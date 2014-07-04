@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  idea_id: 1
+  user_id: 1
+  owner: false
+  admin: false
+  created_at: 2013-11-08 16:02:23
+
+two:
+  idea_id: 1
+  user_id: 1
+  owner: false
+  admin: false
+  created_at: 2013-11-08 16:02:23
