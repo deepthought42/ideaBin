@@ -1,11 +1,7 @@
-<script src="../../assets/javascripts/dropzone.min.js"></script>
+
 <h1>File Upload</h1>
 
-<%= form_tag :action => 'uploadFile' class="dropzone"  do %>
-  <p><label for="upload_file">Select File</label> : 
-	<%= file_field_tag 'datafile' %></p>
-	<%= submit_tag "Upload" %>
-<% end %>
+
 
 <form action="/file-upload" class="dropzone" >
   <div class="fallback">
@@ -13,6 +9,4 @@
   </div>
 </form>
 
-<%= form_for @resource do |f| %>
-  <%= f.file_field :datafile %>
-<% end %>
+
