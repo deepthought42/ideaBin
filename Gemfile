@@ -40,4 +40,4 @@ gem 'jquery-rails'
 gem "devise"
 gem "remotipart", "~> 1.2"
 gem "paperclip", "~> 3.0"
-gem 'git-rails', '~> 0.2.1'
+gem 'git'
