@@ -25,7 +25,7 @@ class IdeasController < ApplicationController
   # GET /ideas/new.json
   def new
     @idea = Idea.new
-
+		
     respond_to do |format|
       format.html # new.html.erb
       format.json { render json: @idea }
@@ -42,6 +42,9 @@ class IdeasController < ApplicationController
   def create
     @idea = Idea.new(params[:idea])
 
+	Dir.mkdir("#{Rails.root}/public/data/repository/"+@idea.name)
+		unless File.exists?("#{Rails.root}/public/data/repository/"+@idea.name)	
+	end
     respond_to do |format|
       if @idea.save
         format.html { redirect_to @idea, notice: 'Idea was successfully created.' }
