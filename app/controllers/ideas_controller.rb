@@ -1,4 +1,6 @@
 class IdeasController < ApplicationController
+  before_filter :authenticate_user!
+
   # GET /ideas
   # GET /ideas.json
   def index
@@ -35,6 +37,7 @@ class IdeasController < ApplicationController
   # GET /ideas/1/edit
   def edit
     @idea = Idea.find(params[:id])
+	session[:idea_id] = params[:id]
   end
 
   # POST /ideas
