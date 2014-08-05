@@ -40,12 +40,12 @@ class ResourcesController < ApplicationController
   # POST /resources
   # POST /resources.json
   def create
-	name =  upload['datafile'].original_filename
-    directory = "public/data"
+i#    name =  upload['datafile'].original_filename
+ #   directory = "public/data/#{current_user}"
     # create the file path
-    path = File.join(directory, name)
+ #   path = File.join(directory, name)
     # write the file
-    File.open(path, "wb") { |f| f.write(upload['datafile'].read) }
+ #   File.open(path, "wb") { |f| f.write(upload['datafile'].read) }
 	
     @resource = Resource.new(params[:resource])
 	

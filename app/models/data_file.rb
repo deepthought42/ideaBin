@@ -2,9 +2,9 @@ class DataFile < ActiveRecord::Base
   # attr_accessible :title, :body
   
     
-  def self.save(upload)
+  def self.save(upload, user_id)
     name =  upload['file'].original_filename
-    directory = "public/data"
+    directory = "public/data/repository/#{user_id}"
     # create the file path
     path = File.join(directory, name)
     # write the file

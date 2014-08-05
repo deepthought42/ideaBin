@@ -9,7 +9,7 @@ development:
   database: ideaBin_development
   pool: 5
   timeout: 5000
-  username: postgres
+  username: nomad
   password: oicu812
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".
@@ -20,7 +20,7 @@ test:
   database: ideaBin_test
   pool: 5
   timeout: 5000
-  username: postgres
+  username: nomad
   password: oicu812
   
 production:
@@ -29,5 +29,5 @@ production:
   database: ideaBin_production
   pool: 5
   timeout: 5000
-  username: postgres
+  username: nomad
   password: oicu812
