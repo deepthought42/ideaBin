@@ -8,7 +8,7 @@ class DataFile < ActiveRecord::Base
     # create the file path
     path = File.join(directory, name)
     # write the file
-    File.open(path, "wb") { |f| f.write(upload['datafile']) }
+    File.open(path, "wb") { |f| f.write(upload['file'].read) }
   end
   
   def cleanup
