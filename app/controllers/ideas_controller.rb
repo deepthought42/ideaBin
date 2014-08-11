@@ -37,7 +37,23 @@ class IdeasController < ApplicationController
   # GET /ideas/1/edit
   def edit
     @idea = Idea.find(params[:id])
-	session[:idea_id] = params[:id]
+    session[:idea_id] = params[:id]
+    repo_path = "#{Rails.root}/public/data/repository/#{current_user}"
+
+    #clone idea repo from owners copy if current user isn't owner
+    if(session[:idea_id] != @idea.owner_id)
+      unless not File.exists?(repo_path)
+        Dir.mkdir(repo_path)
+      end
+
+        Dir.chdir(repo_path)
+
+	@git = Git.clone(repo, @idea.name)
+	@git.chdir do
+          @git.add(add => true)
+	  @git.commit('this is a commit...REMEMBER TO CHANGE THIS TO USER DEFINED MESSAGE') 
+	end
+    end
   end
 
   # POST /ideas
