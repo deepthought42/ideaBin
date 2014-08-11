@@ -45,11 +45,10 @@ class IdeasController < ApplicationController
   def create
     @idea = Idea.new(params[:idea])
 
-	unless not File.exists?("#{Rails.root}/public/data/repository/"+@idea.name) 
-		Dir.mkdir("#{Rails.root}/public/data/repository/"+@idea.name)
-	end
+	unless not File.exists?("#{Rails.root}/public/data/repository/#{current_user}/"+@idea.name) 
+		Dir.mkdir("#{Rails.root}/public/data/repository/#{current_user}/"+@idea.name)	end
 	
-	Git.init("#{Rails.root}/public/data/repository/"+@idea.name)
+	Git.init("#{Rails.root}/public/data/repository/#{current_user}/"+@idea.name)
 	
     respond_to do |format|
       if @idea.save

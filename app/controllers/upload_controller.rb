@@ -9,7 +9,7 @@ class UploadController < ApplicationController
 	unless File.exists?("#{Rails.root}/public/data/repository/#{current_user.id}") 
 		Dir.mkdir("#{Rails.root}/public/data/repository/#{current_user.id}")
 	end
-	post = DataFile.save(params, current_user.id)
+	post = DataFile.save(params, current_user.id, session[:idea_id])
 
 	#session[:idea_id]
     render :text => "File has been uploaded successfully"
