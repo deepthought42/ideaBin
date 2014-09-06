@@ -1,23 +1,30 @@
 <h1>Listing ideas</h1>
+<% @count = 0 %>
+<table class="table">
+  <tbody>
+    <% @ideas.each do |idea| %>
+    <% if @count == 5 %>
+      <tr>      
+    <% end %> 
 
-<table>
-  <tr>
-    <th>Name</th>
-    <th>Description</th>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
-
-<% @ideas.each do |idea| %>
-  <tr>
-    <td><%= idea.name %></td>
-    <td><%= idea.description %></td>
-    <td><%= link_to 'Show', idea %></td>
-    <td><%= link_to 'Edit', edit_idea_path(idea) %></td>
-    <td><%= link_to 'Destroy', idea, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-  </tr>
-<% end %>
+      <td>
+        <div>
+        <%= idea.name %><br />
+        <%= idea.description %>
+        </div>
+        <div>
+          <%= link_to 'Show', idea %>
+          <%= link_to 'Edit', edit_idea_path(idea) %>
+          <%= link_to 'Destroy', idea, method: :delete, data: { confirm: 'Are you sure?' } %>
+        </div>  
+    </td>
+    <% if @count == 5 %>
+      </tr>   
+      <% @count = 0 %>   
+    <% end %> 
+    <% @count+=1 %>
+  <% end %>
+  </tbody>
 </table>
 
 <br />
