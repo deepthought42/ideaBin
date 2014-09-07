@@ -41,7 +41,7 @@ class IdeasController < ApplicationController
     repo_path = "#{Rails.root}/public/data/repository/#{current_user.id}/#{@idea.name}"
 
     #clone idea repo from owners copy if current user isn't owner
-    if(current_user.id != @idea.user)
+    if(current_user.id != @idea.user.id)
       unless File.exists?(repo_path)
         Dir.mkdir(repo_path)
       end

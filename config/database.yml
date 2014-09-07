@@ -9,8 +9,8 @@ development:
   database: ideaBin_development
   pool: 5
   timeout: 5000
-  username: postgresql 
-  password: 
+  username: nomad 
+  password: password 
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".
 # Do not set this db to the same as development or production.
@@ -20,8 +20,8 @@ test:
   database: ideaBin_test
   pool: 5
   timeout: 5000
-  username: postgresql
-  password: 
+  username: nomad
+  password: password
   
 production:
   adapter: postgresql
@@ -29,5 +29,5 @@ production:
   database: ideaBin_production
   pool: 5
   timeout: 5000
-  username: postgresql
-  password: 
+  username: nomad 
+  password: password
