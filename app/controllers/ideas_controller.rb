@@ -41,7 +41,7 @@ class IdeasController < ApplicationController
     repo_path = "#{Rails.root}/public/data/repository/#{current_user.id}/#{@idea.name}"
 
     #clone idea repo from owners copy if current user isn't owner
-    if(current_user.id != @idea.user.id)
+    if(current_user.id != @idea.user_id)
       unless File.exists?(repo_path)
         Dir.mkdir(repo_path)
       end
@@ -56,15 +56,19 @@ class IdeasController < ApplicationController
   # POST /ideas.json
   def create
     @idea = Idea.new(params[:idea])
-    @idea.user = current_user
-	  unless not File.exists?("#{Rails.root}/public/data/repository/#{current_user}/"+@idea.name) 
-		Dir.mkdir("#{Rails.root}/public/data/repository/#{current_user}/"+@idea.name)	end
-	
-	  Git.init("#{Rails.root}/public/data/repository/#{current_user}/"+@idea.name)
+    @idea.user_id = current_user.id
+    repo_path = "#{Rails.root}/public/data/repository/#{current_user.id}" 
+#	  unless File.exists?(repo_path) 
+#		  Dir.mkdir(repo_path)	
+#    end
+    
+    Dir.chdir(repo_path)	
+	  g = Git.init(@idea.name)
+#    g.commit_all('initial commit')
 	
     respond_to do |format|
       if @idea.save
-        format.html { redirect_to @idea, notice: 'Idea was successfully created.' }
+        format.html { redirect_to @idea, notice: "Idea was successfully created.#{g}" }
         format.json { render json: @idea, status: :created, location: @idea }
       else
         format.html { render action: "new" }
@@ -78,9 +82,12 @@ class IdeasController < ApplicationController
   def update
     @idea = Idea.find(params[:id])
 
+    repo_path = "#{Rails.root}/public/data/repository/#{current_user.id}/#{@idea.name}"
+    Dir.chdir(repo_path)
     @git = Git.init
-    @git.add(:all => true)
-	  @git.commit('this is a commit...REMEMBER TO CHANGE THIS TO USER DEFINED MESSAGE') 
+    @git.add
+    @git.commit('this is a commit...REMEMBER TO CHANGE THIS TO USER DEFINED MESSAGE') 
+
 	
     respond_to do |format|
       if @idea.update_attributes(params[:idea])

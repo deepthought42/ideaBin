@@ -4,7 +4,8 @@ class DataFile < ActiveRecord::Base
     
   def self.save(upload, user_id, idea_id)
     name =  upload['file'].original_filename
-    directory = "public/data/repository/#{user_id}/#{idea_id}"
+    @idea = Idea.find(idea_id)
+    directory = "#{Rails.root}/public/data/repository/#{user_id}/#{@idea.name}"
     # create the file path
     path = File.join(directory, name)
     # write the file
@@ -12,8 +13,8 @@ class DataFile < ActiveRecord::Base
   end
   
   def cleanup
-	if File.exist?("#{RAILS_ROOT}/dirname/#{@filename}")
-		File.delete("#{RAILS_ROOT}/dirname/#{@filename}") 
+	  if File.exist?("#{Rails.root}/public/data/repository/#{@filename}")
+  		File.delete("#{Rails.root}/public/data/repository/#{@filename}") 
     end
   end
 
