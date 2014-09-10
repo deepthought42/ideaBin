@@ -57,15 +57,20 @@ class IdeasController < ApplicationController
   def create
     @idea = Idea.new(params[:idea])
     @idea.user_id = current_user.id
-    repo_path = "#{Rails.root}/public/data/repository/#{current_user.id}" 
-#	  unless File.exists?(repo_path) 
-#		  Dir.mkdir(repo_path)	
-#    end
+    directory = "#{Rails.root}/app/assets/images/cover_images/"
+    @idea.cover_img = params[:idea][:cover_img].original_filename
     
+    DataFile.save(params[:idea][:cover_img], directory)
+    repo_path = "#{Rails.root}/public/data/repository/#{current_user.id}" 
     Dir.chdir(repo_path)	
-	  g = Git.init(@idea.name)
-#    g.commit_all('initial commit')
-	
+    g = Git.init(@idea.name)
+
+    if params[:alteredStatus] == '1'
+      @gitcommit = "it was committed"
+      @git.add(:all => true)
+      @git.commit('this is a commit...REMEMBER TO CHANGE THIS TO USER DEFINED MESSAGE')
+    end   
+ 	
     respond_to do |format|
       if @idea.save
         format.html { redirect_to @idea, notice: "Idea was successfully created.#{g}" }

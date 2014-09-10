@@ -1,49 +1,21 @@
-<h1>Ideas</h1>
-<%= link_to '', new_idea_path, :class => 'pull-right glyphicon glyphicon-plus glyphicon-2x' %>
-
-<% @count = 0 %>
-
-<div id="masonry" >
-  <% @ideas.each do |idea| %>
-  <div class="item">
-    <div>
-      <%= idea.name %><br />
-      <%= idea.description %>
-    </div>
-    <div>
-      <%= link_to '', edit_idea_path(idea), :class => 'dock-item glyphicon glyphicon-pencil' %>
-      <%= link_to '', idea, method: :delete, data: { confirm: 'Are you sure?' }, :class => 'glyphicon glyphicon-remove' %>
-    </div>
-  </div>
-  <% end %>
+<div class="row">
+  <%= link_to '', new_idea_path, :class => 'pull-right glyphicon glyphicon-plus glyphicon-2x' %>
 </div>
-<!--
-<table class="table">
-  <tbody>
+<div class="row">
+  <div id="masonry" >
     <% @ideas.each do |idea| %>
-    <% if @count == 5 %>
-      <tr>      
-    <% end %> 
-
-      <td>
-        <div>
+    <div class="item">
+      <div>
+        <%= image_tag("cover_images/#{idea.cover_img}") %>
         <%= idea.name %><br />
         <%= idea.description %>
-        </div>
-        <div>
-          <%= link_to '', edit_idea_path(idea), :class => 'dock-item glyphicon glyphicon-pencil' %>
-          <%= link_to '', idea, method: :delete, data: { confirm: 'Are you sure?' }, :class => 'glyphicon glyphicon-remove' %>
-        </div>  
-    </td>
-    <% if @count == 5 %>
-      </tr>   
-      <% @count = 0 %>   
-    <% end %> 
-    <% @count+=1 %>
-  <% end %>
-  </tbody>
-</table>
--->
-<br />
-
+      </div>
+      <div>
+        <%= link_to '', edit_idea_path(idea), :class => 'dock-item glyphicon glyphicon-pencil' %>
+        <%= link_to '', idea, method: :delete, data: { confirm: 'Are you sure?' }, :class => 'glyphicon glyphicon-remove' %>
+      </div>
+    </div>
+    <% end %>
+  </div>
+</div>
 
