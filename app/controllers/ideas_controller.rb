@@ -85,13 +85,17 @@ class IdeasController < ApplicationController
     repo_path = "#{Rails.root}/public/data/repository/#{current_user.id}/#{@idea.name}"
     Dir.chdir(repo_path)
     @git = Git.init
-    @git.add
-    @git.commit('this is a commit...REMEMBER TO CHANGE THIS TO USER DEFINED MESSAGE') 
+    @gitcommit = ""
+    if params[:alteredStatus] == '1'
+      @gitcommit = "it was committed"
+      @git.add(:all => true)
+      @git.commit('this is a commit...REMEMBER TO CHANGE THIS TO USER DEFINED MESSAGE') 
+    end
 
 	
     respond_to do |format|
       if @idea.update_attributes(params[:idea])
-        format.html { redirect_to @idea, notice: 'Idea was successfully updated.' }
+        format.html { redirect_to @idea, notice: "#{@gitcommit} ... #{params[:alteredStatus]} Idea was successfully updated." }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }
