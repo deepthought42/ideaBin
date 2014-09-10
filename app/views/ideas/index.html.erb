@@ -1,5 +1,23 @@
 <h1>Ideas</h1>
+<%= link_to '', new_idea_path, :class => 'pull-right glyphicon glyphicon-plus glyphicon-2x' %>
+
 <% @count = 0 %>
+
+<div id="masonry" >
+  <% @ideas.each do |idea| %>
+  <div class="item">
+    <div>
+      <%= idea.name %><br />
+      <%= idea.description %>
+    </div>
+    <div>
+      <%= link_to '', edit_idea_path(idea), :class => 'dock-item glyphicon glyphicon-pencil' %>
+      <%= link_to '', idea, method: :delete, data: { confirm: 'Are you sure?' }, :class => 'glyphicon glyphicon-remove' %>
+    </div>
+  </div>
+  <% end %>
+</div>
+<!--
 <table class="table">
   <tbody>
     <% @ideas.each do |idea| %>
@@ -25,7 +43,7 @@
   <% end %>
   </tbody>
 </table>
-
+-->
 <br />
 
-<%= link_to 'New Idea', new_idea_path %>
+
