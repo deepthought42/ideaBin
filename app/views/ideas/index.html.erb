@@ -13,9 +13,8 @@
         <%= idea.description %>
         </div>
         <div>
-          <%= link_to image_tag("pencil-icon.png", :border => 0), edit_idea_path(idea), :class => 'dock-item' %>
-          <%= link_to 'Edit', edit_idea_path(idea) %>
-          <%= link_to 'Destroy', idea, method: :delete, data: { confirm: 'Are you sure?' } %>
+          <%= link_to '', edit_idea_path(idea), :class => 'dock-item glyphicon glyphicon-pencil' %>
+          <%= link_to '', idea, method: :delete, data: { confirm: 'Are you sure?' }, :class => 'glyphicon glyphicon-remove' %>
         </div>  
     </td>
     <% if @count == 5 %>
