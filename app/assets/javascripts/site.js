@@ -26,4 +26,4 @@ $container.imagesLoaded(function(){
     itemSelector: '.item'
   });
 });
-
+});
