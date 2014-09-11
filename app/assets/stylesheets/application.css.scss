@@ -14,3 +14,17 @@
 
 @import "bootstrap-sprockets";
 @import "bootstrap";
+
+.item {
+  width: 220px;
+  margin: 10px;
+  float: left;
+}
+
+.item img {
+  height:       100%;
+  width:        100%;
+  position:     relative;
+}
+
+

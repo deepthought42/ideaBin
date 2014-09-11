@@ -17,10 +17,12 @@ Dropzone.options.myDropzone = {
   }
 };
 
-$(document).ready(function(){
-  var container = document.querySelector('#masonry');
-  var masonry = new Masonry(container, {
-    columnWidth: 50,
+$(window).ready(function(){
+
+var $container = $("#masonry");
+$container.imagesLoaded(function(){
+  $container.masonry({
+    columnWidth: 200,
     itemSelector: '.item'
   });
 });

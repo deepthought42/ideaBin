@@ -113,6 +113,8 @@ class IdeasController < ApplicationController
   # DELETE /ideas/1.json
   def destroy
     @idea = Idea.find(params[:id])
+    repo_path = "#{Rails.root}/public/data/repository/#{current_user.id}/#{@idea.name}"
+    FileUtils.rm_rf(repo_path)
     @idea.destroy
 
     respond_to do |format|
