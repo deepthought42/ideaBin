@@ -3,13 +3,18 @@
 <p>
   <b>Name:</b>
   <%= @idea.name %>
-</p>
-
-<p>
   <b>Description:</b>
   <%= @idea.description %>
 </p>
 
-
-<%= link_to 'Edit', edit_idea_path(@idea) %> |
-<%= link_to 'Back', ideas_path %>
+<div id="#masonry"> 
+  <div class="item">
+    Images
+  </div>
+  <div class="item" >
+    Documents
+  </div>
+  <div class="item" >
+    Diagrams  
+  </div>
+</div>

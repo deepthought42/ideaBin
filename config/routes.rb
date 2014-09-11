@@ -1,4 +1,7 @@
 IdeaBin::Application.routes.draw do
+  root 'ideas#index'
+
+
   resources :upload
   resources :resources
 
@@ -6,6 +9,7 @@ IdeaBin::Application.routes.draw do
 
 
   devise_for :users
+
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
