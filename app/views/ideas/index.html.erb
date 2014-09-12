@@ -10,10 +10,11 @@
         <%= link_to '', edit_idea_path(idea), :class => 'dock-item glyphicon glyphicon-pencil' %>
         <%= link_to '', idea, method: :delete, data: { confirm: 'Are you sure?' }, :class => 'glyphicon glyphicon-remove' %>
 
-        <div class="overlay">
-          <h3 class="title"><%= idea.name %></h3>
+        <div class="overlay" ng-controller="IdeaIndexCtrl">
+          <h3 class="title">{{title}}<%= idea.name %></h3>
           <div class="description">
             <p>
+              {{description}}
               <%= idea.description %>
             </p>
           </div>
