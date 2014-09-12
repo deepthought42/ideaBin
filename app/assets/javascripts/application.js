@@ -15,6 +15,8 @@
 //= require jquery.remotipart
 //= require bootstrap-sprockets
 //= require angular
-//= require_tree ./angular
-//= require_tree .
+//= require_tree ./angular/services
+//= require_tree ./angular/filters
+//= require_tree ./angular/controllers
+//= require_tree ./angular/directives
 
