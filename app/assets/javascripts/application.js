@@ -12,6 +12,9 @@
 //
 //= require jquery
 //= require jquery_ujs
-//= require_tree .
 //= require jquery.remotipart
 //= require bootstrap-sprockets
+//= require angular
+//= require_tree ./angular
+//= require_tree .
+

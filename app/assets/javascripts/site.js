@@ -27,3 +27,5 @@ $(window).ready(function(){
     });
   });
 });
+
+var app = angular.module("ideaBin", ['ngResource', 'ngRoute']);

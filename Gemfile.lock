@@ -27,6 +27,8 @@ GEM
       minitest (~> 5.1)
       thread_safe (~> 0.1)
       tzinfo (~> 1.1)
+    angular-ui-bootstrap-rails (0.11.0)
+    angularjs-rails (1.2.22)
     arel (5.0.1.20140414130214)
     autoprefixer-rails (3.0.1.20140826)
       execjs
@@ -131,6 +133,8 @@ PLATFORMS
   x86-mingw32
 
 DEPENDENCIES
+  angular-ui-bootstrap-rails
+  angularjs-rails
   autoprefixer-rails
   bootstrap-sass (~> 3.2.0)
   coffee-rails
