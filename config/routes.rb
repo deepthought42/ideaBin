@@ -2,11 +2,9 @@ IdeaBin::Application.routes.draw do
   root 'ideas#index'
 
 
-  resources :upload
+  resources :uploads
   resources :resources
-
   resources :ideas
-
 
   devise_for :users
 

@@ -40,15 +40,24 @@ class ResourcesController < ApplicationController
   # POST /resources
   # POST /resources.json
   def create
-i#    name =  upload['datafile'].original_filename
- #   directory = "public/data/#{current_user}"
-    # create the file path
- #   path = File.join(directory, name)
-    # write the file
- #   File.open(path, "wb") { |f| f.write(upload['datafile'].read) }
-	
+#    @idea = Idea.find(session[:idea_id])
+#    idea_id = session[:idea_id]
+    directory = "#{Rails.root}/public/data/repository"
+    unless File.exists?(directory)
+      Dir.mkdir(directory)
+    end
+    post = DataFile.save(params['file'], directory)
+    
+    Dir.chdir(directory)
+#    g = Git.init(@idea.name)
+#    if params[:alteredStatus] == '1'
+#      @gitcommit = "it was committed"
+#      @git.add(:all => true)
+#      @git.commit('this is a commit...REMEMBER TO CHANGE THIS TO USER DEFINED MESSAGE')
+#    end
+
     @resource = Resource.new(params[:resource])
-	
+    	
     respond_to do |format|
       if @resource.save
         format.html { redirect_to @resource, notice: 'Resource was successfully created.' }

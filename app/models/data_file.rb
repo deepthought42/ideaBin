@@ -1,6 +1,8 @@
 class DataFile < ActiveRecord::Base
   # attr_accessible :title, :body
+  def self.chDir(dir_name)
   
+  end  
     
   def self.save(upload_file, directory)
   

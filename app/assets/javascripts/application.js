@@ -14,6 +14,7 @@
 //= require jquery_ujs
 //= require jquery.remotipart
 //= require bootstrap-sprockets
+//= require dropzone.min
 //= require angular
 //= require_tree ./angular/services
 //= require_tree ./angular/filters

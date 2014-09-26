@@ -11,8 +11,12 @@ class UploadController < ApplicationController
 		  Dir.mkdir(directory)
   	end
 	  post = DataFile.save(params['file'], directory)
-
-	  #session[:idea_id]
+    
+#    @resource = Resource.new()
+#    @resource.idea_id = idea_id 
+#    @resource.filename = params[:file].original_filename
+#    @resource.file_type = params[:file].content_type
+#    @resource.save()
     render :text => "File has been uploaded successfully"
   end
 end
