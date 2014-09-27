@@ -9,10 +9,10 @@ Dropzone.options.myDropzone = {
     this.on("sending",function(file, xhr, formData){
     	token = $('meta[name="csrf-token"]').attr('content');
 	    xhr.setRequestHeader('X-CSRF-Token', token);
+      formData.append("comment", "THIS IS A TEMPORARY COMMENT");
     });
     this.on("complete", function(file) { 
       $('form.edit_idea > input#alteredStatus').val('1');
-      alert("Added file."); 
     });
   }
 };

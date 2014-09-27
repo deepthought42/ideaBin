@@ -24,8 +24,9 @@
 
 
 
-$(document).ready( function() {
+/*$(document).ready( function() {
    $('#resource_container').fileTree({ root: '/public/repositories/' }, function(file) {
      alert(file);
    });
 });
+*/
