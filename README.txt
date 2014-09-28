@@ -15,7 +15,14 @@ Getting Started:
 
 	In order to get started you'll need Ruby2.1.2 as well as Rails 4.1.5 installed. You can find documentation on installing these and getting started with Ruby on Rails at rubyonrails.org. This project also relies on PostGreSQL, and the database file currently relies on the default user with an empty password.
 
-Once installed you should be able to clone this repo and fire up a rails server to see it working. 
+  Getting the repo:
+    
+    To get the repo you will need git. If you don't have it you can find it at git-scm.com
+
+    Open a command line and navigate to the directory that you would like to save the project and type in the following and press enter. 
+
+      git clone https://github.com/deepthought42/ideaBin.git
+ 
 
 Overview:
 

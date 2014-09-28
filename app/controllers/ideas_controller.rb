@@ -37,7 +37,7 @@ class IdeasController < ApplicationController
   # GET /ideas/1/edit
   def edit
     @idea = Idea.find(params[:id])
-    session[:idea_id] = params[:id] 
+    session[:idea] = @idea 
  
     repo_path = "#{Rails.root}/public/data/repository/#{current_user.id}/#{@idea.name}"
   
