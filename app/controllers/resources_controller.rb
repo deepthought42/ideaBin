@@ -55,12 +55,15 @@ class ResourcesController < ApplicationController
 #      @git.add(:all => true)
 #      @git.commit('this is a commit...REMEMBER TO CHANGE THIS TO USER DEFINED MESSAGE')
 #    end
+    	@resource = Resource.new
+      @resource.idea_id = session[:idea_id]
+      @resource.filename = params[:file].original_filename
+      @resource.content_type = params[:file].content_type
+      @resource.comment = params[:comment]
 
-    @resource = Resource.new(params[:resource])
-    	
     respond_to do |format|
       if @resource.save
-        format.html { redirect_to @resource, notice: 'Resource was successfully created.' }
+        format.html { redirect_to @resource, notice: "Resource was successfully created.#{params[:comment]}" }
         format.json { render json: @resource, status: :created, location: @resource }
       else
         format.html { render action: "new" }

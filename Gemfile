@@ -41,11 +41,12 @@ gem 'jquery-rails'
 # gem 'debugger'
 
 gem "devise"
-gem "remotipart", "~> 1.2"
-gem "paperclip", "~> 3.0"
+#gem "remotipart", "~> 1.2"
+#gem "paperclip", "~> 3.0"
 gem 'git'
-gem 'bootstrap-sass', '~> 3.2.0'
-gem 'autoprefixer-rails'
-gem 'sprockets', '~>2.11.0'
-gem 'angularjs-rails'
-gem 'angular-ui-bootstrap-rails'
+#gem 'bootstrap-sass', '~> 3.2.0'
+#gem 'autoprefixer-rails'
+#gem 'sprockets', '~>2.11.0'
+#gem 'angularjs-rails'
+#gem 'angular-ui-bootstrap-rails'
+#gem 'angular-ujs'

@@ -1,3 +1,5 @@
+
+
 $.ajaxSetup({
   headers: {
     'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')
@@ -6,10 +8,12 @@ $.ajaxSetup({
 
 Dropzone.options.myDropzone = {
   init: function() {
+    this.on("addedfile", function(file){
+      var comment =  prompt("Please enter comment");
+      $("#resourceComment").val(comment);
+    });
     this.on("sending",function(file, xhr, formData){
-    	token = $('meta[name="csrf-token"]').attr('content');
-	    xhr.setRequestHeader('X-CSRF-Token', token);
-      formData.append("comment", "THIS IS A TEMPORARY COMMENT");
+
     });
     this.on("complete", function(file) { 
       $('form.edit_idea > input#alteredStatus').val('1');
@@ -28,4 +32,4 @@ $(window).ready(function(){
   });
 });
 
-var app = angular.module("ideaBin", ['ngResource', 'ngRoute']);
+//var app = angular.module("ideaBin", ['ngResource', 'ngRoute']);
