@@ -13,7 +13,7 @@ Dropzone.options.myDropzone = {
       $("#resourceComment").val(comment);
     });
     this.on("sending",function(file, xhr, formData){
-
+      xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'))
     });
     this.on("complete", function(file) { 
       $('form.edit_idea > input#alteredStatus').val('1');

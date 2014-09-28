@@ -37,7 +37,7 @@ class IdeasController < ApplicationController
   # GET /ideas/1/edit
   def edit
     @idea = Idea.find(params[:id])
-    session[:idea] = @idea 
+    session[:idea_id] = params[:id] 
  
     repo_path = "#{Rails.root}/public/data/repository/#{current_user.id}/#{@idea.name}"
   
@@ -122,19 +122,5 @@ class IdeasController < ApplicationController
       format.html { redirect_to ideas_url }
       format.json { head :no_content }
     end
-  end
-
-  def chDir
-    dir_name = params[:directory_name]
-    #get directory name from ajax
-    #if child directory then push directory name onto stack
-    #else pop top directory from stack
-
-    #return json list of files and folders
-  end
-
-  def download
-    #get filename from paramaters passed from client
-    #initiate download to client
-  end
+ end
 end

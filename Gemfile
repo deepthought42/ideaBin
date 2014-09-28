@@ -12,7 +12,7 @@ gem 'pg'
 
 # Gems used only for assets and not required
 # in production environments by default.
-group :assets do
+
   gem 'sass'
   gem 'sass-rails' 
   gem 'coffee-rails'
@@ -21,7 +21,7 @@ group :assets do
   # gem 'therubyracer', :platforms => :ruby
 
   gem 'uglifier', '>= 1.0.3'
-end
+
 
 gem 'jquery-rails'
 
@@ -44,10 +44,10 @@ gem "devise"
 #gem "remotipart", "~> 1.2"
 #gem "paperclip", "~> 3.0"
 gem 'git'
-#gem 'bootstrap-sass', '~> 3.2.0'
+gem 'bootstrap-sass', '~> 3.2.0'
 #gem 'autoprefixer-rails'
-#gem 'sprockets', '~>2.11.0'
+gem 'sprockets', '~>2.11.0'
 #gem 'angularjs-rails'
 #gem 'angular-ui-bootstrap-rails'
 #gem 'angular-ujs'
-gem 'activerecord-session_store', github: 'rails/activerecord-session_store'
+gem 'activerecord-session_store'

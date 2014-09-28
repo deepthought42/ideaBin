@@ -1,4 +1,6 @@
 class ResourcesController < ApplicationController
+  before_filter :authenticate_user!
+
   # GET /resources
   # GET /resources.json
   def index
@@ -41,7 +43,7 @@ class ResourcesController < ApplicationController
   # POST /resources.json
   def create
 #    @idea = Idea.find(session[:idea_id])
-#    idea_id = session[:idea_id]
+
     directory = "#{Rails.root}/public/data/repository"
     unless File.exists?(directory)
       Dir.mkdir(directory)
@@ -63,7 +65,7 @@ class ResourcesController < ApplicationController
 
     respond_to do |format|
       if @resource.save
-        format.html { redirect_to @resource, notice: "Resource was successfully created.#{params[:comment]}" }
+        format.html { redirect_to @resource, notice: "Resource was successfully created.#{session[:idea_id]}" }
         format.json { render json: @resource, status: :created, location: @resource }
       else
         format.html { render action: "new" }
