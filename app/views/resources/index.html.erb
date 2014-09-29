@@ -12,9 +12,8 @@
   <tr>
     <td><%= link_to resource.filename %></td>
     <td><%= resource.comment %></td>
-    <td><%= link_to 'Show', resource %></td>
-    <td><%= link_to 'Edit', edit_resource_path(resource) %></td>
-    <td><%= link_to 'Destroy', resource, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+    <td><%= link_to '', edit_resource_path(resource), :class => 'dock-item glyphicon glyphicon-pencil' %></td>
+    <td><%= link_to '', resource, method: :delete, data: { confirm: 'Are you sure?' }, :class=> 'glyphicon glyphicon-remove' %></td>
   </tr>
 <% end %>
 </table>
