@@ -16,6 +16,7 @@
 //= require bootstrap-sprockets
 //= require dropzone.min
 //= require site
+//= require resources
 // require angular
 // require_tree ./angular/services
 // require_tree ./angular/filters

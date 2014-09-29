@@ -7,7 +7,7 @@
       <!-- This is the overlay for the hover -->
       <div class="col-xs-3 item">
         <%= image_tag("cover_images/#{idea.cover_img}") %>
-        <%= link_to '', edit_idea_path(idea), :class => 'dock-item glyphicon glyphicon-pencil' %>
+        <%= link_to '', resources_path(:idea_id => idea.id), :class => 'dock-item glyphicon glyphicon-pencil' %>
         <%= link_to '', idea, method: :delete, data: { confirm: 'Are you sure?' }, :class => 'glyphicon glyphicon-remove' %>
 
         <div class="overlay" ng-controller="IdeaIndexCtrl">

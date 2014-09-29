@@ -4,7 +4,7 @@ class ResourcesController < ApplicationController
   # GET /resources
   # GET /resources.json
   def index
-    @resources = Resource.all
+    @resources = Resource.where(idea_id: params[:idea_id])
 
     respond_to do |format|
       format.html # index.html.erb

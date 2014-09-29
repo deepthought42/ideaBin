@@ -10,7 +10,7 @@
 <% if @resources %>
 <% @resources.each do |resource| %>
   <tr>
-    <td><%= link_to resource.filename, resource.attachment.url if resource.attachment? %></td>
+    <td><%= link_to resource.filename %></td>
     <td><%= resource.comment %></td>
     <td><%= link_to 'Show', resource %></td>
     <td><%= link_to 'Edit', edit_resource_path(resource) %></td>
@@ -22,4 +22,4 @@
 </div>
 <br />
 
-<%= link_to 'New Resource', new_resource_path %>
+
