@@ -5,7 +5,7 @@ class ResourcesController < ApplicationController
   # GET /resources.json
   def index
     @resources = Resource.where(idea_id: params[:idea_id])
-
+    session[:idea_id] = params[:idea_id]
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @resources }
