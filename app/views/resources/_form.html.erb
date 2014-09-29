@@ -12,19 +12,9 @@
   <% end %>
 
   <div class="field">
-    <%= f.label :comment %><br />
-    <%= f.text_field :comment %>
-  </div>
-  <div>
-	<%= f.label :attachment %><br />
-	<%= f.file_field :attachment%></p>
+    <%= @resource.comment %>
   </div>
   <div class="actions">
     <%= f.submit %>
-  </div>
-  
-    
-  <div id="dragndropimage">
-	<%= image_tag "upload_icon.png" %>
   </div>
 <% end %>
