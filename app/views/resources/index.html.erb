@@ -7,15 +7,15 @@
   <% @resources.each do |resource| %>
     <div class="col-xs-3 item">
 
-       <div class="overlay" ng-controller="IdeaIndexCtrl">
-         <h3 class="title"><%= resource.filename %></h3>
+
+         <h5 class="title"><%= resource.filename %></h5>
          <div class="description">
            <p>
              <%= resource.comment %>
            </p>                                                                          </div>
          <%= link_to '', edit_resource_path(resource), :class => 'dock-item glyphicon glyphicon-pencil' %>
          <%= link_to '', resource, method: :delete, data: { confirm: 'Are you sure?' }, :class=> 'glyphicon glyphicon-remove' %>
-       </div>
+    </div>
   <% end %>
 </div>
 <br />

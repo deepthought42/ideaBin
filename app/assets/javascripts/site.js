@@ -33,7 +33,7 @@ $(window).ready(function(){
   var $container = $(".masonry");
   $container.imagesLoaded(function(){
     $container.masonry({
-      columnWidth: 200,
+      columnWidth: 100,
       itemSelector: '.item'
     });
   });
