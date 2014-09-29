@@ -1,18 +1,22 @@
 <h1>Listing resources</h1>
 <div>
-  <%= link_to "Edit Idea", edit_idea_path(session[:idea_id]) %>
+  <%= link_to "", edit_idea_path(session[:idea_id]), :class => 'pull-right glyphicon glyphicon-cog glyphicon-2x' %>
 </div>
-<div id="resource_container">
-<table>
-<% @resources.each do |resource| %>
-  <tr>
-    <td><%= link_to resource.filename %></td>
-    <td><%= resource.comment %></td>
-    <td><%= link_to '', edit_resource_path(resource), :class => 'dock-item glyphicon glyphicon-pencil' %></td>
-    <td><%= link_to '', resource, method: :delete, data: { confirm: 'Are you sure?' }, :class=> 'glyphicon glyphicon-remove' %></td>
-  </tr>
-<% end %>
-</table>
+<div id="resource_container" class="row masonry">
+
+  <% @resources.each do |resource| %>
+    <div class="col-xs-3 item">
+
+       <div class="overlay" ng-controller="IdeaIndexCtrl">
+         <h3 class="title"><%= resource.filename %></h3>
+         <div class="description">
+           <p>
+             <%= resource.comment %>
+           </p>                                                                          </div>
+         <%= link_to '', edit_resource_path(resource), :class => 'dock-item glyphicon glyphicon-pencil' %>
+         <%= link_to '', resource, method: :delete, data: { confirm: 'Are you sure?' }, :class=> 'glyphicon glyphicon-remove' %>
+       </div>
+  <% end %>
 </div>
 <br />
 <%= render "uploadfile" %>

@@ -30,7 +30,7 @@ Dropzone.options.myDropzone = {
 
 $(window).ready(function(){
 
-  var $container = $("#masonry");
+  var $container = $(".masonry");
   $container.imagesLoaded(function(){
     $container.masonry({
       columnWidth: 200,
