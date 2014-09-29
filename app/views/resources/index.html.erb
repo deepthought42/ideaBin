@@ -1,13 +1,9 @@
 <h1>Listing resources</h1>
+<div>
+  <%= link_to "Edit Idea", edit_idea_path(session[:idea_id]) %>
+</div>
 <div id="resource_container">
 <table>
-  <tr>
-    <th>Comment</th>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
-
 <% @resources.each do |resource| %>
   <tr>
     <td><%= link_to resource.filename %></td>
@@ -19,5 +15,4 @@
 </table>
 </div>
 <br />
-<%= debug session[:idea_id]  %>
 <%= render "uploadfile" %>
