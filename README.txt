@@ -30,15 +30,13 @@ Getting Started:
 
     	git clone https://github.com/deepthought42/ideaBin.git
  
-    6.  Create the Database schema:
+    6.  using the command line navigate to the ideaBin folder and run the following commands:
 
 	rake db:setup
+	bundle install
+	rails server
 
-    7.  Start the server
-	
-		rails server
-
-    	8.  Navigate to localhost:3000 and you should see the home page for ideaBin.
+    9.  Navigate to localhost:3000 and you should see the home page for ideaBin.
 
 Overview:
 
