@@ -13,16 +13,32 @@ Stack:
 
 Getting Started:
 
-	In order to get started you'll need Ruby2.1.2 as well as Rails 4.1.5 installed. You can find documentation on installing these and getting started with Ruby on Rails at rubyonrails.org. This project also relies on PostGreSQL, and the database file currently relies on the default user with an empty password.
+	
+	In order to get started you'll need Ruby 2.1.2 as well as Rails 4.1.5 installed. You can find documentation on installing these and getting started with Ruby on Rails at rubyonrails.org. This project also relies on PostGreSQL, and the database file currently relies on the default user with an empty password. The following list of instructions will guide you through getting setup.
 
-  Getting the repo:
-    
-    To get the repo you will need git. If you don't have it you can find it at git-scm.com
+    1. Install Ruby. You can find instructions <a href="https://www.ruby-lang.org/en/installation/#ruby-install">here</a>
+	
+    2. Install Rails:
+		
+     	gem install rails
 
-    Open a command line and navigate to the directory that you would like to save the project and type in the following and press enter. 
+    3.  Install <a href="http://git-scm.com/book/en/Getting-Started-Installing-Git">Instructions>git</a>. 
 
-      git clone https://github.com/deepthought42/ideaBin.git
+    4.  Install <a href="https://wiki.postgresql.org/wiki/Detailed_installation_guides">postrgreSQL</a>
+
+    5.  Open a command line and navigate to the directory that you would like to save the project and type in the following and press enter. 
+
+    	git clone https://github.com/deepthought42/ideaBin.git
  
+    6.  Create the Database schema:
+
+	rake db:setup
+
+    7.  Start the server
+	
+		rails server
+
+    	8.  Navigate to localhost:3000 and you should see the home page for ideaBin.
 
 Overview:
 
