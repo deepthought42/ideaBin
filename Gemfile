@@ -1,13 +1,14 @@
 source 'https://rubygems.org'
-
+ruby '2.1.3'
 gem 'protected_attributes'
 gem 'rails', '~> 4.1.0.rc1'
 
+gem 'tzinfo-data'
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
-gem 'pg'
+gem 'pg', '~> 0.18.0.pre20141017160319'
 
 
 # Gems used only for assets and not required
@@ -26,7 +27,7 @@ gem 'pg'
 gem 'jquery-rails'
 
 # To use ActiveModel has_secure_password
-# gem 'bcrypt-ruby', '~> 3.0.0'
+# gem 'bcrypt-ruby', '~> 3.0.0', :require 'bcrypt'
 
 # To use Jbuilder templates for JSON
 # gem 'jbuilder'

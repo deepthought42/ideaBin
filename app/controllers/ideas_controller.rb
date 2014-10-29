@@ -59,10 +59,16 @@ class IdeasController < ApplicationController
     @idea = Idea.new(params[:idea])
     @idea.user_id = current_user.id
     directory = "#{Rails.root}/app/assets/images/cover_images/"
-    @idea.cover_img = params[:idea][:cover_img].original_filename
+	if params[:idea][:cover_img]
+	    @idea.cover_img = params[:idea][:cover_img].original_filename
+	end
     
     DataFile.save(params[:idea][:cover_img], directory)
     repo_path = "#{Rails.root}/public/data/repository/#{current_user.id}" 
+	unless File.exists?(repo_path)
+		Dir.mkdir(repo_path)
+	end
+	
     Dir.chdir(repo_path)	
     g = Git.init(@idea.name)
 
