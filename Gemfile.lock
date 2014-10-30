@@ -31,6 +31,8 @@ GEM
       minitest (~> 5.1)
       thread_safe (~> 0.1)
       tzinfo (~> 1.1)
+    ancestry (2.1.0)
+      activerecord (>= 3.0.0)
     arel (5.0.1.20140414130214)
     bcrypt (3.1.9)
     bcrypt (3.1.9-x64-mingw32)
@@ -128,6 +130,7 @@ PLATFORMS
 
 DEPENDENCIES
   activerecord-session_store
+  ancestry
   bootstrap-sass (~> 3.2.0)
   coffee-rails
   devise

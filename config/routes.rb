@@ -1,4 +1,6 @@
 IdeaBin::Application.routes.draw do
+  resources :directories
+
   root 'ideas#index'
 
 
