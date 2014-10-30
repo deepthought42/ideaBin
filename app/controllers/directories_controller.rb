@@ -1,7 +1,7 @@
 class DirectoriesController < ApplicationController
-  before_action :set_directory, only: [:show, :edit, :update, :destroy]
-  has_many :resources
-  has_ancestry
+	before_action :set_directory, except: [:new, :create, :index]
+
+	respond_to :html
   
   def index
     @directories = Directory.all
