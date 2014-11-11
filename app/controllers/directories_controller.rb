@@ -1,7 +1,7 @@
 class DirectoriesController < ApplicationController
 	before_action :set_directory, except: [:new, :create, :index]
-
-	respond_to :html
+  #before_filter :authenticate_user!
+	respond_to :html, :json
   
   def index
     @directories = Directory.all
@@ -9,12 +9,12 @@ class DirectoriesController < ApplicationController
   end
 
   def show
-    respond_with(@directory)
+		respond_with(@directory)
   end
 
   def new
     @directory = Directory.new
-    respond_with(@directory)
+		respond_with(@directory)
   end
 
   def edit
@@ -22,13 +22,16 @@ class DirectoriesController < ApplicationController
 
   def create
     @directory = Directory.new(directory_params)
-    @directory.save
-    respond_with(@directory)
+		@directory.name = directory_params[:name]
+		flash[:notice] = "#{directory_params} : #{@directory.name}" if @directory.save
+		respond_with(@directory)
   end
 
   def update
     @directory.update(directory_params)
-    respond_with(@directory)
+    @directory.name = directory_params[:name]
+		flash[:notice] = "#{directory_params} : #{@directory.name}" if @directory.save
+		respond_with(@directory)
   end
 
   def destroy

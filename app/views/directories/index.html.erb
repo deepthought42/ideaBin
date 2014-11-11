@@ -14,7 +14,7 @@
         <td><%= directory.name %></td>
         <td><%= link_to 'Show', directory %></td>
         <td><%= link_to 'Edit', edit_directory_path(directory) %></td>
-        <td><%= link_to 'Destroy', directory, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Destroy', directory, 'data-method' => :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>

@@ -28,7 +28,7 @@ Dropzone.options.myDropzone = {
   }
 };
 
-$(window).ready(function(){
+/*$(window).ready(function(){
 
   var $container = $(".masonry");
   $container.imagesLoaded(function(){
@@ -38,5 +38,5 @@ $(window).ready(function(){
     });
   });
 });
-
+*/
 //var app = angular.module("ideaBin", ['ngResource', 'ngRoute']);

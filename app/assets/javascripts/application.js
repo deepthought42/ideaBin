@@ -12,8 +12,7 @@
 //
 //= require jquery
 //= require jquery_ujs
-// require jquery.remotipart
-//= require bootstrap-sprockets
+
 //= require dropzone.min
 //= require site
 //= require resources
