@@ -42,22 +42,22 @@ class ResourcesController < ApplicationController
   # POST /resources
   # POST /resources.json
   def create
-#    @idea = Idea.find(session[:idea_id])
+    @idea = Idea.find(session[:idea_id])
 
-    directory = "#{Rails.root}/public/data/repository"
+    directory = "#{Rails.root}/public/data/repository/#{current_user.id}/#{@idea.name}";
     unless File.exists?(directory)
       Dir.mkdir(directory)
     end
     post = DataFile.save(params['file'], directory)
     
     Dir.chdir(directory)
-#    g = Git.init(@idea.name)
-#    if params[:alteredStatus] == '1'
-#      @gitcommit = "it was committed"
-#      @git.add(:all => true)
-#      @git.commit('this is a commit...REMEMBER TO CHANGE THIS TO USER DEFINED MESSAGE')
-#    end
-    	@resource = Resource.new
+#   g = Git.init(@idea.name)
+#   if params[:alteredStatus] == '1'
+#     @gitcommit = "it was committed"
+#     @git.add(:all => true)
+#     @git.commit('this is a commit...REMEMBER TO CHANGE THIS TO USER DEFINED MESSAGE')
+#   end
+      @resource = Resource.new
       @resource.idea_id = session[:idea_id]
       @resource.filename = params[:file].original_filename
       @resource.content_type = params[:file].content_type
