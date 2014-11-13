@@ -4,7 +4,7 @@ class DirectoriesController < ApplicationController
 	respond_to :html, :json
   
   def index
-    @directories = Directory.all
+    @directories = Directory.where(idea_id: session[:idea_id])
     respond_with(@directories)
   end
 
@@ -23,6 +23,7 @@ class DirectoriesController < ApplicationController
   def create
     @directory = Directory.new(directory_params)
 		@directory.name = directory_params[:name]
+		@directory.idea_id = session[:idea_id]
 		flash[:notice] = "#{directory_params} : #{@directory.name}" if @directory.save
 		respond_with(@directory)
   end
