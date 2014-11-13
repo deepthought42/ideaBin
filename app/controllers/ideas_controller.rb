@@ -59,15 +59,15 @@ class IdeasController < ApplicationController
     @idea = Idea.new(params[:idea])
     @idea.user_id = current_user.id
     directory = "#{Rails.root}/app/assets/images/cover_images/"
-	if params[:idea][:cover_img]
-	    @idea.cover_img = params[:idea][:cover_img].original_filename
-	end
-    
-    DataFile.save(params[:idea][:cover_img], directory)
-    repo_path = "#{Rails.root}/public/data/repository/#{current_user.id}" 
-	unless File.exists?(repo_path)
-		Dir.mkdir(repo_path)
-	end
+		if params[:idea][:cover_img]
+				@idea.cover_img = params[:idea][:cover_img].original_filename
+		end
+			
+			DataFile.save(params[:idea][:cover_img], directory)
+			repo_path = "#{Rails.root}/public/data/repository/#{current_user.id}" 
+		unless File.exists?(repo_path)
+			Dir.mkdir(repo_path)
+		end
 	
     Dir.chdir(repo_path)	
     g = Git.init(@idea.name)
@@ -95,6 +95,14 @@ class IdeasController < ApplicationController
     @idea = Idea.find(params[:id])
 
     repo_path = "#{Rails.root}/public/data/repository/#{current_user.id}/#{@idea.name}"
+		cover_img_path = "#{Rails.root}/public/images/cover_images/"
+		
+		if params[:idea][:cover_img]
+				@idea.cover_img = params[:idea][:cover_img].original_filename
+		end
+		
+		DataFile.save(params[:idea][:cover_img], cover_img_path)
+
     Dir.chdir(repo_path)
     @git = Git.init
     @gitcommit = ""
@@ -107,7 +115,7 @@ class IdeasController < ApplicationController
 	
     respond_to do |format|
       if @idea.update_attributes(params[:idea])
-        format.html { redirect_to @idea, notice: "#{@gitcommit} ... #{params[:alteredStatus]} Idea was successfully updated." }
+        format.html { redirect_to action: "index", notice: "#{@gitcommit} ... #{params[:alteredStatus]} Idea was successfully updated." }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }
