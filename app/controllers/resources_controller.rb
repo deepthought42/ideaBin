@@ -8,6 +8,7 @@ class ResourcesController < ApplicationController
 		@directories = Directory.all
     @resources = Resource.where(idea_id: params[:idea_id])
     session[:idea_id] = params[:idea_id]
+		@idea = Idea.find(params[:idea_id])
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @resources }
