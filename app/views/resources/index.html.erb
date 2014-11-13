@@ -1,23 +1,25 @@
 
 <h1>Listing resources</h1>
 <div>
-  <%= link_to "", edit_idea_path(session[:idea_id]), :class => 'pull-right glyphicon glyphicon-cog glyphicon-2x' %>
+ <%= link_to "", edit_idea_path(session[:idea_id]), :class => 'pull-right glyphicon glyphicon-cog glyphicon-2x editIdea' %>
 </div>
 <div id="resource_container" class="row masonry">
   <% @resources.each do |resource| %>
     <div class="col-xs-3 item">
          <h5 class="title"><%= resource.filename %></h5>
-         <div class="description">
-           <p>
-             <%= resource.comment %>
-           </p>                                                                          </div>
-         <%= link_to '', edit_resource_path(resource), :class => 'dock-item glyphicon glyphicon-pencil' %>
+          <div class="description">
+            <p>
+              <%= resource.comment %>
+            </p>  
+				  </div>
+         <%= link_to '', edit_resource_path(resource), :class => 'dock-item glyphicon glyphicon-pencil editResource' %>
          <%= link_to '', resource, method: :delete, data: { confirm: 'Are you sure?' }, :class=> 'glyphicon glyphicon-remove' %>
     </div>
   <% end %>
 </div>
 <br />
 <%= render 'directories/form' %>
+<%= render 'directories/index' %>
 <button id="addFolderIcon">Add Directory</button>
 
 <div id="dragndropimage">
