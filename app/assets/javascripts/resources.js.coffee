@@ -13,4 +13,4 @@ $(document).ready ->
       $('body').append "Successful AJAX call: #{data}"
 	###
 	$('.editResource').click ->
-		console.log("resource edit button clicked")
+		alert("resource edit button clicked")

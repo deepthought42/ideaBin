@@ -16,6 +16,7 @@
 //= require dropzone.min
 //= require site
 //= require resources
+//= require directories
 // require angular
 // require_tree ./angular/services
 // require_tree ./angular/filters
