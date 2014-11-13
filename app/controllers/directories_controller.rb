@@ -13,7 +13,7 @@ class DirectoriesController < ApplicationController
   end
 
   def new
-    @directory = Directory.new
+    @directory = Directory.new(:parent_id => params[:parent_id])
 		respond_with(@directory)
   end
 
@@ -23,7 +23,7 @@ class DirectoriesController < ApplicationController
   def create
     @directory = Directory.new(directory_params)
 		@directory.name = directory_params[:name]
-		@directory.idea_id = session[:idea_id]
+
 		flash[:notice] = "#{directory_params} : #{@directory.name}" if @directory.save
 		respond_with(@directory)
   end

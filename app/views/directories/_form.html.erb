@@ -1,4 +1,6 @@
 <%= form_for(@directory) do |f| %>
+
+	<%= f.hidden_field :parent_id %>
   <% if @directory.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@directory.errors.count, "error") %> prohibited this directory from being saved:</h2>
