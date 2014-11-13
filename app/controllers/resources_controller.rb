@@ -4,6 +4,7 @@ class ResourcesController < ApplicationController
   # GET /resources
   # GET /resources.json
   def index
+		@directory = Directory.new
     @resources = Resource.where(idea_id: params[:idea_id])
     session[:idea_id] = params[:idea_id]
     respond_to do |format|

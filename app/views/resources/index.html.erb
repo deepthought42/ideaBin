@@ -4,7 +4,6 @@
   <%= link_to "", edit_idea_path(session[:idea_id]), :class => 'pull-right glyphicon glyphicon-cog glyphicon-2x' %>
 </div>
 <div id="resource_container" class="row masonry">
-
   <% @resources.each do |resource| %>
     <div class="col-xs-3 item">
          <h5 class="title"><%= resource.filename %></h5>
@@ -18,7 +17,7 @@
   <% end %>
 </div>
 <br />
-
+<%= render 'directories/form' %>
 <button id="addFolderIcon">Add Directory</button>
 
 <div id="dragndropimage">
