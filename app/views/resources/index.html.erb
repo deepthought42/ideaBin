@@ -1,8 +1,4 @@
 <div>
-	<img src="/images/cover_images/<%= @idea.cover_img %>" alt="idea cover image"/>
-</div>
-<h1>Listing resources</h1>
-<div>
  <%= link_to "", edit_idea_path(session[:idea_id]), :class => 'pull-right glyphicon glyphicon-cog glyphicon-2x editIdea' %>
 </div>
 
@@ -17,6 +13,7 @@
 		<button id="addFolderIcon">Add Directory</button>
 	</div>
 	<div id="resource_container" class="row masonry">
+		<h1>Listing resources</h1>
 		<% @resources.each do |resource| %>
 			<div class="col-xs-3 item">
 					 <h5 class="title"><%= resource.filename %></h5>
