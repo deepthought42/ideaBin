@@ -38,7 +38,7 @@ class IdeasController < ApplicationController
   def edit
     @idea = Idea.find(params[:id])
     session[:idea_id] = params[:id] 
- 
+		@directories = Directory.where(idea_id: params[:id])
     repo_path = "#{Rails.root}/public/data/repository/#{current_user.id}/#{@idea.name}"
   
     #clone idea repo from owners copy if current user isn't owner
@@ -48,8 +48,17 @@ class IdeasController < ApplicationController
       end
 
       Dir.chdir(repo_path)
-
-    	@git = Git.clone(repo_path, @idea.name)  
+    	@git = Git.clone(repo_path, @idea.name)
+    end
+		
+		respond_to do |format|
+      if @idea.save and @directory.save
+        format.html { redirect_to @idea, notice: "Idea was successfully created.#{g}" }
+        format.json { render json: @idea, status: :created, location: @idea }
+      else
+        format.html { render action: "new" }
+        format.json { render json: @idea.errors, status: :unprocessable_entity }
+      end
     end
   end
 
@@ -62,9 +71,7 @@ class IdeasController < ApplicationController
 		if params[:idea][:cover_img]
 				@idea.cover_img = params[:idea][:cover_img].original_filename
 		end
-		
-			
-			
+
 			DataFile.save(params[:idea][:cover_img], directory)
 			repo_path = "#{Rails.root}/public/data/repository/#{current_user.id}" 
 		unless File.exists?(repo_path)
@@ -72,10 +79,11 @@ class IdeasController < ApplicationController
 		end
 	
 		#create directory in database to associate the directory created in the file systems.
-			@directory = Directory.new()
-			@directory.name = @idea.name
-			@directory.path = "#{repo_path}/#{@idea.name}"
-			
+		@directory = Directory.new()
+		@directory.name = @idea.name
+		@directory.path = "#{repo_path}/#{@idea.name}"
+		session[:directory] = @directory
+		
     Dir.chdir(repo_path)	
     g = Git.init(@idea.name)
 

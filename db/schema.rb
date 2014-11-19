@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141119020909) do
+ActiveRecord::Schema.define(version: 20141119030226) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -25,12 +25,11 @@ ActiveRecord::Schema.define(version: 20141119020909) do
     t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "ancestry"
     t.integer  "idea_id"
     t.string   "path"
+    t.integer  "parent_id"
   end
 
-  add_index "directories", ["ancestry"], name: "index_directories_on_ancestry", using: :btree
   add_index "directories", ["idea_id"], name: "index_directories_on_idea_id", using: :btree
 
   create_table "ideas", force: true do |t|
