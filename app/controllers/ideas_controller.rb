@@ -62,6 +62,8 @@ class IdeasController < ApplicationController
 		if params[:idea][:cover_img]
 				@idea.cover_img = params[:idea][:cover_img].original_filename
 		end
+		
+			
 			
 			DataFile.save(params[:idea][:cover_img], directory)
 			repo_path = "#{Rails.root}/public/data/repository/#{current_user.id}" 
@@ -69,6 +71,11 @@ class IdeasController < ApplicationController
 			Dir.mkdir(repo_path)
 		end
 	
+		#create directory in database to associate the directory created in the file systems.
+			@directory = Directory.new()
+			@directory.name = @idea.name
+			@directory.path = "#{repo_path}/#{@idea.name}"
+			
     Dir.chdir(repo_path)	
     g = Git.init(@idea.name)
 
@@ -79,7 +86,7 @@ class IdeasController < ApplicationController
     end   
  	
     respond_to do |format|
-      if @idea.save
+      if @idea.save and @directory.save
         format.html { redirect_to @idea, notice: "Idea was successfully created.#{g}" }
         format.json { render json: @idea, status: :created, location: @idea }
       else
