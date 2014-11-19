@@ -1,4 +1,5 @@
 class Directory < ActiveRecord::Base
   has_many :resources
-  has_ancestry
+	belongs_to :parent, :class_name => "Directory"
+	has_many :folders, :foreign_key => "parent_id"
 end

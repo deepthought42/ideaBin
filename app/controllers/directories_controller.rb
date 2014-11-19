@@ -9,6 +9,7 @@ class DirectoriesController < ApplicationController
   end
 
   def show
+		@directory = Directory.find(params[:id])
 		respond_with(@directory)
   end
 
@@ -23,7 +24,7 @@ class DirectoriesController < ApplicationController
   def create
     @directory = Directory.new(directory_params)
 		@directory.name = directory_params[:name]
-
+		
 		flash[:notice] = "#{directory_params} : #{@directory.name}" if @directory.save
 		respond_with(@directory)
   end

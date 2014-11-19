@@ -81,7 +81,7 @@ class IdeasController < ApplicationController
 		#create directory in database to associate the directory created in the file systems.
 		@directory = Directory.new()
 		@directory.name = @idea.name
-		@directory.path = "#{repo_path}/#{@idea.name}"
+		@directory.path = repo_path
 		session[:directory] = @directory
 		
     Dir.chdir(repo_path)	
