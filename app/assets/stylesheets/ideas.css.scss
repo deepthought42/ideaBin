@@ -2,6 +2,51 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
+@import url(http://fonts.googleapis.com/css?family=Fira+Sans);
+
 .glyphicon-2x {
       font-size: 48px;
+}
+
+.btn-file {
+    position: relative;
+    overflow: hidden;
+}
+.btn-file input[type=file] {
+    position: absolute;
+    top: 0;
+    right: 0;
+    min-width: 100%;
+    min-height: 100%;
+    font-size: 100px;
+    text-align: right;
+    filter: alpha(opacity=0);
+    opacity: 0;
+    outline: none;
+    background: white;
+    cursor: inherit;
+    display: block;
+}
+
+.item{
+	margin: 0px;
+	padding: 20px;
+}
+
+.item > img{
+	margin-bottom: 20px;
+}
+
+.outline {
+	border: 1px dashed red;
+}
+
+.overlay > h3.title{
+	font-family: 'Fira Sans', sans-serif;
+	font-weight: 900;
+}
+
+#headerIdeas{
+	font-family: 'Fira Sans', sans-serif;
+	font-weight: 900;
 }
