@@ -22,9 +22,16 @@ class DirectoriesController < ApplicationController
   end
 
   def create
+		@idea = Idea.find(session[:idea_id])
+
     @directory = Directory.new(directory_params)
 		@directory.name = directory_params[:name]
-		
+		@directory.idea_id = @idea.id
+		@directory.path = "#{Rails.root}/public/data/repository/#{current_user.id}/#{@idea.name}";
+
+		@directoryParent = Directory.where("idea_id = ? AND is_top = ?", @idea.id, true).take
+		#flash[:notice] = "#{directory_params} : #{@idea.id} , #{true} , #{@directoryParent.id}"
+		@directory.parent_id = @directoryParent.id
 		flash[:notice] = "#{directory_params} : #{@directory.name}" if @directory.save
 		respond_with(@directory)
   end

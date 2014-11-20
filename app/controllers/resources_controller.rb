@@ -47,7 +47,7 @@ class ResourcesController < ApplicationController
   def create
     @idea = Idea.find(session[:idea_id])
 
-    directory = "#{Rails.root}/public/data/repository/#{current_user.id}/#{@idea.name}";
+    directory = "#{Rails.root}/public/data/repository/#{current_user.id}/#{@idea.name}"
     unless File.exists?(directory)
       Dir.mkdir(directory)
     end

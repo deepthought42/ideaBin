@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141119030226) do
+ActiveRecord::Schema.define(version: 20141119233344) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -28,6 +28,7 @@ ActiveRecord::Schema.define(version: 20141119030226) do
     t.integer  "idea_id"
     t.string   "path"
     t.integer  "parent_id"
+    t.boolean  "is_top"
   end
 
   add_index "directories", ["idea_id"], name: "index_directories_on_idea_id", using: :btree

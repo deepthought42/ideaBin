@@ -81,8 +81,9 @@ class IdeasController < ApplicationController
 		#create directory in database to associate the directory created in the file systems.
 		@directory = Directory.new()
 		@directory.name = @idea.name
+		@directory.idea_id = @idea.id
 		@directory.path = repo_path
-		session[:directory] = @directory
+		@directory.path = true
 		
     Dir.chdir(repo_path)	
     g = Git.init(@idea.name)
