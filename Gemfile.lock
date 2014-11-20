@@ -56,6 +56,8 @@ GEM
       warden (~> 1.2.3)
     erubis (2.7.0)
     execjs (2.2.2)
+    font-awesome-rails (4.2.0.0)
+      railties (>= 3.2, < 5.0)
     git (1.2.8)
     hike (1.2.3)
     i18n (0.6.11)
@@ -134,6 +136,7 @@ DEPENDENCIES
   bootstrap-sass (~> 3.2.0)
   coffee-rails
   devise
+  font-awesome-rails
   git
   jquery-rails
   pg (~> 0.18.0.pre20141017160319)

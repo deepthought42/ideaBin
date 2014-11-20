@@ -31,7 +31,7 @@ class DirectoriesController < ApplicationController
 
 		@directoryParent = Directory.where("idea_id = ? AND is_top = ?", @idea.id, true).take
 		#flash[:notice] = "#{directory_params} : #{@idea.id} , #{true} , #{@directoryParent.id}"
-		@directory.parent_id = @directoryParent.id
+		#@directory.parent_id = @directoryParent.id
 		flash[:notice] = "#{directory_params} : #{@directory.name}" if @directory.save
 		respond_with(@directory)
   end
