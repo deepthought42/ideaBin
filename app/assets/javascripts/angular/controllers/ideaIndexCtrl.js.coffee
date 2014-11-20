@@ -1,3 +1,3 @@
-@IdeaIndexCtrl = ($scope) ->
-  $scope.title = "My Ideas"
-  $scope.description = "Description goes here"
+@ideaBin.controller 'ideaIndexCtrl', ['$scope', ($scope) ->
+
+]
