@@ -1,6 +1,5 @@
 @ideaBin = angular.module('ideaBin', [
-  # additional dependencies here, such as restangular
-  'templates'
+  # additional dependencies here, such as restangular 'templates'
 ])
 
 # for compatibility with Rails CSRF protection

@@ -1,20 +1,21 @@
 <div class="row">
   <%= link_to '', new_idea_path, :class => 'pull-right glyphicon glyphicon-plus glyphicon-2x' %>
 </div>
-<div class="row masonry">
+<div class="row masonry" ng-controller="IdeaIndexCtrl">
 
       <% @ideas.each do |idea| %>
       <!-- This is the overlay for the hover -->
-      <div class="col-xs-3 item">
+      <div class="col-xs-3 item" ng-repeat="idea in ideas">
         <%= image_tag("cover_images/#{idea.cover_img}") %>
         <%= link_to '', resources_path(:idea_id => idea.id), :class => 'dock-item glyphicon glyphicon-pencil' %>
         <%= link_to '', idea, method: :delete, data: { confirm: 'Are you sure?' }, :class => 'glyphicon glyphicon-remove' %>
 
-        <div class="overlay" ng-controller="IdeaIndexCtrl">
-          <h3 class="title">{{title}}<%= idea.name %></h3>
+        <div class="overlay" >
+					
+          <h3 class="title">{{idea.name}}<%= idea.name %></h3>
           <div class="description">
             <p>
-              {{description}}
+              {{idea.description}}
               <%= idea.description %>
             </p>
           </div>

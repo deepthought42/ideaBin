@@ -1,8 +1,7 @@
-app = angular.module 'ideaBin',[]
-
-app.controller 'ideaIndexCtrl', 
+@ideaBin.controller "IdeaIndexCtrl", 
 	class IdeaCtrl
-		list:[
-			name: "temp name"
-			description : "temp description"
+		constructor: ($scope) ->
+			$scope.ideas = [
+				name: "temp name"
+				description : "temp description"
 			]
