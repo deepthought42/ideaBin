@@ -1,36 +1,37 @@
 
-<div class="container">
+<div class="container" ng-controller="IdeaIndexCtrl">
   <div class="row text-center">
     <h1 id="headerIdeas">
       These are your ideas.<br>Make the most of them.
     </h1>
   </div>
   <div class="row text-center">
-        <% @ideas.each do |idea| %>
-        <!-- This is the overlay for the hover -->
-        <div class="col-md-3 col-sm-4 col-xs-12 item text-center">
-          <%= image_tag("cover_images/#{idea.cover_img}") %>
+
+        <div class="col-md-3 col-sm-4 col-xs-12 item text-center" ng-repeat="idea in ideas">
+					<img src="/images/cover_images/{{idea.cover_img}}" />
           <div class="btn-group" role="group" aria-label="...">
             <button type="button" class="btn btn-default">
-                 <%= link_to '', resources_path(:idea_id => idea.id), :class => 'fa fa-pencil-square-o' %>
+								 <a ng-click="editIdea(idea.id)" class='fa fa-pencil-square-o' ></a>
             </button>
             <button type="button" class="btn btn-default">
-                <%= link_to '', idea, method: :delete, data: { confirm: 'Are you sure?' }, :class => 'fa fa-times' %>
+								<a ng-click="deleteIdea(idea.id)" class='fa fa-times' ></a>
             </button>
             <button type="button" class="btn btn-default">
                 <i class="fa fa-share-alt"></i>
             </button>
           </div>
           <div class="overlay" ng-controller="IdeaIndexCtrl">
-            <h3 class="title"><%= idea.name %></h3>
+            <h3 class="title">{{idea.name}}</h3>
             <div class="description">
               <p>
-                <%= idea.description %>
-              </p>
+								{{idea.description}}  
+							</p>
             </div>
           </div>
         </div>
-      <% end %>
   </div>
+
+<div class="row">
+  <%= link_to '', new_idea_path, :class => 'pull-right glyphicon glyphicon-plus glyphicon-2x' %>
 </div>
 

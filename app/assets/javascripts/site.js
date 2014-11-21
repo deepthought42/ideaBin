@@ -1,5 +1,3 @@
-
-
 $.ajaxSetup({
   headers: {
     'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')
@@ -27,6 +25,7 @@ Dropzone.options.myDropzone = {
     });
   }
 };
+
 
 /*$(window).ready(function(){
 

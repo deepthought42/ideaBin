@@ -1,6 +1,7 @@
 class IdeasController < ApplicationController
   before_filter :authenticate_user!
-
+	before_action :set_idea, except: [:new, :create, :index]
+	respond_to :html, :json
   # GET /ideas
   # GET /ideas.json
   def index
@@ -149,9 +150,15 @@ class IdeasController < ApplicationController
     FileUtils.rm_rf(repo_path)
     @idea.destroy
 
-    respond_to do |format|
-      format.html { redirect_to ideas_url }
-      format.json { head :no_content }
-    end
+    respond_with(@idea)
  end
+ 
+ private
+    def set_idea
+      @idea = Idea.find(params[:id])
+    end
+
+    def idea_params
+      params.require(:idea).permit(:name)
+    end
 end
