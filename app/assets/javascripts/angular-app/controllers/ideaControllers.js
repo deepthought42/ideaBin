@@ -6,7 +6,7 @@ app.controller("IdeaIndexCtrl", ['$scope', 'IdeaFactory', 'IdeasFactory', '$loca
 		
 		$scope.editIdea = function(ideaId){
 			IdeaFactory.show({id: ideaId});
-			//$location.path('/user-detail/'+userId);
+			$location.path('/user-detail/'+userId);
 		};
 		
 		$scope.deleteIdea =  function(ideaId){
@@ -15,20 +15,20 @@ app.controller("IdeaIndexCtrl", ['$scope', 'IdeaFactory', 'IdeasFactory', '$loca
 		}
 		
 		$scope.createNewIdea = function(){
-			//$location.path('/idea-creation');
+			$location.path('/idea-creation');
 		};
 }]);
 
 app.controller('IdeaDetailCtrl', ['$scope', '$routeParams', 'IdeaFactory', '$location',
 	function($scope, $routeParams, IdeaFactory){
 		$scope.updateIdea = function (){
-			IdeaFactory.update($scipe.idea);
-			//$location.path('/idea-list');
+			IdeaFactory.update($scope.idea);
+			$location.path('/idea-list');
 		}
 		
 		
 		$scope.cancel = function(){
-			//$location.path('/idea-list');
+			$location.path('/idea-list');
 		}
 		
 		$scope.idea = IdeaFactory.show({id: $routeParams.id});
@@ -40,7 +40,7 @@ app.controller('IdeaCreationCtrl', ['$scope', 'IdeasFactory', '$location',
 		//callback for ng-click 'createNewIdea'
 		$scope.createNewIdea = function(){
 			IdeasFactory.create($scope.idea);
-			//$location.path('/idea-list');
+			$location.path('/idea-list');
 		}
 	}
-	]);
+]);
