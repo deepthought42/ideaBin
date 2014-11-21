@@ -18,6 +18,8 @@
 //= require resources
 //= require directories
 //= require angular
+//= require angular-resource
+//= require angular-route
 //= require angular-rails-templates
 //= require angular-app/app
 //= require_tree ./angular-app/templates
