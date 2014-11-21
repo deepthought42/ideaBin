@@ -15,14 +15,21 @@
 <div class="container">
   <div class="row">
   <div class="col-md-4"></div>
-  <div class="col-md-4 outline">
-    <div class="input-group">
-      <span class="btn btn-default btn-file">
-          <input type="file" name="idea[cover_img]" id="idea_cover_img">
-          Browse...
-      </span>
-      <input type="text" placeholder="Choose a file...">
-    </div>
+  <div class="col-md-4 grayBorder" id="divNewIdea">
+    <div class="row text-center">
+  	<h1>
+  		Create an idea,<br> then share it<br> with the world.
+  	</h1>
+  </div>
+     <div class="input-group">
+            <span class="input-group-btn">
+                 <span class="btn btn-success btn-file">
+      				Browse...
+        		  <input type="file" name="idea[cover_img]" id="idea_cover_img">
+          		</span>
+            </span>
+                <input type="text" class="form-control" readonly>
+            </div>
       <div class="field">
         <%= f.label :name %><br />
         <%= f.text_field :name %>
@@ -36,7 +43,8 @@
         <%= f.submit %>
       </div>
     </div>
-    <div class="col-md-4"></div>
+  <div class="col-md-4">
+  </div>
     <% end %>
   </div>
 </div>

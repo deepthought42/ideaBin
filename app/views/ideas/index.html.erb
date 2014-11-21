@@ -5,10 +5,10 @@
       These are your ideas.<br>Make the most of them.
     </h1>
   </div>
-  <div class="row">
+  <div class="row text-center">
         <% @ideas.each do |idea| %>
         <!-- This is the overlay for the hover -->
-        <div class="col-md-3 item text-center">
+        <div class="col-md-3 col-sm-4 col-xs-12 item text-center">
           <%= image_tag("cover_images/#{idea.cover_img}") %>
           <div class="btn-group" role="group" aria-label="...">
             <button type="button" class="btn btn-default">
