@@ -9,7 +9,7 @@
   	</h1>
   </div>
 	<div class="container" ng-controller="IdeaCreationCtrl">
-		<form name="form" novalidate>
+		<form name="idea" novalidate>
 			<div class="input-group">
 				<span class="input-group-btn">
 					<span class="btn btn-success btn-file">
@@ -22,16 +22,16 @@
 			<div class="field">
 				<label for="name" >Name</label>
 				<br />
-				<input type="text" name="idea[name]" ng-model="ideaForm.name" name="name"/>
+				<input type="text" name="idea[name]" ng-model="ideaForm.name" id="name"/>
 			</div>
 			<div class="field">
 				<label for="description" >Description</label>
 				<br />
-				<input type="text" name="idea[description]" ng-model="ideaForm.description" name="description"/>
+				<input type="text" name="idea[description]" ng-model="ideaForm.description" id="description"/>
 			</div>
 			<%= hidden_field_tag :alteredStatus, "0" %>
 			<div class="actions">
-				<button ng-click="createNewIdea()">SAVE</button>      
+				<button ng-click="createNewIdea(idea)">SAVE</button>      
 			</div>
 		</form>
 		<pre>form = {{idea | json}}</pre>

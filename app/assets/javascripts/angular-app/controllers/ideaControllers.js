@@ -4,18 +4,14 @@ app.controller("IdeaIndexCtrl", ['$scope', 'IdeaFactory', 'IdeasFactory', '$loca
 	function($scope, IdeaFactory, IdeasFactory) {
 		$scope.ideas = IdeasFactory.query();
 		
-		$scope.editIdea = function(ideaId){
-			IdeaFactory.show({id: ideaId});
-			$location.path('/user-detail/'+userId);
-		};
-		
-		$scope.deleteIdea =  function(ideaId){
+  	$scope.deleteIdea =  function(ideaId){
 			IdeaFactory.delete({id: ideaId});
 			$scope.ideas = IdeasFactory.query();
 		}
 		
 		$scope.createNewIdea = function(){
-			$location.path('/idea-creation');
+			IdeasFactory.create();
+			$location.path('/ideas');
 		};
 }]);
 
@@ -26,13 +22,18 @@ app.controller('IdeaDetailCtrl', ['$scope', '$routeParams', 'IdeaFactory', '$loc
 			$location.path('/ideas/'+$scope.idea.id );
 		}
 		
-		$scope.editIdea = function () {
+		$scope.editIdea = function (ideaId) {
 			IdeaFactory.show({id: $routeParams.id});
-			$location.path('/ideas/'+$scope.idea.id +"/edit");
+			$location.path('/ideas/'+ideaId +"/edit");
+		}
+		
+		$scope.showIdea = function(){
+		
+			$location.path('/ideas/new');
 		}
 		
 		$scope.cancel = function(){
-			$location.path('/idea-list');
+			$location.path('/ideas');
 		}
 		
 		$scope.idea = IdeaFactory.show({id: $routeParams.id});
@@ -40,10 +41,14 @@ app.controller('IdeaDetailCtrl', ['$scope', '$routeParams', 'IdeaFactory', '$loc
 ]);
 
 app.controller('IdeaCreationCtrl', ['$scope', 'IdeasFactory', '$location',
-	function($scope, IdeasFactory, $location){
+	function($scope, IdeasFactory, $location ){
 		//callback for ng-click 'createNewIdea'
+		$scope.ideaForm = {};
+		$scope.ideaForm.name = "NAME";
+		$scope.ideaForm.description = "DESCRIPTION";
 		$scope.createNewIdea = function(){
-			IdeasFactory.create($scope.idea);
+			console.log($scope.ideaForm)
+			IdeasFactory.create($scope.ideaForm);
 			$location.path('/ideas');
 		}
 	}

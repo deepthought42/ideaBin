@@ -2,11 +2,11 @@ IdeaBin::Application.routes.draw do
 
 	resources :application
   root 'application#index'
-  get '*path' => 'application#index'
- # resources :directories
- # resources :uploads
- # resources :resources
- # resources :ideas
+  #get '*path' => 'application#index'
+  resources :directories
+  resources :uploads
+  resources :resources
+  resources :ideas
 
   devise_for :users
 
