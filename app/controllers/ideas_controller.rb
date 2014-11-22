@@ -18,10 +18,7 @@ class IdeasController < ApplicationController
   def show
     @idea = Idea.find(params[:id])
 
-    respond_to do |format|
-      format.html # show.html.erb
-      format.json { render json: @idea }
-    end
+		respond_with(@idea)
   end
 
   # GET /ideas/new

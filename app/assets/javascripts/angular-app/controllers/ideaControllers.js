@@ -1,7 +1,7 @@
 var app = angular.module('ideaBin.controllers', []);
 
 app.controller("IdeaIndexCtrl", ['$scope', 'IdeaFactory', 'IdeasFactory', '$location',
-	function($scope, IdeaFactory, IdeasFactory) {
+	function($scope, IdeaFactory, IdeasFactory, $location) {
 		$scope.ideas = IdeasFactory.query();
 		
   	$scope.deleteIdea =  function(ideaId){
@@ -13,6 +13,12 @@ app.controller("IdeaIndexCtrl", ['$scope', 'IdeaFactory', 'IdeasFactory', '$loca
 			IdeasFactory.create();
 			$location.path('/ideas');
 		};
+		
+		$scope.editIdea = function (ideaId) {
+			console.log("IDEA ID :: " + ideaId);
+			IdeaFactory.show({id: ideaId});
+			$location.path('/ideas/'+ideaId +"/edit");
+		}
 }]);
 
 app.controller('IdeaDetailCtrl', ['$scope', '$routeParams', 'IdeaFactory', '$location',
@@ -23,7 +29,8 @@ app.controller('IdeaDetailCtrl', ['$scope', '$routeParams', 'IdeaFactory', '$loc
 		}
 		
 		$scope.editIdea = function (ideaId) {
-			IdeaFactory.show({id: $routeParams.id});
+			console.log("IDEA ID :: " + ideaId);
+			IdeaFactory.show({id: ideaId});
 			$location.path('/ideas/'+ideaId +"/edit");
 		}
 		
@@ -36,7 +43,7 @@ app.controller('IdeaDetailCtrl', ['$scope', '$routeParams', 'IdeaFactory', '$loc
 			$location.path('/ideas');
 		}
 		
-		$scope.idea = IdeaFactory.show({id: $routeParams.id});
+		//$scope.idea = IdeaFactory.show({id: $routeParams.id});
 	}
 ]);
 
