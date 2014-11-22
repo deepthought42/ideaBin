@@ -15,35 +15,27 @@ app.controller("IdeaIndexCtrl", ['$scope', 'IdeaFactory', 'IdeasFactory', '$loca
 		};
 		
 		$scope.editIdea = function (ideaId) {
-			console.log("IDEA ID :: " + ideaId);
-			IdeaFactory.show({id: ideaId});
+			//IdeaFactory.show({id: ideaId});
 			$location.path('/ideas/'+ideaId);
+		}
+		
+		$scope.showIdea = function(){
+			$location.path('/ideas/new');
 		}
 }]);
 
 app.controller('IdeaDetailCtrl', ['$scope', '$routeParams', 'IdeaFactory', '$location',
 	function($scope, $routeParams, IdeaFactory, $location){
+		$scope.idea = IdeaFactory.show({id: $routeParams.id});
+		
 		$scope.updateIdea = function (){
 			IdeaFactory.update($scope.idea);
 			$location.path('/ideas/'+$scope.idea.id );
 		}
 		
-		$scope.editIdea = function (ideaId) {
-			console.log("IDEA ID :: " + ideaId);
-			IdeaFactory.show({id: ideaId});
-			$location.path('/ideas/'+ideaId +"/edit");
-		}
-		
-		$scope.showIdea = function(){
-		
-			$location.path('/ideas/new');
-		}
-		
 		$scope.cancel = function(){
 			$location.path('/ideas');
 		}
-		
-		//$scope.idea = IdeaFactory.show({id: $routeParams.id});
 	}
 ]);
 
