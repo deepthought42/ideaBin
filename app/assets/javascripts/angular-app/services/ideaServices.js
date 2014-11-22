@@ -8,7 +8,7 @@ services.factory('IdeasFactory', function ($resource) {
 });
 
 services.factory('IdeaFactory', function ($resource) {
-    return $resource('/ideas/:id', {}, {
+    return $resource('/ideas/:id.json', {}, {
         show: { method: 'GET' },
         update: { method: 'PUT', params: {id: '@id'} },
         delete: { method: 'DELETE', params: {id: '@id'} }

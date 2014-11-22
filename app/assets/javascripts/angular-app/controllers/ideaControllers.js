@@ -20,7 +20,7 @@ app.controller("IdeaIndexCtrl", ['$scope', 'IdeaFactory', 'IdeasFactory', '$loca
 }]);
 
 app.controller('IdeaDetailCtrl', ['$scope', '$routeParams', 'IdeaFactory', '$location',
-	function($scope, $routeParams, IdeaFactory){
+	function($scope, $routeParams, IdeaFactory, $location){
 		$scope.updateIdea = function (){
 			IdeaFactory.update($scope.idea);
 			$location.path('/ideas/'+$scope.idea.id );
@@ -28,7 +28,7 @@ app.controller('IdeaDetailCtrl', ['$scope', '$routeParams', 'IdeaFactory', '$loc
 		
 		$scope.editIdea = function () {
 			IdeaFactory.show({id: $routeParams.id});
-			$location.path('/ideas/'+$scope.idea.id );
+			$location.path('/ideas/'+$scope.idea.id +"/edit");
 		}
 		
 		$scope.cancel = function(){
