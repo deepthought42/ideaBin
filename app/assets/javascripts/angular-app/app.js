@@ -21,9 +21,22 @@ ideaBin.config(function ($routeProvider, $locationProvider) {
 					templateUrl: 'ideas/edit.html', 
 					controller: 'IdeaDetailCtrl'
 				})
-				
-				
-				.otherwise('/');
+				.when('/directories', {
+					templateUrl: 'directories/index.html', 
+					controller: 'DirectoryIndexCtrl'
+				})
+				.when('/directories/new', {
+					templateUrl: 'directories/new.html', 
+					controller: 'DirectoryCreationCtrl'
+				})
+				.when('/directories/:id', {
+					templateUrl: 'directories/edit.html', 
+					controller: 'DirectoryDetailCtrl'
+				})
+				.otherwise('/', {
+					templateUrl: 'directories/index.html', 
+					controller: 'DirectoryIndexCtrl'
+				});
 				
         $locationProvider.html5Mode({
 					enabled: true,
