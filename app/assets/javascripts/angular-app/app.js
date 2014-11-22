@@ -10,9 +10,19 @@ ideaBin.config([
 
 ideaBin.config(function ($routeProvider, $locationProvider) {
         $routeProvider.when('/', {
-					templateUrl: '/ideas/index.html', 
-					controller: 'IdeaListCtrl'
-				});
+					templateUrl: 'ideas/index.html', 
+					controller: 'IdeaIndexCtrl'
+				})
+				.when('/ideas/:id', {
+					templateUrl: 'ideas/show.html', 
+					controller: 'IdeaDetailCtrl'
+				})
+				.when('/ideas/:id/edit', {
+					templateUrl: 'ideas/edit.html', 
+					controller: 'IdeaCreationCtrl'
+				})
+				.otherwise('/');
+				
         $locationProvider.html5Mode({
 					enabled: true,
 					requireBase: false

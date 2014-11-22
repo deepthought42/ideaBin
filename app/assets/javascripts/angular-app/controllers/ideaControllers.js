@@ -23,9 +23,13 @@ app.controller('IdeaDetailCtrl', ['$scope', '$routeParams', 'IdeaFactory', '$loc
 	function($scope, $routeParams, IdeaFactory){
 		$scope.updateIdea = function (){
 			IdeaFactory.update($scope.idea);
-			$location.path('/idea-list');
+			$location.path('/ideas/'+$scope.idea.id );
 		}
 		
+		$scope.editIdea = function () {
+			IdeaFactory.show({id: $routeParams.id});
+			$location.path('/ideas/'+$scope.idea.id );
+		}
 		
 		$scope.cancel = function(){
 			$location.path('/idea-list');
@@ -40,7 +44,7 @@ app.controller('IdeaCreationCtrl', ['$scope', 'IdeasFactory', '$location',
 		//callback for ng-click 'createNewIdea'
 		$scope.createNewIdea = function(){
 			IdeasFactory.create($scope.idea);
-			$location.path('/idea-list');
+			$location.path('/ideas');
 		}
 	}
 ]);

@@ -61,16 +61,15 @@
         <%= link_to "Sign up", new_user_registration_path, :class => 'navbar-link'  %> |
         <%= link_to "Login", new_user_session_path, :class => 'navbar-link'  %>
       <% end %>
-			<a ng-click="createNewIdea()" class="pull-right glyphicon glyphicon-plus glyphicon-2x"></a>
+			<div ng-controller="IdeaDetailCtrl">
+				<a ng-click="editIdea()" class="pull-right glyphicon glyphicon-plus glyphicon-2x"></a>
+			</div>
     </div>
   </div>
 </div>
 
 
 	<div ng-view=""></div>
-  <%= yield %>
-
-
 </body>
 </html>
 

@@ -1,6 +1,6 @@
 IdeaBin::Application.routes.draw do
 
-
+	resources :application
   root 'application#index'
   get '*path' => 'application#index'
  # resources :directories
