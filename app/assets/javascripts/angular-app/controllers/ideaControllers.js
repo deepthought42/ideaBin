@@ -17,7 +17,7 @@ app.controller("IdeaIndexCtrl", ['$scope', 'IdeaFactory', 'IdeasFactory', '$loca
 		$scope.editIdea = function (ideaId) {
 			console.log("IDEA ID :: " + ideaId);
 			IdeaFactory.show({id: ideaId});
-			$location.path('/ideas/'+ideaId +"/edit");
+			$location.path('/ideas/'+ideaId);
 		}
 }]);
 
