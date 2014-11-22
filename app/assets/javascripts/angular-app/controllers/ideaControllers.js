@@ -30,7 +30,7 @@ app.controller('IdeaDetailCtrl', ['$scope', '$routeParams', 'IdeaFactory', '$loc
 		
 		$scope.updateIdea = function (){
 			IdeaFactory.update($scope.idea);
-			$location.path('/ideas/'+$scope.idea.id );
+			$location.path('/ideas');
 		}
 		
 		$scope.cancel = function(){
