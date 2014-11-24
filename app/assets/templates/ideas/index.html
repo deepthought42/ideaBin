@@ -6,11 +6,10 @@
     </h1>
   </div>
   <div class="row text-center">
-
         <div class="col-md-3 col-sm-4 col-xs-12 item text-center" ng-repeat="idea in ideas">
 					<img src="/images/cover_images/{{idea.cover_img}}" />
           <div class="btn-group" role="group" aria-label="...">
-            <button type="button" class="btn btn-default">
+            <button type="button" class="btn btn-default" >
 								 <a ng-click="editIdea(idea.id)" class='fa fa-pencil-square-o' ></a>
             </button>
             <button type="button" class="btn btn-default">
