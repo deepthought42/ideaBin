@@ -40,7 +40,7 @@
   </div>
 </div>
 
-<div id="directoryForm" ng-controller="DirectoryCreationCtrl" ng-show="showCreateDirectory">
+<div id="directoryForm" ng-controller="DirectoryCreationCtrl" ng-show="showCreateDirectoryPanel">
 	<h3>Create a new directory</h3>
 	<form name="directory" >
 		<input type="hidden" ng-model="directory.idea_id"/>
@@ -88,8 +88,10 @@
 		</tbody>
 	</table>
 	<br>
-	<div class="btn btn-primary btn-lg" id="addFolderIcon" ng-click="showCreateDirectory=true">Add Directory</div>
-	<!--<a ng-click="newDirectory()" class='fa fa-plus'></a> -->
+	<div class="btn btn-primary btn-lg" id="addFolderIcon" ng-click="showCreatePanel()">
+		<a class='fa fa-plus'></a>
+	</div>
+		
 </div>
 
 

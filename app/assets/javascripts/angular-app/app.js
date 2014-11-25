@@ -18,30 +18,30 @@ ideaBin.config([
 
 ideaBin.config(function ($routeProvider, $locationProvider) {
         $routeProvider.when('/ideas', {
-					templateUrl: 'ideas/index.html', 
+					templateUrl: 'idea/index.html', 
 					controller: 'IdeaIndexCtrl'
 				})
 				.when('/ideas/new', {
-					templateUrl: 'ideas/new.html', 
+					templateUrl: 'idea/new.html', 
 					controller: 'IdeaCreationCtrl'
 				})
 				.when('/ideas/:id', {
-					templateUrl: 'ideas/edit.html', 
+					templateUrl: 'idea/edit.html', 
 				})
 				.when('/directories', {
-					templateUrl: 'directories/index.html', 
+					templateUrl: 'directory/index.html', 
 					controller: 'DirectoryIndexCtrl'
 				})
 				.when('/directories/new', {
-					templateUrl: 'directories/new.html', 
+					templateUrl: 'directory/new.html', 
 					controller: 'DirectoryCreationCtrl'
 				})
 				.when('/directories/:id', {
-					templateUrl: 'directories/edit.html', 
+					templateUrl: 'directory/edit.html', 
 					controller: 'DirectoryDetailCtrl'
 				})
 				.otherwise('/', {
-					templateUrl: 'directories/index.html', 
+					templateUrl: 'idea/index.html', 
 					controller: 'DirectoryIndexCtrl'
 				});
 				
