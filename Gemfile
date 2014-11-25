@@ -24,7 +24,7 @@ gem 'pg', '~> 0.18.0.pre20141017160319'
   gem 'uglifier', '>= 1.0.3'
 
 
-gem 'jquery-rails'
+gem 'jquery-rails', '~> 3.1.2'
 
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0', :require 'bcrypt'

@@ -2,13 +2,12 @@ var app = angular.module('ideaBin.resourceControllers', []);
 
 app.controller("ResourceIndexCtrl", ['$scope', '$routeParams', 'ResourceFactory', 'ResourcesFactory', '$location',
 	function($scope, $routeParams, ResourceFactory, ResourcesFactory, $location) {
+		$scope.resources = ResourcesFactory.query({id: $routeParams.id});
 		
 		$scope.showResources = function(ideaId){
 			$scope.resources = ResourcesFactory.query();
 			$location.path('/resources');
 		}
-		
-		$scope.resources = ResourcesFactory.query({id: $routeParams.id});
 		
   	$scope.deleteResource =  function(resourceId){
 			ResourceFactory.delete({id: resourceId});
