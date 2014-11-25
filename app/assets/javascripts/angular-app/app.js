@@ -6,7 +6,8 @@ var ideaBin = angular.module('ideaBin',
 		'ideaBin.ideaControllers', 
 		'ideaBin.directoryControllers',
 		'ideaBin.resourceServices', 
-		'ideaBin.resourceControllers']);
+		'ideaBin.resourceControllers',
+		'angularFileUpload']);
 
 // for compatibility with Rails CSRF protection
 

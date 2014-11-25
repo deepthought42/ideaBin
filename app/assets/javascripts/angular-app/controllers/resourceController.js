@@ -26,6 +26,19 @@ app.controller("ResourceIndexCtrl", ['$scope', '$routeParams', 'ResourceFactory'
 		$scope.newResourceFactory = function(){
 			$location.path('/resources/new');
 		}
+		
+		$scope.upload = function() {
+			$scope.upload = function() {
+				$http.post("/resources", $scope.files, 
+				{
+					headers:{'Content-Type':'multipart/form-data'}
+				})
+				.success(function(d){
+					alert(d);
+					console.log(d);
+				})
+			}
+		}
 }]);
 
 app.controller('ResourceDetailCtrl', ['$scope', '$routeParams', 'ResourceFactory', '$location',
