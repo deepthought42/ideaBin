@@ -1,38 +1,38 @@
 var app = angular.module('ideaBin.resourceControllers', []);
 
-app.controller("ResourceIndexCtrl", ['$scope', '$routeParams', 'ResourceFactory', 'ResourcesFactory', '$location',
-	function($scope, $routeParams, ResourceFactory, ResourcesFactory, $location) {
-		$scope.resources = ResourcesFactory.query({id: $routeParams.id});
+app.controller("ResourceIndexCtrl", ['$scope', '$routeParams', 'ResourceFactory', '$location',
+	function($scope, $routeParams, ResourceFactory, $location) {
+		$scope.resources = ResourceFactory.query({idea_id: $routeParams.id, directory_id: $routeParams.id});
 		
-		$scope.showResources = function(ideaId){
-			$scope.resources = ResourcesFactory.query();
+		$scope.showResourceFactorys = function(ideaId){
+			$scope.resources = ResourceFactory.query();
 			$location.path('/resources');
 		}
 		
-  	$scope.deleteResource =  function(resourceId){
-			ResourceFactory.delete({id: resourceId});
-			$scope.resources = ResourcesFactory.query();
+  	$scope.deleteResourceFactory =  function(resourceId){
+			ResourceFactoryFactory.delete({id: resourceId});
+			$scope.resources = ResourceFactory.query();
 		}
 		
-		$scope.createNewResource = function(){
-			ResourcesFactory.create();
+		$scope.createNewResourceFactory = function(){
+			ResourceFactory.create();
 			$location.path('/resources');
 		};
 		
-		$scope.editResource = function (resourceId) {
+		$scope.editResourceFactory = function (resourceId) {
 			$location.path('/resources/'+resourceId);
 		}
 		
-		$scope.newResource = function(){
+		$scope.newResourceFactory = function(){
 			$location.path('/resources/new');
 		}
 }]);
 
 app.controller('ResourceDetailCtrl', ['$scope', '$routeParams', 'ResourceFactory', '$location',
 	function($scope, $routeParams, ResourceFactory, $location){
-		$scope.resource = ResourceFactory.show({id: $routeParams.id});
+		$scope.resource = ResourceFactoryFactory.show({id: $routeParams.id});
 		
-		$scope.updateResource = function (){
+		$scope.updateResourceFactory = function (){
 			ResourceFactory.update($scope.resource);
 			$location.path('/resources');
 		}
@@ -43,15 +43,15 @@ app.controller('ResourceDetailCtrl', ['$scope', '$routeParams', 'ResourceFactory
 	}
 ]);
 
-app.controller('ResourceCreationCtrl', ['$scope', 'ResourcesFactory', '$location',
-	function($scope, ResourcesFactory, $location ){
-		//callback for ng-click 'createNewResource'
+app.controller('ResourceCreationCtrl', ['$scope', 'ResourceFactorysFactory', '$location',
+	function($scope, ResourceFactorysFactory, $location ){
+		//callback for ng-click 'createNewResourceFactory'
 		$scope.resourceForm = {};
 		$scope.resourceForm.name = "NAME";
 		$scope.resourceForm.description = "DESCRIPTION";
-		$scope.createNewResource = function(){
+		$scope.createNewResourceFactory = function(){
 			console.log($scope.resourceForm)
-			ResourcesFactory.create($scope.resourceForm);
+			ResourceFactory.create($scope.resourceForm);
 			$location.path('/resources');
 		}
 	}

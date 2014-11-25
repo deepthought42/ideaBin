@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 ruby '2.1.3'
 gem 'protected_attributes'
-gem 'rails', '~> 4.1.0.rc1'
+gem 'rails', '~> 4.1.8'
 
 gem 'tzinfo-data'
 
@@ -24,8 +24,8 @@ gem 'pg', '~> 0.18.0.pre20141017160319'
   gem 'uglifier', '>= 1.0.3'
 
 
-gem 'jquery-rails', '~> 3.1.2'
-
+#gem 'jquery-rails', '~> 4.0.0.beta1'
+gem 'jquery-cdn', '~> 2.1'
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0', :require 'bcrypt'
 

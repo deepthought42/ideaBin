@@ -1,22 +1,22 @@
 var app = angular.module('ideaBin.directoryControllers', []);
 
-app.controller("DirectoryIndexCtrl", ['$scope', '$routeParams', 'DirectoryFactory', 'DirectoriesFactory', '$location',
-	function($scope, $routeParams, DirectoryFactory, DirectoriesFactory, $location) {
+app.controller("DirectoryIndexCtrl", ['$scope', '$routeParams', 'Directory', '$location',
+	function($scope, $routeParams, Directory, $location) {
 		
 		$scope.showDirectories = function(ideaId){
-			$scope.directories = DirectoriesFactory.query();
+			$scope.directories = Directory.query();
 			$location.path('/directories');
 		}
 		
-		$scope.directories = DirectoriesFactory.query({id: $routeParams.id});
+		$scope.directories = Directory.query({id: $routeParams.id});
 		
   	$scope.deleteDirectory =  function(directoryId){
-			DirectoryFactory.delete({id: directoryId});
-			$scope.directories = DirectoriesFactory.query();
+			Directory.delete({id: directoryId});
+			$scope.directories = Directory.query();
 		}
 		
 		$scope.createNewDirectory = function(){
-			DirectoriesFactory.create();
+			Directory.create();
 			$location.path('/directories');
 		};
 		
@@ -29,12 +29,12 @@ app.controller("DirectoryIndexCtrl", ['$scope', '$routeParams', 'DirectoryFactor
 		}
 }]);
 
-app.controller('DirectoryDetailCtrl', ['$scope', '$routeParams', 'DirectoryFactory', '$location',
-	function($scope, $routeParams, DirectoryFactory, $location){
-		$scope.directory = DirectoryFactory.show({id: $routeParams.id});
+app.controller('DirectoryDetailCtrl', ['$scope', '$routeParams', 'Directory', '$location',
+	function($scope, $routeParams, Directory, $location){
+		$scope.directory = Directory.show({id: $routeParams.id});
 		
 		$scope.updateDirectory = function (){
-			DirectoryFactory.update($scope.directory);
+			Directory.update($scope.directory);
 			$location.path('/directories');
 		}
 		
@@ -44,15 +44,15 @@ app.controller('DirectoryDetailCtrl', ['$scope', '$routeParams', 'DirectoryFacto
 	}
 ]);
 
-app.controller('DirectoryCreationCtrl', ['$scope', 'DirectoriesFactory', '$location',
-	function($scope, DirectoriesFactory, $location ){
+app.controller('DirectoryCreationCtrl', ['$scope', 'Directory', '$location',
+	function($scope, Directory, $location ){
 		//callback for ng-click 'createNewDirectory'
 		$scope.directoryForm = {};
 		$scope.directoryForm.name = "NAME";
 		$scope.directoryForm.description = "DESCRIPTION";
 		$scope.createNewDirectory = function(){
 			console.log($scope.directoryForm)
-			DirectoriesFactory.create($scope.directoryForm);
+			Directory.create($scope.directoryForm);
 			$location.path('/directories');
 		}
 	}

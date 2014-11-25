@@ -1,21 +1,21 @@
 var app = angular.module('ideaBin.ideaControllers', []);
 
-app.controller("IdeaIndexCtrl", ['$scope', 'IdeaFactory', 'IdeasFactory', '$location',
-	function($scope, IdeaFactory, IdeasFactory, $location) {
-		$scope.ideas = IdeasFactory.query();
+app.controller("IdeaIndexCtrl", ['$scope', 'Idea', '$location',
+	function($scope, Idea, $location) {
+		$scope.ideas = Idea.query();
 		
   	$scope.deleteIdea =  function(ideaId){
-			IdeaFactory.delete({id: ideaId});
-			$scope.ideas = IdeasFactory.query();
+			Idea.delete({id: ideaId});
+			$scope.ideas = Idea.query();
 		}
 		
 		$scope.createNewIdea = function(){
-			IdeasFactory.create();
+			Idea.create();
 			$location.path('/ideas');
 		};
 		
 		$scope.editIdea = function (ideaId) {
-			//IdeaFactory.show({id: ideaId});
+			//Idea.show({id: ideaId});
 			$location.path('/ideas/'+ideaId);
 		}
 		
@@ -24,12 +24,12 @@ app.controller("IdeaIndexCtrl", ['$scope', 'IdeaFactory', 'IdeasFactory', '$loca
 		}
 }]);
 
-app.controller('IdeaDetailCtrl', ['$scope', '$routeParams', 'IdeaFactory', '$location',
-	function($scope, $routeParams, IdeaFactory, $location){
-		$scope.idea = IdeaFactory.show({id: $routeParams.id});
+app.controller('IdeaDetailCtrl', ['$scope', '$routeParams', 'Idea', '$location',
+	function($scope, $routeParams, Idea, $location){
+		$scope.idea = Idea.show({id: $routeParams.id});
 		
 		$scope.updateIdea = function (){
-			IdeaFactory.update($scope.idea);
+			Idea.update($scope.idea);
 			$location.path('/ideas');
 		}
 		
@@ -39,15 +39,15 @@ app.controller('IdeaDetailCtrl', ['$scope', '$routeParams', 'IdeaFactory', '$loc
 	}
 ]);
 
-app.controller('IdeaCreationCtrl', ['$scope', 'IdeasFactory', '$location',
-	function($scope, IdeasFactory, $location ){
+app.controller('IdeaCreationCtrl', ['$scope', 'Idea', '$location',
+	function($scope, Idea, $location ){
 		//callback for ng-click 'createNewIdea'
 		$scope.ideaForm = {};
 		$scope.ideaForm.name = "NAME";
 		$scope.ideaForm.description = "DESCRIPTION";
 		$scope.createNewIdea = function(){
 			console.log($scope.ideaForm)
-			IdeasFactory.create($scope.ideaForm);
+			Idea.create($scope.ideaForm);
 			$location.path('/ideas');
 		}
 	}

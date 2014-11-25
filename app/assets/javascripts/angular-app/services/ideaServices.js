@@ -1,16 +1,11 @@
 var services = angular.module('ideaBin.ideaServices', ['ngResource']);
 
-services.factory('IdeasFactory', function ($resource) {
-    return $resource('/ideas.json', {}, {
-        query: { method: 'GET', isArray: true },
-        create: { method: 'POST' }
-    })
-});
-
-services.factory('IdeaFactory', function ($resource) {
+services.factory('Idea', function ($resource) {
     return $resource('/ideas/:id.json', {}, {
-        show: { method: 'GET', params: {id: '@id'}},
-        update: { method: 'PUT', params: {id: '@id'} },
-        delete: { method: 'DELETE', params: {id: '@id'} }
+        query: { method: 'GET', isArray: true },
+        create: { method: 'POST' },
+				show: { method: 'GET', isArray: false},
+        update: { method: 'PUT' },
+        delete: { method: 'DELETE' }
     })
 });

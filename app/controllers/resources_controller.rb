@@ -7,10 +7,10 @@ class ResourcesController < ApplicationController
   # GET /resources.json
   def index
 		@directory = Directory.new
-		@directories = Directory.where(idea_id: params[:id])
-    @resources = Resource.where(idea_id: params[:id])
+		@directories = Directory.where(idea_id: params[:idea_id])
+    @resources = Resource.where(idea_id: params[:idea_id])
 
-		@idea = Idea.find(params[:id])
+		@idea = Idea.find(params[:idea_id])
 		
     respond_with(@resources)
   end
