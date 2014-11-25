@@ -1,43 +1,77 @@
-<div class="pull-right glyphicon glyphicon-cog" id="ideaSettingsLink"></div>
+<div class="pull-right glyphicon glyphicon-cog" id="ideaSettingsLink" ></div>
 
- <div class="row">
+ <div class="row" ng-controller="IdeaDetailCtrl">
   <div class="col-md-4"></div>
-  <div class="col-md-4 grayBorder" id="divNewIdea">
-    <div class="row text-center">
-  	<h1>
-  		Create an idea,<br> then share it<br> with the world.
-  	</h1>
-  </div>
-	<div class="container">
-		<form novalidate>
-			<div class="input-group">
-				<span class="input-group-btn">
-					<span class="btn btn-success btn-file">
-						Browse...
-						<input type="file" name="idea[cover_img]" id="idea_cover_img">
+		<div class="col-md-4 grayBorder" id="divNewIdea">
+			<div class="row text-center">
+			<h1>
+				Create an idea,<br> then share it<br> with the world.
+			</h1>
+		</div>
+		<div class="container">
+			<form novalidate>
+				<div class="input-group">
+					<span class="input-group-btn">
+						<span class="btn btn-success btn-file">
+							Browse...
+							<input type="file" name="idea[cover_img]" id="idea_cover_img">
+						</span>
 					</span>
-				</span>
-				<input type="text" class="form-control" readonly>
-			</div>
-			<div class="field">
-				<label for="name" >Name</label>
-				<br />
-				<input type="text" name="idea[name]" ng-model="idea.name" id="name"/>
-			</div>
-			<div class="field">
-				<label for="description" >Description</label>
-				<br />
-				<input type="text" name="idea[description]" ng-model="idea.description" id="description"/>
-			</div>
-			<div class="actions">
-				<button ng-click="updateIdea()">SAVE</button>      
-			</div>
-		</form>
-	</div>
-  <div class="col-md-4">
-		<div ng-controller="DirectoryIndexCtrl" >
-			<div ng-include="'../directories/index.html'"></div>
+					<input type="text" class="form-control" readonly>
+				</div>
+				<div class="field">
+					<label for="name" >Name</label>
+					<br />
+					<input type="text" name="idea[name]" ng-model="idea.name" id="name"/>
+				</div>
+				<div class="field">
+					<label for="description" >Description</label>
+					<br />
+					<input type="text" name="idea[description]" ng-model="idea.description" id="description"/>
+				</div>
+				<div class="actions">
+					<button ng-click="updateIdea()">SAVE</button>      
+				</div>
+			</form>
+		</div>
+		<div class="col-md-4">
+			
 		</div>
   </div>
-  </div>
 </div>
+
+<div ng-controller="DirectoryIndexCtrl" >
+	<h1>Listing directories</h1>
+
+	<table>
+		<thead>
+			<tr>
+				<th>Name</th>
+				<th colspan="3"></th>
+			</tr>
+		</thead>
+
+		<tbody>
+				<tr ng-repeat="directory in directories">
+					<td>{{directory.name}}</td>
+					<button type="button" class="btn btn-default">
+						<a ng-click="showDirectory(directory.id)" class='fa fa-pencil-square-o' ></a>
+					</button>
+					<td>
+						<button>
+							<a ng-click="editDirectory(directory.id)" class='fa fa-pencil-square-o' ></a>
+						</button>
+					</td>
+					<td>
+						<button>
+							<a ng-click="deleteDirectory(directory.id)" class='fa fa-pencil-square-o' ></a>
+						</button>
+					</td>
+				</tr>
+		</tbody>
+	</table>
+
+	<br>
+	<a ng-click="newDirectory()" class='fa fa-plus'></a>
+</div>
+

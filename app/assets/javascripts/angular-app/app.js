@@ -1,4 +1,4 @@
-var ideaBin = angular.module('ideaBin', ['ngRoute', 'templates', 'ideaBin.services', 'ideaBin.controllers']);
+var ideaBin = angular.module('ideaBin', ['ngRoute', 'templates', 'ideaBin.ideaServices', 'ideaBin.directoryServices', 'ideaBin.ideaControllers', 'ideaBin.directoryControllers']);
 
 // for compatibility with Rails CSRF protection
 
@@ -19,7 +19,6 @@ ideaBin.config(function ($routeProvider, $locationProvider) {
 				})
 				.when('/ideas/:id', {
 					templateUrl: 'ideas/edit.html', 
-					controller: 'IdeaDetailCtrl'
 				})
 				.when('/directories', {
 					templateUrl: 'directories/index.html', 

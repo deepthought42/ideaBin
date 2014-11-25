@@ -1,4 +1,4 @@
-var services = angular.module('ideaBin.services', ['ngResource']);
+var services = angular.module('ideaBin.ideaServices', ['ngResource']);
 
 services.factory('IdeasFactory', function ($resource) {
     return $resource('/ideas.json', {}, {

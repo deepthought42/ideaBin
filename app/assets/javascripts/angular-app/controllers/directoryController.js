@@ -1,4 +1,4 @@
-var app = angular.module('ideaBin.controllers', []);
+var app = angular.module('ideaBin.directoryControllers', []);
 
 app.controller("DirectoryIndexCtrl", ['$scope', 'DirectoryFactory', 'DirectoriesFactory', '$location',
 	function($scope, DirectoryFactory, DirectoriesFactory, $location) {
@@ -8,7 +8,7 @@ app.controller("DirectoryIndexCtrl", ['$scope', 'DirectoryFactory', 'Directories
 			$location.path('/directories');
 		}
 		
-		//$scope.directories = DirectoriesFactory.query();
+		$scope.directories = DirectoriesFactory.query();
 		
   	$scope.deleteDirectory =  function(directoryId){
 			DirectoryFactory.delete({id: directoryId});

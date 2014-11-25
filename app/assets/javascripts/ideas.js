@@ -1,6 +1,6 @@
-# Place all the behaviors and hooks related to the matching controller here.
-# All this logic will automatically be available in application.js.
-# You cain use CoffeeScript in this file: http://jashkenas.github.com/coffee-script/
+// Place all the behaviors and hooks related to the matching controller here.
+// All this logic will automatically be available in application.js.
+// You cain use CoffeeScript in this file: http://jashkenas.github.com/coffee-script/
 
 //Displays file name after selection with file input
 

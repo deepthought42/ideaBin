@@ -1,4 +1,4 @@
-var app = angular.module('ideaBin.controllers', []);
+var app = angular.module('ideaBin.ideaControllers', []);
 
 app.controller("IdeaIndexCtrl", ['$scope', 'IdeaFactory', 'IdeasFactory', '$location',
 	function($scope, IdeaFactory, IdeasFactory, $location) {
