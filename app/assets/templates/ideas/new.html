@@ -2,39 +2,39 @@
 
  <div class="row">
   <div class="col-md-4"></div>
-  <div class="col-md-4 grayBorder" id="divNewIdea">
-    <div class="row text-center">
-  	<h1>
-  		Create an idea,<br> then share it<br> with the world.
-  	</h1>
-  </div>
-	<div class="container" ng-controller="IdeaCreationCtrl">
-		<form name="idea" novalidate>
-			<div class="input-group">
-				<span class="input-group-btn">
-					<span class="btn btn-success btn-file">
-						Browse...
-						<input type="file" name="idea[cover_img]" id="idea_cover_img">
+		<div class="col-md-4 grayBorder" id="divNewIdea">
+			<div class="row text-center">
+			<h1>
+				Create an idea,<br> then share it<br> with the world.
+			</h1>
+		</div>
+		<div class="container" ng-controller="IdeaCreationCtrl">
+			<form name="idea" novalidate>
+				<div class="input-group">
+					<span class="input-group-btn">
+						<span class="btn btn-success btn-file">
+							Browse...
+							<input type="file" name="idea[cover_img]" id="idea_cover_img">
+						</span>
 					</span>
-				</span>
-				<input type="text" class="form-control" readonly>
-			</div>
-			<div class="field">
-				<label for="name" >Name</label>
-				<br />
-				<input type="text" name="idea[name]" ng-model="ideaForm.name" id="name"/>
-			</div>
-			<div class="field">
-				<label for="description" >Description</label>
-				<br />
-				<input type="text" name="idea[description]" ng-model="ideaForm.description" id="description"/>
-			</div>
-			<div class="actions">
-				<button ng-click="createNewIdea(idea)">SAVE</button>      
-			</div>
-		</form>
-	</div>
-  <div class="col-md-4">
-  </div>
+					<input type="text" class="form-control" readonly>
+				</div>
+				<div class="field">
+					<label for="name" >Name</label>
+					<br />
+					<input type="text" name="idea[name]" ng-model="ideaForm.name" id="name"/>
+				</div>
+				<div class="field">
+					<label for="description" >Description</label>
+					<br />
+					<input type="text" name="idea[description]" ng-model="ideaForm.description" id="description"/>
+				</div>
+				<div class="actions">
+					<button ng-click="createNewIdea(idea)">SAVE</button>      
+				</div>
+			</form>
+		</div>
+		<div class="col-md-4">
+		</div>
   </div>
 </div>

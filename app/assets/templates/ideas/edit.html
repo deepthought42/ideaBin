@@ -40,6 +40,23 @@
   </div>
 </div>
 
+<div ng-controller="DirectoryDetailCtrl">
+	<h3>Create a new directory</h3>
+	<form name="directory" >
+		<input type="hidden" ng-model="directory.idea_id"/>
+		<input type="hideen" ng-model="directory.parent_id"/>
+
+		<div class="field">
+			<label for="directoryName"></label>
+			<br>
+			<input type="text" ng-model="directory.name" />
+		</div>
+		<div class="actions">
+			<button ng-click="createDirectory()">Save</button>
+		</div>
+	</form>
+</div>
+
 <div ng-controller="DirectoryIndexCtrl" >
 	<h1>Listing directories</h1>
 
@@ -70,8 +87,37 @@
 				</tr>
 		</tbody>
 	</table>
-
 	<br>
-	<a ng-click="newDirectory()" class='fa fa-plus'></a>
+	<div class="btn btn-primary btn-lg" id="addFolderIcon">Add Directory</div>
+	<!--<a ng-click="newDirectory()" class='fa fa-plus'></a> -->
 </div>
 
+
+<div ng-controller="ResourceIndexCtrl">
+	<div id="ideaResourceContainer">
+		<div id="resource_container" class="row masonry">
+			<h1>Listing resources</h1>
+			<div class="col-xs-3 item" ng-repeat="resource in resources">
+					 <h5 class="title">{{ resource.filename }}</h5>
+						<div class="comment">
+							<p>
+								{{resource.comment}}
+							</p>  
+						</div>
+						<button id="editResource" class="dock-item glyphicon glyphicon-pencil editResource"></button>
+						<button id="removeResource" class="glyphicon glyphicon-remove"></button>
+			</div>
+		</div>
+	</div>
+
+	<div id="dragndropimage">
+		<img src="/images/upload_icon.png" />
+	</div>
+
+	<form id="myDropzone" action="/resources" class="dropzone" >
+		<div class="fallback">
+			<input name="file" type="file" multiple />
+		</div>
+		<input id="resourceComment" name="comment" type="hidden" />
+	</form >
+</div>
