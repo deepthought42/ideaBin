@@ -1,4 +1,12 @@
-var ideaBin = angular.module('ideaBin', ['ngRoute', 'templates', 'ideaBin.ideaServices', 'ideaBin.directoryServices', 'ideaBin.ideaControllers', 'ideaBin.directoryControllers']);
+var ideaBin = angular.module('ideaBin', 
+	[ 'ngRoute', 
+		'templates', 
+		'ideaBin.ideaServices', 
+		'ideaBin.directoryServices', 
+		'ideaBin.resourceServices', 
+		'ideaBin.ideaControllers', 
+		'ideaBin.directoryControllers',
+		'ideaBin.resourceControllers']);
 
 // for compatibility with Rails CSRF protection
 
