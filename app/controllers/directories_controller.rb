@@ -1,12 +1,12 @@
 class DirectoriesController < ApplicationController
 	before_action :set_directory, except: [:new, :create, :index]
   #before_filter :authenticate_user!
-	respond_to :html, :json
+	respond_to :json
   
 	# GET /directories
   # GET /directories.json
   def index
-    @directories = Directory.where(idea_id: params[:id])
+    @directories = Directory.where(idea_id: params[:idea_id])
     respond_with(@directories)
   end
 
