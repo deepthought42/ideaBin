@@ -1,7 +1,7 @@
 var app = angular.module('ideaBin.directoryControllers', []);
 
 app.controller("DirectoryIndexCtrl", ['$scope', '$routeParams', 'DirectoryFactory', 'DirectoriesFactory', '$location',
-	function($scope,$routeParams, DirectoryFactory, DirectoriesFactory, $location) {
+	function($scope, $routeParams, DirectoryFactory, DirectoriesFactory, $location) {
 		
 		$scope.showDirectories = function(ideaId){
 			$scope.directories = DirectoriesFactory.query();

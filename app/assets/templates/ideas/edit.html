@@ -40,7 +40,7 @@
   </div>
 </div>
 
-<div ng-controller="DirectoryDetailCtrl">
+<div ng-controller="DirectoryCreationCtrl">
 	<h3>Create a new directory</h3>
 	<form name="directory" >
 		<input type="hidden" ng-model="directory.idea_id"/>
@@ -93,20 +93,20 @@
 </div>
 
 
-<div ng-controller="ResourceIndexCtrl">
-	<div id="ideaResourceContainer">
-		<div id="resource_container" class="row masonry">
-			<h1>Listing resources</h1>
-			<div class="col-xs-3 item" ng-repeat="resource in resources">
-					 <h5 class="title">{{ resource.filename }}</h5>
-						<div class="comment">
-							<p>
-								{{resource.comment}}
-							</p>  
-						</div>
-						<button id="editResource" class="dock-item glyphicon glyphicon-pencil editResource"></button>
-						<button id="removeResource" class="glyphicon glyphicon-remove"></button>
-			</div>
+<div id="ideaResourceContainer" ng-controller="ResourceIndexCtrl">
+	<div id="resource_container" class="row masonry">
+		<h1>Listing resources</h1>
+		<div class="col-xs-3 item" ng-repeat="resource in resources">
+					<h5 class="title">
+						{{ resource.filename }}
+					</h5>
+					<div class="comment">
+						<p>
+							{{resource.comment}}
+						</p>  
+					</div>
+					<button id="editResource" class="dock-item glyphicon glyphicon-pencil editResource"></button>
+					<button id="removeResource" class="glyphicon glyphicon-remove"></button>
 		</div>
 	</div>
 

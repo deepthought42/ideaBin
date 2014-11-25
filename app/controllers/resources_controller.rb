@@ -1,18 +1,18 @@
 class ResourcesController < ApplicationController
   before_filter :authenticate_user!
 
+	respond_to :json
+
   # GET /resources
   # GET /resources.json
   def index
 		@directory = Directory.new
-		@directories = Directory.where(idea_id: params[:idea_id])
-    @resources = Resource.where(idea_id: params[:idea_id])
-    session[:idea_id] = params[:idea_id]
-		@idea = Idea.find(params[:idea_id])
-    respond_to do |format|
-      format.html # index.html.erb
-      format.json { render json: @resources }
-    end
+		@directories = Directory.where(idea_id: params[:id])
+    @resources = Resource.where(idea_id: params[:id])
+
+		@idea = Idea.find(params[:id])
+		
+    respond_with(@resources)
   end
 
   # GET /resources/1

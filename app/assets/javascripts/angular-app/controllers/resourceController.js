@@ -1,7 +1,7 @@
 var app = angular.module('ideaBin.resourceControllers', []);
 
 app.controller("ResourceIndexCtrl", ['$scope', '$routeParams', 'ResourceFactory', 'ResourcesFactory', '$location',
-	function($scope,$routeParams, ResourceFactory, ResourcesFactory, $location) {
+	function($scope, $routeParams, ResourceFactory, ResourcesFactory, $location) {
 		
 		$scope.showResources = function(ideaId){
 			$scope.resources = ResourcesFactory.query();

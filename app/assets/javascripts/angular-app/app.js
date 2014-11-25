@@ -3,9 +3,9 @@ var ideaBin = angular.module('ideaBin',
 		'templates', 
 		'ideaBin.ideaServices', 
 		'ideaBin.directoryServices', 
-		'ideaBin.resourceServices', 
 		'ideaBin.ideaControllers', 
 		'ideaBin.directoryControllers',
+		'ideaBin.resourceServices', 
 		'ideaBin.resourceControllers']);
 
 // for compatibility with Rails CSRF protection
