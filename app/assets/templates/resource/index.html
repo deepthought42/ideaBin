@@ -1,18 +1,10 @@
-<div>
- <%= link_to "", edit_idea_path(session[:idea_id]), :class => 'pull-right glyphicon glyphicon-cog glyphicon-2x editIdea' %>
-</div>
-
-<br />
-
-<div id="ideaResourceContainer">
-	<div id="directoryList">
-		<%= render 'directories/index' %>
-		<div class="btn btn-primary btn-lg" id="addFolderIcon">Add Directory</div>
-	</div>
+<div id="ideaResourceContainer" ng-controller="ResourceIndexCtrl">
 	<div id="resource_container" class="row masonry">
 		<h1>Listing resources</h1>
 		<div class="col-xs-3 item" ng-repeat="resource in resources">
-				 <h5 class="title">{{ resource.filename }}</h5>
+					<h5 class="title">
+						{{ resource.filename }}
+					</h5>
 					<div class="comment">
 						<p>
 							{{resource.comment}}
@@ -23,17 +15,14 @@
 		</div>
 	</div>
 
+	<div id="dragndropimage">
+		<img src="/images/upload_icon.png" />
+	</div>
+
+	<form id="myDropzone" action="/resources" class="dropzone" >
+		<div class="fallback">
+			<input name="file" type="file" multiple />
+		</div>
+		<input id="resourceComment" name="comment" type="hidden" />
+	</form >
 </div>
-
-
-<div id="dragndropimage">
-  <img src="upload_icon.png" />
-</div>
-
-
-<form id="myDropzone" action="/resources" class="dropzone" >
-  <div class="fallback">
-    <input name="file" type="file" multiple />
-  </div>
-  <input id="resourceComment" name="comment" type="hidden" />
-</form >

@@ -1,4 +1,5 @@
-<div ng-controller="DirectoryDetailCtrl">
+<div id="directoryForm" ng-controller="DirectoryCreationCtrl" ng-show="showCreateDirectoryPanel">
+	<h3>Create a new directory</h3>
 	<form name="directory" >
 		<input type="hidden" ng-model="directory.idea_id"/>
 		<input type="hideen" ng-model="directory.parent_id"/>

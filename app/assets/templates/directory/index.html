@@ -1,32 +1,37 @@
-<h1>Listing directories</h1>
+<div ng-controller="DirectoryIndexCtrl" >
+	<h1>Listing directories</h1>
 
-<table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
+	<table>
+		<thead>
+			<tr>
+				<th>Name</th>
+				<th colspan="3"></th>
+			</tr>
+		</thead>
 
-  <tbody>
-      <tr ng-repeat="directory in directories">
-        <td>{{directory.name}}</td>
-				<button type="button" class="btn btn-default">
-					<a ng-click="showDirectory(directory.id)" class='fa fa-pencil-square-o' ></a>
-				</button>
-        <td>
-					<button>
-						<a ng-click="editDirectory(directory.id)" class='fa fa-pencil-square-o' ></a>
+		<tbody>
+				<tr ng-repeat="directory in directories">
+					<td>{{directory.name}}</td>
+					<button type="button" class="btn btn-default">
+						<a ng-click="showDirectory(directory.id)" class='fa fa-pencil-square-o' ></a>
 					</button>
-				</td>
-        <td>
-					<button>
-						<a ng-click="deleteDirectory(directory.id)" class='fa fa-pencil-square-o' ></a>
-					</button>
-				</td>
-      </tr>
-  </tbody>
-</table>
-
-<br>
-<a ng-click="newDirectory()" class='fa fa-plus'></a>
+					<td>
+						<button>
+							<a ng-click="editDirectory(directory.id)" class='fa fa-pencil-square-o' ></a>
+						</button>
+					</td>
+					<td>
+						<button>
+							<a ng-click="deleteDirectory(directory.id)" class='fa fa-pencil-square-o' ></a>
+						</button>
+					</td>
+				</tr>
+		</tbody>
+	</table>
+	<br>
+	<div class="btn btn-primary btn-lg" id="addFolderIcon" ng-click="showCreatePanel()">
+		New Directory
+		<a class='fa fa-plus'></a>
+	</div>
+		
+</div>
