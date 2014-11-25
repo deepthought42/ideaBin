@@ -3,8 +3,10 @@ class DirectoriesController < ApplicationController
   #before_filter :authenticate_user!
 	respond_to :html, :json
   
+	# GET /directories
+  # GET /directories.json
   def index
-    @directories = Directory.where(idea_id: session[:idea_id])
+    @directories = Directory.where(idea_id: params[:id])
     respond_with(@directories)
   end
 
