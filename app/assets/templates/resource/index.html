@@ -13,6 +13,16 @@
 					<button id="editResource" class="dock-item glyphicon glyphicon-pencil editResource"></button>
 					<button id="removeResource" class="glyphicon glyphicon-remove"></button>
 		</div>
+		
+		<input type="file" nv-file-select uploader="uploader"/><br/>
+		<div class="button" ng-file-select="onFileSelect($files)" data-multiple="true"></div>
+		<div ng-show="dropSupported" class="drop-box" ng-file-drop="onFileSelect($files)" ng-file-drop-available="dropSupported=true" ng-file-drag-over-class="dragOverClass($event)" ng-file-drag-over-delay="100">or drop files <div>here</div></div>
+		<ul>
+			<li ng-repeat="item in uploader.queue">
+					Name: <span ng-bind="item.file.name"></span><br/>
+					<button ng-click="item.upload()">upload</button>
+			</li>
+		</ul>
 	</div>
 
 	<div id="dragndropimage">
@@ -32,9 +42,6 @@
 		<button>Submit</button>
 	</form>
 	
-	<div ng-file-drop="onFileSelect($files)" ng-file-drag-over-class="optional-css-class-name-or-function"
-        ng-show="dropSupported">drop files here</div>
-  <div ng-file-drop-available="dropSupported=true" 
-        ng-show="!dropSupported">HTML5 Drop File is not supported!</div>
-  <button ng-click="upload.abort()">Cancel Upload</button>
+	<div>
+		
 </div>

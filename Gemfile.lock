@@ -76,6 +76,7 @@ GEM
     mime-types (2.4.3)
     minitest (5.4.3)
     multi_json (1.10.1)
+    ng-rails-csrf (0.1.0)
     orm_adapter (0.5.0)
     pg (0.18.0.pre20141117110243)
     pg (0.18.0.pre20141117110243-x64-mingw32)
@@ -149,6 +150,7 @@ DEPENDENCIES
   font-awesome-rails
   git
   jquery-cdn (~> 2.1)
+  ng-rails-csrf
   pg (~> 0.18.0.pre20141017160319)
   protected_attributes
   rails (~> 4.1.8)
