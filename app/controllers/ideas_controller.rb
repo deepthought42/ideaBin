@@ -1,17 +1,14 @@
 class IdeasController < ApplicationController
   before_filter :authenticate_user!
 	before_action :set_idea, except: [:new, :create, :index]
-	respond_to :html, :json
+	respond_to :json
 	
   # GET /ideas
   # GET /ideas.json
   def index
     @ideas = Idea.all
 
-    respond_to do |format|
-      format.html # index.html.erb
-      format.json { render json: @ideas }
-    end
+    respond_with(@ideas)
   end
 
   # GET /ideas/1

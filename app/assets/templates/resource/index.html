@@ -17,10 +17,10 @@
 		<div flow-init="{target: '/resources'}"
      flow-files-submitted="$flow.upload()"
      flow-file-success="$file.msg = $message">
-
-			<input type="file" flow-btn/>
-			Input OR Other element as upload button
-			<span class="btn" flow-btn>Upload File</span>
+		<span class="btn" flow-btn>
+			<input type="file" ng-show="false" flow-btn/>
+			Upload File
+		</span>
 
 			<table>
 				<tr ng-repeat="file in $flow.files">

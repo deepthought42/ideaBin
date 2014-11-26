@@ -16,7 +16,7 @@ app.controller("IdeaIndexCtrl", ['$scope', 'Idea', '$location',
 		
 		$scope.editIdea = function (ideaId) {
 			//Idea.show({id: ideaId});
-			$location.path('/ideas/'+ideaId);
+			$location.path('/ideas/'+ideaId+'/edit');
 		}
 		
 		$scope.showIdea = function(){
