@@ -14,34 +14,29 @@
 					<button id="removeResource" class="glyphicon glyphicon-remove"></button>
 		</div>
 		
-		<input type="file" nv-file-select uploader="uploader"/><br/>
-		<div class="button" ng-file-select="onFileSelect($files)" data-multiple="true"></div>
-		<div ng-show="dropSupported" class="drop-box" ng-file-drop="onFileSelect($files)" ng-file-drop-available="dropSupported=true" ng-file-drag-over-class="dragOverClass($event)" ng-file-drag-over-delay="100">or drop files <div>here</div></div>
-		<ul>
-			<li ng-repeat="item in uploader.queue">
-					Name: <span ng-bind="item.file.name"></span><br/>
-					<button ng-click="item.upload()">upload</button>
-			</li>
-		</ul>
+		<div flow-init="{target: '/resources'}"
+     flow-files-submitted="$flow.upload()"
+     flow-file-success="$file.msg = $message">
+
+			<input type="file" flow-btn/>
+			Input OR Other element as upload button
+			<span class="btn" flow-btn>Upload File</span>
+
+			<table>
+				<tr ng-repeat="file in $flow.files">
+						<td>{{$index+1}}</td>
+						<td>{{file.name}}</td>
+						<td>{{file.msg}}</td>
+				</tr>
+			</table>
+		</div>
+		
+
 	</div>
 
 	<div id="dragndropimage">
 		<img src="/images/upload_icon.png" />
 	</div>
-
-	<form id="myDropzone" action="/resources" class="dropzone" >
-		<div class="fallback">
-			<input name="file" type="file" multiple />
-		</div>
-		<input id="resourceComment" name="comment" type="hidden" />
-	</form >
-	
-	
-	<form enctype="multipart/form-data" action="/resources" method="POST">
-		<input type="file" name="files" multiple />
-		<button>Submit</button>
-	</form>
 	
 	<div>
-		
 </div>

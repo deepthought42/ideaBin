@@ -19,14 +19,13 @@
 //= require directories
 
 //= require bootstrap
-//= require customstyle
 
-//= require angular
+//= require ../components/angular/angular
+//= require ../components/ng-flow/dist/ng-flow-standalone.min
 //= require angular-resource
 //= require angular-route
 //= require angular-rails-templates
 //= require angular-app/app
-//= require angularjs-file-upload
 //= require ng-rails-csrf
 //= require_tree ./angular-app/modules
 //= require_tree ./angular-app/filters
