@@ -26,7 +26,6 @@
 //= require angular-route
 //= require angular-rails-templates
 //= require angular-app/app
-//= require ng-rails-csrf
 //= require_tree ./angular-app/modules
 //= require_tree ./angular-app/filters
 //= require_tree ./angular-app/directives
