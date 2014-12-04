@@ -58,10 +58,10 @@ app.controller('DirectoryCreationCtrl', ['$scope', '$localStorage', '$routeParam
 		$scope.directoryForm = {};
 		$scope.directoryForm.name = "NAME";
 		$scope.directoryForm.idea_id = $scope.$storage.current_idea.id;
-		console.log("CURRENT IDEA ID :: " + $scope.$storage.current_idea);
 		$scope.createNewDirectory = function(){
 			console.log($scope.directoryForm)
 			Directory.create($scope.directoryForm);
+			//fire event to add directory to directories list
 			//$location.path('/directories');
 		}
 	}

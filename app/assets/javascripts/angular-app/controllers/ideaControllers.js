@@ -50,7 +50,6 @@ app.controller('IdeaCreationCtrl', ['$scope', 'Idea', '$location',
 		$scope.ideaForm.name = "NAME";
 		$scope.ideaForm.description = "DESCRIPTION";
 		$scope.createNewIdea = function(){
-			console.log($scope.ideaForm)
 			Idea.create($scope.ideaForm);
 			$location.path('/ideas');
 		}
