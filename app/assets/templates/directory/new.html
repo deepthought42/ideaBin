@@ -1,16 +1,16 @@
+<h3>Create a new directory</h3>
 <div id="directoryForm" ng-controller="DirectoryCreationCtrl" ng-show="showCreateDirectoryPanel">
-	<h3>Create a new directory</h3>
-	<form name="directory" >
+	<form name="directory" novalidate>
 		<input type="hidden" ng-model="directory.idea_id"/>
-		<input type="hideen" ng-model="directory.parent_id"/>
+		<input type="hidden" ng-model="directory.parent_id"/>
 
 		<div class="field">
 			<label for="directoryName"></label>
 			<br>
-			<input type="text" ng-model="directory.name" />
+			<input type="text" ng-model="directory.name" name="directory[name]"/>
 		</div>
 		<div class="actions">
-			<button ng-click="createDirectory()">Save</button>
+			<button ng-click="createNewDirectory()">Save directory</button>
 		</div>
 	</form>
 </div>

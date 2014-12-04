@@ -52,13 +52,14 @@ app.controller('DirectoryDetailCtrl', ['$scope', '$routeParams', 'Directory', '$
 app.controller('DirectoryCreationCtrl', ['$scope', 'Directory', '$location',
 	function($scope, Directory, $location ){
 		//callback for ng-click 'createNewDirectory'
+		console.log("CREATE DIRECTORY CONTRLLER");
 		$scope.directoryForm = {};
 		$scope.directoryForm.name = "NAME";
-		$scope.directoryForm.description = "DESCRIPTION";
+
 		$scope.createNewDirectory = function(){
 			console.log($scope.directoryForm)
 			Directory.create($scope.directoryForm);
-			$location.path('/directories');
+			//$location.path('/directories');
 		}
 	}
 ]);

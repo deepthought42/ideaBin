@@ -32,8 +32,6 @@ app.controller('IdeaDetailCtrl', ['$scope', '$localStorage', '$routeParams', 'Id
 		$scope.idea = Idea.show({id: $routeParams.id});
 
 		$scope.updateIdea = function (ideaId){
-			console.log("ID PASSED IN :: " + ideaId);
-			
 			Idea.update($scope.idea,{id: ideaId}, function(){
 					$location.path('/ideas');
 			});
