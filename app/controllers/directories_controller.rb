@@ -1,6 +1,6 @@
 class DirectoriesController < ApplicationController
+	before_filter :authenticate_user!
 	before_action :set_directory, except: [:new, :create, :index]
-  #before_filter :authenticate_user!
 	respond_to :json
   
 	# GET /directories
@@ -24,7 +24,7 @@ class DirectoriesController < ApplicationController
   end
 
   def create
-		@idea = Idea.find(session[:idea_id])
+		@idea = Idea.find(params[:idea_id])
 
     @directory = Directory.new(directory_params)
 		@directory.name = directory_params[:name]

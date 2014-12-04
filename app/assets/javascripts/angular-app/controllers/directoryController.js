@@ -1,4 +1,5 @@
-var app = angular.module('ideaBin.directoryControllers', []);
+var app = angular.module('ideaBin.directoryControllers', [
+	'ngStorage']);
 
 app.controller("DirectoryIndexCtrl", ['$scope', '$rootScope', '$routeParams', 'Directory', '$location',
 	function($scope, $rootScope, $routeParams, Directory, $location) {
@@ -49,13 +50,15 @@ app.controller('DirectoryDetailCtrl', ['$scope', '$routeParams', 'Directory', '$
 	}
 ]);
 
-app.controller('DirectoryCreationCtrl', ['$scope', 'Directory', '$location',
-	function($scope, Directory, $location ){
+app.controller('DirectoryCreationCtrl', ['$scope', '$localStorage', '$routeParams', 'Directory', '$location',
+	function($scope, $localStorage, $routeParams, Directory, $location ){
+		$scope.$storage = $localStorage;
 		//callback for ng-click 'createNewDirectory'
 		console.log("CREATE DIRECTORY CONTRLLER");
 		$scope.directoryForm = {};
 		$scope.directoryForm.name = "NAME";
-
+		$scope.directoryForm.idea_id = $scope.$storage.current_idea.id;
+		console.log("CURRENT IDEA ID :: " + $scope.$storage.current_idea);
 		$scope.createNewDirectory = function(){
 			console.log($scope.directoryForm)
 			Directory.create($scope.directoryForm);
