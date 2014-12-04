@@ -1,7 +1,10 @@
-var app = angular.module('ideaBin.ideaControllers', []);
+var app = angular.module('ideaBin.ideaControllers', [
+				'ngStorage']
+			);
 
-app.controller("IdeaIndexCtrl", ['$scope', 'Idea', '$location',
-	function($scope, Idea, $location) {
+app.controller("IdeaIndexCtrl", ['$scope', '$localStorage', 'Idea', '$location',
+	function($scope, $localStorage, Idea, $location) {
+		$scope.$storage = $localStorage;
 		$scope.ideas = Idea.query();
 		
   	$scope.deleteIdea =  function(ideaId){
@@ -16,7 +19,8 @@ app.controller("IdeaIndexCtrl", ['$scope', 'Idea', '$location',
 		
 		$scope.editIdea = function (ideaId) {
 			//Idea.show({id: ideaId});
-			$location.path('/ideas/'+ideaId+'/edit');
+			$scope.$storage.current_idea = ideaId;
+			$location.path('/ideas/'+ideaId);
 		}
 		
 		$scope.showIdea = function(){

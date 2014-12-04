@@ -1,8 +1,8 @@
 var app = angular.module('ideaBin.resourceControllers', []);
 
-app.controller("ResourceIndexCtrl", ['$scope', '$routeParams', 'ResourceFactory', '$location', 
-	function($scope, $routeParams, ResourceFactory, $location) {
-		$scope.resources = ResourceFactory.query({idea_id: $routeParams.id});
+app.controller("ResourceIndexCtrl", ['$scope', '$rootScope', '$routeParams', 'ResourceFactory', '$location', 
+	function($scope, $rootScope, $routeParams, ResourceFactory, $location) {
+		$scope.resources = ResourceFactory.query({id: $rootScope.current_idea});
 		
 		$scope.showResourceFactorys = function(ideaId){
 			$scope.resources = ResourceFactory.query();
@@ -37,7 +37,7 @@ app.controller("ResourceIndexCtrl", ['$scope', '$routeParams', 'ResourceFactory'
 					method: 'POST', // or 'PUT',
 					headers: {'XSRF-TOKEN': ''},
 					//withCredentials: true,
-					data: {resource: $scope.resource},
+					data: {resource: $scope.resource, idea_id: $scope.idea.id},
 					file: file, // or list of files ($files) for html5 only
 					//fileName: 'doc.jpg' or ['1.jpg', '2.jpg', ...] // to modify the name of the file(s)
 					// customize file formData name ('Content-Disposition'), server side file variable name. 

@@ -22,10 +22,12 @@
 
 //= require ../components/angular/angular
 //= require ../components/ng-flow/dist/ng-flow-standalone.min
+//= require ../components/ngStorage/ngStorage.min
 //= require angular-resource
 //= require angular-route
 //= require angular-rails-templates
 //= require angular-app/app
+
 //= require_tree ./angular-app/modules
 //= require_tree ./angular-app/filters
 //= require_tree ./angular-app/directives

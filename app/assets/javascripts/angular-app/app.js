@@ -26,7 +26,7 @@ ideaBin.config(function ($routeProvider, $locationProvider) {
 					templateUrl: 'idea/new.html', 
 					controller: 'IdeaCreationCtrl'
 				})
-				.when('/ideas/:id/edit', {
+				.when('/ideas/:id', {
 					templateUrl: 'idea/edit.html', 
 				})
 				.when('/directories', {
