@@ -112,7 +112,7 @@ class IdeasController < ApplicationController
   # PUT /ideas/1.json
   def update
     @idea = Idea.find(params[:id])
-
+		@idea.description = params[:description]
     repo_path = "#{Rails.root}/public/data/repository/#{current_user.id}/#{@idea.name}"
 		cover_img_path = "#{Rails.root}/public/images/cover_images/"
 		
@@ -132,14 +132,10 @@ class IdeasController < ApplicationController
     end
 
 	
-    respond_to do |format|
-      if @idea.update_attributes(params[:idea])
-        format.html { redirect_to action: "index", notice: "#{@gitcommit} ... #{params[:alteredStatus]} Idea was successfully updated." }
-        format.json { head :no_content }
-      else
-        format.html { render action: "edit" }
-        format.json { render json: @idea.errors, status: :unprocessable_entity }
-      end
+    if @idea.update_attributes(params[:idea])
+			respond_with(@idea)
+		else
+			puts "THERE WAS AN ISSUE UPDATING"
     end
   end
 

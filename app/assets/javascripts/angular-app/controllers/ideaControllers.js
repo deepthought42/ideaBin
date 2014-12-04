@@ -4,7 +4,6 @@ var app = angular.module('ideaBin.ideaControllers', [
 
 app.controller("IdeaIndexCtrl", ['$scope', '$localStorage', 'Idea', '$location',
 	function($scope, $localStorage, Idea, $location) {
-		$scope.$storage = $localStorage;
 		$scope.ideas = Idea.query();
 		
   	$scope.deleteIdea =  function(ideaId){
@@ -19,7 +18,6 @@ app.controller("IdeaIndexCtrl", ['$scope', '$localStorage', 'Idea', '$location',
 		
 		$scope.editIdea = function (ideaId) {
 			//Idea.show({id: ideaId});
-			$scope.$storage.current_idea = ideaId;
 			$location.path('/ideas/'+ideaId);
 		}
 		
@@ -28,13 +26,17 @@ app.controller("IdeaIndexCtrl", ['$scope', '$localStorage', 'Idea', '$location',
 		}
 }]);
 
-app.controller('IdeaDetailCtrl', ['$scope', '$routeParams', 'Idea', '$location',
-	function($scope, $routeParams, Idea, $location){
+app.controller('IdeaDetailCtrl', ['$scope', '$localStorage', '$routeParams', 'Idea', '$location',
+	function($scope, $localStorage, $routeParams, Idea, $location){
+		$scope.$storage = $localStorage;
 		$scope.idea = Idea.show({id: $routeParams.id});
-		
-		$scope.updateIdea = function (){
-			Idea.update($scope.idea);
-			$location.path('/ideas');
+
+		$scope.updateIdea = function (ideaId){
+			console.log("ID PASSED IN :: " + ideaId);
+			
+			Idea.update($scope.idea,{id: ideaId}, function(){
+					$location.path('/ideas');
+			});
 		}
 		
 		$scope.cancel = function(){
