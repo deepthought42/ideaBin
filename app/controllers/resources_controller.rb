@@ -1,6 +1,6 @@
 class ResourcesController < ApplicationController
-  before_filter :authenticate_user!
-	before_action :set_resource, except: [:new, :create, :index]
+  #before_filter :authenticate_user!
+	#before_action :set_resource, except: [:new, :create, :index]
 	respond_to :json
 
   # GET /resources
@@ -60,11 +60,12 @@ class ResourcesController < ApplicationController
 #     @git.add(:all => true)
 #     @git.commit('this is a commit...REMEMBER TO CHANGE THIS TO USER DEFINED MESSAGE')
 #   end
-      @resource = Resource.new
-      @resource.idea_id = session[:idea_id]
-      @resource.filename = params[:file].original_filename
-      @resource.content_type = params[:file].content_type
-      @resource.comment = params[:comment]
+		@resource = Resource.new
+		@resource.idea_id = params[:idea_id]
+		@resource.filename = params[:file].original_filename
+		@resource.content_type = params[:file].content_type
+		@resource.comment = params[:comment]
+		#@resource.directory_id = params[:directory_id]
 	
 		@resource.save
 		respond_with(@resource)
@@ -104,6 +105,6 @@ class ResourcesController < ApplicationController
     end
 
     def resource_params
-      params.require(:resource).permit(:name)
+      #params.require(:resource).permit(:name)
     end
 end

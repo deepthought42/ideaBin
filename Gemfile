@@ -1,4 +1,4 @@
-source 'https://rubygems.org'
+source 'http://rubygems.org'
 ruby '2.1.3'
 gem 'protected_attributes'
 gem 'rails', '~> 4.1.8'

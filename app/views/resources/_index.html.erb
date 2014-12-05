@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Directories</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @directories.each do |directory| %>
+      <tr>
+        <td><%= directory.name %></td>
+        <td><%= link_to '', edit_directory_path(directory) , :class => 'dock-item glyphicon glyphicon-pencil editResource'%></td>
+        <td><%= link_to '', directory, 'data-method' => :delete, data: { confirm: 'Are you sure?' } , :class=> 'glyphicon glyphicon-remove'%></td>
+				<td>
+					<%= link_to '', new_directory_path(:parent_id => directory) , :class => 'dock-item glyphicon glyphicon-folder-open' %>
+				</td>
+			</tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+

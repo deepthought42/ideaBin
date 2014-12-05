@@ -7,6 +7,5 @@ services.factory('Idea', function ($resource) {
 				show: { method: 'GET', isArray: false},
         update: { method: 'PUT' },
         delete: { method: 'DELETE' }, 
-				
 			})
 });

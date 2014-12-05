@@ -28,16 +28,20 @@ app.controller("ResourceIndexCtrl", ['$scope', '$localStorage', '$rootScope', '$
 		}
 		
 		$scope.onFileSelect = function($files) {
-			console.log("UPLOADING FILES" + $files);
+			console.log("UPLOADING FILES" + $scope.$storage.current_idea + ":: IS THIS THING WORKING");
+			var comment = prompt("Please describe the upload");
 			//$files: an array of files selected, each file has name, size, and type.
 			for (var i = 0; i < $files.length; i++) {
 				var file = $files[i];
 				$scope.upload = $upload.upload({
-					url: '/resources', 
+					url: '/resources.json', 
 					method: 'POST', // or 'PUT',
 					headers: {'XSRF-TOKEN': ''},
 					//withCredentials: true,
-					data: {resource: $scope.resource, idea_id: $scope.$storage.current_idea.id},
+					data: {	comment: comment, 
+									resource: $scope.resource, 
+									idea_id: $scope.$storage.current_idea.id, 
+									directory_id: $scope.$storage.current_directory.id},
 					file: file, // or list of files ($files) for html5 only
 					//fileName: 'doc.jpg' or ['1.jpg', '2.jpg', ...] // to modify the name of the file(s)
 					// customize file formData name ('Content-Disposition'), server side file variable name. 
@@ -48,14 +52,14 @@ app.controller("ResourceIndexCtrl", ['$scope', '$localStorage', '$rootScope', '$
 					console.log('percent: ' + parseInt(100.0 * evt.loaded / evt.total));
 				}).success(function(data, status, headers, config) {
 					// file is uploaded successfully
-					console.log(data);
+					console.log("UPLOAD SUCCESSFUL");
+					$scope.resources = Resource.query({idea_id: $scope.$storage.current_idea.id});
 				});
 				//.error(...)
 				//.then(success, error, progress); 
 				// access or attach event listeners to the underlying XMLHttpRequest.
 				//.xhr(function(xhr){xhr.upload.addEventListener(...)})
 			}
-			$scope.resources = Resource.query({idea_id: $scope.$storage.current_idea.id});
 
 			
     /* alternative way of uploading, send the file binary with the file's content-type.
