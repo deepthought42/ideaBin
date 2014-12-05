@@ -15,12 +15,12 @@
 		</div>
 		
 		<div flow-init="{target: '/resources'}"
-     flow-files-submitted="$flow.upload()"
-     flow-file-success="$file.msg = $message">
-		<span class="btn" flow-btn>
-			<input type="file" ng-show="false" flow-btn/>
-			Upload File
-		</span>
+			flow-files-submitted="$flow.upload()"
+			flow-file-success="$file.msg = $message">
+			<span class="btn" flow-btn>
+				
+				Upload File
+			</span>
 
 			<table>
 				<tr ng-repeat="file in $flow.files">
@@ -30,13 +30,9 @@
 				</tr>
 			</table>
 		</div>
-		
-
 	</div>
 
 	<div id="dragndropimage">
 		<img src="/images/upload_icon.png" />
 	</div>
-	
-	<div>
 </div>

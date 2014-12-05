@@ -1,29 +1,30 @@
 var app = angular.module('ideaBin.resourceControllers', []);
 
-app.controller("ResourceIndexCtrl", ['$scope', '$rootScope', '$routeParams', 'ResourceFactory', '$location', 
-	function($scope, $rootScope, $routeParams, ResourceFactory, $location) {
-		$scope.resources = ResourceFactory.query({id: $rootScope.current_idea});
-		
-		$scope.showResourceFactorys = function(ideaId){
-			$scope.resources = ResourceFactory.query();
+app.controller("ResourceIndexCtrl", ['$scope', '$localStorage', '$rootScope', '$routeParams', 'Resource', '$location', 
+	function($scope, $localStorage, $rootScope, $routeParams, Resource, $location) {
+		$scope.$storage = $localStorage;
+		$scope.resources = Resource.query({id: $scope.$storage.current_idea.id});
+
+		$scope.showResource = function(ideaId){
+			$scope.resources = Resource.query();
 			$location.path('/resources');
 		}
 		
-  	$scope.deleteResourceFactory =  function(resourceId){
-			ResourceFactoryFactory.delete({id: resourceId});
-			$scope.resources = ResourceFactory.query();
+  	$scope.deleteResource =  function(resourceId){
+			Resource.delete({id: resourceId});
+			$scope.resources = Resource.query();
 		}
 		
-		$scope.createNewResourceFactory = function(){
-			ResourceFactory.create();
+		$scope.createNewResource = function(){
+			Resource.create();
 			$location.path('/resources');
 		};
 		
-		$scope.editResourceFactory = function (resourceId) {
+		$scope.editResource = function (resourceId) {
 			$location.path('/resources/'+resourceId);
 		}
 		
-		$scope.newResourceFactory = function(){
+		$scope.newResource = function(){
 			$location.path('/resources/new');
 		}
 		
@@ -37,7 +38,7 @@ app.controller("ResourceIndexCtrl", ['$scope', '$rootScope', '$routeParams', 'Re
 					method: 'POST', // or 'PUT',
 					headers: {'XSRF-TOKEN': ''},
 					//withCredentials: true,
-					data: {resource: $scope.resource, idea_id: $scope.idea.id},
+					data: {resource: $scope.resource, idea_id: $scope.$storage.current_idea.id},
 					file: file, // or list of files ($files) for html5 only
 					//fileName: 'doc.jpg' or ['1.jpg', '2.jpg', ...] // to modify the name of the file(s)
 					// customize file formData name ('Content-Disposition'), server side file variable name. 
@@ -62,12 +63,12 @@ app.controller("ResourceIndexCtrl", ['$scope', '$rootScope', '$routeParams', 'Re
 		};
 }]);
 
-app.controller('ResourceDetailCtrl', ['$scope', '$routeParams', 'ResourceFactory', '$location',
-	function($scope, $routeParams, ResourceFactory, $location){
-		$scope.resource = ResourceFactoryFactory.show({id: $routeParams.id});
+app.controller('ResourceDetailCtrl', ['$scope', '$routeParams', 'Resource', '$location',
+	function($scope, $routeParams, Resource, $location){
+		$scope.resource = Resource.show({id: $routeParams.id});
 		
-		$scope.updateResourceFactory = function (){
-			ResourceFactory.update($scope.resource);
+		$scope.updateResource = function (){
+			Resource.update($scope.resource);
 			$location.path('/resources');
 		}
 		
@@ -77,15 +78,15 @@ app.controller('ResourceDetailCtrl', ['$scope', '$routeParams', 'ResourceFactory
 	}
 ]);
 
-app.controller('ResourceCreationCtrl', ['$scope', 'ResourceFactorysFactory', '$location',
-	function($scope, ResourceFactorysFactory, $location ){
+app.controller('ResourceCreationCtrl', ['$scope', 'Resource', '$location',
+	function($scope, Resource, $location ){
 		//callback for ng-click 'createNewResourceFactory'
 		$scope.resourceForm = {};
 		$scope.resourceForm.name = "NAME";
 		$scope.resourceForm.description = "DESCRIPTION";
-		$scope.createNewResourceFactory = function(){
+		$scope.createNewResource = function(){
 			console.log($scope.resourceForm)
-			ResourceFactory.create($scope.resourceForm);
+			Resource.create($scope.resourceForm);
 			$location.path('/resources');
 		}
 	}
