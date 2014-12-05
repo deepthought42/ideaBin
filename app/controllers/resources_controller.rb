@@ -54,12 +54,10 @@ class ResourcesController < ApplicationController
     post = DataFile.save(params['file'], directory)
     
     Dir.chdir(directory)
-#   g = Git.init(@idea.name)
-#   if params[:alteredStatus] == '1'
-#     @gitcommit = "it was committed"
-#     @git.add(:all => true)
-#     @git.commit('this is a commit...REMEMBER TO CHANGE THIS TO USER DEFINED MESSAGE')
-#   end
+		@git = Git.init()
+		@git.add(:all => true)
+		@git.commit(params[:comment])
+   
 		@resource = Resource.new
 		@resource.idea_id = params[:idea_id]
 		@resource.filename = params[:file].original_filename

@@ -74,7 +74,7 @@ class IdeasController < ApplicationController
 		#end
 
 			#DataFile.save(params[:idea][:cover_img], directory)
-			repo_path = "#{Rails.root}/public/data/repository/#{current_user.id}" 
+			repo_path = "#{Rails.root}/public/data/repository/#{current_user.id}/#{@idea.name}" 
 		unless File.exists?(repo_path)
 			Dir.mkdir(repo_path)
 		end
@@ -87,8 +87,9 @@ class IdeasController < ApplicationController
 			@directory.path = repo_path
 			@directory.is_top = true
 			Dir.chdir(repo_path)	
-			g = Git.init(@idea.name)
-
+			@git = Git.init()
+			@git.add(:all => true)
+			@git.commit("INITIAL COMMIT MASTER SYSTEM");
 			if params[:alteredStatus] == '1'
 				@gitcommit = "it was committed"
 				@git.add(:all => true)
@@ -97,15 +98,6 @@ class IdeasController < ApplicationController
 			@directory.save
 		end
 		respond_with(@idea)
-    #respond_to do |format|
-    #  if @idea.save and @directory.save
-    #    format.html { redirect_to @idea, notice: "Idea was successfully created.#{g}" }
-    #    format.json { render json: @idea, status: :created, location: @idea }
-    #  else
-    #    format.html { render action: "new" }
-    #    format.json { render json: @idea.errors, status: :unprocessable_entity }
-    #  end
-    #end
   end
 
   # PUT /ideas/1
