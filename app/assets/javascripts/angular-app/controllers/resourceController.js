@@ -3,8 +3,7 @@ var app = angular.module('ideaBin.resourceControllers', []);
 app.controller("ResourceIndexCtrl", ['$scope', '$localStorage', '$rootScope', '$routeParams', 'Resource', '$location', '$upload',
 	function($scope, $localStorage, $rootScope, $routeParams, Resource, $location, $upload) {
 		$scope.$storage = $localStorage;
-		$scope.resources = Resource.query({id: $scope.$storage.current_idea.id});
-
+		
 		$scope.showResource = function(ideaId){
 			$scope.resources = Resource.query();
 			$location.path('/resources');
@@ -56,6 +55,8 @@ app.controller("ResourceIndexCtrl", ['$scope', '$localStorage', '$rootScope', '$
 				// access or attach event listeners to the underlying XMLHttpRequest.
 				//.xhr(function(xhr){xhr.upload.addEventListener(...)})
 			}
+			$scope.resources = Resource.query({idea_id: $scope.$storage.current_idea.id});
+
 			
     /* alternative way of uploading, send the file binary with the file's content-type.
        Could be used to upload files to CouchDB, imgur, etc... html5 FileReader is needed. 

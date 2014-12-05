@@ -1,16 +1,16 @@
 class ResourcesController < ApplicationController
-  #before_filter :authenticate_user!
-
+  before_filter :authenticate_user!
+	before_action :set_resource, except: [:new, :create, :index]
 	respond_to :json
 
   # GET /resources
   # GET /resources.json
   def index
-		@directory = Directory.new
-		@directories = Directory.where(idea_id: params[:idea_id])
+		#@directory = Directory.new
+		#@directories = Directory.where(idea_id: params[:idea_id])
     @resources = Resource.where(idea_id: params[:idea_id])
 
-		@idea = Idea.find(params[:idea_id])
+		#@idea = Idea.find(params[:idea_id])
 		
     respond_with(@resources)
   end
@@ -65,16 +65,9 @@ class ResourcesController < ApplicationController
       @resource.filename = params[:file].original_filename
       @resource.content_type = params[:file].content_type
       @resource.comment = params[:comment]
-
-    respond_to do |format|
-      if @resource.save
-        format.html { redirect_to @resource, notice: "Resource was successfully created.#{session[:idea_id]}" }
-        format.json { render json: @resource, status: :created, location: @resource }
-      else
-        format.html { render action: "new" }
-        format.json { render json: @resource.errors, status: :unprocessable_entity }
-      end
-    end
+	
+		@resource.save
+		respond_with(@resource)
   end
 
   # PUT /resources/1
@@ -104,4 +97,13 @@ class ResourcesController < ApplicationController
       format.json { head :no_content }
     end
   end
+	
+	private
+		def set_resource
+      @resource = Resource.find(params[:id])
+    end
+
+    def resource_params
+      params.require(:resource).permit(:name)
+    end
 end
