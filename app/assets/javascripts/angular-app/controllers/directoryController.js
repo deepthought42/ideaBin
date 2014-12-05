@@ -1,11 +1,11 @@
 var app = angular.module('ideaBin.directoryControllers', [
 	'ngStorage']);
 
-app.controller("DirectoryIndexCtrl", ['$scope', '$rootScope', '$routeParams', 'Directory', '$location',
-	function($scope, $rootScope, $routeParams, Directory, $location) {
+app.controller("DirectoryIndexCtrl", ['$scope', '$rootScope', '$localStorage', '$routeParams', 'Directory', 'DirectoryEvent', '$location',
+	function($scope, $rootScope, $localStorage, $routeParams, Directory, DirectoryEvent, $location) {
 		$scope.directories = Directory.query({idea_id: $routeParams.id});
 		$rootScope.showCreateDirectoryPanel = false;
-		
+		$scope.$storage = $localStorage;
 		$scope.showDirectories = function(ideaId){
 			$scope.directories = Directory.query();
 			$location.path('/directories');
@@ -33,6 +33,11 @@ app.controller("DirectoryIndexCtrl", ['$scope', '$rootScope', '$routeParams', 'D
 		$scope.newDirectory = function(){
 			$location.path('/directories/new');
 		}
+		
+		//EVENT HANDLING
+		$rootScope.$on('directoryCreated', function(event, data){
+			$scope.directories = Directory.query({idea_id: $scope.$storage.current_idea.id});
+		});
 }]);
 
 app.controller('DirectoryDetailCtrl', ['$scope', '$routeParams', 'Directory', '$location',
@@ -50,8 +55,8 @@ app.controller('DirectoryDetailCtrl', ['$scope', '$routeParams', 'Directory', '$
 	}
 ]);
 
-app.controller('DirectoryCreationCtrl', ['$scope', '$localStorage', '$routeParams', 'Directory', '$location',
-	function($scope, $localStorage, $routeParams, Directory, $location ){
+app.controller('DirectoryCreationCtrl', ['$scope', '$rootScope', '$localStorage', '$routeParams', 'DirectoryEvent', 'Directory', '$location',
+	function($scope, $rootScope, $localStorage, $routeParams, DirectoryEvent, Directory, $location ){
 		$scope.$storage = $localStorage;
 		//callback for ng-click 'createNewDirectory'
 		console.log("CREATE DIRECTORY CONTRLLER");
@@ -62,6 +67,7 @@ app.controller('DirectoryCreationCtrl', ['$scope', '$localStorage', '$routeParam
 			console.log($scope.directoryForm)
 			Directory.create($scope.directoryForm);
 			//fire event to add directory to directories list
+			DirectoryEvent.broadcastNewDirectory($rootScope);
 			//$location.path('/directories');
 		}
 	}
