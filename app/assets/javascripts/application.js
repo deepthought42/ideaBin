@@ -21,7 +21,8 @@
 //= require bootstrap
 
 //= require ../components/angular/angular
-//= require ../components/ng-flow/dist/ng-flow-standalone.min
+//= require ../components/ng-file-upload/angular-file-upload-shim.min
+//= require ../components/ng-file-upload/angular-file-upload.min
 //= require ../components/ngStorage/ngStorage.min
 //= require angular-resource
 //= require angular-route

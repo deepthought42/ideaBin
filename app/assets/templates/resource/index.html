@@ -14,11 +14,9 @@
 					<button id="removeResource" class="glyphicon glyphicon-remove"></button>
 		</div>
 		
-		<div flow-init="{target: '/resources'}"
-			flow-files-submitted="$flow.upload()"
-			flow-file-success="$file.msg = $message">
-			<span class="btn" flow-btn>
-				
+		<div >
+			<span class="btn" >
+				<input type="file" ng-model="$files" ng-file-select="onFileSelect($files)" multiple style="display:hidden"/>
 				Upload File
 			</span>
 

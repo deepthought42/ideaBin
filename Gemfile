@@ -51,7 +51,7 @@ gem 'sprockets', '~>2.11.0'
 gem 'activerecord-session_store'
 
 gem 'font-awesome-rails'
-gem 'angular-rails-templates'
+gem 'angular-rails-templates', '~>0.1.3'
 gem 'angularjs-rails'
 gem 'bower-rails'
 gem 'angular_rails_csrf'

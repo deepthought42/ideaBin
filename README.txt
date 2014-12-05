@@ -8,7 +8,9 @@ undo changes submitted by collaborators.
 Stack:
 	Rails 4.1.5
 	Ruby 2.1.2
+	NodeJS
 	AngularJS
+	Bower
 	PostGreSql
 
 Getting Started:
@@ -26,17 +28,27 @@ Getting Started:
 
     4.  Install <a href="https://wiki.postgresql.org/wiki/Detailed_installation_guides">postrgreSQL</a>
 
+		5. Install NodeJS
+		
+		6. Install bower
+					npm install -g bower
+		
     5.  Open a command line and navigate to the directory that you would like to save the project and type in the following and press enter. 
 
     	git clone https://github.com/deepthought42/ideaBin.git
  
     6.  using the command line navigate to the ideaBin folder and run the following commands:
 
-	rake db:setup
-	bundle install
-	rails server
+			6.1)  Install bower dependencies
+							bower install
+			6.2)  Setup Database
+							rake db:setup
+			6.3)  install bundled gems
+							bundle install
+			6.4)	Start server
+							rails server
 
-    9.  Navigate to localhost:3000 and you should see the home page for ideaBin.
+    7.  Navigate to localhost:3000 and you should see the home page for ideaBin.
 
 Overview:
 
