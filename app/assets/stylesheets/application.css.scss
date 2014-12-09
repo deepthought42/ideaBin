@@ -17,6 +17,10 @@
 @import "font-awesome";
 
 
+h1,h2,h3,h4,h5,h6{
+	font-family: 'Fira Sans';
+}
+
 .item {
   width: 220px;
   margin: 10px;
@@ -29,4 +33,12 @@
   position:     relative;
 }
 
+.navbar-inverse{
+	background-color: #080808;
+	background-color: red;
+}
+
+#btnNewIdea{
+	padding: 6px 12px;
+}
 
