@@ -1,14 +1,14 @@
 <div class="pull-right glyphicon glyphicon-cog" id="ideaSettingsLink" ></div>
 
+<div class="container">
  <div class="row" ng-controller="IdeaDetailCtrl">
-  <div class="col-md-4"></div>
 		<div class="col-md-4 grayBorder" id="divNewIdea">
 			<div class="row text-center">
 			<h1>
 				Create an idea,<br> then share it<br> with the world.
 			</h1>
 		</div>
-		<div class="container">
+		<div>
 			<form novalidate>
 				<div class="input-group">
 					<span class="input-group-btn">
@@ -34,12 +34,15 @@
 				</div>
 			</form>
 		</div>
-		<div class="col-md-4">
-			
-		</div>
+ 	</div>
+ 	 <div class="col-md-4">
+		<div ng-include="'directory/new.html'" ></div>
+		<div ng-include="'directory/index.html'" ></div>
+	</div>
+	<div class="col-md-4">
+  		<div ng-include="'resource/index.html'" ></div>
   </div>
-</div>
+ </div>
 
-<div ng-include="'directory/new.html'" ></div>
-<div ng-include="'directory/index.html'" ></div>
-<div ng-include="'resource/index.html'" ></div>
+
+</div>

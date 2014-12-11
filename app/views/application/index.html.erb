@@ -47,6 +47,9 @@
         </div>
         <button type="submit" class="btn btn-default">Submit</button>
       </form>
+      <div ng-controller="IdeaIndexCtrl">
+        <button ng-click="showIdea()" class="btn btn-success navbar-btn" id="btnNewIdea">+ Create New Idea</button>
+      </div>
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->
 </nav>
@@ -62,9 +65,6 @@
         <%= link_to "Sign up", new_user_registration_path, :class => 'navbar-link'  %> |
         <%= link_to "Login", new_user_session_path, :class => 'navbar-link'  %>
       <% end %>
-			<div ng-controller="IdeaIndexCtrl">
-				<a ng-click="showIdea()" class="pull-right glyphicon glyphicon-plus glyphicon-2x"></a>
-			</div>
     </div>
   </div>
 </div>
