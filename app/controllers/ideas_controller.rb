@@ -69,12 +69,12 @@ class IdeasController < ApplicationController
 
     @idea.user_id = current_user.id
     directory = "#{Rails.root}/app/assets/images/cover_images/"
-		#if params[:idea][:cover_img]
-		#		@idea.cover_img = params[:idea][:cover_img].original_filename
-		#end
+		if params[:idea][:cover_img]
+				@idea.cover_img = params[:idea][:cover_img].original_filename
+		end
 
-			#DataFile.save(params[:idea][:cover_img], directory)
-			repo_path = "#{Rails.root}/public/data/repository/#{current_user.id}/#{@idea.name}" 
+		DataFile.save(params[:idea][:cover_img], directory)
+		repo_path = "#{Rails.root}/public/data/repository/#{current_user.id}/#{@idea.name}" 
 		unless File.exists?(repo_path)
 			Dir.mkdir(repo_path)
 		end

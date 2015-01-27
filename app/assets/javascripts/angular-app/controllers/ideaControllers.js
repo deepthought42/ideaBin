@@ -51,6 +51,7 @@ app.controller('IdeaCreationCtrl', ['$scope', 'Idea', '$location',
 	function($scope, Idea, $location ){
 		//callback for ng-click 'createNewIdea'
 		$scope.ideaForm = {};
+		$scope.ideaForm.cover_img = "";
 		$scope.ideaForm.name = "NAME";
 		$scope.ideaForm.description = "DESCRIPTION";
 		$scope.createNewIdea = function(){
