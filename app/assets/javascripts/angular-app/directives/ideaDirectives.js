@@ -1,4 +1,4 @@
-var ideaDirectives = angular.module('ideaBin.ideaServices', ['ngResource']);
+var ideaDirectives = angular.module('ideaBin.ideaDirectives', ['ngResource']);
 
 ideaDirectives.directive('fileModel', ['$parse', function ($parse) {
     return {
