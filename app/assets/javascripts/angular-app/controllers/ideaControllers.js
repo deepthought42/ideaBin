@@ -55,7 +55,10 @@ app.controller('IdeaCreationCtrl', ['$scope', 'Idea', '$location',
 		$scope.ideaForm.name = "NAME";
 		$scope.ideaForm.description = "DESCRIPTION";
 		$scope.createNewIdea = function(){
-			Idea.create($scope.ideaForm);
+			var fd = $scope.ideaForm
+			//Take the first selected file
+			fd.append("file", files[0]);
+			Idea.create(fd);
 			$location.path('/ideas');
 		}
 	}
