@@ -4,7 +4,7 @@ services.factory('Idea', function ($resource) {
     return $resource('/ideas/:id.json',{id: '@id'}, {
         query: { method: 'GET', isArray: true },
         create: { 
-									$http.post(uploadUrl, fd, {
+									$http.post('/ideas.json', $resource, {
 											withCredentials: true,
 											headers: {'Content-Type': undefined },
 											transformRequest: angular.identity
