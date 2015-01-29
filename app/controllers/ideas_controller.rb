@@ -70,11 +70,12 @@ class IdeasController < ApplicationController
     @idea.user_id = current_user.id
     directory = "#{Rails.root}/app/assets/images/cover_images/"
 		
-		logger.info "Idea Params :: #{idea_params[:cover_image]}"
+		filename = idea_params[:cover_img][:name]
+		logger.info "Idea Params :: #{filename}"
 		
 		@idea.cover_img = idea_params[:cover_img][:name]
 
-		DataFile.save(idea_params[:cover_img], directory)
+		DataFile.save(idea_params[:cover_img][0], directory)
 		repo_path = "#{Rails.root}/public/data/repository/#{current_user.id}" 
 		unless File.exists?(repo_path)
 			Dir.mkdir(repo_path)
