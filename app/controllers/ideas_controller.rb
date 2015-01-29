@@ -69,12 +69,13 @@ class IdeasController < ApplicationController
 
     @idea.user_id = current_user.id
     directory = "#{Rails.root}/app/assets/images/cover_images/"
-		if params[:idea][:cover_img]
-				@idea.cover_img = params[:idea][:cover_img].original_filename
-		end
+		
+		logger.info "Idea Params :: #{idea_params[:cover_image]}"
+		
+		@idea.cover_img = idea_params[:cover_img][:name]
 
-		DataFile.save(params[:idea][:cover_img], directory)
-		repo_path = "#{Rails.root}/public/data/repository/#{current_user.id}/#{@idea.name}" 
+		DataFile.save(idea_params[:cover_img], directory)
+		repo_path = "#{Rails.root}/public/data/repository/#{current_user.id}" 
 		unless File.exists?(repo_path)
 			Dir.mkdir(repo_path)
 		end
@@ -87,9 +88,8 @@ class IdeasController < ApplicationController
 			@directory.path = repo_path
 			@directory.is_top = true
 			Dir.chdir(repo_path)	
-			@git = Git.init()
-			@git.add(:all => true)
-			@git.commit("INITIAL COMMIT MASTER SYSTEM");
+			@git = Git.init(@idea.name)
+			
 			if params[:alteredStatus] == '1'
 				@gitcommit = "it was committed"
 				@git.add(:all => true)
@@ -148,6 +148,6 @@ class IdeasController < ApplicationController
     end
 
     def idea_params
-      params.require(:idea).permit(:name)
+      params.require(:idea).permit(:name, :description, cover_img: [:webkitRelativePath, :lastModified, :lastModifiedDate, :name, :size, :type])
     end
 end

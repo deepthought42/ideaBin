@@ -9,20 +9,20 @@
 			</h1>
 		</div>
 		<div ng-controller="IdeaCreationCtrl">
-			<form name="idea" novalidate>
+			<form name="idea" enctype="multipart/form-data" novalidate>
 				<div class="input-group">
 					<span class="input-group-btn">
 						<span class="btn btn-success btn-file">
 							Browse...
-							<input type="file" name="idea[cover_img]" ng-model="ideaForm.cover_img" id="idea_cover_img">
+							<input type="file" name="idea[cover_img]" id="idea_cover_img" />
 						</span>
 					</span>
-					<input type="text" class="form-control" readonly>
+					<input type="text" class="form-control" readonly />
 				</div>
 				<div class="field">
 					<label for="name" >Name</label>
 					<br />
-					<input type="text" name="idea[name]" ng-model="ideaForm.name" id="name"/>
+					<input type="text" name="idea[name]" ng-model="ideaForm.name" id="name" />
 				</div>
 				<div class="field">
 					<label for="description" >Description</label>

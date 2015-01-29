@@ -55,10 +55,12 @@ app.controller('IdeaCreationCtrl', ['$scope', 'Idea', '$location',
 		$scope.ideaForm.name = "NAME";
 		$scope.ideaForm.description = "DESCRIPTION";
 		$scope.createNewIdea = function(){
-			var fd = $scope.ideaForm
 			//Take the first selected file
-			fd.append("file", files[0]);
-			Idea.create(fd);
+			var cover_img = document.getElementById('idea_cover_img');
+			console.log("COVER IMAGE :: " + cover_img.files[0].name);
+			$scope.ideaForm.cover_img = cover_img.files[0];
+			Idea.create($scope.ideaForm);
+			
 			$location.path('/ideas');
 		}
 	}

@@ -4,12 +4,11 @@ services.factory('Idea', function ($resource) {
     return $resource('/ideas/:id.json',{id: '@id'}, {
         query: { method: 'GET', isArray: true },
         create: { 
-									$http.post('/ideas.json', $resource, {
-											withCredentials: true,
-											headers: {'Content-Type': undefined },
-											transformRequest: angular.identity
-									}).success( ...all right!... ).error( ..damn!... ); 
-								},
+									method: 'POST',  
+									headers: {
+										'Content-Type': 'application/json'
+									}
+				},
 				show: { method: 'GET', isArray: false},
         update: { method: 'PUT' },
         delete: { method: 'DELETE' }, 
