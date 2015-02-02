@@ -67,7 +67,7 @@ class IdeasController < ApplicationController
     @idea = Idea.new(ActiveSupport::JSON.decode(params[:idea]))
 		
     @idea.user_id = current_user.id
-    directory = "#{Rails.root}/app/assets/images/cover_images/"
+    directory = "#{Rails.root}/public/images/cover_images/"
 		ideaName = ActiveSupport::JSON.decode(params[:idea])
 		@idea.cover_img = params[:cover_img]
 
@@ -98,7 +98,7 @@ class IdeasController < ApplicationController
     @idea = Idea.find(params[:id])
 		@idea.description = params[:description]
     repo_path = "#{Rails.root}/public/data/repository/#{current_user.id}/#{@idea.name}"
-		cover_img_path = "#{Rails.root}/app/assets/images/cover_images/"
+		cover_img_path = "#{Rails.root}/public/images/cover_images/"
 		
 		if params[:idea][:cover_img]
 				@idea.cover_img = params[:idea][:cover_img].original_filename
@@ -140,6 +140,6 @@ class IdeasController < ApplicationController
     end
 
     def idea_params
-			params.require(:idea).permit(:idea, :name, :description)
+			params.require(:idea).permit(:name, :description, :cover_img_file_name)
     end
 end
