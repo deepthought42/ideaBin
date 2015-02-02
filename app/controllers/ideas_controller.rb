@@ -69,9 +69,6 @@ class IdeasController < ApplicationController
     @idea.user_id = current_user.id
     directory = "#{Rails.root}/app/assets/images/cover_images/"
 		ideaName = ActiveSupport::JSON.decode(params[:idea])
-		filename = params[:cover_img]
-		logger.info "Idea Params :: #{params[:idea]}"
-		logger.info "IDEA NAME :: #{@idea.name}"
 		@idea.cover_img = params[:cover_img]
 
 		DataFile.save(params[:cover_img], directory)
@@ -143,8 +140,6 @@ class IdeasController < ApplicationController
     end
 
     def idea_params
-			#params[:idea] = params[:idea].to_json
-      #params.permit(:idea, :name, :description)
-			#params.permit(:cover_img, :format)
+			params.require(:idea).permit(:idea, :name, :description)
     end
 end
