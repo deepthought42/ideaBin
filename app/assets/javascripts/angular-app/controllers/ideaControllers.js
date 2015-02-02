@@ -47,19 +47,29 @@ app.controller('IdeaDetailCtrl', ['$scope', '$localStorage', '$routeParams', 'Id
 	}
 ]);
 
-app.controller('IdeaCreationCtrl', ['$scope', 'Idea', '$location',
-	function($scope, Idea, $location ){
+app.controller('IdeaCreationCtrl', ['$scope', 'Idea', '$location', '$upload',
+	function($scope, Idea, $location, $upload ){
 		//callback for ng-click 'createNewIdea'
 		$scope.ideaForm = {};
-		$scope.ideaForm.cover_img = "";
-		$scope.ideaForm.name = "NAME";
-		$scope.ideaForm.description = "DESCRIPTION";
+		$scope.ideaForm.name = "";
+		$scope.ideaForm.description = "";
 		$scope.createNewIdea = function(){
 			//Take the first selected file
-			var cover_img = document.getElementById('idea_cover_img');
-			console.log("COVER IMAGE :: " + cover_img.files[0].name);
-			$scope.ideaForm.cover_img = cover_img.files[0];
-			Idea.create($scope.ideaForm);
+			console.log("COVER IMAGE :: " + $scope.cover_img);
+			var ideaFormVals = angular.toJson($scope.ideaForm);
+			$scope.upload = $upload.upload({
+				url: '/ideas.json',
+				method: 'POST',
+				data: {idea: ideaFormVals},
+				file: $scope.cover_img,
+        fileFormDataName: 'cover_img'
+			}).
+			progress(function(evt) {
+				console.log('progress: ' + parseInt(100.0 * evt.loaded / evt.total));
+			}).success(function(data, status, headers, config) {
+				console.log('file ' + config.file.name + 'is uploaded successfully. Response: ' + data);
+			});
+			//Idea.create($scope.ideaForm);
 			
 			$location.path('/ideas');
 		}

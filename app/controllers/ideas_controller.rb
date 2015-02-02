@@ -64,18 +64,17 @@ class IdeasController < ApplicationController
   # POST /ideas
   # POST /ideas.json
   def create
-    @idea = Idea.new(idea_params)
-		@idea.description = params[:description]
-
+    @idea = Idea.new(ActiveSupport::JSON.decode(params[:idea]))
+		
     @idea.user_id = current_user.id
     directory = "#{Rails.root}/app/assets/images/cover_images/"
-		
-		filename = idea_params[:cover_img][:name]
-		logger.info "Idea Params :: #{filename}"
-		
-		@idea.cover_img = idea_params[:cover_img][:name]
+		ideaName = ActiveSupport::JSON.decode(params[:idea])
+		filename = params[:cover_img]
+		logger.info "Idea Params :: #{params[:idea]}"
+		logger.info "IDEA NAME :: #{@idea.name}"
+		@idea.cover_img = params[:cover_img]
 
-		DataFile.save(idea_params[:cover_img][0], directory)
+		DataFile.save(params[:cover_img], directory)
 		repo_path = "#{Rails.root}/public/data/repository/#{current_user.id}" 
 		unless File.exists?(repo_path)
 			Dir.mkdir(repo_path)
@@ -88,14 +87,9 @@ class IdeasController < ApplicationController
 			@directory.idea_id = @idea.id
 			@directory.path = repo_path
 			@directory.is_top = true
-			Dir.chdir(repo_path)	
+			Dir.chdir(repo_path)
 			@git = Git.init(@idea.name)
-			
-			if params[:alteredStatus] == '1'
-				@gitcommit = "it was committed"
-				@git.add(:all => true)
-				@git.commit('this is a commit...REMEMBER TO CHANGE THIS TO USER DEFINED MESSAGE')
-			end   
+
 			@directory.save
 		end
 		respond_with(@idea)
@@ -107,7 +101,7 @@ class IdeasController < ApplicationController
     @idea = Idea.find(params[:id])
 		@idea.description = params[:description]
     repo_path = "#{Rails.root}/public/data/repository/#{current_user.id}/#{@idea.name}"
-		cover_img_path = "#{Rails.root}/public/images/cover_images/"
+		cover_img_path = "#{Rails.root}/app/assets/images/cover_images/"
 		
 		if params[:idea][:cover_img]
 				@idea.cover_img = params[:idea][:cover_img].original_filename
@@ -149,6 +143,8 @@ class IdeasController < ApplicationController
     end
 
     def idea_params
-      params.require(:idea).permit(:name, :description, cover_img: [:webkitRelativePath, :lastModified, :lastModifiedDate, :name, :size, :type])
+			#params[:idea] = params[:idea].to_json
+      #params.permit(:idea, :name, :description)
+			#params.permit(:cover_img, :format)
     end
 end
