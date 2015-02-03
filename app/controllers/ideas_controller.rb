@@ -64,17 +64,15 @@ class IdeasController < ApplicationController
   # POST /ideas
   # POST /ideas.json
   def create
-    @idea = Idea.new(idea_params)
-		@idea.description = params[:description]
-
+    @idea = Idea.new(ActiveSupport::JSON.decode(params[:idea]))
+		
     @idea.user_id = current_user.id
-    directory = "#{Rails.root}/app/assets/images/cover_images/"
-		#if params[:idea][:cover_img]
-		#		@idea.cover_img = params[:idea][:cover_img].original_filename
-		#end
+    directory = "#{Rails.root}/public/images/cover_images/"
+		ideaName = ActiveSupport::JSON.decode(params[:idea])
+		@idea.cover_img = params[:cover_img]
 
-			#DataFile.save(params[:idea][:cover_img], directory)
-			repo_path = "#{Rails.root}/public/data/repository/#{current_user.id}/#{@idea.name}" 
+		DataFile.save(params[:cover_img], directory)
+		repo_path = "#{Rails.root}/public/data/repository/#{current_user.id}" 
 		unless File.exists?(repo_path)
 			Dir.mkdir(repo_path)
 		end
@@ -86,15 +84,9 @@ class IdeasController < ApplicationController
 			@directory.idea_id = @idea.id
 			@directory.path = repo_path
 			@directory.is_top = true
-			Dir.chdir(repo_path)	
-			@git = Git.init()
-			@git.add(:all => true)
-			@git.commit("INITIAL COMMIT MASTER SYSTEM");
-			if params[:alteredStatus] == '1'
-				@gitcommit = "it was committed"
-				@git.add(:all => true)
-				@git.commit('this is a commit...REMEMBER TO CHANGE THIS TO USER DEFINED MESSAGE')
-			end   
+			Dir.chdir(repo_path)
+			@git = Git.init(@idea.name)
+
 			@directory.save
 		end
 		respond_with(@idea)
@@ -148,6 +140,6 @@ class IdeasController < ApplicationController
     end
 
     def idea_params
-      params.require(:idea).permit(:name)
+			params.require(:idea).permit(:name, :description, :cover_img_file_name)
     end
 end
