@@ -43,6 +43,10 @@ ideaBin.config(function ($routeProvider, $locationProvider) {
 					templateUrl: 'directory/edit.html', 
 					controller: 'DirectoryDetailCtrl'
 				})
+				.when('/users/signout', {
+					templateUrl: 'idea/index.html', 
+					controller: 'UserAuthorizationCtrl'
+				})
 				.otherwise('/', {
 					templateUrl: 'idea/index.html', 
 					controller: 'DirectoryIndexCtrl'
