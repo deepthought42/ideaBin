@@ -8,8 +8,8 @@
 	*/ 
 var app = angular.module('ideaBin.userControllers', []);
 
-app.controller('UserSessionCtrl', ['$scope', 'Auth',
-	function ($scope, Auth) { 
+app.controller('UserSessionCtrl', ['$scope', 'Auth', '$location',
+	function ($scope, Auth, $location) { 
 	
 	
 	$scope.signIn = function(loginForm){
@@ -27,7 +27,7 @@ app.controller('UserSessionCtrl', ['$scope', 'Auth',
 		});
 		
 		$scope.$on('devise:login', function(event, currentUser) {
-			// after a login, a hard refresh, a new tab
+			$location.path('/ideas');
 		});
 
 		$scope.$on('devise:new-session', function(event, currentUser) {
