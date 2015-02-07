@@ -6,6 +6,7 @@
 		"ng-file-upload-shim": "latest",
     "ng-file-upload": "latest",
 		"ngstorage": "latest",
-		"angular-ui-ace": "latest"
+		"angular-ui-ace": "latest",
+		"angular-devise": "latest"
   }
 }

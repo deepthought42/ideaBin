@@ -63,5 +63,9 @@ module IdeaBin
 			'Access-Control-Allow-Origin' => '*',
 			'Access-Control-Request-Method' => '*'
 		}
+		
+		config.to_prepare do
+			 DeviseController.respond_to :html, :json
+		end
   end
 end

@@ -8,8 +8,10 @@ var ideaBin = angular.module('ideaBin',
 		'ideaBin.directoryControllers',
 		'ideaBin.resourceServices', 
 		'ideaBin.resourceControllers',
+		'ideaBin.userControllers',
 		'angularFileUpload',
-		'ui.ace']);
+		'ui.ace',
+		'Devise']);
 
 // for compatibility with Rails CSRF protection
 
@@ -45,7 +47,11 @@ ideaBin.config(function ($routeProvider, $locationProvider) {
 				})
 				.when('/users/signout', {
 					templateUrl: 'idea/index.html', 
-					controller: 'UserAuthorizationCtrl'
+					controller: 'UserSessionCtrl'
+				})
+				.when('/sign_in', {
+					templateUrl: 'user_session/new.html',
+					controller:	'UserSessionCtrl'
 				})
 				.otherwise('/', {
 					templateUrl: 'idea/index.html', 

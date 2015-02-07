@@ -66,6 +66,9 @@ GEM
       responders
       thread_safe (~> 0.1)
       warden (~> 1.2.3)
+    devise_token_auth (0.1.30)
+      devise (~> 3.3)
+      rails (~> 4.1)
     erubis (2.7.0)
     execjs (2.2.2)
     font-awesome-rails (4.2.0.0)
@@ -156,6 +159,7 @@ DEPENDENCIES
   bower-rails
   coffee-rails
   devise
+  devise_token_auth
   font-awesome-rails
   git
   jquery-cdn (~> 2.1)
