@@ -46,12 +46,20 @@ ideaBin.config(function ($routeProvider, $locationProvider) {
 					templateUrl: 'directory/edit.html', 
 					controller: 'DirectoryDetailCtrl'
 				})
+				.when('/users/edit', {
+					templateUrl: 'user/edit.html', 
+					controller: 'UserSessionCtrl'
+				})
 				.when('/users/signout', {
 					templateUrl: 'idea/index.html', 
 					controller: 'UserSessionCtrl'
 				})
 				.when('/sign_in', {
 					templateUrl: 'user_session/new.html',
+					controller:	'UserSessionCtrl'
+				})
+				.when('/register', {
+					templateUrl: 'user/register.html',
 					controller:	'UserSessionCtrl'
 				})
 				.otherwise('/', {

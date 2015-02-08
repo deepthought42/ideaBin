@@ -69,8 +69,12 @@ app.controller('UserSessionCtrl', ['$scope', 'Auth', '$location', '$localStorage
 
 			$scope.$on('devise:new-registration', function(event, user) {
 				$scope.$storage.user = user;
-				$locations.path('/user/new');
+				$location.path('/ideas');
 			});
+		}
+		
+		$scope.editProfile = function(){
+			$scope.user = $scope.$storage.user;
 		}
 	}
 ]);

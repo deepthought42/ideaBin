@@ -59,13 +59,17 @@
     <div class="col-md-3 pull-right" ng-controller="UserSessionCtrl">
         Logged in as <strong>{{user.email}}</strong>.
 				<span ng-show="!user.id">
-					<a ng-href="/sign_in">Sign in</a>
+					<a ng-href="/sign_in">Sign in</a> |
 				</span>
 				<span ng-show="user.id">
-					<a ng-click='logout(user)'>Sign out</a>
+					<a ng-click='logout(user)'>Sign out</a> |
 				</span>
-        <a class='navbar-link' >Edit profile</a> |
-        <a class='navbar-link' >Sign up</a> |
+				<span ng-show="user.id" >
+					<a class='navbar-link' ng-href="/users/edit">Edit profile</a> 
+				</span>
+				<span ng-show="!user.id" >
+					<a class='navbar-link' ng-href="/register" >Sign up</a> 
+				</span>	
     </div>
   </div>
 </div>
