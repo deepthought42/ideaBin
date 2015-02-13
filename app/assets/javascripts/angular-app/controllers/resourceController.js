@@ -5,8 +5,7 @@ app.controller("ResourceIndexCtrl", ['$scope', '$localStorage', '$rootScope', '$
 		$scope.$storage = $localStorage;
 		
 		$scope.$watch('files', function () {
-			var comment = prompt("Please describe the upload");
-        $scope.upload($scope.files, comment);
+        $scope.upload($scope.files);
     });
 		
 		$scope.showResource = function(ideaId){
@@ -28,10 +27,13 @@ app.controller("ResourceIndexCtrl", ['$scope', '$localStorage', '$rootScope', '$
 			$location.path('/resources/'+resourceId);
 		}
 		
-		$scope.upload = function(files, comment) {			
+		$scope.upload = function(files) {			
 			//$files: an array of files selected, each file has name, size, and type.
+							var comment = prompt("Please describe the upload");
+
 			for (var i = 0; i < files.length; i++) {
 				var file = files[i];
+				
 				$upload.upload({
 					url: '/resources.json', 
 					method: 'POST', // or 'PUT',
