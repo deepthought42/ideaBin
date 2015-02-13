@@ -16,8 +16,10 @@
 		
 		<div >
 			<span class="btn" >
-				<input type="file" ng-model="$files" ng-file-select="onFileSelect($files)" multiple style="display:hidden"/>
-				Upload File
+					<button ng-file-drop ng-model="files" class="drop-box" 
+						drag-over-class="dragover" ng-multiple="true" allow-dir="true"
+						>Drop files here</button>
+					<div ng-no-file-drop>File Drag/Drop is not supported for this browser</div>
 			</span>
 
 			<table>
@@ -30,7 +32,7 @@
 		</div>
 	</div>
 
-	<div id="dragndropimage">
+	<div id="dragndropimage dropzone">
 		<img src="/images/upload_icon.png" />
 	</div>
 </div>

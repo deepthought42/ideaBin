@@ -4,6 +4,11 @@ app.controller("ResourceIndexCtrl", ['$scope', '$localStorage', '$rootScope', '$
 	function($scope, $localStorage, $rootScope, $routeParams, Resource, $location, $upload) {
 		$scope.$storage = $localStorage;
 		
+		$scope.$watch('files', function () {
+			var comment = prompt("Please describe the upload");
+        $scope.upload($scope.files, comment);
+    });
+		
 		$scope.showResource = function(ideaId){
 			$scope.resources = Resource.query();
 			$location.path('/resources');
@@ -23,17 +28,11 @@ app.controller("ResourceIndexCtrl", ['$scope', '$localStorage', '$rootScope', '$
 			$location.path('/resources/'+resourceId);
 		}
 		
-		$scope.newResource = function(){
-			$location.path('/resources/new');
-		}
-		
-		$scope.onFileSelect = function($files) {
-			console.log("UPLOADING FILES" + $scope.$storage.current_idea + ":: IS THIS THING WORKING");
-			var comment = prompt("Please describe the upload");
+		$scope.upload = function(files, comment) {			
 			//$files: an array of files selected, each file has name, size, and type.
-			for (var i = 0; i < $files.length; i++) {
-				var file = $files[i];
-				$scope.upload = $upload.upload({
+			for (var i = 0; i < files.length; i++) {
+				var file = files[i];
+				$upload.upload({
 					url: '/resources.json', 
 					method: 'POST', // or 'PUT',
 					headers: {'XSRF-TOKEN': ''},
