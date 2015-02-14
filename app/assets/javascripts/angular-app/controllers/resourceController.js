@@ -29,7 +29,7 @@ app.controller("ResourceIndexCtrl", ['$scope', '$localStorage', '$rootScope', '$
 		
 		$scope.upload = function(files) {			
 			//$files: an array of files selected, each file has name, size, and type.
-							var comment = prompt("Please describe the upload");
+			var comment = prompt("Please describe the upload");
 
 			for (var i = 0; i < files.length; i++) {
 				var file = files[i];
