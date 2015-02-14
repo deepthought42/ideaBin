@@ -8,9 +8,7 @@ app.controller("ResourceIndexCtrl", ['$scope', '$localStorage', '$rootScope', '$
         $scope.upload($scope.files);
     });
 		
-		$scope.showResource = function(ideaId){
-			$scope.resources = Resource.query();
-			$location.path('/resources');
+		$scope.showResource = function(resourceId){
 		}
 		
   	$scope.deleteResource =  function(resourceId){

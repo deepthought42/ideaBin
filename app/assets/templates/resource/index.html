@@ -10,7 +10,7 @@
 							{{resource.comment}}
 						</p>  
 					</div>
-					<button id="editResource" class="dock-item glyphicon glyphicon-pencil editResource"></button>
+					<button id="editResource" ng-click="editResource(resource.id)" class="dock-item glyphicon glyphicon-pencil"></button>
 					<button id="removeResource" ng-click="deleteResource(resource.id)" class="glyphicon glyphicon-remove"></button>
 		</div>
 		

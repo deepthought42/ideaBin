@@ -62,6 +62,10 @@ ideaBin.config(function ($routeProvider, $locationProvider) {
 					templateUrl: 'user/register.html',
 					controller:	'UserSessionCtrl'
 				})
+				.when('/resources/:id', {
+					templateUrl:  'resource/edit.html',
+					controller:	  'ResourceDetailCtrl'
+				})
 				.otherwise('/', {
 					templateUrl: 'idea/index.html', 
 					controller: 'DirectoryIndexCtrl'
