@@ -40,6 +40,7 @@ class ResourcesController < ApplicationController
   # GET /resources/1/edit
   def edit
     @resource = Resource.find(params[:id])
+		respond_with(@resource)
   end
 
   # POST /resources

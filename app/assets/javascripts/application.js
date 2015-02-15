@@ -19,11 +19,14 @@
 //= require directories
 
 //= require bootstrap
+//= require ../components/ace-builds/src-min-noconflict/ace.js
 
 //= require ../components/angular/angular
+//= require ../components/angular-ui-ace/ui-ace.min
 //= require ../components/ng-file-upload/angular-file-upload-shim.min
 //= require ../components/ng-file-upload/angular-file-upload.min
 //= require ../components/ngStorage/ngStorage.min
+//= require ../components/angular-devise/lib/devise-min
 //= require angular-resource
 //= require angular-route
 //= require angular-rails-templates

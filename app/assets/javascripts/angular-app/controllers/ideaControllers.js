@@ -1,5 +1,4 @@
-var app = angular.module('ideaBin.ideaControllers', [
-				'ngStorage']
+var app = angular.module('ideaBin.ideaControllers', []
 			);
 
 app.controller("IdeaIndexCtrl", ['$scope', '$localStorage', 'Idea', '$location',

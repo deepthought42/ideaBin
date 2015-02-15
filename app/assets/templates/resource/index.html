@@ -10,14 +10,16 @@
 							{{resource.comment}}
 						</p>  
 					</div>
-					<button id="editResource" class="dock-item glyphicon glyphicon-pencil editResource"></button>
-					<button id="removeResource" class="glyphicon glyphicon-remove"></button>
+					<button id="editResource" ng-click="editResource(resource.id)" class="dock-item glyphicon glyphicon-pencil"></button>
+					<button id="removeResource" ng-click="deleteResource(resource.id)" class="glyphicon glyphicon-remove"></button>
 		</div>
 		
 		<div >
 			<span class="btn" >
-				<input type="file" ng-model="$files" ng-file-select="onFileSelect($files)" multiple style="display:hidden"/>
-				Upload File
+					<button ng-file-drop ng-model="files" class="drop-box" 
+						drag-over-class="dragover" ng-multiple="true" allow-dir="true"
+						>Drop files here</button>
+					<div ng-no-file-drop>File Drag/Drop is not supported for this browser</div>
 			</span>
 
 			<table>
@@ -28,9 +30,5 @@
 				</tr>
 			</table>
 		</div>
-	</div>
-
-	<div id="dragndropimage">
-		<img src="/images/upload_icon.png" />
 	</div>
 </div>

@@ -1,8 +1,9 @@
-<form name="resource" >
-  <div class="field">
-    {{ @resource.comment }}
-  </div>
-	<div class="actions">
-		<button ng-click="createDirectory()">Save</button>
-	</div>
-</form>
+<div ng-controller="ResourceDetailCtrl">
+	<form>
+		<input ng-model="resource.comment">
+		</div>
+		<div class="actions">
+			<button ng-click="updateResource()">Save</button>
+		</div>
+	</form>
+</div>
