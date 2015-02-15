@@ -66,15 +66,13 @@ ideaBin.config(function ($routeProvider, $locationProvider) {
 					templateUrl:  'resource/edit.html',
 					controller:	  'ResourceDetailCtrl'
 				})
-				.otherwise('/', {
-					templateUrl: 'idea/index.html', 
-					controller: 'DirectoryIndexCtrl'
-				});
+				.otherwise({redirectTo : '/ideas'});
 				
         $locationProvider.html5Mode({
 					enabled: true,
 					requireBase: false
 				});
+				
 				//$routeProvider.when('/idea-detail/:id', {templateUrl: 'partials/idea-detail.html', controller: 'IdeaDetailCtrl'});
         //$routeProvider.when('/idea-creation', {templateUrl: 'partials/idea-creation.html', controller: 'IdeaCreationCtrl'});
         //$routeProvider.otherwise({redirectTo: '/idea-list'});
