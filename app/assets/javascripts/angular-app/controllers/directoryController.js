@@ -8,8 +8,8 @@ app.controller("DirectoryIndexCtrl", ['$scope', '$rootScope', '$localStorage', '
 		$scope.$storage = $localStorage;
 		$scope.$storage.current_directory = Directory.query({idea_id: $routeParams.id, isTrue: true});
 		
-		$scope.showDirectories = function(ideaId){
-			$scope.directories = Directory.query();
+		$scope.showDirectories = function(dir_id){
+			$scope.directories = Directory.query({id: dir_id});
 			$location.path('/directories');
 		}		
 	
