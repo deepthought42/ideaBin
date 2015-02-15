@@ -6,7 +6,7 @@ class DirectoriesController < ApplicationController
 	# GET /directories
   # GET /directories.json
   def index
-    @directories = Directory.where(idea_id: params[:idea_id])
+    @directories = Directory.where(idea_id: session[:directory_id])
     respond_with(@directories)
   end
 

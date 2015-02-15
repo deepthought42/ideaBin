@@ -33,7 +33,6 @@ app.controller('IdeaDetailCtrl', ['$scope', '$localStorage', '$routeParams', 'Id
 	function($scope, $localStorage, $routeParams, Idea, $location){
 		$scope.$storage = $localStorage;
 		$scope.idea = Idea.show({id: $routeParams.id});
-		$scope.$storage.directory = $scope.idea.name;
 		
 		$scope.updateIdea = function (ideaId){
 			Idea.update($scope.idea,{id: ideaId}, function(){
