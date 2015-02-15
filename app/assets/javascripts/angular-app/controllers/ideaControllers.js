@@ -24,7 +24,7 @@ app.controller("IdeaIndexCtrl", ['$scope', '$localStorage', 'Idea', '$location',
 			$location.path('/ideas/'+ideaId);
 		}
 		
-		$scope.showIdea = function(){
+		$scope.newIdea = function(){
 			$location.path('/ideas/new');
 		}
 }]);
