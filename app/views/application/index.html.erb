@@ -8,71 +8,70 @@
 		<%= csrf_meta_tags %>
 </head>
 <body ng-app="ideaBin">
-  <nav class="navbar navbar-inverse" role="navigation">
-  <div class="container-fluid">
-    <!-- Brand and toggle get grouped for better mobile display -->
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-        <span class="sr-only">Toggle navigation</span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-      <a class="navbar-brand" href="#">IdeaBin</a>
+ <div id="sideMenu" class="text-center show-menu">
+    <div class="btn-group" role="group" aria-label="...">
+      <i type="button" class="btn sidebar-btn border-white fa fa-folder" id="btnAddFolder"></i>
+      <i type="button" class="btn sidebar-btn border-white fa fa-file" id="btnAddFile"></i>
     </div>
-
-    <!-- Collect the nav links, forms, and other content for toggling -->
-    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-      <ul class="nav navbar-nav">
-        <li class="active"><a href="/ideas/new">Home</a><span class="sr-only">(current)</span></a></li>
-        <li>
-					<a href="/ideas" >Ideas</a>
-				</li>
-        <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Dropdown <span class="caret"></span></a>
-          <ul class="dropdown-menu" role="menu">
-            <li><a href="#">Action</a></li>
-            <li><a href="#">Another action</a></li>
-            <li><a href="#">Something else here</a></li>
-            <li class="divider"></li>
-            <li><a href="#">Separated link</a></li>
-            <li class="divider"></li>
-            <li><a href="#">One more separated link</a></li>
-          </ul>
-        </li>
-      </ul>
-      <form class="navbar-form navbar-left" role="search">
-        <div class="form-group">
-          <input type="text" class="form-control" placeholder="Search">
+    
+    
+    <div class="border-white sidebar-wrapper-add" id="wrapper-add-folder">
+        <h6>Add Folder</h6>
+        <input type="text" />
+        <i class="btn fa fa-plus"></i>
+        <div class="dropdown">
+            <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenuFolder" data-toggle="dropdown" aria-expanded="true">
+                Dropdown
+                <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenuFolder">
+                <li role="presentation"><a role="menuitem" tabindex="-1" href="#">CSS</a></li>
+                <li role="presentation"><a role="menuitem" tabindex="-1" href="#">JS</a></li>
+                <li role="presentation"><a role="menuitem" tabindex="-1" href="#">INC</a></li>
+            </ul>
         </div>
-        <button type="submit" class="btn btn-default">Submit</button>
-      </form>
-      <div ng-controller="IdeaIndexCtrl">
-        <button ng-click="showIdea()" class="btn btn-success navbar-btn" id="btnNewIdea">+ Create New Idea</button>
-      </div>
-    </div><!-- /.navbar-collapse -->
-  </div><!-- /.container-fluid -->
-</nav>
-
-<div class="container-fluid">
-  <div class="row">
-    <div class="col-md-3 pull-right" ng-controller="UserSessionCtrl">
-        Logged in as <strong>{{user.email}}</strong>.
-				<span ng-show="!user.id">
-					<a ng-href="/sign_in">Sign in</a> |
-				</span>
-				<span ng-show="user.id">
-					<a ng-click='logout(user)'>Sign out</a> |
-				</span>
-				<span ng-show="user.id" >
-					<a class='navbar-link' ng-href="/users/edit">Edit profile</a> 
-				</span>
-				<span ng-show="!user.id" >
-					<a class='navbar-link' ng-href="/register" >Sign up</a> 
-				</span>	
     </div>
-  </div>
+
+    <div class="border-white sidebar-wrapper-add" id="wrapper-add-file">
+        <h6>Add File</h6>
+        <input type="text" />
+        <i class="btn fa fa-plus"></i>
+        
+        <div class="dropdown">
+            <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenuFolder" data-toggle="dropdown" aria-expanded="true">
+                Dropdown
+                <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenuFolder">
+                <li role="presentation"><a role="menuitem" tabindex="-1" href="#">CSS</a></li>
+                <li role="presentation"><a role="menuitem" tabindex="-1" href="#">JS</a></li>
+                <li role="presentation"><a role="menuitem" tabindex="-1" href="#">INC</a></li>
+            </ul>
+        </div>
+      </div>
+    
+    <table class="table table-striped text-left">
+        <tr>
+            <td>CSS</td>
+        </tr>
+        <tr>
+            <td>JS</td>            
+        </tr>
+        <tr>
+            <td>INC</td>
+        </tr>
+    </table>
+    
+     <div class="btn-toggle-wrapper">
+        <i id="toggleBtn" class="btn fa fa-bars"></i>
+    </div>
+    <div id="ideabin">
+        <h1 class="inline">ideabin</h1>
+        <i class="inline fa fa-lightbulb-o fa-2x"></i>
+    </div>
 </div>
+
+
 
 
 	<div ng-view=""></div>

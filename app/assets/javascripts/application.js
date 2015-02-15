@@ -17,6 +17,7 @@
 //= require site
 //= require resources
 //= require directories
+//= require nav
 
 //= require bootstrap
 //= require ../components/ace-builds/src-min-noconflict/ace.js
@@ -35,7 +36,6 @@
 //= require_tree ./angular-app/modules
 //= require_tree ./angular-app/filters
 //= require_tree ./angular-app/directives
-//= require_tree ./angular-app/models
 //= require_tree ./angular-app/services
 //= require_tree ./angular-app/controllers
 //= require_tree ../templates

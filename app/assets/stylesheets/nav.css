@@ -1,0 +1,86 @@
+.btn-toggle-wrapper{
+    position: absolute;
+    left: 200px;
+    top:0px;
+}
+
+.btn{
+    border-radius: 0px;
+}
+
+.border-white{
+    border: 1px solid #fff;
+}
+
+#toggleBtn{
+    padding: 10px;
+    background-color: #E6E7E8;
+    color: #333;
+    top:0px;
+    border-radius: 0px;
+    margin: 3px;
+    transition: all .5s;
+    z-index: 5;
+}
+
+#sideMenu{
+    padding: 15px;
+    width: 200px;
+    background-color: #E6E7E8;
+    height: 100vh;
+    display: inline-block;
+    position: relative;
+    right: 200px;
+    transition: right .5s;
+    float: left;
+    z-index: 5;
+}
+
+.sidebar-btn{
+    margin: 5px;
+}
+
+.sidebar-wrapper-add{
+    margin: 10px auto;
+    padding: 3px;
+}
+
+.sidebar-wrapper-add > input{
+    width:96%;
+}
+
+.show-menu{
+    right: 0px!important;
+}
+
+.make-transparent{
+    border: none!important;
+    background-color: transparent!important;
+}
+
+#wrapper-add-folder, #wrapper-add-file{
+    display: none;
+}
+
+.inline{
+    display: inline;
+}
+
+#ideabin{
+    position: absolute;
+    bottom: 0px;
+    left: 5px;
+}
+
+div#ideabin h1{
+    margin: 0px;
+}
+
+#fakeText{
+    border: 1px solid #E6E7E8;
+    margin: 15px;
+    height: 300px;
+    width: 50%%;
+    z-index: 5;
+    float: right;
+}
