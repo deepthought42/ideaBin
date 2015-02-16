@@ -1,15 +1,13 @@
-<div class="pull-right glyphicon glyphicon-cog" id="ideaSettingsLink" ></div>
-
 <div class="container">
  <div class="row" ng-controller="IdeaDetailCtrl">
- 	<div class="col-md-6">
+
+ 	<div class="col-md-6" id="ace-wrapper">
  		<div ui-ace></div>
  	</div>
  	<div class="col-md-6">
  		
  		<div class="row">
 			<div class="col-md-12" id="divNewIdea">
-				<div class="row text-center">
 				<h6>
 					Create an idea, then share it with the world.
 				</h6>
@@ -17,14 +15,9 @@
 		</div>
 		<div class="row">
 			<form novalidate>
-				<div class="input-group">
-					<span class="input-group-btn">
-						<span class="btn btn-success btn-file">
-							Browse...
-							<input type="file" name="idea[cover_img]" file-model="cover_img" id="idea_cover_img">
-						</span>
-					</span>
-					<input type="text" class="form-control" readonly>
+
+				<div class="field">				
+					<input type="file" ng-file-select uploader="createNewIdea" ng-model="cover_img" />
 				</div>
 				<div class="field">
 					<label for="name" >Name</label>
@@ -37,19 +30,22 @@
 					<input type="text" name="idea[description]" ng-model="idea.description" id="description"/>
 				</div>
 				<div class="actions">
-					<button ng-click="updateIdea(idea)">SAVE</button>      
+					<button class="btn btn-default" ng-click="updateIdea(idea)">Save</button>      
 				</div>
 			</form>
 		</div>
+		<div class="row">
+			<div class="col-md-12">
+				<div ng-include="'directory/new.html'" ></div>
+				<div ng-include="'directory/index.html'" ></div>
+			</div>
 		</div>
- 	</div>
- 	 <div class="col-md-12">
-		<div ng-include="'directory/new.html'" ></div>
-		<div ng-include="'directory/index.html'" ></div>
-	</div>
-	<div class="col-md-12">
-  		<div ng-include="'resource/index.html'" ></div>
-  	</div>
+		<div class="row">
+			<div class="col-md-12">
+		  		<div ng-include="'resource/index.html'" ></div>
+		  	</div>
+	 	</div>
+		</div>
 
 </div>
 	

@@ -5,20 +5,13 @@
 			<div class="col-md-4" id="divNewIdea">
 				<div class="row text-center">
 				<h1>
-					Create an idea,<br> then share it<br> with the world.
+					Create an idea, then share it with the world.
 				</h1>
 			</div>
 			<div ng-controller="IdeaCreationCtrl">
 				<form name="idea" enctype="multipart/form-data" novalidate>
-					<div class="input-group">
-						<span class="input-group-btn">
-							<span class="btn btn-success btn-file">
-								Browse...
-								
-								<input type="file" ng-file-select uploader="createNewIdea" ng-model="cover_img" />
-							</span>
-						</span>
-						<input type="text" class="form-control" readonly />
+					<div class="field">			
+						<input type="file" ng-file-select uploader="createNewIdea" ng-model="cover_img" />
 					</div>
 					<div class="field">
 						<label for="name" >Name</label>

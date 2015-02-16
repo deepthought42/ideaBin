@@ -21,6 +21,14 @@ h1,h2,h3,h4,h5,h6{
 	font-family: 'Fira Sans';
 }
 
+body{
+  margin-top: 60px;
+}
+
+.container-fluid{
+  padding: 30px 60px 30px 120px;
+}
+
 .item {
   width: 220px;
   margin: 10px;
