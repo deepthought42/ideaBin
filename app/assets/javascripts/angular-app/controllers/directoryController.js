@@ -3,18 +3,7 @@ var app = angular.module('ideaBin.directoryControllers', [
 
 app.controller("DirectoryIndexCtrl", ['$scope', '$rootScope', '$localStorage', '$routeParams', 'Directory', 'DirectoryEvent', '$location',
 	function($scope, $rootScope, $localStorage, $routeParams, Directory, DirectoryEvent, $location) {
-		
-		$rootScope.showCreateDirectoryPanel = false;
-		$scope.$storage = $localStorage;
-
-		if($scope.$storage.current_directory){
-			$scope.showDirectories($scope.$storage.current_directory);
-		}
-		else{
-			$scope.directories = Directory.query({idea_id: $routeParams.id});
-		}
-		
-		
+	
 		$scope.showDirectories = function(dir_id){
 			$scope.$storage.current_directory = Directory.query({id: dir_id});
 			var directories = Directory.query({parent_id: dir_id});
@@ -52,6 +41,16 @@ app.controller("DirectoryIndexCtrl", ['$scope', '$rootScope', '$localStorage', '
 		$rootScope.$on('directoryCreated', function(event, data){
 			$scope.directories = Directory.query({idea_id: $scope.$storage.current_idea.id});
 		});
+		
+
+		$rootScope.showCreateDirectoryPanel = false;
+		$scope.$storage = $localStorage;
+		if($scope.$storage.current_directory){
+			$scope.showDirectories($scope.$storage.current_directory);
+		}
+		else{
+			$scope.directories = Directory.query({idea_id: $routeParams.id});
+		}
 }]);
 
 app.controller('DirectoryDetailCtrl', ['$scope', '$routeParams', 'Directory', '$location',
