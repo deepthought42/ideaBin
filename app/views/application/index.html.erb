@@ -19,7 +19,12 @@
     
     <div ng-controller="IdeaIndexCtrl">
 			<button ng-click="newIdea()" >Add New Idea</button>
+<<<<<<< HEAD
 		<div>
+=======
+    </div>
+            
+>>>>>>> 2d7715a2c5b4daf6002d457825bbf6d121882b58
     <div class="border-white sidebar-wrapper-add" id="wrapper-add-folder">
         <h6>Add Folder</h6>
         <input type="text" />
@@ -57,17 +62,9 @@
         </div>
       </div>
     
-    <table class="table table-striped text-left">
-        <tr>
-            <td>CSS</td>
-        </tr>
-        <tr>
-            <td>JS</td>            
-        </tr>
-        <tr>
-            <td>INC</td>
-        </tr>
-    </table>
+    <ul>
+        <a href="/ideas"><li>ideas</li></a>
+    </ul>
     
      <div class="btn-toggle-wrapper">
         <i id="toggleBtn" class="btn fa fa-bars"></i>
@@ -79,9 +76,10 @@
 </div>
 
 
+<div class="container-fluid fixed-top">
+    <div ng-view=""></div>
+</div>
 
-
-	<div ng-view=""></div>
 </body>
 </html>
 

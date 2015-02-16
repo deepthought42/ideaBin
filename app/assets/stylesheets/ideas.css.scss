@@ -4,7 +4,13 @@
 
 @import url(http://fonts.googleapis.com/css?family=Fira+Sans);
 
-.ace_editor { height: 200px; }
+.ace_editor { 
+	height: 200px;
+}
+
+#ace-wrapper{
+	padding-left: 60px;
+}
 
 .glyphicon-2x {
       font-size: 48px;
@@ -31,7 +37,7 @@
 }
 
 #divNewIdea{
-	padding: 30px;
+	padding: 15px 5px;
 	border-radius: 8px;
 }
 
