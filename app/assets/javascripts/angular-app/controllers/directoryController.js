@@ -45,11 +45,12 @@ app.controller("DirectoryIndexCtrl", ['$scope', '$rootScope', '$localStorage', '
 
 		$rootScope.showCreateDirectoryPanel = false;
 		$scope.$storage = $localStorage;
-		if($scope.$storage.current_directory){
-			$scope.showDirectories($scope.$storage.current_directory);
+		if($scope.$storage.current_directory && $scope.$storage.current_directory != null){
+			$scope.showDirectories($scope.$storage.current_directory.id);
 		}
 		else{
-			$scope.directories = Directory.query({idea_id: $routeParams.id});
+			$scope.directories = Directory.query({idea_id: $routeParams.id, is_top: true});
+			console.log("DIRECTORIES :: " + $scope.directories);
 		}
 }]);
 
@@ -73,11 +74,13 @@ app.controller('DirectoryCreationCtrl', ['$scope', '$rootScope', '$localStorage'
 		$scope.$storage = $localStorage;
 		//callback for ng-click 'createNewDirectory'
 		console.log("CREATE DIRECTORY CONTRLLER");
-		$scope.directoryForm = {};
-		$scope.directoryForm.name = "NAME";
+		$scope.directoryForm = {}
+		$scope.directoryForm.name = "NAME"
 		$scope.createNewDirectory = function(){
-			$scope.directoryForm.idea_id = $scope.$storage.current_idea.id;
-
+			$scope.directoryForm.idea_id = $scope.$storage.current_idea.id
+			if($scope.$storage.current_directory){
+				$scope.directoryForm.parent_id = $scope.$storage.current_directory.id
+			}
 			console.log($scope.directoryForm)
 			Directory.create($scope.directoryForm);
 			//fire event to add directory to directories list

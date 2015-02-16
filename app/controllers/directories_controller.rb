@@ -10,8 +10,10 @@ class DirectoriesController < ApplicationController
 			session[:directory_id] = params[:parent_id]
 			@directories = Directory.where(parent_id: session[:directory_id])
 		else
-			@directories = Directory.where(idea_id: params[:idea_id])
+			@directory = Directory.where("idea_id = ? AND is_top = ?", params[:idea_id], true)
+			@directories = Directory.where("parent_id = ?", @directory.first.id)
 		end
+		
     respond_with(@directories)
   end
 
