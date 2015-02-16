@@ -50,15 +50,6 @@ class IdeasController < ApplicationController
     end
 		
 		respond_with(@idea)
-		#respond_to do |format|
-    #  if @idea.save and @directory.save
-    #    format.html { redirect_to @idea, notice: "Idea was successfully created.#{g}" }
-    #    format.json { render json: @idea, status: :created, location: @idea }
-    #  else
-    #    format.html { render action: "new" }
-    #    format.json { render json: @idea.errors, status: :unprocessable_entity }
-    #  end
-    #end
   end
 
   # POST /ideas

@@ -6,7 +6,12 @@ class DirectoriesController < ApplicationController
 	# GET /directories
   # GET /directories.json
   def index
-    @directories = Directory.where(idea_id: session[:directory_id])
+		if(params[:parent_id])
+			session[:directory_id] = params[:parent_id]
+			@directories = Directory.where(parent_id: session[:directory_id])
+		else
+			@directories = Directory.where(idea_id: params[:idea_id])
+		end
     respond_with(@directories)
   end
 
@@ -30,10 +35,15 @@ class DirectoriesController < ApplicationController
 		@directory.name = directory_params[:name]
 		@directory.idea_id = @idea.id
 		@directory.path = "#{Rails.root}/public/data/repository/#{current_user.id}/#{@idea.name}";
-
-		@directoryParent = Directory.where("idea_id = ? AND is_top = ?", @idea.id, true).take
-		#flash[:notice] = "#{directory_params} : #{@idea.id} , #{true} , #{@directoryParent.id}"
-		#@directory.parent_id = @directoryParent.id
+		
+		if(session[:directory_id])
+			@directory.is_top = false
+		else
+			@directory.is_top = true
+		end
+		if session[:directory_id]
+			@directory.parent_id = session[:directory_id]
+		end
 		flash[:notice] = "#{directory_params} : #{@directory.name}" if @directory.save
 		respond_with(@directory)
   end

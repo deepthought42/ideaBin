@@ -3,14 +3,27 @@ var app = angular.module('ideaBin.directoryControllers', [
 
 app.controller("DirectoryIndexCtrl", ['$scope', '$rootScope', '$localStorage', '$routeParams', 'Directory', 'DirectoryEvent', '$location',
 	function($scope, $rootScope, $localStorage, $routeParams, Directory, DirectoryEvent, $location) {
-		$scope.directories = Directory.query({idea_id: $routeParams.id});
+		
 		$rootScope.showCreateDirectoryPanel = false;
 		$scope.$storage = $localStorage;
-		$scope.$storage.current_directory = Directory.query({idea_id: $routeParams.id, isTrue: true});
+		//work on getting directories set. 
+		if($scope.$storage.current_directory){
+			showDirectories($scope.$storage.current_directory);
+		}
+		else{
+			$scope.directories = Directory.query({idea_id: $routeParams.id, isTrue: true});
+		}
+		
 		
 		$scope.showDirectories = function(dir_id){
-			$scope.directories = Directory.query({id: dir_id});
-			$location.path('/directories');
+			$scope.$storage.current_directory = Directory.query({id: dir_id});
+			var directories = Directory.query({parent_id: dir_id});
+			if(directories){
+				$scope.directories = directories;
+			}
+			else{
+				$scope.directories = {};
+			}
 		}		
 	
 		$scope.showCreatePanel = function(){
@@ -32,7 +45,7 @@ app.controller("DirectoryIndexCtrl", ['$scope', '$rootScope', '$localStorage', '
 		}
 		
 		$scope.newDirectory = function(){
-			$location.path('/directories/new');
+		$location.path('/directories/new');
 		}
 		
 		//EVENT HANDLING
@@ -63,8 +76,9 @@ app.controller('DirectoryCreationCtrl', ['$scope', '$rootScope', '$localStorage'
 		console.log("CREATE DIRECTORY CONTRLLER");
 		$scope.directoryForm = {};
 		$scope.directoryForm.name = "NAME";
-		$scope.directoryForm.idea_id = $scope.$storage.current_idea.id;
 		$scope.createNewDirectory = function(){
+			$scope.directoryForm.idea_id = $scope.$storage.current_idea.id;
+
 			console.log($scope.directoryForm)
 			Directory.create($scope.directoryForm);
 			//fire event to add directory to directories list
