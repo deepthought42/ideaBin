@@ -6,12 +6,12 @@ app.controller("DirectoryIndexCtrl", ['$scope', '$rootScope', '$localStorage', '
 		
 		$rootScope.showCreateDirectoryPanel = false;
 		$scope.$storage = $localStorage;
-		//work on getting directories set. 
+
 		if($scope.$storage.current_directory){
-			showDirectories($scope.$storage.current_directory);
+			$scope.showDirectories($scope.$storage.current_directory);
 		}
 		else{
-			$scope.directories = Directory.query({idea_id: $routeParams.id, isTrue: true});
+			$scope.directories = Directory.query({idea_id: $routeParams.id});
 		}
 		
 		
