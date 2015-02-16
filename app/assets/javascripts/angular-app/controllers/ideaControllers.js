@@ -17,8 +17,9 @@ app.controller("IdeaIndexCtrl", ['$scope', '$localStorage', 'Idea', '$location',
 		};
 		
 		$scope.editIdea = function (ideaId) {
-			$scope.$storage.current_idea = Idea.show({id: ideaId});
-			$location.path('/ideas/'+ideaId);
+			$scope.$storage.current_idea = Idea.show({id: ideaId})
+			$scope.$storage.current_directory = undefined
+			$location.path('/ideas/'+ideaId)
 		}
 		
 		$scope.newIdea = function(){
