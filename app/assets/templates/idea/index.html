@@ -1,31 +1,32 @@
 
 <div class="container" ng-controller="IdeaIndexCtrl">
-  <div class="row text-center">
-    <h1 id="headerIdeas">
-      These are your ideas.<br>Make the most of them.
-    </h1>
-  </div>
-  <div class="row text-center">
-        <div class="col-md-3 col-sm-4 col-xs-12 item text-center" ng-repeat="idea in ideas">
-					<img ng-src="/images/cover_images/{{idea.cover_img_file_name}}" />
-          <div class="btn-group" role="group" aria-label="...">
-            <button type="button" class="btn btn-default" >
-								 <a ng-click="editIdea(idea.id)" class='fa fa-pencil-square-o' ></a>
-            </button>
-            <button type="button" class="btn btn-default">
-								<a ng-click="deleteIdea(idea.id)" class='fa fa-times' ></a>
-            </button>
-            <button type="button" class="btn btn-default">
-                <i class="fa fa-share-alt"></i>
-            </button>
-          </div>
-          <div class="overlay">
-            <h3 class="title">{{idea.name}}</h3>
-            <div class="description">
-              <p>
-								{{idea.description}}  
-							</p>
+    <div class="row text-center">
+      <h1 id="headerIdeas">
+        These are your ideas.<br>Make the most of them.
+      </h1>
+    </div>
+    <div class="row text-center">
+          <div class="col-md-3 col-sm-4 col-xs-12 item text-center" ng-repeat="idea in ideas">
+    				<img ng-src="/images/cover_images/{{idea.cover_img_file_name}}" />
+            <div class="btn-group" role="group" aria-label="...">
+              <button type="button" class="btn btn-default" >
+    							 <a ng-click="editIdea(idea.id)" class='fa fa-pencil-square-o' ></a>
+              </button>
+              <button type="button" class="btn btn-default">
+    							<a ng-click="deleteIdea(idea.id)" class='fa fa-times' ></a>
+              </button>
+              <button type="button" class="btn btn-default">
+                  <i class="fa fa-share-alt"></i>
+              </button>
+            </div>
+            <div class="overlay">
+              <h3 class="title">{{idea.name}}</h3>
+              <div class="description">
+                <p>
+    							{{idea.description}}  
+    						</p>
+              </div>
             </div>
           </div>
-        </div>
+    </div>
   </div>

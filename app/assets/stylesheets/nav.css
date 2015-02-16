@@ -14,7 +14,7 @@
 
 #toggleBtn{
     padding: 10px;
-    background-color: #E6E7E8;
+    background-color: rgba(0,0,0,.1);
     color: #333;
     top:0px;
     border-radius: 0px;
@@ -26,8 +26,8 @@
 #sideMenu{
     padding: 15px;
     width: 200px;
-    background-color: #E6E7E8;
-    height: 100vh;
+    background-color: rgba(0,0,0,.1);
+    height: 99vh;
     display: inline-block;
     position: relative;
     right: 200px;
