@@ -1,5 +1,4 @@
-var app = angular.module('ideaBin.ideaControllers', []
-			);
+var app = angular.module('ideaBin.ideaControllers', []);
 
 app.controller("IdeaIndexCtrl", ['$scope', '$localStorage', 'Idea', '$location',
 	function($scope, $localStorage, Idea, $location) {
@@ -17,8 +16,8 @@ app.controller("IdeaIndexCtrl", ['$scope', '$localStorage', 'Idea', '$location',
 		};
 		
 		$scope.editIdea = function (ideaId) {
-			$scope.$storage.current_idea = Idea.show({id: ideaId})
-			$scope.$storage.current_directory = undefined
+			$localStorage.current_idea  = ideaId
+
 			$location.path('/ideas/'+ideaId)
 		}
 		

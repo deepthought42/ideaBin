@@ -1,25 +1,22 @@
 class DirectoriesController < ApplicationController
 	before_filter :authenticate_user!
-	before_action :set_directory, except: [:new, :create, :index]
+	before_action :set_directory, except: [:show, :new, :create, :index]
 	respond_to :json
   
 	# GET /directories
   # GET /directories.json
   def index
 		if(params[:parent_id])
-			session[:directory_id] = params[:parent_id]
-			@directories = Directory.where(parent_id: session[:directory_id])
-		else
-			@directory = Directory.where("idea_id = ? AND is_top = ?", params[:idea_id], true)
-			@directories = Directory.where("parent_id = ?", @directory.first.id)
+			@directories = Directory.where(parent_id: params[:parent_id])
 		end
 		
     respond_with(@directories)
   end
 
   def show
-		@directory = Directory.find(params[:id])
-		respond_with(@directory)
+		@directory = Directory.where(idea_id: params[:id], is_top: true).first
+		logger.info("DIRECTORY :: " +@directory.to_json)
+		respond_with(@directory.to_json)
   end
 
   def new

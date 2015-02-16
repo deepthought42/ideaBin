@@ -17,6 +17,7 @@ class IdeasController < ApplicationController
     @idea = Idea.find(params[:id])
 
 		respond_with(@idea)
+
   end
 
   # GET /ideas/new

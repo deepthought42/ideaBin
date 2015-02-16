@@ -1,18 +1,21 @@
-var app = angular.module('ideaBin.directoryControllers', [
-	'ngStorage']);
+var app = angular.module('ideaBin.directoryControllers', ['ngStorage']);
 
 app.controller("DirectoryIndexCtrl", ['$scope', '$rootScope', '$localStorage', '$routeParams', 'Directory', 'DirectoryEvent', '$location',
 	function($scope, $rootScope, $localStorage, $routeParams, Directory, DirectoryEvent, $location) {
 	
 		$scope.showDirectories = function(dir_id){
-			$scope.$storage.current_directory = Directory.query({id: dir_id});
-			var directories = Directory.query({parent_id: dir_id});
-			if(directories){
-				$scope.directories = directories;
-			}
-			else{
-				$scope.directories = {};
-			}
+			$scope.current_directory = Directory.show({id: dir_id}).$promise;
+			
+			$scope.current_directory.then(function onSuccess(response) {
+				// access data from 'response'
+				console.log("Succesful showing of directory");
+				$scope.$storage.current_directory = response;
+				$scope.directories = Directory.query({parent_id: $scope.$storage.current_directory.id});
+			},
+			function onFail(response) {
+					// handle failure
+			});
+
 		}		
 	
 		$scope.showCreatePanel = function(){
@@ -39,18 +42,31 @@ app.controller("DirectoryIndexCtrl", ['$scope', '$rootScope', '$localStorage', '
 		
 		//EVENT HANDLING
 		$rootScope.$on('directoryCreated', function(event, data){
-			$scope.directories = Directory.query({idea_id: $scope.$storage.current_idea.id});
+			$scope.directories = Directory.query({parent_id: $scope.$storage.current_directory.id});
 		});
 		
 
 		$rootScope.showCreateDirectoryPanel = false;
 		$scope.$storage = $localStorage;
-		if($scope.$storage.current_directory && $scope.$storage.current_directory != null){
-			$scope.showDirectories($scope.$storage.current_directory.id);
+		var curr_idea = $scope.$storage.current_idea;
+		console.log("IDEA TO JSON :: " + curr_idea);
+		
+		if($scope.$storage.current_directory && $scope.$storage.current_directory.length > 0){
+			$scope.showDirectories($scope.$storage.current_directory);
 		}
-		else{
-			$scope.directories = Directory.query({idea_id: $routeParams.id, is_top: true});
-			console.log("DIRECTORIES :: " + $scope.directories);
+		else{			
+			$scope.current_directory = Directory.show({id: $scope.$storage.current_idea}).$promise;
+			//var dir = 173;
+			$scope.current_directory.then(function onSuccess(response) {
+				// access data from 'response'
+				$scope.$storage.current_directory = response;
+				$scope.directories = Directory.query({parent_id: $scope.$storage.current_directory.id});
+			},
+			function onFail(response) {
+					// handle failure
+			});
+
+			
 		}
 }]);
 
