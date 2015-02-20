@@ -3,6 +3,7 @@ IdeaBin::Application.routes.draw do
 	resources :application
   root 'application#index'
   #get '*path' => 'application#index'
+	get '/topFolder' => 'resource#topFolder'
   resources :directories
   resources :uploads
   resources :resources

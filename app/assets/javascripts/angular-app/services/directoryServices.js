@@ -13,7 +13,7 @@ services.factory('Directory', function ($resource) {
 services.factory('DirectoryEvent', function($resource){
 	return {
 		broadcastNewDirectory : function(scope){
-			scope.$broadcast('directoryCreated', $resource);
+			scope.$broadcast('DirectoryCreated', $resource);
 		}
 	}
 });

@@ -2,7 +2,7 @@ class DirectoriesController < ApplicationController
 	before_filter :authenticate_user!
 	before_action :set_directory, except: [:show, :new, :create, :index]
 	respond_to :json
-  
+	
 	# GET /directories
   # GET /directories.json
   def index
@@ -15,8 +15,7 @@ class DirectoriesController < ApplicationController
 
   def show
 		@directory = Directory.where(idea_id: params[:id], is_top: true).first
-		logger.info("DIRECTORY :: " +@directory.to_json)
-		respond_with(@directory.to_json)
+		respond_with(@directory)
   end
 
   def new
@@ -33,16 +32,17 @@ class DirectoriesController < ApplicationController
     @directory = Directory.new(directory_params)
 		@directory.name = directory_params[:name]
 		@directory.idea_id = @idea.id
+		
+		#needs to be altered to reflect infinite level depth of folder structure
 		@directory.path = "#{Rails.root}/public/data/repository/#{current_user.id}/#{@idea.name}";
 		
-		if(session[:directory_id])
+		if(directory_params[:parent_id])
 			@directory.is_top = false
 		else
 			@directory.is_top = true
 		end
-		if session[:directory_id]
-			@directory.parent_id = session[:directory_id]
-		end
+		@directory.parent_id = params[:parent_id]
+		
 		flash[:notice] = "#{directory_params} : #{@directory.name}" if @directory.save
 		respond_with(@directory)
   end
