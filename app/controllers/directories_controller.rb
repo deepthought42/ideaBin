@@ -28,20 +28,22 @@ class DirectoriesController < ApplicationController
 
   def create
 		@idea = Idea.find(params[:idea_id])
-
+		@parentDir = Directory.find(directory_params[:parent_id])
+		
     @directory = Directory.new(directory_params)
 		@directory.name = directory_params[:name]
 		@directory.idea_id = @idea.id
 		
 		#needs to be altered to reflect infinite level depth of folder structure
-		@directory.path = "#{Rails.root}/public/data/repository/#{current_user.id}/#{@idea.name}";
+		@directory.path = "#{@parentDir.path}/#{@directory.name}"
+		#@directory.path = "#{Rails.root}/public/data/repository/#{current_user.id}/#{@idea.name}";
 		
 		if(directory_params[:parent_id])
 			@directory.is_top = false
 		else
 			@directory.is_top = true
 		end
-		@directory.parent_id = params[:parent_id]
+		@directory.parent_id = directory_params[:parent_id]
 		
 		flash[:notice] = "#{directory_params} : #{@directory.name}" if @directory.save
 		respond_with(@directory)
@@ -65,6 +67,6 @@ class DirectoriesController < ApplicationController
     end
 
     def directory_params
-      params.require(:directory).permit(:name)
+      params.require(:directory).permit(:name, :parent_id)
     end
 end
