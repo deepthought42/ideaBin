@@ -24,8 +24,13 @@ app.controller("DirectoryIndexCtrl", ['$scope', '$rootScope', '$localStorage', '
 		}
 		
 		$scope.newDirectory = function(){
-		$location.path('/directories/new');
+			$location.path('/directories/new');
 		}
+		
+		$rootScope.$on('addDirectory', function(event, data) { 
+			console.log(data); 
+			$scope.directories.push(data);
+		});
 		
 		$rootScope.showCreateDirectoryPanel = false;
 		$scope.$storage = $localStorage;
@@ -78,9 +83,9 @@ app.controller('DirectoryCreationCtrl', ['$scope', '$rootScope', '$localStorage'
 				$scope.directoryForm.parent_id = $scope.$storage.current_directory;
 			}
 			console.log($scope.directoryForm)
-			Directory.create($scope.directoryForm);
-			$scope.directories = Directory.query({parent_id: $scope.$storage.current_directory});
-
+			$scope.directory = Directory.create($scope.directoryForm);
+			//$scope.directories = Directory.query({parent_id: $scope.$storage.current_directory});
+			$rootScope.$broadcast("addDirectory", $scope.directory )
 			//$location.path('/directories');
 		}
 	}
