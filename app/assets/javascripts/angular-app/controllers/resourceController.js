@@ -3,7 +3,7 @@ var app = angular.module('ideaBin.resourceControllers', []);
 app.controller("ResourceIndexCtrl", ['$scope', '$localStorage', '$rootScope', '$routeParams', 'Resource', '$location', '$upload',
 	function($scope, $localStorage, $rootScope, $routeParams, Resource, $location, $upload) {
 		$scope.$storage = $localStorage;
-		$scope.resources = Resource.query();
+		$scope.resources = Resource.query({parent_id: $localStorage.current_directory});
 		
 		$scope.$watch('files', function () {
         $scope.upload($scope.files);
@@ -40,7 +40,7 @@ app.controller("ResourceIndexCtrl", ['$scope', '$localStorage', '$rootScope', '$
 					data: {	comment: comment, 
 									resource: $scope.resource, 
 									idea_id: $scope.$storage.current_idea, 
-									directory_id: $scope.$storage.current_directory.id},
+									directory_id: $scope.$storage.current_directory},
 					file: file, // or list of files ($files) for html5 only
 					//fileName: 'doc.jpg' or ['1.jpg', '2.jpg', ...] // to modify the name of the file(s)
 					// customize file formData name ('Content-Disposition'), server side file variable name. 

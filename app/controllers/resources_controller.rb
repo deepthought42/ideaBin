@@ -64,7 +64,7 @@ class ResourcesController < ApplicationController
 		@resource.filename = params[:file].original_filename
 		@resource.content_type = params[:file].content_type
 		@resource.comment = params[:comment]
-		#@resource.directory_id = params[:directory_id]
+		@resource.directory_id = params[:directory_id]
 	
 		@resource.save
 		respond_with(@resource)
