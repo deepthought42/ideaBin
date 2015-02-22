@@ -8,7 +8,7 @@ class ResourcesController < ApplicationController
   def index
 		#@directory = Directory.new
 		#@directories = Directory.where(idea_id: params[:idea_id])
-    @resources = Resource.where(idea_id: params[:idea_id])
+    @resources = Resource.where(directory_id: params[:parent_id])
 
 		#@idea = Idea.find(params[:idea_id])
 		

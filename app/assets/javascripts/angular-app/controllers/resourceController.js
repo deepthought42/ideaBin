@@ -39,7 +39,7 @@ app.controller("ResourceIndexCtrl", ['$scope', '$localStorage', '$rootScope', '$
 					//withCredentials: true,
 					data: {	comment: comment, 
 									resource: $scope.resource, 
-									idea_id: $scope.$storage.current_idea.id, 
+									idea_id: $scope.$storage.current_idea, 
 									directory_id: $scope.$storage.current_directory.id},
 					file: file, // or list of files ($files) for html5 only
 					//fileName: 'doc.jpg' or ['1.jpg', '2.jpg', ...] // to modify the name of the file(s)
@@ -52,7 +52,7 @@ app.controller("ResourceIndexCtrl", ['$scope', '$localStorage', '$rootScope', '$
 				}).success(function(data, status, headers, config) {
 					// file is uploaded successfully
 					console.log("UPLOAD SUCCESSFUL");
-					$scope.resources = Resource.query({idea_id: $scope.$storage.current_idea.id});
+					$scope.resources = Resource.query({parent_id: $scope.$storage.current_directory});
 				});
 				//.error(...)
 				//.then(success, error, progress); 
