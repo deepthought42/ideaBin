@@ -1,17 +1,19 @@
 <div id="ideaResourceContainer" ng-controller="ResourceIndexCtrl">
 	<div id="resource_container" class="row masonry">
 		<h6>Listing resources</h6>
-		<div class="col-xs-3 item" ng-repeat="resource in resources">
-					<h5 class="title">
-						{{ resource.filename }}
-					</h5>
-					<div class="comment">
-						<p>
-							{{resource.comment}}
-						</p>  
-					</div>
-					<button id="editResource" ng-click="editResource(resource.id)" class="dock-item glyphicon glyphicon-pencil"></button>
-					<button id="removeResource" ng-click="deleteResource(resource.id)" class="glyphicon glyphicon-remove"></button>
+		<div class="col-md-12" ng-repeat="resource in resources">
+			<div class="col-md-4">
+				
+					{{ resource.filename }}
+			
+			</div>
+			<div class="col-md-6">
+				{{resource.comment}}
+			</div> 
+			<div class="col-md-2">
+				<button id="editResource" ng-click="editResource(resource.id)" class="col-md-6 dock-item glyphicon glyphicon-pencil"></button>
+				<button id="removeResource" ng-click="deleteResource(resource.id)" class="col-md-6 glyphicon glyphicon-remove"></button>
+			</div>
 		</div>
 		
 		<div >
