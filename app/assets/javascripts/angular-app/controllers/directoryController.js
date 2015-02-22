@@ -1,7 +1,7 @@
 var app = angular.module('ideaBin.directoryControllers', ['ngStorage']);
 
-app.controller("DirectoryIndexCtrl", ['$scope', '$rootScope', '$localStorage', '$routeParams', 'Directory', 'DirectoryEvent', '$location',
-	function($scope, $rootScope, $localStorage, $routeParams, Directory, DirectoryEvent, $location) {
+app.controller("DirectoryIndexCtrl", ['$scope', '$rootScope', '$localStorage', '$routeParams', 'Directory', '$location',
+	function($scope, $rootScope, $localStorage, $routeParams, Directory, $location) {
 		//$scope.directories = Directory.query({parent_id: $scope.$storage.current_directory});
 	
 		$scope.showDirectories = function(dir_id){
@@ -35,7 +35,6 @@ app.controller("DirectoryIndexCtrl", ['$scope', '$rootScope', '$localStorage', '
 		$rootScope.showCreateDirectoryPanel = false;
 		$scope.$storage = $localStorage;
 		var curr_idea = $scope.$storage.current_idea;
-		console.log("IDEA TO JSON :: " + curr_idea);
 		
 		if($scope.$storage.current_directory && $scope.$storage.current_directory.length > 0){
 			$scope.showDirectories($scope.$storage.current_directory);
@@ -71,8 +70,8 @@ app.controller('DirectoryDetailCtrl', ['$scope', '$routeParams', 'Directory', '$
 	}
 ]);
 
-app.controller('DirectoryCreationCtrl', ['$scope', '$rootScope', '$localStorage', '$routeParams', 'DirectoryEvent', 'Directory', '$location',
-	function($scope, $rootScope, $localStorage, $routeParams, DirectoryEvent, Directory, $location ){
+app.controller('DirectoryCreationCtrl', ['$scope', '$rootScope', '$localStorage', '$routeParams', 'Directory', '$location',
+	function($scope, $rootScope, $localStorage, $routeParams, Directory, $location ){
 		$scope.$storage = $localStorage;
 		//callback for ng-click 'createNewDirectory'
 		$scope.directoryForm = {}

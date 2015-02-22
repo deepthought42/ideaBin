@@ -10,10 +10,11 @@ services.factory('Directory', function ($resource) {
 			})
 });
 
-services.factory('DirectoryEvent', function($resource){
+/*services.factory('DirectoryEvent', function($resource){
 	return {
 		broadcastNewDirectory : function(scope){
 			scope.$broadcast('DirectoryCreated', $resource);
 		}
 	}
 });
+*/
