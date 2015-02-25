@@ -9,8 +9,18 @@
 				<div class="col-md-5" >
 					<div ng-include="'resource/index.html'" ></div>
 				</div>
-				<div class="col-md-4" id="ace-wrapper">
-					<div ui-ace></div>
+				<div class="col-md-4" id="ace-wrapper" ng-controller="ResourceDetailCtrl">
+					<div ui-ace="{
+							onLoad : aceLoaded,
+							maxLines: 5,
+							require: ['ace/ext/language_tools'],
+							advanced: {
+									enableSnippets: true,
+									enableBasicAutocompletion: true,
+									enableLiveAutocompletion: true
+							}
+						}">
+					</div>
 				</div>
 			</div>
 		</div>

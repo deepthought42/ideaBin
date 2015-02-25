@@ -28,7 +28,6 @@ app.controller("DirectoryIndexCtrl", ['$scope', '$rootScope', '$localStorage', '
 		}
 		
 		$rootScope.$on('addDirectory', function(event, data) { 
-			console.log(data); 
 			$scope.directories.push(data);
 		});
 		

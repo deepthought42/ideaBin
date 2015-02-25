@@ -1,7 +1,7 @@
 var app = angular.module('ideaBin.resourceControllers', []);
 
-app.controller("ResourceIndexCtrl", ['$scope', '$localStorage', '$rootScope', '$routeParams', 'Resource', '$location', '$upload',
-	function($scope, $localStorage, $rootScope, $routeParams, Resource, $location, $upload) {
+app.controller("ResourceIndexCtrl", ['$rootScope', '$scope', '$localStorage', '$rootScope', '$routeParams', 'Resource', '$location', '$upload',
+	function($rootScope, $scope, $localStorage, $rootScope, $routeParams, Resource, $location, $upload) {
 		$scope.$storage = $localStorage;
 		$scope.resources = Resource.query({parent_id: $localStorage.current_directory});
 		
@@ -9,7 +9,8 @@ app.controller("ResourceIndexCtrl", ['$scope', '$localStorage', '$rootScope', '$
         $scope.upload($scope.files);
     });
 		
-		$scope.showResource = function(resourceId){
+		$scope.showResource = function(resourceText){
+			$scope.editor.setValue(resourceText);
 		}
 		
   	$scope.deleteResource =  function(resourceId){
@@ -23,7 +24,10 @@ app.controller("ResourceIndexCtrl", ['$scope', '$localStorage', '$rootScope', '$
 		};
 		
 		$scope.editResource = function (resourceId) {
-			$location.path('/resources/'+resourceId);
+			console.log("RESOURCE BEING SHOWN");
+			$scope.resource = Resource.show({id: resourceId});
+			$rootScope.$broadcast("editResource", $scope.resource );
+			//location.path('/resources/'+resourceId);
 		}
 		
 		$scope.upload = function(files) {			
@@ -62,9 +66,33 @@ app.controller("ResourceIndexCtrl", ['$scope', '$localStorage', '$rootScope', '$
 		};
 }]);
 
-app.controller('ResourceDetailCtrl', ['$scope', '$routeParams', 'Resource', '$location',
-	function($scope, $routeParams, Resource, $location){
-		$scope.resource = Resource.show({id: $routeParams.id});
+app.controller('ResourceDetailCtrl', ['$rootScope', '$scope', '$routeParams', 'Resource', '$location',
+	function($rootScope, $scope, $routeParams, Resource, $location){
+		//$scope.resource = Resource.show({id: $routeParams.id});
+		
+		$scope.aceLoaded = function(_editor) {
+			$scope.editor = _editor;
+			// Options
+			//_editor.setReadOnly(true);
+		};
+
+		$scope.aceChanged = function(e) {
+			//
+		};
+		
+		$rootScope.$on('editResource', function(event, data) { 
+			console.log(data); 
+			$scope.resource = data.$promise;
+			$scope.resource.then(function onSuccess(response) {
+					// access data from 'response'
+					$scope.resource = response;
+					console.log("RESPONSE :: " + $scope.resource.filename);
+					$scope.editor.setValue(response.filename);
+				},
+				function onFail(response) {
+						// handle failure
+				});
+		});
 		
 		$scope.updateResource = function (){
 			Resource.update($scope.resource);
