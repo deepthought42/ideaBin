@@ -6,12 +6,7 @@ class ResourcesController < ApplicationController
   # GET /resources
   # GET /resources.json
   def index
-		#@directory = Directory.new
-		#@directories = Directory.where(idea_id: params[:idea_id])
     @resources = Resource.where(directory_id: params[:parent_id])
-
-		#@idea = Idea.find(params[:idea_id])
-		
     respond_with(@resources)
   end
 

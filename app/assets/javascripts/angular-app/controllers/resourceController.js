@@ -3,7 +3,7 @@ var app = angular.module('ideaBin.resourceControllers', []);
 app.controller("ResourceIndexCtrl", ['$rootScope', '$scope', '$localStorage', '$rootScope', '$routeParams', 'Resource', '$location', '$upload',
 	function($rootScope, $scope, $localStorage, $rootScope, $routeParams, Resource, $location, $upload) {
 		$scope.$storage = $localStorage;
-		$scope.resources = Resource.query({parent_id: $localStorage.current_directory});
+		$scope.resources = Resource.query({parent_id: $localStorage.current_directory.id});
 		
 		$scope.$watch('files', function () {
         $scope.upload($scope.files);
@@ -15,7 +15,7 @@ app.controller("ResourceIndexCtrl", ['$rootScope', '$scope', '$localStorage', '$
 		
   	$scope.deleteResource =  function(resourceId){
 			Resource.delete({id: resourceId});
-			$scope.resources = Resource.query({parent_id: $localStorage.current_directory});
+			$scope.resources = Resource.query({parent_id: $localStorage.current_directory.id});
 		}
 		
 		$scope.createNewResource = function(){
@@ -44,7 +44,7 @@ app.controller("ResourceIndexCtrl", ['$rootScope', '$scope', '$localStorage', '$
 					data: {	comment: comment, 
 									resource: $scope.resource, 
 									idea_id: $scope.$storage.current_idea, 
-									directory_id: $scope.$storage.current_directory},
+									directory_id: $scope.$storage.current_directory.id},
 					file: file, // or list of files ($files) for html5 only
 					//fileName: 'doc.jpg' or ['1.jpg', '2.jpg', ...] // to modify the name of the file(s)
 					// customize file formData name ('Content-Disposition'), server side file variable name. 
@@ -56,7 +56,7 @@ app.controller("ResourceIndexCtrl", ['$rootScope', '$scope', '$localStorage', '$
 				}).success(function(data, status, headers, config) {
 					// file is uploaded successfully
 					console.log("UPLOAD SUCCESSFUL");
-					$scope.resources = Resource.query({parent_id: $scope.$storage.current_directory});
+					$scope.resources = Resource.query({parent_id: $scope.$storage.current_directory.id});
 				});
 				//.error(...)
 				//.then(success, error, progress); 
@@ -66,8 +66,8 @@ app.controller("ResourceIndexCtrl", ['$rootScope', '$scope', '$localStorage', '$
 		};
 }]);
 
-app.controller('ResourceDetailCtrl', ['$rootScope', '$scope', '$routeParams', 'Resource', '$location',
-	function($rootScope, $scope, $routeParams, Resource, $location){
+app.controller('ResourceDetailCtrl', ['$rootScope', '$scope', '$localStorage', '$routeParams', 'Resource', '$location',
+	function($rootScope, $scope, $localStorage, $routeParams, Resource, $location){
 		//$scope.resource = Resource.show({id: $routeParams.id});
 		
 		$scope.aceLoaded = function(_editor) {
@@ -86,8 +86,8 @@ app.controller('ResourceDetailCtrl', ['$rootScope', '$scope', '$routeParams', 'R
 			$scope.resource.then(function onSuccess(response) {
 					// access data from 'response'
 					$scope.resource = response;
-					console.log("RESPONSE :: " + $scope.resource.filename);
-					$scope.editor.setValue(response.filename);
+					console.log("RESPONSE :: " + $localStorage.current_directory.id);
+					$scope.editor.setValue($localStorage.current_directory.path + "/" + response.filename);
 				},
 				function onFail(response) {
 						// handle failure

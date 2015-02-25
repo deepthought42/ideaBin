@@ -2,11 +2,17 @@ var app = angular.module('ideaBin.directoryControllers', ['ngStorage']);
 
 app.controller("DirectoryIndexCtrl", ['$scope', '$rootScope', '$localStorage', '$routeParams', 'Directory', '$location',
 	function($scope, $rootScope, $localStorage, $routeParams, Directory, $location) {
-		//$scope.directories = Directory.query({parent_id: $scope.$storage.current_directory});
-	
+
 		$scope.showDirectories = function(dir_id){
 			$scope.current_directory = Directory.show({id: dir_id}).$promise;
-			$scope.$storage.current_directory = dir_id;
+			$scope.current_directory.then(function onSuccess(response) {
+				// access data from 'response'
+				$scope.$storage.current_directory = response;
+				$scope.directories = Directory.query({parent_id: response.id});
+			},
+			function onFail(response) {
+					// handle failure
+			});
 			$scope.directories = Directory.query({parent_id: dir_id});
 		}		
 	
@@ -36,17 +42,15 @@ app.controller("DirectoryIndexCtrl", ['$scope', '$rootScope', '$localStorage', '
 		var curr_idea = $scope.$storage.current_idea;
 		
 		if($scope.$storage.current_directory && $scope.$storage.current_directory.length > 0){
-			$scope.showDirectories($scope.$storage.current_directory);
+			$scope.showDirectories($scope.$storage.current_directory.id);
 		}
 		else{			
 			$scope.current_directory = Directory.show({id: $scope.$storage.current_idea}).$promise;
 				//var dir = 173;
 				$scope.current_directory.then(function onSuccess(response) {
 					// access data from 'response'
-					console.log("RESPONSE :: " + response.id);
-					$scope.$storage.current_directory = response.id;
-					console.log("RESPONSE :: " + $scope.$storage.current_directory);
-					$scope.directories = Directory.query({parent_id: $scope.$storage.current_directory});
+					$scope.$storage.current_directory = response;
+					$scope.directories = Directory.query({parent_id: $scope.$storage.current_directory.id});
 				},
 				function onFail(response) {
 						// handle failure
@@ -78,13 +82,11 @@ app.controller('DirectoryCreationCtrl', ['$scope', '$rootScope', '$localStorage'
 		$scope.createNewDirectory = function(){
 			$scope.directoryForm.idea_id = $scope.$storage.current_idea;
 			if($scope.$storage.current_directory){
-				$scope.directoryForm.parent_id = $scope.$storage.current_directory;
+				$scope.directoryForm.parent_id = $scope.$storage.current_directory.id;
 			}
 			console.log($scope.directoryForm)
 			$scope.directory = Directory.create($scope.directoryForm);
-			//$scope.directories = Directory.query({parent_id: $scope.$storage.current_directory});
 			$rootScope.$broadcast("addDirectory", $scope.directory )
-			//$location.path('/directories');
 		}
 	}
 ]);
