@@ -79,12 +79,14 @@ app.controller('ResourceDetailCtrl', ['$rootScope', '$scope', '$localStorage', '
 		};
 		
 		$rootScope.$on('editResource', function(event, data) { 
-			console.log(data); 
+			console.log("RESOURCE DATA " + data.$promise); 
+
 			$scope.resource = data.$promise;
+			$localStorage.resource = data;
 			$scope.resource.then(function onSuccess(response) {
 					// access data from 'response'
 					$scope.resource = response;
-					console.log(response);
+					console.log("DATA RESPONSE : " + response);
 					//$localStorage.current_directory.path + "/" + response.filename
 					$scope.editor.setValue($scope.resource);
 				},
