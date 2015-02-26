@@ -93,6 +93,16 @@ class ResourcesController < ApplicationController
     end
   end
 	
+	#GET /resourceFile/1.json
+	def contents
+		@resource = Resource.find(params[:id])
+		@directory = Directory.find(@resource.directory_id)
+		
+		if(@resource)
+			render file: "#{@directory.path}/#{@resource.filename}"
+		end
+	end
+	
 	private
 		def set_resource
       @resource = Resource.find(params[:id])

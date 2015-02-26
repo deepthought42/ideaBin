@@ -1,7 +1,7 @@
 var app = angular.module('ideaBin.resourceControllers', []);
 
-app.controller("ResourceIndexCtrl", ['$rootScope', '$scope', '$localStorage', '$rootScope', '$routeParams', 'Resource', '$location', '$upload',
-	function($rootScope, $scope, $localStorage, $rootScope, $routeParams, Resource, $location, $upload) {
+app.controller("ResourceIndexCtrl", ['$rootScope', '$scope', '$localStorage', '$rootScope', '$routeParams', 'Resource', 'ResourceContent', '$location', '$upload',
+	function($rootScope, $scope, $localStorage, $rootScope, $routeParams, Resource, ResourceContent, $location, $upload) {
 		$scope.$storage = $localStorage;
 		$scope.resources = Resource.query({parent_id: $localStorage.current_directory.id});
 		
@@ -24,10 +24,8 @@ app.controller("ResourceIndexCtrl", ['$rootScope', '$scope', '$localStorage', '$
 		};
 		
 		$scope.editResource = function (resourceId) {
-			console.log("RESOURCE BEING SHOWN");
-			$scope.resource = Resource.show({id: resourceId});
+			$scope.resource = ResourceContent.show({id: resourceId});
 			$rootScope.$broadcast("editResource", $scope.resource );
-			//location.path('/resources/'+resourceId);
 		}
 		
 		$scope.upload = function(files) {			
@@ -86,11 +84,12 @@ app.controller('ResourceDetailCtrl', ['$rootScope', '$scope', '$localStorage', '
 			$scope.resource.then(function onSuccess(response) {
 					// access data from 'response'
 					$scope.resource = response;
-					console.log("RESPONSE :: " + $localStorage.current_directory.id);
-					$scope.editor.setValue($localStorage.current_directory.path + "/" + response.filename);
+					console.log("RESPONSE :: " + response);
+					//$localStorage.current_directory.path + "/" + response.filename
+					$scope.editor.setValue(response);
 				},
 				function onFail(response) {
-						// handle failure
+						alert("FAILED TO LOAD RESOURCE CONTENTS FOR EDITING");
 				});
 		});
 		

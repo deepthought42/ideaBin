@@ -3,12 +3,15 @@ IdeaBin::Application.routes.draw do
 	resources :application
   root 'application#index'
   #get '*path' => 'application#index'
-	get '/topFolder' => 'resource#topFolder'
   resources :directories
   resources :uploads
-  resources :resources
+  resources :resources do
+		member do
+			get 'contents'
+		end
+	end
   resources :ideas
-
+	
   devise_for :users
 
 
