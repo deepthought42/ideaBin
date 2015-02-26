@@ -84,9 +84,9 @@ app.controller('ResourceDetailCtrl', ['$rootScope', '$scope', '$localStorage', '
 			$scope.resource.then(function onSuccess(response) {
 					// access data from 'response'
 					$scope.resource = response;
-					console.log("RESPONSE :: " + response);
+					console.log(response);
 					//$localStorage.current_directory.path + "/" + response.filename
-					$scope.editor.setValue(response);
+					$scope.editor.setValue($scope.resource);
 				},
 				function onFail(response) {
 						alert("FAILED TO LOAD RESOURCE CONTENTS FOR EDITING");

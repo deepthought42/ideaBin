@@ -99,7 +99,7 @@ class ResourcesController < ApplicationController
 		@directory = Directory.find(@resource.directory_id)
 		
 		if(@resource)
-			render file: "#{@directory.path}/#{@resource.filename}"
+			render file: "#{@directory.path}/#{@directory.name}/#{@resource.filename}"
 		end
 	end
 	
