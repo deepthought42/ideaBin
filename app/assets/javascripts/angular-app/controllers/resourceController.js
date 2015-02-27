@@ -1,7 +1,7 @@
 var app = angular.module('ideaBin.resourceControllers', []);
 
-app.controller("ResourceIndexCtrl", ['$rootScope', '$scope', '$localStorage', '$rootScope', '$routeParams', 'Resource', 'ResourceContent', '$location', '$upload',
-	function($rootScope, $scope, $localStorage, $rootScope, $routeParams, Resource, ResourceContent, $location, $upload) {
+app.controller("ResourceIndexCtrl", ['$rootScope', '$scope', '$localStorage', '$rootScope', '$routeParams', 'Resource', '$location', '$upload',
+	function($rootScope, $scope, $localStorage, $rootScope, $routeParams, Resource, $location, $upload) {
 		$scope.$storage = $localStorage;
 		$scope.resources = Resource.query({parent_id: $localStorage.current_directory.id});
 		
@@ -24,8 +24,7 @@ app.controller("ResourceIndexCtrl", ['$rootScope', '$scope', '$localStorage', '$
 		};
 		
 		$scope.editResource = function (resourceId) {
-			$scope.resource = ResourceContent.show({id: resourceId});
-			$rootScope.$broadcast("editResource", $scope.resource );
+			$rootScope.$broadcast("editResource", resourceId );
 		}
 		
 		$scope.upload = function(files) {			
@@ -64,8 +63,8 @@ app.controller("ResourceIndexCtrl", ['$rootScope', '$scope', '$localStorage', '$
 		};
 }]);
 
-app.controller('ResourceDetailCtrl', ['$rootScope', '$scope', '$localStorage', '$routeParams', 'Resource', '$location',
-	function($rootScope, $scope, $localStorage, $routeParams, Resource, $location){
+app.controller('ResourceDetailCtrl', ['$rootScope', '$scope', '$localStorage', '$routeParams', 'Resource', '$http', '$location',
+	function($rootScope, $scope, $localStorage, $routeParams, Resource, $http, $location){
 		//$scope.resource = Resource.show({id: $routeParams.id});
 		
 		$scope.aceLoaded = function(_editor) {
@@ -78,21 +77,16 @@ app.controller('ResourceDetailCtrl', ['$rootScope', '$scope', '$localStorage', '
 			//
 		};
 		
-		$rootScope.$on('editResource', function(event, data) { 
-			console.log("RESOURCE DATA " + data.$promise); 
-
-			$scope.resource = data.$promise;
-			$localStorage.resource = data;
-			$scope.resource.then(function onSuccess(response) {
-					// access data from 'response'
-					$scope.resource = response;
-					console.log("DATA RESPONSE : " + response);
-					//$localStorage.current_directory.path + "/" + response.filename
-					$scope.editor.setValue($scope.resource);
-				},
-				function onFail(response) {
-						alert("FAILED TO LOAD RESOURCE CONTENTS FOR EDITING");
-				});
+		$rootScope.$on('editResource', function(event, resourceId) { 
+			console.log("RESOURCE DATA " + resourceId); 
+			$http({method: "GET", url: "/resources/" + resourceId + "/contents"})
+						.success(function(data){ 
+								alert("SUCCESSFULLY RETRIEVED RESOURCE CONTENTS " + data);
+								$scope.editor.setValue(data);
+						})
+						.fail(function(data){
+							alert("Failed to load resource!");
+						});
 		});
 		
 		$scope.updateResource = function (){
