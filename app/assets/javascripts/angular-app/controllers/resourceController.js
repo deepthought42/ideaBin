@@ -80,13 +80,12 @@ app.controller('ResourceDetailCtrl', ['$rootScope', '$scope', '$localStorage', '
 		$rootScope.$on('editResource', function(event, resourceId) { 
 			console.log("RESOURCE DATA " + resourceId); 
 			$http({method: "GET", url: "/resources/" + resourceId + "/contents"})
-						.success(function(data){ 
-								alert("SUCCESSFULLY RETRIEVED RESOURCE CONTENTS " + data);
-								$scope.editor.setValue(data);
-						})
-						.fail(function(data){
-							alert("Failed to load resource!");
-						});
+				.success(function(data){ 
+						$scope.editor.setValue(data);
+				})
+				.error(function(data){
+					alert("Failed to load resource!");
+				});
 		});
 		
 		$scope.updateResource = function (){
