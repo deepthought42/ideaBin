@@ -33,11 +33,11 @@ app.controller('IdeaDetailCtrl', ['$scope', '$localStorage', '$routeParams', 'Id
 		
 		$scope.uploadFile = function(){
 			console.log("COVER IMAGE :: " + $scope.cover_img);
-			//var ideaFormVals = angular.toJson($scope.idea);
+			var ideaFormVals = angular.toJson($scope.idea);
 			$scope.upload = $upload.upload({
 				url: '/ideas/' + $scope.idea.id + '.json',
 				method: 'PUT',
-				data: {},
+				data: {idea: ideaFormVals},
 				file: $scope.cover_img,
 				fileFormDataName: 'cover_img'
 			}).
