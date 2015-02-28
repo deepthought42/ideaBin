@@ -37,6 +37,21 @@ app.controller('IdeaDetailCtrl', ['$scope', '$localStorage', '$routeParams', 'Id
 			});
 		}
 		
+		$scope.uploadFile = function(ideaId){
+			$scope.upload = $upload.upload({
+				url: '/ideas/'+ideaId+'.json',
+				method: 'POST',
+				data: {},
+				file: $scope.cover_img,
+        fileFormDataName: 'cover_img'
+			}).
+			progress(function(evt) {
+				console.log('progress: ' + parseInt(100.0 * evt.loaded / evt.total));
+			}).success(function(data, status, headers, config) {
+				console.log('file ' + config.file.name + 'is uploaded successfully. Response: ' + data);
+			});
+		}
+		
 		$scope.cancel = function(){
 			$location.path('/ideas');
 		}

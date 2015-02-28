@@ -16,4 +16,6 @@
 /tmp
 
 #Ignore everything added to the public/data folder
-/public/data/
+/public/data
+/public/data/repositories
+/public/images/cover_images
