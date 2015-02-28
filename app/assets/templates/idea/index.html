@@ -9,14 +9,9 @@
           <div class="col-md-3 col-sm-4 col-xs-12 item text-center" ng-repeat="idea in ideas">
     				<img ng-src="/images/cover_images/{{idea.cover_img_file_name}}" />
             <div class="btn-group" role="group" aria-label="...">
-              <button type="button" class="btn btn-default" >
-    							 <a ng-click="editIdea(idea.id)" class='fa fa-pencil-square-o' ></a>
+              <button type="button" class="btn btn-default fa fa-pencil-square-o" ng-click="editIdea(idea.id)">
               </button>
-              <button type="button" class="btn btn-default">
-    							<a ng-click="deleteIdea(idea.id)" class='fa fa-times' ></a>
-              </button>
-              <button type="button" class="btn btn-default">
-                  <i class="fa fa-share-alt"></i>
+              <button type="button" class="btn btn-default fa fa-times" ng-click="deleteIdea(idea.id)">
               </button>
             </div>
             <div class="overlay">
