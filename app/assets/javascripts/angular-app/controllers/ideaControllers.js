@@ -26,29 +26,32 @@ app.controller("IdeaIndexCtrl", ['$scope', '$localStorage', 'Idea', '$location',
 		}
 }]);
 
-app.controller('IdeaDetailCtrl', ['$scope', '$localStorage', '$routeParams', 'Idea', '$location',
-	function($scope, $localStorage, $routeParams, Idea, $location){
+app.controller('IdeaDetailCtrl', ['$scope', '$localStorage', '$routeParams', 'Idea', '$location', '$upload',
+	function($scope, $localStorage, $routeParams, Idea, $location, $upload){
 		$scope.$storage = $localStorage;
 		$scope.idea = Idea.show({id: $routeParams.id});
 		
-		$scope.updateIdea = function (ideaId){
-			Idea.update($scope.idea,{id: ideaId}, function(){
-					$location.path('/ideas');
-			});
-		}
-		
-		$scope.uploadFile = function(ideaId){
+		$scope.uploadFile = function(){
+			console.log("COVER IMAGE :: " + $scope.cover_img);
+			//var ideaFormVals = angular.toJson($scope.idea);
 			$scope.upload = $upload.upload({
-				url: '/ideas/'+ideaId+'.json',
-				method: 'POST',
+				url: '/ideas/' + $scope.idea.id + '.json',
+				method: 'PUT',
 				data: {},
 				file: $scope.cover_img,
-        fileFormDataName: 'cover_img'
+				fileFormDataName: 'cover_img'
 			}).
 			progress(function(evt) {
 				console.log('progress: ' + parseInt(100.0 * evt.loaded / evt.total));
 			}).success(function(data, status, headers, config) {
 				console.log('file ' + config.file.name + 'is uploaded successfully. Response: ' + data);
+			});
+		}
+		
+		$scope.updateIdea = function (ideaId){
+			$scope.uploadFile();
+			Idea.update($scope.idea,{id: ideaId}, function(){
+					$location.path('/ideas');
 			});
 		}
 		

@@ -92,11 +92,11 @@ class IdeasController < ApplicationController
     repo_path = "#{Rails.root}/public/data/repository/#{current_user.id}/#{@idea.name}"
 		cover_img_path = "#{Rails.root}/public/images/cover_images/"
 		
-		if params[:idea][:cover_img]
-				@idea.cover_img = params[:idea][:cover_img].original_filename
+		if params[:cover_img]
+				@idea.cover_img = params[:cover_img]
 		end
 		
-		DataFile.save(params[:idea][:cover_img], cover_img_path)
+		DataFile.save(params[:cover_img], cover_img_path)
 
     Dir.chdir(repo_path)
     @git = Git.init

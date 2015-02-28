@@ -32,10 +32,10 @@
 					</h6>
 				</div>
 				<div class="row" >
-					<form novalidate>
+					<form enctype="multipart/form-data" novalidate>
 						<div class="field">			
 							<img ng-src="/images/cover_images/{{idea.cover_img_file_name}}" />
-							<input type="file" ng-file-select uploader="uploadFile()" ng-model="cover_img" />
+							<input type="file" ng-file-select uploader="uploadFile" ng-model="cover_img" />
 						</div>
 						<div class="field">
 							<label for="name" >Name</label>
