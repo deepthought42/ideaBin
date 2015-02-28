@@ -2,14 +2,12 @@
 	<div class="row">
 		<div class="col-md-12">
 			<div class="row">
-				<div class="col-md-3" >
+				<div class="col-md-4" >
 					<div ng-include="'directory/new.html'" ></div>
 					<div ng-include="'directory/index.html'" ></div>
-				</div>
-				<div class="col-md-5" >
 					<div ng-include="'resource/index.html'" ></div>
 				</div>
-				<div class="col-md-4" id="ace-wrapper" ng-controller="ResourceDetailCtrl">
+				<div class="col-md-8" id="ace-wrapper" ng-controller="ResourceDetailCtrl">
 					<div ui-ace="{
 							onLoad : aceLoaded,
 							maxLines: 5,
