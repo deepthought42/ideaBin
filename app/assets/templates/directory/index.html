@@ -12,18 +12,16 @@
 		<tbody>
 				<tr ng-repeat="directory in directories">
 					<td>
-						<button type="button" class="btn btn-default">
-							<a ng-click="showDirectories(directory.id)" class='' >{{directory.name}}</a>
+						<button type="button" class="btn btn-default" ng-click="showDirectories(directory.id)">
+							{{directory.name}}
 						</button>
 					</td>
 					<td>
-						<button>
-							<a ng-click="editDirectory(directory.id)" class='fa fa-pencil-square-o' ></a>
+						<button ng-click="editDirectory(directory.id)" class="fa fa-pencil-square-o">
 						</button>
 					</td>
 					<td>
-						<button>
-							<a ng-click="deleteDirectory(directory.id)" class='fa fa-x' ></a>
+						<button ng-click="deleteDirectory(directory.id)" class='fa fa-x'>
 						</button>
 					</td>
 				</tr>
