@@ -25,7 +25,7 @@ app.controller("IdeaIndexCtrl", ['$scope', '$localStorage', 'Idea', '$location',
 					// handle failure
 			});
 
-			$location.path('/ideas/'+ideaId)
+			$location.path('/ideas/'+ideaId);
 		}
 		
 		$scope.newIdea = function(){
@@ -33,11 +33,12 @@ app.controller("IdeaIndexCtrl", ['$scope', '$localStorage', 'Idea', '$location',
 		}
 }]);
 
-app.controller('IdeaDetailCtrl', ['$scope', '$localStorage', '$routeParams', 'Idea', '$location', '$upload',
-	function($scope, $localStorage, $routeParams, Idea, $location, $upload){
+app.controller('IdeaDetailCtrl', ['$scope', '$localStorage', '$routeParams', 'Idea', '$location', '$upload', '$rootScope',
+	function($scope, $localStorage, $routeParams, Idea, $location, $upload, $rootScope){
 		$scope.$storage = $localStorage;
 		$scope.idea = Idea.show({id: $routeParams.id});
-		
+		$rootScope.ideaEditPanelVisible = false;
+
 		$scope.uploadFile = function(){
 			console.log("COVER IMAGE :: " + $scope.cover_img);
 			var ideaFormVals = angular.toJson($scope.idea);
@@ -60,6 +61,14 @@ app.controller('IdeaDetailCtrl', ['$scope', '$localStorage', '$routeParams', 'Id
 			Idea.update($scope.idea,{id: ideaId}, function(){
 					$location.path('/ideas');
 			});
+		}
+		
+		$scope.showIdeaEditPanel = function() {
+			$rootScope.ideaEditPanelVisible = true;
+		}
+		
+		$scope.hideIdeaEditPanel = function() {
+			$rootScope.ideaEditPanelVisible = false;
 		}
 		
 		$scope.cancel = function(){

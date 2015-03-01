@@ -1,6 +1,6 @@
 <div class="container" >
-	<div class="col-md-2">
-		<button class="fa fa-lightbulb-o"></button>
+	<div class="col-md-2" ng-controller="IdeaDetailCtrl">
+		<button class="fa fa-lightbulb-o" ng-click="showIdeaEditPanel()"></button>
 	</div>
 	<div class="col-md-10">
 		<div class="row">
@@ -17,7 +17,7 @@
 				</div>
 			</div>
 		</div>
-		<div class="col-md-12" display="hidden" ng-controller="IdeaDetailCtrl">
+		<div class="col-md-12" display="hidden" ng-controller="IdeaDetailCtrl" ng-show="ideaEditPanelVisible">
 			<div class="row" id="divNewIdea">
 				<h6>
 					Create an idea, then share it with the world.
