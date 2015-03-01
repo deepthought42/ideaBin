@@ -42,8 +42,7 @@ app.controller("DirectoryIndexCtrl", ['$scope', '$rootScope', '$localStorage', '
 							console.log("DATA :: " + data);
 							$scope.$storage.current_directory = data;
 							$scope.showDirectories($scope.$storage.current_directory.id);
-							$rootScope.$broadcast('loadResources', $scope.$storage.current_directory.i);
-
+							$rootScope.$broadcast('loadResources', $scope.$storage.current_directory.id);
 					})
 					.error(function(data){
 						alert("Failed to load Directory!");

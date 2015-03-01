@@ -7,18 +7,8 @@
 					<div ng-include="'directory/index.html'" ></div>
 					<div ng-include="'resource/index.html'" ></div>
 				</div>
-				<div class="col-md-8" id="ace-wrapper" ng-controller="ResourceDetailCtrl">
-					<div ui-ace="{
-							onLoad : aceLoaded,
-							maxLines: 5,
-							require: ['ace/ext/language_tools'],
-							advanced: {
-									enableSnippets: true,
-									enableBasicAutocompletion: true,
-									enableLiveAutocompletion: true
-							}
-						}">
-					</div>
+				<div class="col-md-8" >
+					<div ng-include="'resource/edit.html'" ></div>
 				</div>
 			</div>
 		</div>

@@ -1,9 +1,16 @@
-<div ng-controller="ResourceDetailCtrl">
-	<form>
-		<input ng-model="resource.comment">
-		</div>
+<div id="ace-wrapper" ng-controller="ResourceDetailCtrl">
+	<div ui-ace="{
+			onLoad : aceLoaded,
+			maxLines: 5,
+			require: ['ace/ext/language_tools'],
+			advanced: {
+					enableSnippets: true,
+					enableBasicAutocompletion: true,
+					enableLiveAutocompletion: true
+			}
+		}">
+	</div>
 		<div class="actions">
 			<button ng-click="updateResource()">Save</button>
 		</div>
-	</form>
 </div>

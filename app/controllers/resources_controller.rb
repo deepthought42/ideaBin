@@ -69,14 +69,13 @@ class ResourcesController < ApplicationController
     @resource = Resource.find(params[:id])
 		@parentDir = Directory.find(@resource.directory_id)
 		
-		directory = @directory.path = "#{@parentDir.path}"
+		file_path = "#{@parentDir.path}/#{@resource.filename}"
 		#write params[:text] to resource file
+		
     respond_to do |format|
-      if @resource.update_attributes(params[:resource])
-        format.html { redirect_to @resource, notice: 'Resource was successfully updated.' }
+      if File.open(file_path, 'w') {|f| f.write(params[:content]) }
         format.json { head :no_content }
       else
-        format.html { render action: "edit" }
         format.json { render json: @resource.errors, status: :unprocessable_entity }
       end
     end
