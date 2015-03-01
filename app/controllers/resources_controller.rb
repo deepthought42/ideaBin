@@ -74,6 +74,11 @@ class ResourcesController < ApplicationController
 		
     respond_to do |format|
       if File.open(file_path, 'w') {|f| f.write(params[:content]) }
+				Dir.chdir(@parentDir.path)
+				@git = Git.init()
+				@git.add(:all => true)
+				@git.commit(params[:comment])
+				
         format.json { head :no_content }
       else
         format.json { render json: @resource.errors, status: :unprocessable_entity }

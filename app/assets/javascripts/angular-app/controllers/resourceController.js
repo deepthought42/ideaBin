@@ -81,7 +81,6 @@ app.controller('ResourceDetailCtrl', ['$rootScope', '$scope', '$localStorage', '
 		};
 		
 		$rootScope.$on('editResource', function(event, resourceId) { 
-			console.log("RESOURCE DATA " + resourceId); 
 			$http({method: "GET", url: "/resources/" + resourceId + "/contents"})
 				.success(function(data){ 
 						$scope.resource = Resource.show({id: resourceId});
@@ -96,6 +95,7 @@ app.controller('ResourceDetailCtrl', ['$rootScope', '$scope', '$localStorage', '
 		$scope.updateResource = function (){
 			var content = $scope.editor.getValue();
 			$scope.resource.content = content;
+			$scope.resource.comment = prompt("Please describe the changes made");
 			Resource.update($scope.resource);
 		}
 
