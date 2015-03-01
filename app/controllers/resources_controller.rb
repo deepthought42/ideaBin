@@ -44,14 +44,10 @@ class ResourcesController < ApplicationController
   # POST /resources.json
   def create
     @parentDir = Directory.find(params[:directory_id])
-	
-		directory = "#{@parentDir.path}"
-    unless File.exists?(directory)
-      Dir.mkdir(directory)
-    end
-    post = DataFile.save(params['file'], directory)
+		
+    post = DataFile.save(params['file'], @parentDir.path)
     
-    Dir.chdir(directory)
+    Dir.chdir(@parentDir.path)
 		@git = Git.init()
 		@git.add(:all => true)
 		@git.commit(params[:comment])
@@ -91,9 +87,13 @@ class ResourcesController < ApplicationController
   def destroy
     @resource = Resource.find(params[:id])
     @resource.destroy
-
+		
+		@directory = Directory.find(@resource.directory_id)
+		image_path = "#{@directory.path}/#{@resource.filename}"
+		FileUtils.rm(image_path)
+		
+		#REMOVE FILE FROM FILE SYSTEM AND DO A GIT commit
     respond_to do |format|
-      format.html { redirect_to resources_url }
       format.json { head :no_content }
     end
   end

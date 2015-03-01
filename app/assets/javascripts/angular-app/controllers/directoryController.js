@@ -7,13 +7,12 @@ app.controller("DirectoryIndexCtrl", ['$scope', '$rootScope', '$localStorage', '
 		var curr_idea = $scope.$storage.current_idea;
 		
 		$scope.showDirectories = function(dir_id){
-			console.log("GETTING RESOURCES FOR directory :: " + dir_id);
 			$scope.current_directory = Directory.show({id: dir_id}).$promise;
 			$scope.current_directory.then(function onSuccess(response) {
 				// access data from 'response'
-				console.log("DIRECTORY RESPONSE ID :: " + response.id);
 				$scope.$storage.current_directory = response;
 				$scope.directories = Directory.query({parent_id: response.id});
+				$rootScope.$broadcast('loadResources', response.id);
 			},
 			function onFail(response) {
 					// handle failure
@@ -43,6 +42,8 @@ app.controller("DirectoryIndexCtrl", ['$scope', '$rootScope', '$localStorage', '
 							console.log("DATA :: " + data);
 							$scope.$storage.current_directory = data;
 							$scope.showDirectories($scope.$storage.current_directory.id);
+							$rootScope.$broadcast('loadResources', $scope.$storage.current_directory.i);
+
 					})
 					.error(function(data){
 						alert("Failed to load Directory!");

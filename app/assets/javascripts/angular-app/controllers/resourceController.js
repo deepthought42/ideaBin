@@ -3,7 +3,11 @@ var app = angular.module('ideaBin.resourceControllers', []);
 app.controller("ResourceIndexCtrl", ['$rootScope', '$scope', '$localStorage', '$rootScope', '$routeParams', 'Resource', '$location', '$upload',
 	function($rootScope, $scope, $localStorage, $rootScope, $routeParams, Resource, $location, $upload) {
 		$scope.$storage = $localStorage;
-		$scope.resources = Resource.query({directory_id: $localStorage.current_directory.id});
+		
+		//move to event
+		$rootScope.$on('loadResources', function(event, directoryId){
+			$scope.resources = Resource.query({directory_id: directoryId});
+		});
 		
 		$scope.$watch('files', function () {
         $scope.upload($scope.files);
