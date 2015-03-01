@@ -1,44 +1,49 @@
 <div class="container" >
-	<div class="row">
-		<div class="col-md-12">
-			<div class="row">
-				<div class="col-md-4" >
-					<div ng-include="'directory/new.html'" ></div>
-					<div ng-include="'directory/index.html'" ></div>
-					<div ng-include="'resource/index.html'" ></div>
-				</div>
-				<div class="col-md-8" >
-					<div ng-include="'resource/edit.html'" ></div>
+	<div class="col-md-2">
+		<button class="fa fa-lightbulb-o"></button>
+	</div>
+	<div class="col-md-10">
+		<div class="row">
+			<div class="col-md-12">
+				<div class="row">
+					<div class="col-md-4" >
+						<div ng-include="'directory/new.html'" ></div>
+						<div ng-include="'directory/index.html'" ></div>
+						<div ng-include="'resource/index.html'" ></div>
+					</div>
+					<div class="col-md-8" >
+						<div ng-include="'resource/edit.html'" ></div>
+					</div>
 				</div>
 			</div>
 		</div>
-	</div>
-	<div class="col-md-12" display="hidden" ng-controller="IdeaDetailCtrl">
-				<div class="row" id="divNewIdea">
-					<h6>
-						Create an idea, then share it with the world.
-					</h6>
-				</div>
-				<div class="row" >
-					<form enctype="multipart/form-data" novalidate>
-						<div class="field">			
-							<img ng-src="/images/cover_images/{{idea.cover_img_file_name}}" />
-							<input type="file" ng-file-select uploader="uploadFile" ng-model="cover_img" />
-						</div>
-						<div class="field">
-							<label for="name" >Name</label>
-							<br />
-							<input type="text" name="idea[name]" ng-model="idea.name" id="name"/>
-						</div>
-						<div class="field">
-							<label for="description" >Description</label>
-							<br />
-							<input type="text" name="idea[description]" ng-model="idea.description" id="description"/>
-						</div>
-						<div class="actions">
-							<button class="btn btn-default" ng-click="updateIdea(idea)">Save</button>      
-						</div>
-					</form>
-				</div>
+		<div class="col-md-12" display="hidden" ng-controller="IdeaDetailCtrl">
+			<div class="row" id="divNewIdea">
+				<h6>
+					Create an idea, then share it with the world.
+				</h6>
 			</div>
+			<div class="row" >
+				<form enctype="multipart/form-data" novalidate>
+					<div class="field">			
+						<img ng-src="/images/cover_images/{{idea.cover_img_file_name}}" />
+						<input type="file" ng-file-select uploader="uploadFile" ng-model="cover_img" />
+					</div>
+					<div class="field">
+						<label for="name" >Name</label>
+						<br />
+						<input type="text" name="idea[name]" ng-model="idea.name" id="name"/>
+					</div>
+					<div class="field">
+						<label for="description" >Description</label>
+						<br />
+						<input type="text" name="idea[description]" ng-model="idea.description" id="description"/>
+					</div>
+					<div class="actions">
+						<button class="btn btn-default" ng-click="updateIdea(idea)">Save</button>      
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
 </div>
