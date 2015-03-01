@@ -60,11 +60,10 @@ class IdeasController < ApplicationController
 		
     @idea.user_id = current_user.id
     directory = "#{Rails.root}/public/images/cover_images/"
-		ideaName = ActiveSupport::JSON.decode(params[:idea])
 		@idea.cover_img = params[:cover_img]
 
 		DataFile.save(params[:cover_img], directory)
-		repo_path = "#{Rails.root}/public/data/repository/#{current_user.id}" 
+		repo_path = "#{Rails.root}/public/data/repository/#{current_user.id}/#{@idea.name}" 
 		unless File.exists?(repo_path)
 			Dir.mkdir(repo_path)
 		end
@@ -88,16 +87,16 @@ class IdeasController < ApplicationController
   # PUT /ideas/1.json
   def update
     @idea = Idea.find(params[:id])
+		@idea.name = params[:name]
 		@idea.description = params[:description]
     repo_path = "#{Rails.root}/public/data/repository/#{current_user.id}/#{@idea.name}"
 		cover_img_path = "#{Rails.root}/public/images/cover_images/"
 		
 		if params[:cover_img]
 				@idea.cover_img = params[:cover_img]
+				DataFile.save(params[:cover_img], cover_img_path)
 		end
 		
-		DataFile.save(params[:cover_img], cover_img_path)
-
     Dir.chdir(repo_path)
     @git = Git.init
     @gitcommit = ""
@@ -108,7 +107,7 @@ class IdeasController < ApplicationController
     end
 
 	
-    if @idea.update_attributes(params[:idea])
+    if @idea.save
 			respond_with(@idea)
 		else
 			puts "THERE WAS AN ISSUE UPDATING"

@@ -1,6 +1,6 @@
 class DirectoriesController < ApplicationController
 	before_filter :authenticate_user!
-	before_action :set_directory, except: [:show, :new, :create, :index]
+	#before_action :set_directory, except: [:show, :new, :create, :index]
 	respond_to :json
 	
 	# GET /directories
@@ -13,8 +13,13 @@ class DirectoriesController < ApplicationController
     respond_with(@directories)
   end
 
-  def show
+	def topDir
 		@directory = Directory.where(idea_id: params[:id], is_top: true).first
+		respond_with(@directory)
+  end
+	
+  def show
+		@directory = Directory.find(params[:id])
 		respond_with(@directory)
   end
 
@@ -28,7 +33,7 @@ class DirectoriesController < ApplicationController
 
   def create
 		@idea = Idea.find(params[:idea_id])
-		@parentDir = Directory.find(directory_params[:parent_id])
+		@parentDir = Directory.find(params[:parent_id])
 		
     @directory = Directory.new(directory_params)
 		@directory.name = directory_params[:name]
@@ -36,14 +41,17 @@ class DirectoriesController < ApplicationController
 		
 		#needs to be altered to reflect infinite level depth of folder structure
 		@directory.path = "#{@parentDir.path}/#{@directory.name}"
-		#@directory.path = "#{Rails.root}/public/data/repository/#{current_user.id}/#{@idea.name}";
+
+		unless File.exists?(@directory.path)
+			Dir.mkdir(@directory.path)
+		end
 		
 		if(directory_params[:parent_id])
 			@directory.is_top = false
+			@directory.parent_id = directory_params[:parent_id]
 		else
 			@directory.is_top = true
 		end
-		@directory.parent_id = directory_params[:parent_id]
 		
 		flash[:notice] = "#{directory_params} : #{@directory.name}" if @directory.save
 		respond_with(@directory)

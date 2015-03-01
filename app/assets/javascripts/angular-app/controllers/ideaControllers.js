@@ -1,7 +1,7 @@
 var app = angular.module('ideaBin.ideaControllers', []);
 
-app.controller("IdeaIndexCtrl", ['$scope', '$localStorage', 'Idea', '$location',
-	function($scope, $localStorage, Idea, $location) {
+app.controller("IdeaIndexCtrl", ['$scope', '$localStorage', 'Idea', '$location', '$http',
+	function($scope, $localStorage, Idea, $location, $http) {
 		$scope.$storage = $localStorage;
 		$scope.ideas = Idea.query();
 		
@@ -17,7 +17,15 @@ app.controller("IdeaIndexCtrl", ['$scope', '$localStorage', 'Idea', '$location',
 		
 		$scope.editIdea = function (ideaId) {
 			$localStorage.current_idea  = ideaId
-
+			
+			$http({method: "GET", url: "/directories/" + ideaId + "/topDir.json"})
+				.success(function(data){ 
+						$scope.$storage.current_directory = data;
+				})
+				.error(function(data){
+					alert("Failed to load Directory!");
+				});
+				
 			$location.path('/ideas/'+ideaId)
 		}
 		

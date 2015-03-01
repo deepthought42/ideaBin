@@ -9,12 +9,3 @@ services.factory('Directory', function ($resource) {
 				delete: { method: 'DELETE'}
 			})
 });
-
-/*services.factory('DirectoryEvent', function($resource){
-	return {
-		broadcastNewDirectory : function(scope){
-			scope.$broadcast('DirectoryCreated', $resource);
-		}
-	}
-});
-*/

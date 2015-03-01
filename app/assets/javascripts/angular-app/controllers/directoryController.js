@@ -4,16 +4,17 @@ app.controller("DirectoryIndexCtrl", ['$scope', '$rootScope', '$localStorage', '
 	function($scope, $rootScope, $localStorage, $routeParams, Directory, $location) {
 
 		$scope.showDirectories = function(dir_id){
+			console.log("GETTING RESOURCES FOR directory :: " + dir_id);
 			$scope.current_directory = Directory.show({id: dir_id}).$promise;
 			$scope.current_directory.then(function onSuccess(response) {
 				// access data from 'response'
+				console.log("DIRECTORY RESPONSE ID :: " + response.id);
 				$scope.$storage.current_directory = response;
 				$scope.directories = Directory.query({parent_id: response.id});
 			},
 			function onFail(response) {
 					// handle failure
 			});
-			$scope.directories = Directory.query({parent_id: dir_id});
 		}		
 	
 		$scope.showCreatePanel = function(){
@@ -23,10 +24,6 @@ app.controller("DirectoryIndexCtrl", ['$scope', '$rootScope', '$localStorage', '
   	$scope.deleteDirectory =  function(directoryId){
 			Directory.delete({id: directoryId});
 			$scope.directories = Directory.query();
-		}
-		
-		$scope.editDirectory = function (directoryId) {
-			$location.path('/directories/'+directoryId);
 		}
 		
 		$scope.newDirectory = function(){
@@ -45,7 +42,7 @@ app.controller("DirectoryIndexCtrl", ['$scope', '$rootScope', '$localStorage', '
 			$scope.showDirectories($scope.$storage.current_directory.id);
 		}
 		else{			
-			$scope.current_directory = Directory.show({id: $scope.$storage.current_idea}).$promise;
+			$scope.current_directory = Directory.show({id: $scope.$storage.current_directory.id}).$promise;
 				//var dir = 173;
 				$scope.current_directory.then(function onSuccess(response) {
 					// access data from 'response'

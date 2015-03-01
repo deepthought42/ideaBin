@@ -1,12 +1,12 @@
 class ResourcesController < ApplicationController
-  #before_filter :authenticate_user!
+  before_filter :authenticate_user!
 	#before_action :set_resource, except: [:new, :create, :index]
 	respond_to :json
 	
   # GET /resources
   # GET /resources.json
   def index
-    @resources = Resource.where(directory_id: params[:parent_id])
+    @resources = Resource.where(directory_id: params[:directory_id])
     respond_with(@resources)
   end
 
@@ -38,12 +38,14 @@ class ResourcesController < ApplicationController
 		respond_with(@resource)
   end
 
+	#Takes directory id and resouce in.
+	#
   # POST /resources
   # POST /resources.json
   def create
-    @idea = Idea.find(params[:idea_id])
-
-    directory = "#{Rails.root}/public/data/repository/#{current_user.id}/#{@idea.name}"
+    @parentDir = Directory.find(params[:directory_id])
+	
+		directory = "#{@parentDir.path}"
     unless File.exists?(directory)
       Dir.mkdir(directory)
     end
@@ -69,7 +71,10 @@ class ResourcesController < ApplicationController
   # PUT /resources/1.json
   def update
     @resource = Resource.find(params[:id])
-
+		@parentDir = Directory.find(@resource.directory_id)
+		
+		directory = @directory.path = "#{@parentDir.path}"
+		#write params[:text] to resource file
     respond_to do |format|
       if @resource.update_attributes(params[:resource])
         format.html { redirect_to @resource, notice: 'Resource was successfully updated.' }
@@ -93,7 +98,7 @@ class ResourcesController < ApplicationController
     end
   end
 	
-	#GET /resourceFile/1.json
+	#GET /resources/1/contents.json
 	def contents
 		@resource = Resource.find(params[:id])
 		@directory = Directory.find(@resource.directory_id)

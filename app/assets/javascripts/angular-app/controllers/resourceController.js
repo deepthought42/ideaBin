@@ -3,7 +3,7 @@ var app = angular.module('ideaBin.resourceControllers', []);
 app.controller("ResourceIndexCtrl", ['$rootScope', '$scope', '$localStorage', '$rootScope', '$routeParams', 'Resource', '$location', '$upload',
 	function($rootScope, $scope, $localStorage, $rootScope, $routeParams, Resource, $location, $upload) {
 		$scope.$storage = $localStorage;
-		$scope.resources = Resource.query({parent_id: $localStorage.current_directory.id});
+		$scope.resources = Resource.query({directory_id: $localStorage.current_directory.id});
 		
 		$scope.$watch('files', function () {
         $scope.upload($scope.files);
@@ -15,7 +15,7 @@ app.controller("ResourceIndexCtrl", ['$rootScope', '$scope', '$localStorage', '$
 		
   	$scope.deleteResource =  function(resourceId){
 			Resource.delete({id: resourceId});
-			$scope.resources = Resource.query({parent_id: $localStorage.current_directory.id});
+			$scope.resources = Resource.query({directory_id: $localStorage.current_directory.id});
 		}
 		
 		$scope.createNewResource = function(){
@@ -40,7 +40,6 @@ app.controller("ResourceIndexCtrl", ['$rootScope', '$scope', '$localStorage', '$
 					//withCredentials: true,
 					data: {	comment: comment, 
 									resource: $scope.resource, 
-									idea_id: $scope.$storage.current_idea, 
 									directory_id: $scope.$storage.current_directory.id},
 					file: file, // or list of files ($files) for html5 only
 					//fileName: 'doc.jpg' or ['1.jpg', '2.jpg', ...] // to modify the name of the file(s)
@@ -53,7 +52,7 @@ app.controller("ResourceIndexCtrl", ['$rootScope', '$scope', '$localStorage', '$
 				}).success(function(data, status, headers, config) {
 					// file is uploaded successfully
 					console.log("UPLOAD SUCCESSFUL");
-					$scope.resources = Resource.query({parent_id: $scope.$storage.current_directory.id});
+					$scope.resources = Resource.query({directory_id: $scope.$storage.current_directory.id});
 				});
 				//.error(...)
 				//.then(success, error, progress); 
