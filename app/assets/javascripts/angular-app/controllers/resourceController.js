@@ -96,7 +96,9 @@ app.controller('ResourceDetailCtrl', ['$rootScope', '$scope', '$localStorage', '
 			var content = $scope.editor.getValue();
 			$scope.resource.content = content;
 			$scope.resource.comment = prompt("Please describe the changes made");
-			Resource.update($scope.resource);
+			if($scope.resource.comment){
+				Resource.update($scope.resource);
+			}
 		}
 
 		$scope.cancel = function(){
