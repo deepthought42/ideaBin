@@ -16,7 +16,13 @@ app.controller("IdeaIndexCtrl", ['$scope', '$localStorage', 'Idea', '$location',
 		};
 		
 		$scope.editIdea = function (ideaId) {
-			$localStorage.current_idea  = ideaId
+			$localStorage.current_idea  = Idea.show({id: ideaId}).$promise;
+			$localStorage.current_idea.then(function onSuccess(	response){
+				$localStorage.current_idea = response;
+			},
+			function onFail(response) {
+					// handle failure
+			});
 			
 			$http({method: "GET", url: "/directories/" + ideaId + "/topDir.json"})
 				.success(function(data){ 
