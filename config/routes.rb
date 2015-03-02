@@ -15,7 +15,11 @@ IdeaBin::Application.routes.draw do
 			get 'contents'
 		end
 	end
-  resources :ideas
+  resources :ideas do
+		member do
+			put 'uploadCover'
+		end
+	end
 	
   devise_for :users
 

@@ -106,7 +106,6 @@ class IdeasController < ApplicationController
       @git.commit('this is a commit...REMEMBER TO CHANGE THIS TO USER DEFINED MESSAGE') 
     end
 
-	
     if @idea.save
 			respond_with(@idea)
 		else
@@ -123,6 +122,23 @@ class IdeasController < ApplicationController
     @idea.destroy
 
     respond_with(@idea)
+ end
+ 
+ # PUT /ideas/:id/uploadCover.json
+ def uploadCover
+	@idea = Idea.find(params[:id])
+	cover_img_path = "#{Rails.root}/public/images/cover_images/"
+		
+		if params[:cover_img]
+				@idea.cover_img = params[:cover_img]
+				DataFile.save(params[:cover_img], cover_img_path)
+		end
+		
+		if @idea.save
+			respond_with(@idea)
+		else
+			puts "THERE WAS AN ISSUE UPDATING COVER IMAGE."
+    end
  end
  
  private

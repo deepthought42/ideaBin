@@ -26,9 +26,8 @@
 			</div>
 			<div class="row" >
 				<form enctype="multipart/form-data" novalidate>
-					<div class="field">			
+					<div class="field" ng-file-drop ng-file-change="uploadFile($files)" ng-model="cover_img" drop-available="dropSupported">			
 						<img class="cover_img" ng-src="/images/cover_images/{{idea.cover_img_file_name}}" />
-						<input type="file" ng-file-select uploader="uploadFile" ng-model="cover_img" />
 					</div>
 					<div class="field" class="ideaName">
 						{{idea.name}}
