@@ -13,6 +13,7 @@
 
 #ace-wrapper{
 	padding-left: 60px;
+	border: solid 5px;
 }
 
 .glyphicon-2x {
@@ -95,4 +96,9 @@
 #headerIdeas{
 	font-family: 'Fira Sans', sans-serif;
 	font-weight: 900;
+}
+
+#ideaEditPanel {
+	position: absolute;
+	top:			0px;
 }
