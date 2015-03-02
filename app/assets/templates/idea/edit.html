@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <div class="container" >
 	<div class="col-md-2" ng-controller="IdeaDetailCtrl">
 		<button class="fa fa-lightbulb-o" ng-click="showIdeaEditPanel()"></button>
@@ -43,3 +44,66 @@
 		</div>
 	</div>
 </div>
+=======
+
+<div class="container">
+
+    <div class="col-md-2" ng-controller="IdeaDetailCtrl">
+        <i class="btn fa fa-lightbulb-o" ng-click="showIdeaEditPanel()"></i>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="btn-group" role="group" aria-label="...">
+                <i type="button" class="btn toolbar-btn border-white fa fa-file-image-o" id="btnEditCoverImg"></i>
+                <i type="button" class="btn toolbar-btn border-white fa fa-folder" id="btnAddFolder"></i>
+                <i type="button" class="btn toolbar-btn border-white fa fa-file" id="btnAddFile"></i> 
+            </div>
+        </div>
+    </div>
+
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="row">
+                    <div class="col-md-6" >
+                        <div ng-include="'directory/new.html'" ></div>
+                        <div ng-include="'directory/index.html'" ></div>
+                        <div ng-include="'resource/index.html'" ></div>
+                    </div>
+                    <div class="col-md-6" >
+                        <div ng-include="'resource/edit.html'" ></div>
+                    </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row" id="ideaEditPanel" ng-controller="IdeaDetailCtrl" ng-show="ideaEditPanelVisible">
+            <button class="fa fa-times hidePanelButton" ng-click="hideIdeaEditPanel()"></button>
+        <div class="col-md-12" id="divNewIdea">
+            <h6>
+                Create an idea, then share it with the world.
+            </h6>
+        </div>
+        <div class="col-md-12" >
+            <form enctype="multipart/form-data" novalidate>
+                <div class="field">			
+                    <img class="cover_img" ng-src="/images/cover_images/{{idea.cover_img_file_name}}" />
+                    <input type="file" ng-file-select uploader="uploadFile" ng-model="cover_img" />
+                </div>
+                <div class="field" class="ideaName">
+                    {{idea.name}}
+                    <br />
+                </div>
+                <div class="field">
+                    <input type="text" name="idea[description]" ng-model="idea.description" id="description" placeholder="Description"/>
+                </div>
+                <div class="actions">
+                    <button class="btn btn-default" ng-click="updateIdea(idea)">Save</button>      
+                </div>
+            </form>
+        </div>
+    </div>
+    
+</div>
+>>>>>>> ac3b8dbcefc8ed35f540ff886974038f5bb478fb
