@@ -18,9 +18,7 @@
 			</div>
 		</div>
 		<div class="col-md-12" id="ideaEditPanel" ng-controller="IdeaDetailCtrl" ng-show="ideaEditPanelVisible">
-			<div class="">
-				<button class="fa fa-times" ng-click="hideIdeaEditPanel()"></button>
-			</div>
+				<button class="fa fa-times hidePanelButton" ng-click="hideIdeaEditPanel()"></button>
 			<div class="row" id="divNewIdea">
 				<h6>
 					Create an idea, then share it with the world.
@@ -29,18 +27,15 @@
 			<div class="row" >
 				<form enctype="multipart/form-data" novalidate>
 					<div class="field">			
-						<img ng-src="/images/cover_images/{{idea.cover_img_file_name}}" />
+						<img class="cover_img" ng-src="/images/cover_images/{{idea.cover_img_file_name}}" />
 						<input type="file" ng-file-select uploader="uploadFile" ng-model="cover_img" />
 					</div>
-					<div class="field">
-						<label for="name" >Name</label>
+					<div class="field" class="ideaName">
+						{{idea.name}}
 						<br />
-						<input type="text" name="idea[name]" ng-model="idea.name" id="name"/>
 					</div>
 					<div class="field">
-						<label for="description" >Description</label>
-						<br />
-						<input type="text" name="idea[description]" ng-model="idea.description" id="description"/>
+						<input type="text" name="idea[description]" ng-model="idea.description" id="description" placeholder="Description"/>
 					</div>
 					<div class="actions">
 						<button class="btn btn-default" ng-click="updateIdea(idea)">Save</button>      
