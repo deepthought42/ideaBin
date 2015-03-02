@@ -135,6 +135,7 @@ class IdeasController < ApplicationController
 		end
 		
 		if @idea.save
+			puts "Upload successful"
 			respond_with(@idea)
 		else
 			puts "THERE WAS AN ISSUE UPDATING COVER IMAGE."

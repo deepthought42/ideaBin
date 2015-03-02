@@ -40,7 +40,6 @@ app.controller('IdeaDetailCtrl', ['$scope', '$localStorage', '$routeParams', 'Id
 		$rootScope.ideaEditPanelVisible = false;
 
 		$scope.uploadFile = function(){
-			console.log("COVER IMAGE :: " + $scope.cover_img);
 			var ideaFormVals = angular.toJson($scope.idea);
 			$scope.upload = $upload.upload({
 				url: '/ideas/' + $scope.idea.id + '/uploadCover.json',
@@ -52,6 +51,17 @@ app.controller('IdeaDetailCtrl', ['$scope', '$localStorage', '$routeParams', 'Id
 			progress(function(evt) {
 				console.log('progress: ' + parseInt(100.0 * evt.loaded / evt.total));
 			}).success(function(data, status, headers, config) {
+				$scope.idea  = Idea.show({id: $scope.$storage.current_idea.id});
+				$scope.idea.then(function onSuccess(	response){
+					$localStorage.current_idea = response;
+					$scope.$apply(function () {
+							$scope.idea = $scope.cover_img.filename;
+							$scope.message = "Timeout called!";
+					});
+				},
+				function onFail(response) {
+						// handle failure
+				});
 				console.log('file ' + config.file + ' was uploaded successfully. Status: ' + status);
 			});
 		}
