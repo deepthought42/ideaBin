@@ -8,6 +8,7 @@
 		"ngstorage": "latest",
 		"angular-ui-ace": "latest",
 		"angular-devise": "latest",
-		"font-awesome" : "latest"
+		"font-awesome" : "latest",
+		"angular-motion": "latest"
   }
 }
