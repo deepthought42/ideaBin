@@ -29,9 +29,8 @@
 					<div class="field" ng-file-drop ng-file-change="uploadFile($files)" ng-model="cover_img" drop-available="dropSupported">			
 						<img class="cover_img" ng-src="/images/cover_images/{{idea.cover_img_file_name}}" />
 					</div>
-					<div class="field" class="ideaName">
-						{{idea.name}}
-						<br />
+					<div >
+						<h3 class="title ideaName">{{idea.name}}</h3>
 					</div>
 					<div class="field">
 						<input type="text" name="idea[description]" ng-model="idea.description" id="description" placeholder="Description"/>
