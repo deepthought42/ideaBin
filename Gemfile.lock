@@ -164,7 +164,7 @@ DEPENDENCIES
   git
   jquery-cdn (~> 2.1)
   paperclip (~> 3.5.3)
-  pg (~> 0.18.0.pre20141017160319)
+  pg
   protected_attributes
   rails (~> 4.1.8)
   sass

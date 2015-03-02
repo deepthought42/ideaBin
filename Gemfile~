@@ -8,7 +8,7 @@ gem 'tzinfo-data'
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
-gem 'pg'
+gem 'pg', '~> 0.18.0.pre20141017160319'
 
 
 # Gems used only for assets and not required
