@@ -32,6 +32,10 @@ app.controller("DirectoryIndexCtrl", ['$scope', '$rootScope', '$localStorage', '
 			$location.path('/directories/new');
 		}
 		
+		$scope.showNewDirectoryPanel = function(){
+			alert("same level ctrl declaration works");
+		}
+		
 		$rootScope.$on('addDirectory', function(event, data) { 
 			$scope.directories.push(data);
 		});
@@ -48,10 +52,10 @@ app.controller("DirectoryIndexCtrl", ['$scope', '$rootScope', '$localStorage', '
 						alert("Failed to load Directory!");
 					});
 		});	
-				
-				
-		
-		
+	
+		$rootScope.$on('showNewDirectoryPanel', function(event){
+			alert("new directory gets shown with this logic");
+		});
 }]);
 
 app.controller('DirectoryDetailCtrl', ['$scope', '$routeParams', 'Directory', '$location',

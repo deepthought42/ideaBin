@@ -1,18 +1,10 @@
 <div class="container" >
-	<div class="col-md-2" ng-controller="IdeaDetailCtrl">
-		<button class="fa fa-lightbulb-o" ng-click="showIdeaEditPanel()"></button>
+	<div class="col-md-2 btn-group" role="group" ng-controller="IdeaDetailCtrl">
+		<button class="btn toolbar-btn border-white fa fa-lightbulb-o" ng-click="showIdeaEditPanel()"></button>
+		<button class="btn toolbar-btn border-white fa fa-folder" id="btnAddFolder" ng-click="showNewDirectoryPanel()" />
+		<button class="btn toolbar-btn border-white fa fa-file" id="btnAddFile" />
 	</div>
 	<div class="row">
-			<div class="col-md-12">
-					<div class="btn-group" role="group" aria-label="...">
-						<i type="button" class="btn toolbar-btn border-white fa fa-file-image-o" id="btnEditCoverImg"></i>
-						<i type="button" class="btn toolbar-btn border-white fa fa-folder" id="btnAddFolder"></i>
-						<i type="button" class="btn toolbar-btn border-white fa fa-file" id="btnAddFile"></i> 
-					</div>
-			</div>
-    </div>
-		<div class="row">
-
 		<div class="col-md-12">
 			<div class="row">
 				<div class="col-md-12">

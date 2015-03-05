@@ -17,8 +17,8 @@ ActiveRecord::Schema.define(version: 20150201014348) do
   enable_extension "plpgsql"
 
   create_table "data_files", force: true do |t|
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "directories", force: true do |t|
@@ -36,8 +36,8 @@ ActiveRecord::Schema.define(version: 20150201014348) do
   create_table "ideas", force: true do |t|
     t.string   "name"
     t.string   "description"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
     t.integer  "user_id"
     t.string   "cover_img_file_name"
     t.string   "cover_img_content_type"
@@ -52,14 +52,14 @@ ActiveRecord::Schema.define(version: 20150201014348) do
     t.integer  "user_id"
     t.boolean  "owner"
     t.boolean  "admin"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "resources", force: true do |t|
     t.string   "comment"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
     t.string   "filename"
     t.string   "content_type"
     t.integer  "idea_id"
@@ -90,8 +90,8 @@ ActiveRecord::Schema.define(version: 20150201014348) do
     t.datetime "last_sign_in_at"
     t.string   "current_sign_in_ip"
     t.string   "last_sign_in_ip"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",                          null: false
+    t.datetime "updated_at",                          null: false
     t.boolean  "admin"
   end
 

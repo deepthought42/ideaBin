@@ -84,6 +84,10 @@ app.controller('IdeaDetailCtrl', ['$scope', '$localStorage', '$routeParams', 'Id
 		$scope.cancel = function(){
 			$location.path('/ideas');
 		}
+		
+		$scope.showNewDirectoryPanel = function(){
+			$rootScope.$broadcast("showNewDirectoryPanel");
+		}
 	}
 ]);
 

@@ -12,8 +12,7 @@ var ideaBin = angular.module('ideaBin',
 		'angularFileUpload',
 		'ui.ace',
 		'Devise',
-		'ngStorage',
-		'ngAnimate']);
+		'ngStorage']);
 
 // for compatibility with Rails CSRF protection
 
