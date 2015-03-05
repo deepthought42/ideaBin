@@ -29,8 +29,13 @@ app.controller("IdeaIndexCtrl", ['$scope', '$localStorage', 'Idea', '$location',
 		}
 		
 		$scope.showNewIdea = function(){
-			$scope.newIdeaPanelVisible = true;
+			$scope.isCreateIdeaPanelVisible = true;
 		}
+		
+				
+		$rootScope.$on('hideCreateIdeaPanel', function(event, data) {
+			$scope.isCreateIdeaPanelVisible = false;
+		});
 }]);
 
 app.controller('IdeaDetailCtrl', ['$scope', '$localStorage', '$routeParams', 'Idea', '$location', '$upload', '$rootScope',
@@ -85,14 +90,18 @@ app.controller('IdeaDetailCtrl', ['$scope', '$localStorage', '$routeParams', 'Id
 			$location.path('/ideas');
 		}
 		
+		$scope.showNewIdea = function(){
+			$rootScope.isCreateIdeaPanelVisible = true;
+		}
+		
 		$scope.showNewDirectoryPanel = function(){
 			$rootScope.$broadcast("showNewDirectoryPanel");
 		}
 	}
 ]);
 
-app.controller('IdeaCreationCtrl', ['$scope', 'Idea', '$location', '$upload',
-	function($scope, Idea, $location, $upload ){
+app.controller('IdeaCreationCtrl', ['$scope', '$rootScope', 'Idea', '$location', '$upload',
+	function($scope, $rootScope, Idea, $location, $upload ){
 		//callback for ng-click 'createNewIdea'
 		$scope.ideaForm = {};
 		$scope.ideaForm.name = "";
@@ -116,6 +125,10 @@ app.controller('IdeaCreationCtrl', ['$scope', 'Idea', '$location', '$upload',
 			//Idea.create($scope.ideaForm);
 			
 			$location.path('/ideas');
+		}
+		
+		$scope.hideCreateIdeaPanel = function(){
+			$rootScope.$broadcast('hideCreateIdeaPanel');
 		}
 	}
 ]);

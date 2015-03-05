@@ -11,7 +11,7 @@
  <div id="sideMenu" class="text-center show-menu">
     <div ng-controller="IdeaIndexCtrl">
 			<button ng-click="showNewIdea()" >Add New Idea</button>
-			<div ng-include="'idea/new.html'" ></div>
+			<div ng-include="'idea/new.html'" ng-show="isCreateIdeaPanelVisible"></div>
     </div>
     
     <ul>
