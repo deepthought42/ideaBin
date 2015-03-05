@@ -106,11 +106,20 @@ app.controller('IdeaCreationCtrl', ['$scope', '$rootScope', 'Idea', '$location',
 		$scope.ideaForm = {};
 		$scope.ideaForm.name = "";
 		$scope.ideaForm.description = "";
+		$scope.ideaForm.cover_img_file_name = "no-image-found.png";
+
 		$scope.createNewIdea = function(){
 			//Take the first selected file
-			console.log("COVER IMAGE :: " + $scope.cover_img);
+			$scope.uploadFile();
+			Idea.update($scope.idea,{id: ideaId}, function(){
+					$location.path('/ideas');
+			});
+			//Idea.create($scope.ideaForm);
+		}
+		
+		$scope.uploadFile = function(){
 			var ideaFormVals = angular.toJson($scope.ideaForm);
-			$scope.upload = $upload.upload({
+			$scope.$upload = $upload.upload({
 				url: '/ideas.json',
 				method: 'POST',
 				data: {idea: ideaFormVals},
@@ -122,9 +131,6 @@ app.controller('IdeaCreationCtrl', ['$scope', '$rootScope', 'Idea', '$location',
 			}).success(function(data, status, headers, config) {
 				console.log('file ' + config.file.name + 'is uploaded successfully. Response: ' + data);
 			});
-			//Idea.create($scope.ideaForm);
-			
-			$location.path('/ideas');
 		}
 		
 		$scope.hideCreateIdeaPanel = function(){
