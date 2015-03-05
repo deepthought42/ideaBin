@@ -19,6 +19,10 @@ app.controller("DirectoryIndexCtrl", ['$scope', '$rootScope', '$localStorage', '
 			});
 		}		
 	
+		$scope.hideCreateDirectoryPanel = function(){
+				//$rootScope.
+		}
+		
 		$scope.showCreatePanel = function(){
 			$rootScope.createDirectoryPanelVisible = true;
 		};

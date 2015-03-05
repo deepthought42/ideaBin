@@ -28,8 +28,8 @@ app.controller("IdeaIndexCtrl", ['$scope', '$localStorage', 'Idea', '$location',
 			$location.path('/ideas/'+ideaId);
 		}
 		
-		$scope.newIdea = function(){
-			$location.path('/ideas/new');
+		$scope.showNewIdea = function(){
+			$scope.newIdeaPanelVisible = true;
 		}
 }]);
 

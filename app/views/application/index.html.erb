@@ -9,53 +9,10 @@
 </head>
 <body ng-app="ideaBin">
  <div id="sideMenu" class="text-center show-menu">
-		
-    <div class="btn-group" role="group" aria-label="...">
-      <i type="button" class="btn sidebar-btn border-white fa fa-folder" id="btnAddFolder"></i>
-      <i type="button" class="btn sidebar-btn border-white fa fa-file" id="btnAddFile"></i>
-									
-
-    </div>
-    
     <div ng-controller="IdeaIndexCtrl">
-			<button ng-click="newIdea()" >Add New Idea</button>
+			<button ng-click="showNewIdea()" >Add New Idea</button>
+			<div ng-include="'idea/new.html'" ></div>
     </div>
-    <div class="border-white sidebar-wrapper-add" id="wrapper-add-folder">
-        <h6>Add Folder</h6>
-        <input type="text" />
-        <i class="btn fa fa-plus"></i>
-        <div class="dropdown">
-            <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenuFolder" data-toggle="dropdown" aria-expanded="true">
-                Dropdown
-                <span class="caret"></span>
-            </button>
-            <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenuFolder">
-                <li role="presentation"><a role="menuitem" tabindex="-1" href="#">CSS</a></li>
-                <li role="presentation"><a role="menuitem" tabindex="-1" href="#">JS</a></li>
-                <li role="presentation"><a role="menuitem" tabindex="-1" href="#">INC</a></li>
-
-            </ul>
-        </div>
-    </div>
-							
-
-    <div class="border-white sidebar-wrapper-add" id="wrapper-add-file">
-        <h6>Add File</h6>
-        <input type="text" />
-        <i class="btn fa fa-plus"></i>
-        
-        <div class="dropdown">
-            <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenuFolder" data-toggle="dropdown" aria-expanded="true">
-                Dropdown
-                <span class="caret"></span>
-            </button>
-            <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenuFolder">
-                <li role="presentation"><a role="menuitem" tabindex="-1" href="#">CSS</a></li>
-                <li role="presentation"><a role="menuitem" tabindex="-1" href="#">JS</a></li>
-                <li role="presentation"><a role="menuitem" tabindex="-1" href="#">INC</a></li>
-            </ul>
-        </div>
-      </div>
     
     <ul>
         <a href="/ideas"><li>ideas</li></a>
