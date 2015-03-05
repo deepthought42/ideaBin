@@ -20,7 +20,7 @@ app.controller("DirectoryIndexCtrl", ['$scope', '$rootScope', '$localStorage', '
 		}		
 	
 		$scope.showCreatePanel = function(){
-			$rootScope.showCreateDirectoryPanel = true;
+			$rootScope.createDirectoryPanelVisible = true;
 		};
 		
   	$scope.deleteDirectory =  function(directoryId){
@@ -30,10 +30,6 @@ app.controller("DirectoryIndexCtrl", ['$scope', '$rootScope', '$localStorage', '
 		
 		$scope.newDirectory = function(){
 			$location.path('/directories/new');
-		}
-		
-		$scope.showNewDirectoryPanel = function(){
-			alert("same level ctrl declaration works");
 		}
 		
 		$rootScope.$on('addDirectory', function(event, data) { 
@@ -62,6 +58,10 @@ app.controller('DirectoryDetailCtrl', ['$scope', '$routeParams', 'Directory', '$
 	function($scope, $routeParams, Directory, $location){
 		$scope.directory = Directory.show({id: $routeParams.id});
 		
+		$scope.hideDirectoryPanel = function(event){
+			$rootScope.createDirectoryPanelVisible = false;
+		}
+		
 		$scope.updateDirectory = function (){
 			Directory.update($scope.directory);
 			$location.path('/directories');
@@ -87,6 +87,10 @@ app.controller('DirectoryCreationCtrl', ['$scope', '$rootScope', '$localStorage'
 			console.log($scope.directoryForm)
 			$scope.directory = Directory.create($scope.directoryForm);
 			$rootScope.$broadcast("addDirectory", $scope.directory )
+		}
+		
+		$scope.hideDirectoryEditPanel = function() {
+			$rootScope.createDirectoryPanelVisible = false;
 		}
 	}
 ]);
