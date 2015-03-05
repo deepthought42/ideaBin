@@ -10,10 +10,8 @@
 				<div class="col-md-12">
 					<div class="row">
 						<div class="col-md-4" >
-                            <div class="col-md-12" id="wrapperIdeaDirectory">
-                                <div ng-include="'directory/new.html'" ></div>
-                                <div ng-include="'directory/index.html'" ></div>
-                            </div>
+                            <div ng-include="'directory/new.html'" ></div>
+                            <div ng-include="'directory/index.html'" ></div>
 							<div ng-include="'resource/index.html'" ></div>
 						</div>
 						<div class="col-md-8" >
@@ -22,13 +20,8 @@
 					</div>
 				</div>
 			</div>
-			<div class="col-md-12" id="ideaEditPanel" ng-controller="IdeaDetailCtrl" ng-show="ideaEditPanelVisible">
-					<button class="fa fa-times hidePanelButton" ng-click="hideIdeaEditPanel()"></button>
-				<div class="row" id="divNewIdea">
-					<h6>
-						Create an idea, then share it with the world.
-					</h6>
-				</div>
+			<div class="col-md-5" id="ideaEditPanel" ng-controller="IdeaDetailCtrl" ng-show="ideaEditPanelVisible">
+					<button class="btn btn-default fa fa-times hidePanelButton" ng-click="hideIdeaEditPanel()"></button>
 				<div class="row" >
 					<form enctype="multipart/form-data" novalidate>
 						<div class="field" ng-file-drop ng-file-change="uploadFile($files)" ng-model="cover_img" drop-available="dropSupported">			

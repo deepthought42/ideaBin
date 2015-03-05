@@ -18,10 +18,6 @@ app.controller("DirectoryIndexCtrl", ['$scope', '$rootScope', '$localStorage', '
 					// handle failure
 			});
 		}		
-	
-		$scope.showCreatePanel = function(){
-			$rootScope.showCreateDirectoryPanel = true;
-		};
 		
   	$scope.deleteDirectory =  function(directoryId){
 			Directory.delete({id: directoryId});
@@ -54,7 +50,8 @@ app.controller("DirectoryIndexCtrl", ['$scope', '$rootScope', '$localStorage', '
 		});	
 	
 		$rootScope.$on('showNewDirectoryPanel', function(event){
-			$('#wrapperIdeaDirectory').slideToggle();
+            $rootScope.showCreateDirectoryPanel = true;
+			$('#directoryForm').slideToggle().delay(100);
 		});
 }]);
 
