@@ -1,7 +1,8 @@
 <div id="ideaResourceContainer" ng-controller="ResourceIndexCtrl">
 	<div id="resource_container" class="row masonry">
-		<h6>Listing resources</h6>
-		<div class="col-md-12" ng-repeat="resource in resources">
+		<div class="col-md-12">
+          
+        <div class="col-md-12" ng-repeat="resource in resources">
 			<div class="col-md-4">
 				
 					{{ resource.filename }}
@@ -11,14 +12,18 @@
 				{{resource.comment}}
 			</div> 
 			<div class="col-md-4">
-				<button id="editResource" ng-click="editResource(resource.id)" class="col-md-6 dock-item glyphicon glyphicon-pencil"></button>
-				<button id="removeResource" ng-click="deleteResource(resource.id)" class="col-md-6 glyphicon glyphicon-remove"></button>
+				<i id="editResource" ng-click="editResource(resource.id)" class="col-md-6 dock-item toolbar-btn fa fa-edit"></i>
+				<i id="removeResource" ng-click="deleteResource(resource.id)" class="col-md-6 toolbar-btn fa fa-times"></i>
 			</div>
 		</div>
+
+
+          
+        </div>
 		
-		<div >
+		<div class="col-md-12">
 			<span >
-					<button ng-file-drop ng-model="files" class="drop-box" 
+					<button class="btn btn-default btn-block" id="resourceDragDropBtn" ng-file-drop ng-model="files" class="drop-box" 
 						drag-over-class="dragover" ng-multiple="true" allow-dir="true"
 						>Drop files here</button>
 					<div ng-no-file-drop>File Drag/Drop is not supported for this browser</div>

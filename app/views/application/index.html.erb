@@ -10,12 +10,12 @@
 <body ng-app="ideaBin">
  <div id="sideMenu" class="text-center show-menu">
     <div ng-controller="IdeaIndexCtrl">
-			<button ng-click="showNewIdea()" >Add New Idea</button>
+			<button class="btn btn-default"  ng-click="showNewIdea()" >Add New Idea</button>
 			<div ng-include="'idea/new.html'" ></div>
     </div>
     
-    <ul>
-        <a href="/ideas"><li>ideas</li></a>
+    <ul id="sidebarList">
+        <a href="/ideas"><li>MY IDEAS</li></a>
     </ul>
     
      <div class="btn-toggle-wrapper">
@@ -29,7 +29,7 @@
 
 
 <div class="container-fluid fixed-top">
-	<div class="col-md-3 pull-right" ng-controller="UserSessionCtrl">
+	<div id="userInfo" class="col-md-3 pull-right" ng-controller="UserSessionCtrl">
 		Logged in as <strong>{{user.email}}</strong>.
 		<span ng-show="!user.id">
 			<a ng-href="/sign_in">Sign in</a> |

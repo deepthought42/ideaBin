@@ -54,7 +54,8 @@ app.controller("DirectoryIndexCtrl", ['$scope', '$rootScope', '$localStorage', '
 		});	
 	
 		$rootScope.$on('showNewDirectoryPanel', function(event){
-			alert("new directory gets shown with this logic");
+            $rootScope.showCreateDirectoryPanel = true;
+			$('#directoryForm').slideToggle().delay(100);
 		});
 }]);
 
