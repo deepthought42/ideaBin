@@ -18,11 +18,12 @@
 
 
 h1,h2,h3,h4,h5,h6{
-	font-family: 'Fira Sans';
+  font-family: 'Fira Sans';
 }
 
 body{
   margin-top: 60px;
+  background-color: #faffa3;
 }
 
 .container-fluid{
@@ -41,18 +42,19 @@ body{
   position:     relative;
 }
 
-.navbar-inverse{
-	background-color: #080808;
-	background-color: red;
-}
-
 #btnNewIdea{
-	padding: 6px 12px;
+  padding: 6px 12px;
 }
 
 .fixed-top{
   width: 100%;
   position: absolute;
   top:0;
+}
+
+#userInfo{
+  position: absolute;
+  right: 0;
+  top: 10px;
 }
 

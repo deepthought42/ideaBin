@@ -13,7 +13,11 @@
 
 #ace-wrapper{
 	padding-left: 60px;
-	border: solid 5px;
+    width: 100%;
+}
+
+#ace-wrapper button{
+  margin-top: 10px;
 }
 
 .glyphicon-2x {
@@ -101,18 +105,18 @@
 #ideaEditPanel {
 	position: 		absolute;
 	background: 	white;
-	top:					0px;
-	border: 			solid 1px;
-	width:				30%;
-	height:				60%;
-	border-radius:	5%;
+	top:			0px;
+	border: 		solid 1px;
+	width:			30%;
+    padding:        15px;
+}
+
+#ideaEditPanel form{
+  padding: 20px;
 }
 
 #ideaEditPanel .cover_img {
-	position:			relative;
-	left:					20%;
 	width:				50%;
-	height:				60%;
 }
 
 #ideaEditPanel .ideaName {
@@ -120,14 +124,15 @@
 }
 
 .hidePanelButton{
-	position: 			absolute;
-	top:						1%;
-	left:						88%;
+	position: 	    absolute;
+	top:		    1%;
+	left:		    88%;
 	border-radius:	45%;
 }
 
 .toolbar-btn{
     background-color: #E6E7E8;
-    border: 1px solid #999999!important;
-    border-radius: 0px;
+    border:           1px solid #999999!important;
+    border-radius:    0px;
+    width:            50px;
 }
