@@ -133,6 +133,16 @@ app.controller('IdeaCreationCtrl', ['$scope', '$rootScope', 'Idea', '$location',
 			});
 		}
 		
+		$scope.previewImage = function(files){
+			var reader = new FileReader();
+			reader.readAsDataURL(files[0]);
+			console.log(files[0]);
+			reader.onload = function(event){
+				alert("SHOULD PREVIEW NOW :: " + event.target.result);
+				$scope.cover_img_file_name = event.target.result;
+			}
+		}
+		
 		$scope.hideCreateIdeaPanel = function(){
 			$rootScope.$broadcast('hideCreateIdeaPanel');
 		}
