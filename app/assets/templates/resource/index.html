@@ -2,24 +2,20 @@
 	<div id="resource_container" class="row masonry">
 		<div class="col-md-12">
           
-          <table class="table table-striped">
-            <tr>
-              <th>File Name</th>
-              <th>File Description</th>
-              <th>Edit or Remove</th>
-            </tr>
-            <tr ng-repeat="resource in resources">
-              <td>{{ resource.filename }}</td>
-              <td>{{resource.comment}}</td>
-              <td>
-                <div class="btn-group">
-            <i id="editResource" ng-click="editResource(resource.id)" class="btn btn-default toolbar-btn fa fa-edit"></i>
-            <i id="removeResource" ng-click="deleteResource(resource.id)" class="btn btn-default toolbar-btn fa fa-times"></i>
-                </div>
-              </td>
-            </tr>
-          
-          </table>
+        <div class="col-md-12" ng-repeat="resource in resources">
+			<div class="col-md-4">
+				
+					{{ resource.filename }}
+			
+			</div>
+			<div class="col-md-4">
+				{{resource.comment}}
+			</div> 
+			<div class="col-md-4">
+				<i id="editResource" ng-click="editResource(resource.id)" class="col-md-6 dock-item toolbar-btn fa fa-edit"></i>
+				<i id="removeResource" ng-click="deleteResource(resource.id)" class="col-md-6 toolbar-btn fa fa-times"></i>
+			</div>
+		</div>
 
 
           
