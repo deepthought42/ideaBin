@@ -29,8 +29,13 @@ app.controller("IdeaIndexCtrl", ['$scope', '$localStorage', 'Idea', '$location',
 		}
 		
 		$scope.showNewIdea = function(){
-			$scope.newIdeaPanelVisible = true;
+			$scope.isCreateIdeaPanelVisible = true;
 		}
+		
+				
+		$rootScope.$on('hideCreateIdeaPanel', function(event, data) {
+			$scope.isCreateIdeaPanelVisible = false;
+		});
 }]);
 
 app.controller('IdeaDetailCtrl', ['$scope', '$localStorage', '$routeParams', 'Idea', '$location', '$upload', '$rootScope',
@@ -85,23 +90,36 @@ app.controller('IdeaDetailCtrl', ['$scope', '$localStorage', '$routeParams', 'Id
 			$location.path('/ideas');
 		}
 		
+		$scope.showNewIdea = function(){
+			$rootScope.isCreateIdeaPanelVisible = true;
+		}
+		
 		$scope.showNewDirectoryPanel = function(){
 			$rootScope.$broadcast("showNewDirectoryPanel");
 		}
 	}
 ]);
 
-app.controller('IdeaCreationCtrl', ['$scope', 'Idea', '$location', '$upload',
-	function($scope, Idea, $location, $upload ){
+app.controller('IdeaCreationCtrl', ['$scope', '$rootScope', 'Idea', '$location', '$upload',
+	function($scope, $rootScope, Idea, $location, $upload ){
 		//callback for ng-click 'createNewIdea'
 		$scope.ideaForm = {};
 		$scope.ideaForm.name = "";
 		$scope.ideaForm.description = "";
+		$scope.ideaForm.cover_img_file_name = "no-image-found.png";
+
 		$scope.createNewIdea = function(){
 			//Take the first selected file
-			console.log("COVER IMAGE :: " + $scope.cover_img);
+			$scope.uploadFile();
+			Idea.update($scope.idea,{id: ideaId}, function(){
+					$location.path('/ideas');
+			});
+			//Idea.create($scope.ideaForm);
+		}
+		
+		$scope.uploadFile = function(){
 			var ideaFormVals = angular.toJson($scope.ideaForm);
-			$scope.upload = $upload.upload({
+			$scope.$upload = $upload.upload({
 				url: '/ideas.json',
 				method: 'POST',
 				data: {idea: ideaFormVals},
@@ -113,9 +131,20 @@ app.controller('IdeaCreationCtrl', ['$scope', 'Idea', '$location', '$upload',
 			}).success(function(data, status, headers, config) {
 				console.log('file ' + config.file.name + 'is uploaded successfully. Response: ' + data);
 			});
-			//Idea.create($scope.ideaForm);
-			
-			$location.path('/ideas');
+		}
+		
+		$scope.previewImage = function(files){
+			var reader = new FileReader();
+			reader.readAsDataURL(files[0]);
+			console.log(files[0]);
+			reader.onload = function(event){
+				alert("SHOULD PREVIEW NOW :: " + event.target.result);
+				$scope.cover_img_file_name = event.target.result;
+			}
+		}
+		
+		$scope.hideCreateIdeaPanel = function(){
+			$rootScope.$broadcast('hideCreateIdeaPanel');
 		}
 	}
 ]);

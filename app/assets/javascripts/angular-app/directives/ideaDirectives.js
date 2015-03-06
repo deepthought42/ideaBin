@@ -11,6 +11,8 @@ ideaDirectives.directive('fileModel', ['$parse', function ($parse) {
                 scope.$apply(function(){
                     modelSetter(scope, element[0].files[0]);
                 });
+								$scope.file = (e.srcElement || e.target).files[0];
+								$scope.getFile();
             });
         }
     };

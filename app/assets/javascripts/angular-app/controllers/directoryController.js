@@ -54,8 +54,12 @@ app.controller("DirectoryIndexCtrl", ['$scope', '$rootScope', '$localStorage', '
 		});	
 	
 		$rootScope.$on('showNewDirectoryPanel', function(event){
+<<<<<<< HEAD
             $rootScope.showCreateDirectoryPanel = true;
 			$('#directoryForm').slideToggle().delay(100);
+=======
+			$('#wrapperIdeaDirectory').slideToggle();
+>>>>>>> ideaCreatePanelStyles
 		});
 }]);
 

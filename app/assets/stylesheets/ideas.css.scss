@@ -132,7 +132,21 @@
 
 .toolbar-btn{
     background-color: #E6E7E8;
+<<<<<<< HEAD
     border:           1px solid #999999!important;
     border-radius:    0px;
     width:            50px;
 }
+=======
+    border: 1px solid #999999!important;
+    border-radius: 0px;
+}
+
+#wrapperIdeaDirectory{
+    display: none;
+}
+
+#ideaCreatePanel {
+	background-color:		white;
+}
+>>>>>>> ideaCreatePanelStyles
