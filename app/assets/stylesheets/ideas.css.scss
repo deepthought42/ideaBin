@@ -101,7 +101,7 @@
 .ideaItem .btn-group{
 	position:			absolute;
 	bottom:				0px;
-	right:				0px;
+	right:				5px;
 }
 
 .outline {
@@ -175,4 +175,13 @@
 
 #ideaCreatePanel {
 	background-color:		white;
+}
+
+.ideaIcon {
+	color:				#FFFFCC;
+	font-size:		1.5em;
+}
+
+.ideaIcon:hover {
+	color:				#FFFF99;
 }
