@@ -98,7 +98,7 @@ app.controller('IdeaDetailCtrl', ['$scope', '$localStorage', '$routeParams', 'Id
 		}
 		
 		$scope.showNewDirectoryPanel = function(){
-			$rootScope.$broadcast("showNewDirectoryPanel");
+			$('#directoryForm').slideToggle().delay(100);
 		}
 	}
 ]);

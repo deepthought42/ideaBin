@@ -52,11 +52,6 @@ app.controller("DirectoryIndexCtrl", ['$scope', '$rootScope', '$localStorage', '
 						alert("Failed to load Directory!");
 					});
 		});	
-	
-		$rootScope.$on('showNewDirectoryPanel', function(event){
-			$rootScope.createDirectoryPanelVisible = true;
-			$('#directoryForm').slideToggle().delay(100);
-		});
 }]);
 
 app.controller('DirectoryDetailCtrl', ['$scope', '$routeParams', 'Directory', '$location',
