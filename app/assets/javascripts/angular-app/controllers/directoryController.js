@@ -31,7 +31,6 @@ app.controller("DirectoryIndexCtrl", ['$scope', '$rootScope', '$localStorage', '
 			Directory.delete({id: directory.id});
 			var index = $scope.directories.indexOf(idea);
 			$scope.directories.splice(index, 1);
-			//$scope.directories = Directory.query();
 		}
 		
 		$scope.newDirectory = function(){
