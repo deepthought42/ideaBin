@@ -137,18 +137,21 @@
 #ideaEditPanel {
 	position: 		absolute;
 	background: 	white;
-	top:			0px;
-	border: 		solid 1px;
-	width:			30%;
-    padding:        15px;
+	top:					0px;
+	border: 			solid 1px;
+	width:				30%;
+	height:				350px;
 }
 
-#ideaEditPanel form{
-  padding: 20px;
-}
 
 #ideaEditPanel .cover_img {
-	width:				50%;
+	height:				100%;
+}
+
+.ideaCoverImage {
+	position:			relative;
+	height:				70%;
+	padding:			0px;
 }
 
 #ideaEditPanel .ideaName {
@@ -157,9 +160,13 @@
 
 .hidePanelButton{
 	position: 	    absolute;
-	top:		    1%;
-	left:		    88%;
-	border-radius:	45%;
+	font-size:			2em;
+	top:		    5px;
+	right:			5px;
+}
+
+.hidePanelButton:hover{
+	cursor:				pointer;
 }
 
 .toolbar-btn{
@@ -185,3 +192,4 @@
 .ideaIcon:hover {
 	color:				#FFFF99;
 }
+
