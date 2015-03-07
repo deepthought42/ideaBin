@@ -65,6 +65,7 @@ class DirectoriesController < ApplicationController
   end
 
   def destroy
+		@directory = Directory.find(params[:id])
     @directory.destroy
     respond_with(@directory)
   end

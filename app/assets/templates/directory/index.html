@@ -3,6 +3,6 @@
 	<div class="col-md-12" ng-repeat="directory in directories">
 		<span class="col-md-1"><i class="fa fa-folder"></i></span>
 		<span class="col-md-9" id="directoryName" ng-click="showDirectories(directory.id)">{{ directory.name }}</span>
-		<span class="col-md-1 directoryButtons"><i ng-click="deleteDirectory(directory.id)" class='directoryButton fa fa-times'></i>
+		<span class="col-md-1 directoryButtons" ng-click="deleteDirectory(directory.id)"><i class='directoryButton fa fa-times'></i>
 	</div>
 </div>
