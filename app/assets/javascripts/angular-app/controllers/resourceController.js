@@ -111,8 +111,8 @@ app.controller('ResourceCreationCtrl', ['$scope', 'Resource', '$location',
 	function($scope, Resource, $location ){
 		//callback for ng-click 'createNewResourceFactory'
 		$scope.resourceForm = {};
-		$scope.resourceForm.name = "NAME";
-		$scope.resourceForm.description = "DESCRIPTION";
+		$scope.resourceForm.name = "";
+		$scope.resourceForm.description = "";
 		$scope.createNewResource = function(){
 			console.log($scope.resourceForm)
 			Resource.create($scope.resourceForm);

@@ -78,7 +78,7 @@ app.controller('DirectoryCreationCtrl', ['$scope', '$rootScope', '$localStorage'
 		$scope.$storage = $localStorage;
 		//callback for ng-click 'createNewDirectory'
 		$scope.directoryForm = {}
-		$scope.directoryForm.name = "NAME"
+		$scope.directoryForm.name = ""
 		$scope.createNewDirectory = function(){
 			$scope.directoryForm.idea_id = $scope.$storage.current_idea;
 			if($scope.$storage.current_directory){

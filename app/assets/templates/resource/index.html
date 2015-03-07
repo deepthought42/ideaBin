@@ -1,15 +1,11 @@
 <div id="ideaResourceContainer" ng-controller="ResourceIndexCtrl">
 	<div id="resource_container" class="row masonry">
-		<div class="col-md-12">
-			<div class="col-md-12" ng-repeat="resource in resources">
-				<div class="col-md-8">
-						{{ resource.filename }}
-				</div>
-				<div class="btn btn-block col-md-4">
-					<i id="editResource" ng-click="editResource(resource.id)" class="col-md-6 dock-item toolbar-btn fa fa-edit"></i>
-					<i id="removeResource" ng-click="deleteResource(resource.id)" class="col-md-6 toolbar-btn fa fa-times"></i>
-				</div>
-			</div>
+		<div class="col-md-12" ng-repeat="resource in resources">
+			<span class="col-md-10" id="resourceName">{{ resource.filename }}</span>
+			<span class="col-md-2 resourceButtons" >
+				<i id="editResource" ng-click="editResource(resource.id)" class="resourceButton dock-item fa fa-edit"></i>
+				<i id="removeResource" ng-click="deleteResource(resource.id)" class="resourceButton fa fa-times"></i>
+			</span>
 		</div>
 		<div class="col-md-12">
 			<span >
