@@ -39,13 +39,13 @@ class IdeasController < ApplicationController
 		session[:directory_id] = @directoryParent.id
 
     repo_path = "#{Rails.root}/public/data/repository/#{current_user.id}/#{@idea.name}"
-  
+		
     #clone idea repo from owners copy if current user isn't owner
-    if(current_user.id != @idea.user_id)
-      unless File.exists?(repo_path)
-        Dir.mkdir(repo_path)
-      end
+		unless File.exists?(repo_path)
+			Dir.mkdir(repo_path)
+		end
 
+    if(current_user.id != @idea.user_id)
       Dir.chdir(repo_path)
     	@git = Git.clone(repo_path, @idea.name)
     end
@@ -63,7 +63,7 @@ class IdeasController < ApplicationController
 		@idea.cover_img = params[:cover_img]
 
 		DataFile.save(params[:cover_img], directory)
-		repo_path = "#{Rails.root}/public/data/repository/#{current_user.id}/#{@idea.name}" 
+		repo_path = "#{Rails.root}/public/data/repository/#{current_user.id}" 
 		unless File.exists?(repo_path)
 			Dir.mkdir(repo_path)
 		end
@@ -73,7 +73,7 @@ class IdeasController < ApplicationController
 			@directory = Directory.new()
 			@directory.name = @idea.name
 			@directory.idea_id = @idea.id
-			@directory.path = repo_path
+			@directory.path = "#{repo_path}/#{@idea.name}"
 			@directory.is_top = true
 			Dir.chdir(repo_path)
 			@git = Git.init(@idea.name)

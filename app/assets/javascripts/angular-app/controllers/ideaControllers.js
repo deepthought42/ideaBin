@@ -31,8 +31,11 @@ app.controller("IdeaIndexCtrl", ['$scope', '$localStorage', 'Idea', '$location',
 		$scope.showNewIdea = function(){
 			$scope.isCreateIdeaPanelVisible = true;
 		}
+	
+		$scope.showMyIdeas = function(){
+			$location.path('/ideas');
+		}
 		
-				
 		$rootScope.$on('hideCreateIdeaPanel', function(event, data) {
 			$scope.isCreateIdeaPanelVisible = false;
 		});
@@ -111,9 +114,6 @@ app.controller('IdeaCreationCtrl', ['$scope', '$rootScope', 'Idea', '$location',
 		$scope.createNewIdea = function(){
 			//Take the first selected file
 			$scope.uploadFile();
-			Idea.update($scope.idea,{id: ideaId}, function(){
-					$location.path('/ideas');
-			});
 			//Idea.create($scope.ideaForm);
 		}
 		
@@ -136,10 +136,9 @@ app.controller('IdeaCreationCtrl', ['$scope', '$rootScope', 'Idea', '$location',
 		$scope.previewImage = function(files){
 			var reader = new FileReader();
 			reader.readAsDataURL(files[0]);
-			console.log(files[0]);
 			reader.onload = function(event){
-				alert("SHOULD PREVIEW NOW :: " + event.target.result);
-				$scope.cover_img_file_name = event.target.result;
+				$('#ideaCreationImage').attr('src', reader.result);
+				$scope.ideaForm.cover_img = files[0];
 			}
 		}
 		

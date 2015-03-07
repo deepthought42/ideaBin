@@ -79,22 +79,54 @@
 	margin-bottom:20px;
 }
 
-.item{
-	margin: 0px;
-	padding: 20px;
+.ideaItem{
+	margin: 			0px;
+	padding:			0px;
+	height:				200px;
 }
 
-.item > img{
-	margin-bottom: 20px;
+.ideaImg {
+	position:			relative;
+	width:				100%;
+	height:				100%;
+}
+
+.ideaImg img{
+	position:			relative;
+	width:				100%;
+	height:				100%;
+
+}
+
+.ideaItem .btn-group{
+	position:			absolute;
+	bottom:				0px;
+	right:				0px;
 }
 
 .outline {
 	border: 1px dashed red;
 }
 
+.overlay {
+	display:		none;
+	position:		absolute;
+	top:				25%;
+	left:				25%;
+	height:			50%;
+	width:			50%;
+	color:		white;
+}
+
+.ideaItem:hover .overlay{
+	display:		block;
+	
+}
+
 .overlay > h3.title{
 	font-family: 'Fira Sans', sans-serif;
 	font-weight: 900;
+
 }
 
 #headerIdeas{

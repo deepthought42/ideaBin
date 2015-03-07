@@ -11,15 +11,16 @@
  <div id="sideMenu" class="text-center show-menu">
     <div ng-controller="IdeaIndexCtrl">
 			<button class="btn btn-default"  ng-click="showNewIdea()" >Add New Idea</button>
+			<ul id="sidebarList">
+        <li ng-click="showMyIdeas()">MY IDEAS</li>
+			</ul>
 			<div ng-include="'idea/new.html'" ></div>
     </div>
     
-    <ul id="sidebarList">
-        <a href="/ideas"><li>MY IDEAS</li></a>
-    </ul>
     
-     <div class="btn-toggle-wrapper">
-        <i id="toggleBtn" class="btn fa fa-bars"></i>
+		
+		<div class="btn-toggle-wrapper">
+			<i id="toggleBtn" class="btn fa fa-bars"></i>
     </div>
     <div id="ideabin">
         <h1 class="inline">ideabin</h1>

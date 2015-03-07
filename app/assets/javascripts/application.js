@@ -13,7 +13,6 @@
 // require jquery
 // require jquery_ujs
 
-//= require dropzone.min
 //= require site
 //= require resources
 //= require directories

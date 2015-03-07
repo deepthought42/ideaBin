@@ -1,7 +1,7 @@
 class ResourcesController < ApplicationController
   before_filter :authenticate_user!
 	#before_action :set_resource, except: [:new, :create, :index]
-	respond_to :json
+	respond_to :html, :json
 	
   # GET /resources
   # GET /resources.json
@@ -70,7 +70,6 @@ class ResourcesController < ApplicationController
 		@parentDir = Directory.find(@resource.directory_id)
 		
 		file_path = "#{@parentDir.path}/#{@resource.filename}"
-		#write params[:text] to resource file
 		
     respond_to do |format|
       if File.open(file_path, 'w') {|f| f.write(params[:content]) }
@@ -91,7 +90,6 @@ class ResourcesController < ApplicationController
   def destroy
     @resource = Resource.find(params[:id])
     
-		
 		@directory = Directory.find(@resource.directory_id)
 		image_path = "#{@directory.path}/#{@resource.filename}"
 		if(FileUtils.rm(image_path))
@@ -113,8 +111,16 @@ class ResourcesController < ApplicationController
 		@resource = Resource.find(params[:id])
 		@directory = Directory.find(@resource.directory_id)
 		
+		extname = File.extname(@resource.filename)[1..-1]
+    mime_type = Mime::Type.lookup_by_extension(extname)
+    content_type = mime_type.to_s unless mime_type.nil?
+
+		@content = IO.read("#{@directory.path}/#{@resource.filename}")
+		
 		if(@resource)
-			render file: "#{@directory.path}/#{@resource.filename}"
+			render text: @content
+		else
+			render plain: "OH NO!"
 		end
 	end
 	
