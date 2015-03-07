@@ -5,9 +5,12 @@ app.controller("IdeaIndexCtrl", ['$scope', '$localStorage', 'Idea', '$location',
 		$scope.$storage = $localStorage;
 		$scope.ideas = Idea.query();
 		
-  	$scope.deleteIdea =  function(ideaId){
-			Idea.delete({id: ideaId});
-			$scope.ideas = Idea.query();
+  	$scope.deleteIdea =  function(idea){
+			Idea.delete({id: idea.id});
+			var index = $scope.ideas.indexOf(idea);
+			$scope.ideas.splice(index, 1);
+			console.log($scope.ideas);
+			//$scope.ideas = Idea.query();
 		}
 		
 		$scope.createNewIdea = function(){
