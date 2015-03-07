@@ -2,32 +2,7 @@
 	<h6>Listing directories</h6>
 	<div class="col-md-12" ng-repeat="directory in directories">
 		<span class="col-md-1"><i class="fa fa-folder"></i></span>
-		<span class="col-md-9" id="directoryName" ng-click="showDirectories(directory.id)">Placeholder directory{{ directory.filename }}</span>
+		<span class="col-md-9" id="directoryName" ng-click="showDirectories(directory.id)">{{ directory.name }}</span>
 		<span class="col-md-1 directoryButtons"><i ng-click="deleteDirectory(directory.id)" class='directoryButton fa fa-times'></i>
 	</div>
-	<!--<table>
-		<thead>
-			<tr>
-				<th></th>
-				<th colspan="3"></th>
-			</tr>
-		</thead>
-
-		<tbody>
-				<tr ng-repeat="directory in directories">
-					<td>
-						<button type="button" class="btn btn-default" ng-click="showDirectories(directory.id)">
-							{{directory.name}}
-						</button>
-					</td>
-					<td>
-					  <div class="btn-group" role="group" aria-label="...">
-                        <i ng-click="deleteDirectory(directory.id)" class='btn btn-default fa fa-times'></i>
-						</div>
-					</td>
-				</tr>
-		</tbody>
-		
-	</table>
-	-->
 </div>

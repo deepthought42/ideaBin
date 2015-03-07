@@ -80,7 +80,7 @@ app.controller('DirectoryCreationCtrl', ['$scope', '$rootScope', '$localStorage'
 		$scope.directoryForm = {}
 		$scope.directoryForm.name = ""
 		$scope.createNewDirectory = function(){
-			$scope.directoryForm.idea_id = $scope.$storage.current_idea;
+			$scope.directoryForm.idea_id = $scope.$storage.current_idea.id;
 			if($scope.$storage.current_directory){
 				$scope.directoryForm.parent_id = $scope.$storage.current_directory.id;
 			}
