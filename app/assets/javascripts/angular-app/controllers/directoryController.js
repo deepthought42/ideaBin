@@ -18,14 +18,6 @@ app.controller("DirectoryIndexCtrl", ['$scope', '$rootScope', '$localStorage', '
 					// handle failure
 			});
 		}		
-	
-		$scope.hideCreateDirectoryPanel = function(){
-				//$rootScope.
-		}
-		
-		$scope.showCreatePanel = function(){
-			$rootScope.createDirectoryPanelVisible = true;
-		};
 		
   	$scope.deleteDirectory =  function(directory){
 			Directory.delete({id: directory.id});
