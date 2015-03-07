@@ -27,9 +27,11 @@ app.controller("DirectoryIndexCtrl", ['$scope', '$rootScope', '$localStorage', '
 			$rootScope.createDirectoryPanelVisible = true;
 		};
 		
-  	$scope.deleteDirectory =  function(directoryId){
-			Directory.delete({id: directoryId});
-			$scope.directories = Directory.query();
+  	$scope.deleteDirectory =  function(directory){
+			Directory.delete({id: directory.id});
+			var index = $scope.directories.indexOf(idea);
+			$scope.directories.splice(index, 1);
+			//$scope.directories = Directory.query();
 		}
 		
 		$scope.newDirectory = function(){
