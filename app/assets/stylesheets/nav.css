@@ -22,7 +22,7 @@
 #sideMenu{
   padding: 15px;
   width: 200px;
-  background-color: rgba(69,40,27,.7);
+  background-color: rgba(27,79,125,.7);
   height: 99vh;
   display: inline-block;
   position: relative;
@@ -33,17 +33,22 @@
 }
 
 #sidebarList{
-  list-style-type: none;
-  padding: 0px;
+  list-style-type: 	none;
+  padding: 					0px;
 }
 
 #sidebarList li{
-  font-family: 'Fira Sans';
-  text-transform: uppercase;
-  color: #fff;
-  font-size: 20px;
-  letter-spacing: 2px;
-  margin-top: 15px;
+  font-family: 			'Fira Sans';
+  text-transform: 	uppercase;
+  color:						#FFB873;
+  font-size: 				20px;
+  letter-spacing: 	2px;
+  margin-top: 			15px;
+}
+
+#sidebarList li:hover{
+	color:					#FFD473;
+	cursor:					pointer;
 }
 
 .sidebar-btn{
@@ -85,6 +90,11 @@
 
 div#ideabin h1{
   margin: 0px;
+	color:		#FFCB73;
+}
+
+#ideabin .ideaBulb {
+	color:		#FFFF66;
 }
 
 #fakeText{
