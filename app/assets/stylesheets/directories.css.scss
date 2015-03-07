@@ -7,6 +7,12 @@
 	display:				none;
 }
 
-#directoryList {
+.directoryButton {
+	margin:						0px;
+	padding:					0px;
+	text-align:				right;
+}
 
+.directoryButton:hover {
+	cursor:				pointer;
 }
