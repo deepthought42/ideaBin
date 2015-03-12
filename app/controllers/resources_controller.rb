@@ -53,7 +53,7 @@ class ResourcesController < ApplicationController
 		@git.commit(params[:comment])
    
 		@resource = Resource.new
-		@resource.idea_id = params[:idea_id]
+		@resource.idea_id = @parentDir.idea_id
 		@resource.filename = params[:file].original_filename
 		@resource.content_type = params[:file].content_type
 		@resource.comment = params[:comment]
@@ -121,6 +121,18 @@ class ResourcesController < ApplicationController
 			render text: @content
 		else
 			render plain: "OH NO!"
+		end
+	end
+	
+	#GET /resources/1/download.json
+	def download
+		@resource = Resource.find(params[:id])
+		@directory = Directory.find(@resource.directory_id)
+		
+		if(@resource)
+			send_file("#{@directory.path}/#{@resource.filename}")
+		else
+			render json:	{errors: "Could not find file with id #{params[:id]}"}	
 		end
 	end
 	

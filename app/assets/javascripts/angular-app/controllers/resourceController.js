@@ -1,7 +1,7 @@
 var app = angular.module('ideaBin.resourceControllers', []);
 
-app.controller("ResourceIndexCtrl", ['$rootScope', '$scope', '$localStorage', '$rootScope', '$routeParams', 'Resource', '$location', '$upload',
-	function($rootScope, $scope, $localStorage, $rootScope, $routeParams, Resource, $location, $upload) {
+app.controller("ResourceIndexCtrl", ['$rootScope', '$scope', '$localStorage', '$rootScope', '$routeParams', 'Resource', '$location', '$upload', '$http',
+	function($rootScope, $scope, $localStorage, $rootScope, $routeParams, Resource, $location, $upload, $http) {
 		$scope.$storage = $localStorage;
 		
 		//move to event
@@ -29,6 +29,22 @@ app.controller("ResourceIndexCtrl", ['$rootScope', '$scope', '$localStorage', '$
 		
 		$scope.editResource = function (resourceId) {
 			$rootScope.$broadcast("editResource", resourceId );
+		}
+		
+		$scope.downloadResource = function(resourceId, filename){
+			$http({method: "GET", url: "/resources/" + resourceId + "/download"})
+				.success(function(data){ 
+						console.log("DOWNLOAD DATA :: " + data);
+						var hiddenElement = document.createElement('a');
+
+						hiddenElement.href = 'data:attachment/*,' + encodeURI(data);
+						hiddenElement.target = '_blank';
+						hiddenElement.download = filename;
+						hiddenElement.click();
+				})
+				.error(function(data){
+					alert("Failed to load resource!");
+				});
 		}
 		
 		$scope.upload = function(files) {			
@@ -77,7 +93,7 @@ app.controller('ResourceDetailCtrl', ['$rootScope', '$scope', '$localStorage', '
 		};
 
 		$scope.aceChanged = function(e) {
-			//
+			//TODO : Save changes
 		};
 		
 		$rootScope.$on('editResource', function(event, resourceId) { 
