@@ -124,10 +124,10 @@ class IdeasController < ApplicationController
     respond_with(@idea)
  end
  
- # PUT /ideas/:id/uploadCover.json
- def uploadCover
-	@idea = Idea.find(params[:id])
-	cover_img_path = "#{Rails.root}/public/images/cover_images/"
+  # PUT /ideas/:id/uploadCover.json
+  def uploadCover
+		@idea = Idea.find(params[:id])
+		cover_img_path = "#{Rails.root}/public/images/cover_images/"
 		
 		if params[:cover_img]
 				@idea.cover_img = params[:cover_img]
@@ -140,7 +140,18 @@ class IdeasController < ApplicationController
 		else
 			puts "THERE WAS AN ISSUE UPDATING COVER IMAGE."
     end
- end
+  end
+
+	#GET /userIdeas/:id 
+	def userIdeas
+		@ideas = Idea.where(user_id: params[:id])
+		
+		if @ideas
+			respond_with(@ideas)
+		else
+			render json: {errors: "Could not find files for user"}
+		end
+	end
  
  private
     def set_idea

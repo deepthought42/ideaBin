@@ -2,7 +2,8 @@ IdeaBin::Application.routes.draw do
 
 	resources :application
   root 'application#index'
-  #get '*path' => 'application#index'
+  get '/userIdeas/:id' => 'ideas#userIdeas'
+	
   resources :directories do
 		member do
 			get 'topDir'
