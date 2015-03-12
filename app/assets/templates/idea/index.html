@@ -6,7 +6,7 @@
       </h1>
     </div>
     <div class="row text-center">
-			<div class="col-md-3 ideaItem text-center" ng-repeat="idea in ideas">
+			<div class="col-md-3 ideaItem text-center" ng-repeat="idea in ideas track by idea.name">
 				<div class="ideaImg">
 					<img ng-src="/images/cover_images/{{idea.cover_img_file_name}}" />
 					<div class="btn-group" role="group" aria-label="...">

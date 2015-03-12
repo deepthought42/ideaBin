@@ -33,8 +33,19 @@ app.controller("IdeaIndexCtrl", ['$scope', '$localStorage', 'Idea', '$location',
 			$scope.isCreateIdeaPanelVisible = true;
 		}
 	
-		$scope.showMyIdeas = function(){
-			$location.path('/ideas');
+		$scope.$on('showMyIdeas', function(event, userId){
+			$scope.showUserIdeas(userId);
+		});
+		
+		$scope.showUserIdeas = function(userId){
+			console.log("CURRENT USER :: " + userId);
+			$http.get("/userIdeas/" + userId+".json")
+				.success(function(data){ 
+					$scope.ideas = data;
+				})
+				.error(function(data){
+					alert(data.errors);
+				});
 		}
 		
 		$rootScope.$on('hideCreateIdeaPanel', function(event, data) {

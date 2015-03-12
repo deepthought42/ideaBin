@@ -9,7 +9,7 @@
 </head>
 <body ng-app="ideaBin">
  <div id="sideMenu" class="text-center show-menu">
-    <div ng-controller="IdeaIndexCtrl">
+    <div ng-controller="NavigationController">
 			<button class="btn btn-default"  ng-click="showNewIdea()" >Add New Idea</button>
 			<ul id="sidebarList">
         <li ng-click="showMyIdeas()">MY IDEAS</li>
@@ -33,13 +33,13 @@
 		<span ng-show="!user.id">
 			<a ng-href="/sign_in">Sign in</a> |
 		</span>
-		<span ng-show="user.id">
+		<span class="pointerCursor" ng-show="user.id">
 			<a ng-click='logout(user)'>Sign out</a> |
 		</span>
-		<span ng-show="user.id" >
+		<span class="pointerCursor" ng-show="user.id" >
 			<a class='navbar-link' ng-href="/users/edit">Edit profile</a> 
 		</span>
-		<span ng-show="!user.id" >
+		<span class="pointerCursor" ng-show="!user.id" >
 			<a class='navbar-link' ng-href="/register" >Sign up</a> 
 		</span>	
 	</div>
