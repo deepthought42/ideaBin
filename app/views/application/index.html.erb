@@ -10,11 +10,11 @@
 <body ng-app="ideaBin">
  <div id="sideMenu" class="text-center show-menu">
     <div ng-controller="NavigationController">
-			<button class="btn btn-default"  ng-click="showNewIdea()" >Add New Idea</button>
+			<button class="btn btn-default" ng-click="showNewIdea()" >Add New Idea</button>
 			<ul id="sidebarList">
+				<li ng-click="showAllIdeas()">All Ideas</li>
         <li ng-click="showMyIdeas()">MY IDEAS</li>
 			</ul>
-			<div ng-include="'idea/new.html'" ></div>
     </div>
 
 		<div class="btn-toggle-wrapper">

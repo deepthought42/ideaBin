@@ -37,6 +37,14 @@ app.controller("IdeaIndexCtrl", ['$scope', '$localStorage', 'Idea', '$location',
 			$scope.showUserIdeas(userId);
 		});
 		
+		$scope.$on('showAddIdea', function(event, data){
+			$scope.showNewIdea();
+		});
+		
+		$scope.$on('showAllIdeas', function(event, data){
+			$scope.ideas = Idea.query();
+		});
+		
 		$scope.showUserIdeas = function(userId){
 			console.log("CURRENT USER :: " + userId);
 			$http.get("/userIdeas/" + userId+".json")
@@ -48,7 +56,7 @@ app.controller("IdeaIndexCtrl", ['$scope', '$localStorage', 'Idea', '$location',
 				});
 		}
 		
-		$rootScope.$on('hideCreateIdeaPanel', function(event, data) {
+		$scope.$on('hideCreateIdeaPanel', function(event, data) {
 			$scope.isCreateIdeaPanelVisible = false;
 		});
 }]);

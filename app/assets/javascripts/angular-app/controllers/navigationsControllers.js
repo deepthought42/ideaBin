@@ -7,6 +7,10 @@ app.controller("NavigationController",['$scope', '$http', '$rootScope', '$localS
 		}
 		
 		$scope.showNewIdea = function(){
-			
+			$rootScope.$broadcast('showAddIdea');
+		}
+		
+		$scope.showAllIdeas = function(){
+			$rootScope.$broadcast('showAllIdeas');
 		}
 	}]);
