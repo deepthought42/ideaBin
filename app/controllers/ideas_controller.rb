@@ -59,17 +59,15 @@ class IdeasController < ApplicationController
     @idea = Idea.new(ActiveSupport::JSON.decode(params[:idea]))
 		
     @idea.user_id = current_user.id
-    directory = "#{Rails.root}/public/images/cover_images/"
-		@idea.cover_img = params[:cover_img]
-
-		DataFile.save(params[:cover_img], directory)
 		repo_path = "#{Rails.root}/public/data/repository/#{current_user.id}" 
+		@idea.cover_img = params[:cover_img]
+				
 		unless File.exists?(repo_path)
 			Dir.mkdir(repo_path)
 		end
 		
-		if @idea.save
-				#create directory in database to associate the directory created in the file systems.
+		
+			#create directory in database to associate the directory created in the file systems.
 			@directory = Directory.new()
 			@directory.name = @idea.name
 			@directory.idea_id = @idea.id
@@ -78,8 +76,12 @@ class IdeasController < ApplicationController
 			Dir.chdir(repo_path)
 			@git = Git.init(@idea.name)
 
+			@idea.path = "/data/repository/#{current_user.id}/#{@idea.name}"
+			DataFile.save(params[:cover_img], @directory.path)
+			
 			@directory.save
-		end
+			@idea.save
+
 		respond_with(@idea)
   end
 

@@ -45,8 +45,11 @@ app.controller("IdeaIndexCtrl", ['$scope', '$localStorage', 'Idea', '$location',
 			$scope.ideas = Idea.query();
 		});
 		
+		$scope.$on('addIdeaToList', function(event, data){
+			$scope.ideas.push(data);
+		});
+		
 		$scope.showUserIdeas = function(userId){
-			console.log("CURRENT USER :: " + userId);
 			$http.get("/userIdeas/" + userId+".json")
 				.success(function(data){ 
 					$scope.ideas = data;
@@ -132,9 +135,7 @@ app.controller('IdeaCreationCtrl', ['$scope', '$rootScope', 'Idea', '$location',
 		$scope.ideaForm.cover_img_file_name = "no-image-found.png";
 
 		$scope.createNewIdea = function(){
-			//Take the first selected file
 			$scope.uploadFile();
-			//Idea.create($scope.ideaForm);
 		}
 		
 		$scope.uploadFile = function(){
@@ -150,6 +151,8 @@ app.controller('IdeaCreationCtrl', ['$scope', '$rootScope', 'Idea', '$location',
 				console.log('progress: ' + parseInt(100.0 * evt.loaded / evt.total));
 			}).success(function(data, status, headers, config) {
 				console.log('file ' + config.file.name + 'is uploaded successfully. Response: ' + data);
+				$rootScope.$broadcast('hideCreateIdeaPanel');
+				$rootScope.$broadcast('addIdeaToList', data);
 			});
 		}
 		
