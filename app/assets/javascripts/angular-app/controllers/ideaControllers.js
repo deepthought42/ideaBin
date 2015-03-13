@@ -46,7 +46,6 @@ app.controller("IdeaIndexCtrl", ['$scope', '$localStorage', 'Idea', '$location',
 		});
 		
 		$scope.showUserIdeas = function(userId){
-			console.log("CURRENT USER :: " + userId);
 			$http.get("/userIdeas/" + userId+".json")
 				.success(function(data){ 
 					$scope.ideas = data;
