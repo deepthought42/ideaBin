@@ -1,37 +1,37 @@
 
 <div class="container" ng-controller="IdeaIndexCtrl">
-		<div ng-include="'idea/new.html'" ></div>
+	<div ng-include="'idea/new.html'" ></div>
 
-    <div class="row text-center">
-      <h1 id="headerIdeas">
-        These are your ideas.<br>Make the most of them.
-      </h1>
-    </div>
-    <div class="row text-center">
-			<div class="col-md-3 ideaItem text-center" ng-repeat="idea in ideas">
-              <div class="flip-container" ontouchstart="this.classList.toggle('hover');">
-                <div class="flipper">
-                    <div class="front">
-                      <div class="ideaImg">
-                        <img ng-src="/images/cover_images/{{idea.cover_img_file_name}}" />
-                        <div class="btn-group" role="group" aria-label="...">
-                            <i type="button" class="fa fa-pencil ideaIcon" ng-click="editIdea(idea.id)">
-                            </i>
-                            <i type="button" class="fa fa-times ideaIcon" ng-click="deleteIdea(idea)">
-                            </i>
-                        </div>
-				      </div>
-                    </div>
-                    <div class="back">
-                      <h3 class="title">{{idea.name}}</h3>
-                        <div class="description">
-                            <p>
-                                {{idea.description}}  
-                            </p>
-                        </div>
-                    </div>
-                </div>
-              </div>
+	<div class="row text-center">
+		<h1 id="headerIdeas">
+			These are your ideas.<br>Make the most of them.
+		</h1>
+	</div>
+	<div class="row text-center">
+		<div class="col-md-3 ideaItem text-center" ng-repeat="idea in ideas">
+			<div class="flip-container" ontouchstart="this.classList.toggle('hover');">
+				<div class="flipper">
+					<div class="front">
+						<div class="ideaImg">
+							<img ng-src="{{idea.path}}/{{idea.cover_img_file_name}}" />
+							<div class="btn-group" role="group" aria-label="...">
+								<i type="button" class="fa fa-pencil ideaIcon" ng-click="editIdea(idea.id)">
+								</i>
+								<i type="button" class="fa fa-times ideaIcon" ng-click="deleteIdea(idea)">
+								</i>
+							</div>
+						</div>
+						</div>
+						<div class="back">
+							<h3 class="title">{{idea.name}}</h3>
+							<div class="description">
+								<p>
+									{{idea.description}}  
+								</p>
+							</div>
+						</div>
+					</div>
+				</div>
 			</div>
     </div>
   </div>

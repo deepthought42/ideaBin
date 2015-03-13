@@ -76,7 +76,7 @@ class IdeasController < ApplicationController
 			Dir.chdir(repo_path)
 			@git = Git.init(@idea.name)
 
-			@idea.path = @directory.path
+			@idea.path = "/data/repository/#{current_user.id}/#{@idea.name}"
 			DataFile.save(params[:cover_img], @directory.path)
 			
 			@directory.save
