@@ -207,7 +207,13 @@
 	}
 
 .flip-container, .front, .back {
+    height: 200px;
+    width: 100%;
+}
 
+.back{
+  background-color: rgba(27,79,125,1.0);
+  color: #fff;
 }
 
 /* flip speed goes here */

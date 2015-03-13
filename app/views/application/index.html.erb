@@ -28,21 +28,7 @@
 
 
 <div class="container-fluid fixed-top">
-	<div id="userInfo" class="col-md-3 pull-right" ng-controller="UserSessionCtrl">
-		Logged in as <strong>{{user.email}}</strong>.
-		<span ng-show="!user.id">
-			<a ng-href="/sign_in">Sign in</a> |
-		</span>
-		<span class="pointerCursor" ng-show="user.id">
-			<a ng-click='logout(user)'>Sign out</a> |
-		</span>
-		<span class="pointerCursor" ng-show="user.id" >
-			<a class='navbar-link' ng-href="/users/edit">Edit profile</a> 
-		</span>
-		<span class="pointerCursor" ng-show="!user.id" >
-			<a class='navbar-link' ng-href="/register" >Sign up</a> 
-		</span>	
-	</div>
+	<div ng-include="'user/sessionToolbar.html'"></div>
 	<div ng-view=""></div>
 </div>
 
