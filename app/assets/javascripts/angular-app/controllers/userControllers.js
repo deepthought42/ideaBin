@@ -59,27 +59,48 @@ app.controller('UserSessionCtrl', ['$scope', 'Auth', '$location', '$localStorage
 			});
 		}
 		
-		$scope.register = function(){
-			var credentials = {
-				email: $scope.registrationForm.email,
-				password: $scope.registrationForm.password,
-				password_confirmation: $scope.registrationForm.confirmation_password
-			};
-
-			Auth.register(credentials).then(function(registeredUser) {
-				console.log(registeredUser); // => {id: 1, ect: '...'}
-			}, function(error) {
-				alert("Something went wrong during registration. Womp womp");
-			});
-
-			$scope.$on('devise:new-registration', function(event, user) {
-				$scope.$storage.user = user;
-				$location.path('/ideas');
-			});
-		}
+		$scope.$on('userRegistered', function(event, data){
+			$scope.user = data;
+		})
 		
 		$scope.editProfile = function(){
 			$scope.user = $scope.$storage.user;
 		}
 	}
 ]);
+
+app.controller('UserDetailController', ['$scope', '$location', '$localStorage',
+	function ($scope, $location, $localStorage) { 
+		
+	}
+);
+
+app.controller('UserAuthenticateController', ['$scope', '$location', '$localStorage',
+	function ($scope, $location, $localStorage) { 
+		
+	}
+);
+
+app.controller('UserRegisterController', ['$scope', 'Auth', '$location', '$localStorage',
+	function ($scope, Auth, $location, $localStorage) { 
+	
+	$scope.register = function(){
+		var credentials = {
+			email: $scope.registrationForm.email,
+			password: $scope.registrationForm.password,
+			password_confirmation: $scope.registrationForm.confirmation_password
+		};
+
+		Auth.register(credentials).then(function(registeredUser) {
+			console.log(registeredUser); // => {id: 1, ect: '...'}
+		}, function(error) {
+			alert("Something went wrong during registration. Womp womp");
+		});
+
+		$scope.$on('devise:new-registration', function(event, user) {
+			$scope.$storage.user = user;
+			$rootScope.$broadcast('userRegistered', user);
+			$location.path('/ideas');
+		});
+	}
+})
