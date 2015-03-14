@@ -13,8 +13,11 @@ app.controller('UserSessionCtrl', ['$scope', 'Auth', '$location', '$localStorage
 		$scope.$storage = $localStorage;
 		
 		$scope.signedIn = Auth.isAuthenticated;
-		$scope.logout = Auth.logout;
 		$scope.user = $scope.$storage.user;
+		
+		$scope.updateUser = function( user){
+				$scope.user = user;
+		}
 		
 		$scope.signIn = function(loginForm){
 			var credentials = {
@@ -25,6 +28,7 @@ app.controller('UserSessionCtrl', ['$scope', 'Auth', '$location', '$localStorage
 			//Authenticate with user credentials
 			Auth.login(credentials).then(function(user) {
 				$scope.$storage.user = user;
+				$scope.updateUser(user);
 				console.log($scope.$storage.user); // => {id: 1, ect: '...'}
 			}, function(error) {
 				alert("Failed to log in");
@@ -36,7 +40,7 @@ app.controller('UserSessionCtrl', ['$scope', 'Auth', '$location', '$localStorage
 
 			$scope.$on('devise:new-session', function(event, currentUser) {
 					$scope.$storage.user = currentUser;
-					console.log($scope.$storage.user);
+					console.log("NEW SESSION USER VALUE :: " + $scope.$storage.user);
 					$location.path('/ideas');
 			});
 		
@@ -45,6 +49,7 @@ app.controller('UserSessionCtrl', ['$scope', 'Auth', '$location', '$localStorage
 		$scope.logout = function(user){
 			Auth.logout().then(function(user) {
 				alert($scope.$storage.user.email + "you're signed out now.");
+				$scope.user = {}
 			}, function(error) {
 				// An error occurred logging out.
 			});
