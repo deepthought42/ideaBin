@@ -1,9 +1,9 @@
 <div id="userInfo" class="col-md-5 pull-right" ng-controller="UserSessionCtrl">
-	<span ng-show="!user.id" class="pull-right">
+	<span ng-show="!$storage.user.id" class="pull-right">
 		<a class="pointerCursor" ng-click="showSignInForm()">Sign in</a> |
 		<a class='pointerCursor navbar-link' ng-click="showRegistrationForm()">Sign up</a>
 	</span>
-	<span  ng-show="user.id" class="pull-right">
+	<span  ng-show="$storage.user.id" class="pull-right">
 		<div class="col-md-8 pull-right">
 			Logged in as <strong>{{user.email}}</strong>.
 		</div>

@@ -36,14 +36,14 @@ app.controller('UserSessionCtrl', ['$scope', 'Auth', '$location', '$localStorage
 		$scope.logout = function(user){
 			Auth.logout().then(function(user) {
 				alert($scope.$storage.user.email + "you're signed out now.");
-				$scope.user = {}
+				$scope.user = null;
 				$('#editProfileForm').hide();
 			}, function(error) {
 				// An error occurred logging out.
 			});
 
 			$scope.$on('devise:logout', function(event, oldCurrentUser) {
-				$scope.$storage.user = {}
+				$scope.$storage.user = null;
 			});
 		}
 		
