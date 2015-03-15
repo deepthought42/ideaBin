@@ -23,17 +23,18 @@
     <div id="ideabin">
         <img id="ideabinLogo" src="http://darrohndesign.com/ideabin/ideabin.jpg" />
     </div>
-</div>
+	</div>
 
+	<div id="authorizationPanels">
+		<div ng-include="'user/edit.html'" ></div>
+		<div ng-include="'user/register.html'" ></div>
+		<div ng-include="'user_session/new.html'" ></div>
+	</div>
+	<div class="container-fluid fixed-top">
+		<div ng-include="'user/sessionToolbar.html'"></div>
 
-<div class="container-fluid fixed-top">
-	<div ng-include="'user/sessionToolbar.html'"></div>
-	<div ng-include="'user/edit.html'" ></div>
-	<div ng-include="'user/register.html'" ></div>
-	<div ng-include="'user_session/new.html'" ></div>
-	<div ng-view=""></div>
-</div>
-
+		<div ng-view=""></div>
+	</div>
 </body>
 </html>
 
