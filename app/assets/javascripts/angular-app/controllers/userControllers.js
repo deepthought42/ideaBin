@@ -60,7 +60,7 @@ app.controller('UserSessionCtrl', ['$scope', 'Auth', '$location', '$localStorage
 app.controller('UserDetailController', ['$scope', '$location', '$localStorage',
 	function ($scope, $location, $localStorage) { 
 		$scope.hideEditProfilePanel =  function(){
-			$('#editProfileForm').slideUp().delay(100);
+			$('#editProfileForm').hide();
 		}
 	}
 ]);
@@ -70,7 +70,7 @@ app.controller('UserAuthenticateController', ['$scope', '$rootScope', 'Auth', '$
 		$scope.$storage = $localStorage;
 		
 		$scope.hideSignInPanel = function() {
-			$('#signInForm').slideUp().delay(100);
+			$('#signInForm').hide;
 		}
 	
 		$scope.signIn = function(loginForm){

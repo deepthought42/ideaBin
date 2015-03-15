@@ -1,7 +1,4 @@
 <div id="userRegistrationForm" ng-controller="UserRegisterController">
-	<div class="col-md-12 closeButton">
-		<i class="fa fa-times hidePanelButton" ng-click="hideEditProfilePanel()"></i>
-	</div>
 	<div class="col-md-12">
 		<form role="form" ng-init="registrationForm = {}"> 
 			<div class="form-group">
@@ -13,7 +10,8 @@
 			<div class="form-group"> 
 				<input placeholder= "Confirm Password" type="password" name="confirmation_password" id="confirmation_password" ng-model="registrationForm.confirmation_password" required="required" class="form-control"> 
 			</div> 
-			<button type="submit" class="btn btn-primary btn-sm pull-center;" ng-click="register()">Sign up</button> 
+			<button type="submit" class="btn btn-primary btn-sm" ng-click="register()">Sign up</button> 
+			<button class="btn btn-primary btn-sm pull-right" ng-click="hideEditProfilePanel()">Cancel</button>
 		</form>
 	</div>
 </div>

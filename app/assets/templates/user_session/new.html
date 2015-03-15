@@ -1,7 +1,4 @@
 <div id="signInForm" ng-controller="UserAuthenticateController">
-	<div class="col-md-12 closeButton" >
-		<i class="fa fa-times hidePanelButton" ng-click="hideSignInPanel()"></i>
-	</div>
 	<div class="col-md-12">
 		<form role="form" ng-init="loginForm = {}"> 
 			
@@ -11,7 +8,8 @@
 			<div class="form-group"> 
 				<input type="password" name="password" id="password" ng-model="loginForm.password" required="required" class="form-control" placeholder="Password"> 
 			</div> 
-			<button type="submit" class="btn btn-primary btn-sm pull-right" ng-click="signIn(loginForm)">Sign in</button> 
+			<button type="submit" class="btn btn-primary btn-sm" ng-click="signIn(loginForm)">Sign in</button> 
+			<button class="btn btn-primary btn-sm pull-right" ng-click="hideSignInPanel()">Cancel</button>
 		</form>
 	</div>
 </div>
