@@ -20,15 +20,17 @@ app.controller('UserSessionCtrl', ['$scope', 'Auth', '$location', '$localStorage
 		});
 		
 		$scope.showRegistrationForm = function(){
-			$('#userRegistrationForm').slideDown().delay(100);
+			$('#signInForm').hide();
+			$('#userRegistrationForm').show();
 		}
 		
 		$scope.showEditProfileForm = function(){
-			$('#editProfileForm').slideDown().delay(100);
+			$('#editProfileForm').show();
 		}
 		
 		$scope.showSignInForm = function() {
-			$('#signInForm').slideDown().delay(100);
+			$('#userRegistrationForm').hide();
+			$('#signInForm').show();
 		}
 		
 		$scope.logout = function(user){
