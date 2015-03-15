@@ -168,13 +168,15 @@
 
 .hidePanelButton{
 	position: 	    absolute;
-	font-size:			2em;
-	top:		    5px;
-	right:			5px;
+	font-size:			1.5em;
+	top:		    		3%;
+	right:					3%;
 }
+
 
 .hidePanelButton:hover{
 	cursor:				pointer;
+	color:				blue;
 }
 
 .toolbar-btn{

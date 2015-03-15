@@ -37,6 +37,7 @@ app.controller('UserSessionCtrl', ['$scope', 'Auth', '$location', '$localStorage
 			Auth.logout().then(function(user) {
 				alert($scope.$storage.user.email + "you're signed out now.");
 				$scope.user = {}
+				$('#editProfileForm').hide();
 			}, function(error) {
 				// An error occurred logging out.
 			});
