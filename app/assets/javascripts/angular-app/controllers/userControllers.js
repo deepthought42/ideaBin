@@ -64,6 +64,8 @@ app.controller('UserDetailController', ['$scope', '$location', '$localStorage',
 
 app.controller('UserAuthenticateController', ['$scope', '$rootScope', 'Auth', '$location', '$localStorage',
 	function ($scope, $rootScope, Auth, $location, $localStorage) { 
+		$scope.$storage = $localStorage;
+		
 		$scope.hideSignInPanel = function() {
 			$('#signInForm').slideUp().delay(100);
 		}
@@ -89,6 +91,7 @@ app.controller('UserAuthenticateController', ['$scope', '$rootScope', 'Auth', '$
 
 			$scope.$on('devise:new-session', function(event, currentUser) {
 					$scope.$storage.user = currentUser;
+					$scope.hideSignInPanel();
 					console.log("NEW SESSION USER VALUE :: " + $scope.$storage.user);
 					$location.path('/ideas');
 			});
