@@ -1,5 +1,9 @@
-<div ng-controller="UserAuthenticateController">
+<div id="signInForm" ng-controller="UserAuthenticateController">
+	<div class="row" >
+		<button class="fa fa-times hidePanelButton" ng-click="hideSignInPanel()"></button>
+	</div>
 	<form role="form" ng-init="loginForm = {}"> 
+		
 		<div class="form-group">
 			<label for="email">Email</label> 
 			<input type="email" name="email" id="email" ng-model="loginForm.email" required="required" class="form-control"> 

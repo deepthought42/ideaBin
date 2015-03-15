@@ -18,7 +18,19 @@ app.controller('UserSessionCtrl', ['$scope', 'Auth', '$location', '$localStorage
 		$scope.$on('userAuthenticated', function(event, user){
 				$scope.user = user;
 		});
-					
+		
+		$scope.showRegistrationForm = function(){
+			$('#userRegistrationForm').slideToggle().delay(100);
+		}
+		
+		$scope.showEditProfileForm = function(){
+			$('#editProfileForm').slideDown().delay(100);
+		}
+		
+		$scope.showSignInForm = function() {
+			$('#signInForm').slideDown().delay(100);
+		}
+		
 		$scope.logout = function(user){
 			Auth.logout().then(function(user) {
 				alert($scope.$storage.user.email + "you're signed out now.");
@@ -44,7 +56,9 @@ app.controller('UserSessionCtrl', ['$scope', 'Auth', '$location', '$localStorage
 
 app.controller('UserDetailController', ['$scope', '$location', '$localStorage',
 	function ($scope, $location, $localStorage) { 
-		
+		$scope.hideEditProfilePanel =  function(){
+			$('#editProfileForm').slideUp().delay(100);
+		}
 	}
 ]);
 

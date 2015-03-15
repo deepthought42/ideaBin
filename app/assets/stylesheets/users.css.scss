@@ -1,0 +1,29 @@
+// Place all the styles related to the Users controller here.
+
+
+#userRegistrationForm {
+  margin-bottom: 0px;
+	display:				none;
+}
+
+#editProfileForm {
+	position:					absolute;
+	top:							10%;
+	right:						5%;
+	width:						20%;
+	height:						50%;
+	background-color: #ffffff;
+  margin-bottom: 		0px;
+	display:					none;
+	z-index:					5;
+}
+
+#signInForm {
+
+  margin-bottom:  0px;
+	display:				none;
+}
+
+.closeButton {
+	height:				15%;
+}

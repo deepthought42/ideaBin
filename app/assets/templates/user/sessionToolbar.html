@@ -1,10 +1,10 @@
 <div id="userInfo" class="col-md-3 pull-right" ng-controller="UserSessionCtrl">
 	<span ng-show="!user.id">
-		<a class="pointerCursor" ng-href="/sign_in">Sign in</a> |
-		<a class='pointerCursor navbar-link' ng-href="/register" >Sign up</a>
+		<a class="pointerCursor" ng-click="showAuthenticationForm()">Sign in</a> |
+		<a class='pointerCursor navbar-link' ng-click="showRegistrationForm()">Sign up</a>
 	</span>
 	<span  ng-show="user.id">
 		Logged in as <strong>{{user.email}}</strong>.<a class="pointerCursor" ng-click='logout(user)'>Sign out</a> |
-		<a class='pointerCursor navbar-link' ng-href="/users/edit">Edit profile</a> 
+		<a class='pointerCursor navbar-link' ng-click="showEditProfileForm()">Edit profile</a> 
 	</span>
 </div>
