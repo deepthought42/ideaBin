@@ -104,8 +104,8 @@ app.controller('UserAuthenticateController', ['$scope', '$rootScope', 'Auth', '$
 
 app.controller('UserRegisterController', ['$scope', 'Auth', '$location', '$localStorage',
 	function ($scope, Auth, $location, $localStorage) { 
-		$scope.hideEditProfilePanel = function(){
-			$('#userRegistrationForm').slideUp().delay(100);
+		$scope.hideRegistrationPanel = function(){
+			$('#userRegistrationForm').hide();
 		}
 		$scope.register = function(){
 			var credentials = {
