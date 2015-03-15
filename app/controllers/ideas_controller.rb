@@ -1,5 +1,5 @@
 class IdeasController < ApplicationController
-  before_filter :authenticate_user!
+  before_filter :authenticate_user!, except: [:index]
 	before_action :set_idea, except: [:new, :create, :index, :userIdeas]
 	respond_to :json
 	
