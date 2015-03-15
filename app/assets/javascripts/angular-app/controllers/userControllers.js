@@ -20,7 +20,7 @@ app.controller('UserSessionCtrl', ['$scope', 'Auth', '$location', '$localStorage
 		});
 		
 		$scope.showRegistrationForm = function(){
-			$('#userRegistrationForm').slideToggle().delay(100);
+			$('#userRegistrationForm').slideDown().delay(100);
 		}
 		
 		$scope.showEditProfileForm = function(){
@@ -64,6 +64,10 @@ app.controller('UserDetailController', ['$scope', '$location', '$localStorage',
 
 app.controller('UserAuthenticateController', ['$scope', '$rootScope', 'Auth', '$location', '$localStorage',
 	function ($scope, $rootScope, Auth, $location, $localStorage) { 
+		$scope.hideSignInPanel = function() {
+			$('#signInForm').slideUp().delay(100);
+		}
+	
 		$scope.signIn = function(loginForm){
 			var credentials = {
 				email: $scope.loginForm.email,
@@ -94,7 +98,9 @@ app.controller('UserAuthenticateController', ['$scope', '$rootScope', 'Auth', '$
 
 app.controller('UserRegisterController', ['$scope', 'Auth', '$location', '$localStorage',
 	function ($scope, Auth, $location, $localStorage) { 
-	
+		$scope.hideEditProfilePanel = function(){
+			$('#userRegistrationForm').slideUp().delay(100);
+		}
 		$scope.register = function(){
 			var credentials = {
 				email: $scope.registrationForm.email,

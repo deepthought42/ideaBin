@@ -2,8 +2,15 @@
 
 
 #userRegistrationForm {
-  margin-bottom: 0px;
-	display:				none;
+  position:					absolute;
+	top:							10%;
+	right:						5%;
+	width:						20%;
+	height:						50%;
+	background-color: #ffffff;
+  margin-bottom: 		0px;
+	display:					none;
+	z-index:					5;
 }
 
 #editProfileForm {
@@ -19,11 +26,17 @@
 }
 
 #signInForm {
-
-  margin-bottom:  0px;
-	display:				none;
+	position:					absolute;
+	top:							20%;
+	right:						5%;
+	width:						20%;
+	height:						100%;
+	background-color: #ffffff;
+  margin-bottom: 		0px;
+	display:					none;
+	z-index:					5;
 }
 
 .closeButton {
-	height:				15%;
+	height:				20%;
 }
