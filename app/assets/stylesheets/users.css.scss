@@ -4,7 +4,7 @@
 #userRegistrationForm {
   position:					absolute;
 	width:						100%;
-	height:						125%;
+	height:						100%;
 	background-color: #ffffff;
   margin-bottom: 		0px;
 	display:					none;
@@ -23,9 +23,9 @@
 
 #signInForm {
 	position:					absolute;
-	right:						20%;
+	right:						25%;
 	width:						100%;
-	height:						100%;
+	height:						80%;
 	background-color: #ffffff;
   margin-bottom: 		0px;
 	display:					none;
@@ -34,4 +34,10 @@
 
 .closeButton {
 	height:				20%;
+}
+
+#userInfo{
+  position: 	absolute;
+  right:		 	0px;
+  top: 				10px;
 }

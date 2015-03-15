@@ -51,20 +51,14 @@ body{
   top:0;
 }
 
-#userInfo{
-  position: absolute;
-  right: 0;
-  top: 10px;
-}
-
 .pointerCursor {
 	cursor:								pointer;
 }
 
 #authorizationPanels {
 	position:			absolute;
-	right:				10%;
-	top:					50%;
+	right:				1%;
+	top:					5%;
 	width:				20%;
 	height:				40%;
 }
