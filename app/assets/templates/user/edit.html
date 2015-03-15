@@ -1,16 +1,21 @@
-<div ng-controller="UserDetailController">
-	<form role="form"> 
-		<div class="form-group">
-			<input placeholder= "Email" type="email" name="email" id="email" ng-model="user.email" required="required" class="form-control"> 
-		</div> 
-		
-		Change Password
-		<div class="form-group"> 
-			<input placeholder= "Password" type="password" name="password" id="password" ng-model="user.password" required="required" class="form-control"> 
-		</div> 
-		<div class="form-group"> 
-			<input placeholder= "Confirm Password" type="password" name="confirmation_password" id="confirmation_password" ng-model="user.confirmation_password" required="required" class="form-control"> 
-		</div> 
-		<button type="submit" class="btn btn-primary btn-lg" ng-click="register()">Sign up</button> 
-	</form>
+<div id="editProfileForm" ng-controller="UserDetailController" >
+	<div class="col-md-12 closeButton">
+		<button class="fa fa-times hidePanelButton" ng-click="hideEditProfilePanel()"></button>
+	</div>
+	<div class="col-md-12">
+		<form role="form"> 
+			<div class="form-group">
+				<input placeholder= "Email" type="email" name="email" id="email" ng-model="user.email" required="required" class="form-control"> 
+			</div> 
+			
+			Change Password
+			<div class="form-group"> 
+				<input placeholder= "Password" type="password" name="password" id="password" ng-model="user.password" required="required" class="form-control"> 
+			</div> 
+			<div class="form-group"> 
+				<input placeholder= "Confirm Password" type="password" name="confirmation_password" id="confirmation_password" ng-model="user.confirmation_password" required="required" class="form-control"> 
+			</div> 
+			<button type="submit" class="btn btn-primary btn-lg" ng-click="register()">Save</button> 
+		</form>
+	</div>
 </div>

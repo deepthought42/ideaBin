@@ -1,13 +1,19 @@
-<div ng-controller="UserAuthenticateController">
-	<form role="form" ng-init="loginForm = {}"> 
-		<div class="form-group">
-			<label for="email">Email</label> 
-			<input type="email" name="email" id="email" ng-model="loginForm.email" required="required" class="form-control"> 
-		</div> 
-		<div class="form-group"> 
-			<label for="password">Password</label> 
-			<input type="password" name="password" id="password" ng-model="loginForm.password" required="required" class="form-control"> 
-		</div> 
-		<button type="submit" class="btn btn-primary btn-lg" ng-click="signIn(loginForm)">Sign in</button> 
-	</form>
+<div id="signInForm" ng-controller="UserAuthenticateController">
+	<div class="col-md-12 closeButton" >
+		<button class="fa fa-times hidePanelButton" ng-click="hideSignInPanel()"></button>
+	</div>
+	<div class="col-md-12">
+		<form role="form" ng-init="loginForm = {}"> 
+			
+			<div class="form-group">
+				<label for="email">Email</label> 
+				<input type="email" name="email" id="email" ng-model="loginForm.email" required="required" class="form-control"> 
+			</div> 
+			<div class="form-group"> 
+				<label for="password">Password</label> 
+				<input type="password" name="password" id="password" ng-model="loginForm.password" required="required" class="form-control"> 
+			</div> 
+			<button type="submit" class="btn btn-primary btn-lg" ng-click="signIn(loginForm)">Sign in</button> 
+		</form>
+	</div>
 </div>

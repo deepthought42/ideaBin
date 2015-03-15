@@ -18,7 +18,19 @@ app.controller('UserSessionCtrl', ['$scope', 'Auth', '$location', '$localStorage
 		$scope.$on('userAuthenticated', function(event, user){
 				$scope.user = user;
 		});
-					
+		
+		$scope.showRegistrationForm = function(){
+			$('#userRegistrationForm').slideDown().delay(100);
+		}
+		
+		$scope.showEditProfileForm = function(){
+			$('#editProfileForm').slideDown().delay(100);
+		}
+		
+		$scope.showSignInForm = function() {
+			$('#signInForm').slideDown().delay(100);
+		}
+		
 		$scope.logout = function(user){
 			Auth.logout().then(function(user) {
 				alert($scope.$storage.user.email + "you're signed out now.");
@@ -44,12 +56,20 @@ app.controller('UserSessionCtrl', ['$scope', 'Auth', '$location', '$localStorage
 
 app.controller('UserDetailController', ['$scope', '$location', '$localStorage',
 	function ($scope, $location, $localStorage) { 
-		
+		$scope.hideEditProfilePanel =  function(){
+			$('#editProfileForm').slideUp().delay(100);
+		}
 	}
 ]);
 
 app.controller('UserAuthenticateController', ['$scope', '$rootScope', 'Auth', '$location', '$localStorage',
 	function ($scope, $rootScope, Auth, $location, $localStorage) { 
+		$scope.$storage = $localStorage;
+		
+		$scope.hideSignInPanel = function() {
+			$('#signInForm').slideUp().delay(100);
+		}
+	
 		$scope.signIn = function(loginForm){
 			var credentials = {
 				email: $scope.loginForm.email,
@@ -71,6 +91,7 @@ app.controller('UserAuthenticateController', ['$scope', '$rootScope', 'Auth', '$
 
 			$scope.$on('devise:new-session', function(event, currentUser) {
 					$scope.$storage.user = currentUser;
+					$scope.hideSignInPanel();
 					console.log("NEW SESSION USER VALUE :: " + $scope.$storage.user);
 					$location.path('/ideas');
 			});
@@ -80,7 +101,9 @@ app.controller('UserAuthenticateController', ['$scope', '$rootScope', 'Auth', '$
 
 app.controller('UserRegisterController', ['$scope', 'Auth', '$location', '$localStorage',
 	function ($scope, Auth, $location, $localStorage) { 
-	
+		$scope.hideEditProfilePanel = function(){
+			$('#userRegistrationForm').slideUp().delay(100);
+		}
 		$scope.register = function(){
 			var credentials = {
 				email: $scope.registrationForm.email,
