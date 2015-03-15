@@ -70,7 +70,7 @@ app.controller('UserAuthenticateController', ['$scope', '$rootScope', 'Auth', '$
 		$scope.$storage = $localStorage;
 		
 		$scope.hideSignInPanel = function() {
-			$('#signInForm').hide;
+			$('#signInForm').hide();
 		}
 	
 		$scope.signIn = function(loginForm){
