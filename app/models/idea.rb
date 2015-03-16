@@ -4,4 +4,5 @@ class Idea < ActiveRecord::Base
   has_many   :resources
 	has_attached_file :cover_img
 	validates_attachment :cover_img, content_type: { content_type: ["image/jpeg", "image/jpeg", "image/png", "image/gif"] }
+	validates :name, :presence => true
 end
