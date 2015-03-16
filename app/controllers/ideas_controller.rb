@@ -34,10 +34,8 @@ class IdeasController < ApplicationController
   # GET /ideas/1/edit
   def edit
     @idea = Idea.find(params[:id])
-    session[:idea_id] = params[:id] 
 		@directoryParent = Directory.where("idea_id = ? AND is_top = ?", @idea.id, true).take
-		session[:directory_id] = @directoryParent.id
-
+	
     repo_path = "#{Rails.root}/public/data/repository/#{current_user.id}/#{@idea.name}"
 		
     #clone idea repo from owners copy if current user isn't owner
