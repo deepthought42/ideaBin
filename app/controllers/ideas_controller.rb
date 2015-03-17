@@ -39,13 +39,22 @@ class IdeasController < ApplicationController
     repo_path = "#{Rails.root}/public/data/repository/#{current_user.id}/#{@idea.name}"
 		
     #clone idea repo from owners copy if current user isn't owner
-		unless File.exists?(repo_path)
-			Dir.mkdir(repo_path)
-		end
-
+		@repo = IdeasUsers.find(user_id: current_user.id, parent_id: @idea.id)
+		
     if(current_user.id != @idea.user_id)
+			unless File.exists?(repo_path)
+				Dir.mkdir(repo_path)
+			end
       Dir.chdir(repo_path)
-    	@git = Git.clone(repo_path, @idea.name)
+			if(!@repo)
+				@git = Git.clone(repo_path, @idea.name)
+				@repo = IdeasUsers.new()
+				@repo.user_id = current_user.id
+				@repo.idea_id = @idea.id
+			else
+				#merge parent into existing repo
+			end
+			
     end
 		
 		respond_with(@idea)
