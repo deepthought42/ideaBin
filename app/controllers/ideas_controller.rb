@@ -59,9 +59,12 @@ class IdeasController < ApplicationController
     @idea.user_id = current_user.id
 		repo_path = "#{Rails.root}/public/data/repository/#{current_user.id}" 
 		@idea.cover_img = params[:cover_img]
-				
+		
 		unless File.exists?(repo_path)
 			Dir.mkdir(repo_path)
+			@repo = IdeasUsers.new()
+			@repo.user_id = current_user.id
+			@repo.idea_id = @idea.id
 		end
 		
 		

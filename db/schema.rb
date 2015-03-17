@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150316024922) do
+ActiveRecord::Schema.define(version: 20150317001534) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -48,6 +48,16 @@ ActiveRecord::Schema.define(version: 20150316024922) do
 
   add_index "ideas", ["user_id"], name: "index_ideas_on_user_id", using: :btree
 
+  create_table "ideas_users", id: false, force: true do |t|
+    t.integer "user_id",         null: false
+    t.integer "idea_id",         null: false
+    t.integer "parent_id"
+    t.boolean "pull_request_id"
+  end
+
+  add_index "ideas_users", ["idea_id"], name: "index_ideas_users_on_idea_id", using: :btree
+  add_index "ideas_users", ["user_id"], name: "index_ideas_users_on_user_id", using: :btree
+
   create_table "participations", force: true do |t|
     t.integer  "idea_id"
     t.integer  "user_id"
@@ -57,14 +67,14 @@ ActiveRecord::Schema.define(version: 20150316024922) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "pullRequests", force: true do |t|
+  create_table "pull_requests", force: true do |t|
     t.integer "user_id",       null: false
     t.integer "repository_id", null: false
     t.string  "message",       null: false
   end
 
-  add_index "pullRequests", ["repository_id"], name: "index_pullRequests_on_repository_id", unique: true, using: :btree
-  add_index "pullRequests", ["user_id"], name: "index_pullRequests_on_user_id", unique: true, using: :btree
+  add_index "pull_requests", ["repository_id"], name: "index_pull_requests_on_repository_id", unique: true, using: :btree
+  add_index "pull_requests", ["user_id"], name: "index_pull_requests_on_user_id", unique: true, using: :btree
 
   create_table "resources", force: true do |t|
     t.string   "comment"
