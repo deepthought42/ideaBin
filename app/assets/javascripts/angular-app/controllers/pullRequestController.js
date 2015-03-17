@@ -115,7 +115,7 @@ app.controller('PullRequestCreationController', ['$scope', '$rootScope', 'PullRe
 		})
 		
 		$scope.hideCreatePullRequestPanel = function(){
-			$rootScope.$broadcast('hideCreatePullRequestPanel');
+			$("#pullRequestCreatePanel").hide();
 		}
 	}
 ]);
