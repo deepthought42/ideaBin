@@ -125,8 +125,7 @@ app.controller('IdeaDetailCtrl', ['$scope', '$localStorage', '$routeParams', 'Id
 		}
 		
 		$scope.showPullRequestCreatePanel = function(){
-			alert("showing pull request panel I think");
-				$rootScope.$broadcast('showPullRequestCreatePanel');
+			$rootScope.$broadcast('showPullRequestCreatePanel');
 		}
 	}
 ]);
