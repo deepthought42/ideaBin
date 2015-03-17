@@ -57,9 +57,12 @@ class PullRequestsController < ApplicationController
 
   # PUT /pullRequests/1
   # PUT /pullRequests/1.json
+	#update will be used for accepting a pull request
   def update
     @pullRequest = PullRequest.find(params[:id])
-	
+		@git = Git.init()
+		g.remote(name).merge(branch2)
+		
     if @pullRequest.save
 			respond_with(@pullRequest)
 		else
