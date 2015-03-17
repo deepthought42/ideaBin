@@ -59,6 +59,10 @@ app.controller("IdeaIndexController", ['$scope', '$localStorage', 'Idea', '$loca
 				});
 		}
 		
+		$scope.showPullCreateRequestPanel = function(){
+				$rootScope.$broadcast('showPullCreateRequestPanel');
+		}
+		
 		$scope.$on('hideCreateIdeaPanel', function(event, data) {
 			$scope.isCreateIdeaPanelVisible = false;
 		});

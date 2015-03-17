@@ -76,9 +76,7 @@ app.controller('PullRequestDetailCtrl', ['$scope', '$localStorage', '$routeParam
 			});
 		}
 		
-		$scope.showPullRequestEditPanel = function() {
-			$rootScope.pullRequestEditPanelVisible = true;
-		}
+		
 		
 		$scope.hidePullRequestEditPanel = function() {
 			$rootScope.pullRequestEditPanelVisible = false;
@@ -98,7 +96,7 @@ app.controller('PullRequestDetailCtrl', ['$scope', '$localStorage', '$routeParam
 	}
 ]);
 
-app.controller('PullRequestCreationCtrl', ['$scope', '$rootScope', 'PullRequest', '$location', '$upload',
+app.controller('PullRequestCreationController', ['$scope', '$rootScope', 'PullRequest', '$location', '$upload',
 	function($scope, $rootScope, PullRequest, $location, $upload ){
 		//callback for ng-click 'createNewPullRequest'
 		$scope.pullRequestForm = {};
@@ -112,14 +110,9 @@ app.controller('PullRequestCreationCtrl', ['$scope', '$rootScope', 'PullRequest'
 			});
 		}
 		
-		$scope.previewImage = function(files){
-			var reader = new FileReader();
-			reader.readAsDataURL(files[0]);
-			reader.onload = function(event){
-				$('#pullRequestCreationImage').attr('src', reader.result);
-				$scope.pullRequestForm.cover_img = files[0];
-			}
-		}
+		$scope.$on('showPullRequestCreatePanel', function() {
+			$("#pullRequestCreatePanel").show();
+		})
 		
 		$scope.hideCreatePullRequestPanel = function(){
 			$rootScope.$broadcast('hideCreatePullRequestPanel');
