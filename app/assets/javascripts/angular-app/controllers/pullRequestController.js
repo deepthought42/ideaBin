@@ -100,10 +100,10 @@ app.controller('PullRequestCreationController', ['$scope', '$rootScope', 'PullRe
 	function($scope, $rootScope, PullRequest, $location, $upload, $localStorage ){
 		//callback for ng-click 'createNewPullRequest'
 		$scope.pullRequestForm = {};
-		$scope.pullRequestForm.user_id = "";
-		$scope.pullRequestForm.idea_id = $localStorage.current_idea.id;
-
+		
+		
 		$scope.createNewPullRequest = function(){
+			$scope.pullRequestForm.idea_id = $localStorage.current_idea.id;
 			PullRequest.create($scope.pullRequestForm, function(){
 				alert("Successfully posted pullRequest");
 			});

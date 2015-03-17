@@ -1,4 +1,4 @@
-class PullRequestController < ApplicationController
+class PullRequestsController < ApplicationController
 	before_filter :authenticate_user!
 	respond_to :json
 	
@@ -45,17 +45,20 @@ class PullRequestController < ApplicationController
   # POST /pullRequests
   # POST /pullRequests.json
   def create
-    @pullRequest = pullRequest.new()
+    @pullRequest = PullRequest.new()
     @pullRequest.user_id = current_user.id
-		@pullRequest.idea_id = params[:idea_id]
+		#needs to be changed to use the repository id as soon as repos are set up
+		IdeasUsers.find(idea_id: params[:idea_id], current_user: current_user.id)
+		@pullRequest.repository_id = 
 		
-		respond_with(@pullRequest)
+		@pullRequest.message = params[:name]
+		@pullRequest.save
   end
 
   # PUT /pullRequests/1
   # PUT /pullRequests/1.json
   def update
-    @pullRequest = pullRequest.find(params[:id])
+    @pullRequest = PullRequest.find(params[:id])
 	
     if @pullRequest.save
 			respond_with(@pullRequest)

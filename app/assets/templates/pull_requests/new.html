@@ -4,6 +4,7 @@
 			<div>
 				<button class="fa fa-times hidePanelButton" ng-click="hideCreatePullRequestPanel()"></button>
 				<form name="pullRequest" enctype="multipart/form-data" novalidate>
+					<input type="hidden" ng-model="pullRequestForm.idea_id" />
 					<div class="field" ng-file-drop ng-file-change="previewImage($files)" ng-model="cover_img" drop-available="dropSupported">			
 						<img id="pullRequestCreationImage" class="cover_img" ng-src="/images/{{pullRequestForm.cover_img_file_name}}" />
 					</div>

@@ -71,12 +71,9 @@ class IdeasController < ApplicationController
 		
 		unless File.exists?(repo_path)
 			Dir.mkdir(repo_path)
-			@repo = IdeasUsers.new()
-			@repo.user_id = current_user.id
-			@repo.idea_id = @idea.id
 		end
 		
-		
+			
 			#create directory in database to associate the directory created in the file systems.
 			@directory = Directory.new()
 			@directory.name = @idea.name
@@ -92,6 +89,11 @@ class IdeasController < ApplicationController
 			@directory.save
 			@idea.save
 
+			@repo = IdeasUsers.new()
+			@repo.user_id = current_user.id
+			@repo.idea_id = @idea.id
+			@repo.save
+			
 		respond_with(@idea)
   end
 
