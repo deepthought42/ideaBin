@@ -42,20 +42,13 @@ class PullRequestController < ApplicationController
     end
   end
 
-  # GET /pullRequests/1/edit
-  def edit
-    @pullRequest = pullRequest.find(params[:id])
-		
-		respond_with(@pullRequest)
-  end
-
   # POST /pullRequests
   # POST /pullRequests.json
   def create
     @pullRequest = pullRequest.new()
     @pullRequest.user_id = current_user.id
-		@pullRequest.repository_id = params[:repo_id]
-
+		@pullRequest.idea_id = params[:idea_id]
+		
 		respond_with(@pullRequest)
   end
 
@@ -70,13 +63,4 @@ class PullRequestController < ApplicationController
 			respond_with(error:	"An error occurred while updating your pull request")
     end
   end
-
-  # DELETE /pullRequests/1
-  # DELETE /pullRequests/1.json
-  def destroy
-    @pullRequest = pullRequest.find(params[:id])
-    @pullRequest.destroy
-
-    respond_with(@pullRequest)
-	end
 end

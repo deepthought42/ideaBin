@@ -1,6 +1,5 @@
 <div id="pullRequestCreatePanel" class="container" ng-controller="PullRequestCreationController">
-	 <div class="row" >
-	  <div  class="col-md-4"></div>
+  <div class="row" >
 		<div class="col-md-4">
 			<div>
 				<button class="fa fa-times hidePanelButton" ng-click="hideCreatePullRequestPanel()"></button>
@@ -11,11 +10,8 @@
 					<div class="field">
 						<input type="text" name="pullRequest[name]" ng-model="pullRequestForm.name" id="name" placeholder="Name"/>
 					</div>
-					<div class="field">
-						<input type="text" name="pullRequest[description]" ng-model="pullRequestForm.description" id="description" placeholder="Description"/>
-					</div>
 					<div class="actions">
-				        <button ng-click="createNewPullRequest(pullRequest)">SAVE</button>      
+						<button ng-click="createNewPullRequest()">SAVE</button>      
 					</div>
 				</form>
 			</div>

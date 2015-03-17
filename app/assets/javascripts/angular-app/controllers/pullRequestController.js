@@ -96,13 +96,12 @@ app.controller('PullRequestDetailCtrl', ['$scope', '$localStorage', '$routeParam
 	}
 ]);
 
-app.controller('PullRequestCreationController', ['$scope', '$rootScope', 'PullRequest', '$location', '$upload',
-	function($scope, $rootScope, PullRequest, $location, $upload ){
+app.controller('PullRequestCreationController', ['$scope', '$rootScope', 'PullRequest', '$location', '$upload','$localStorage',
+	function($scope, $rootScope, PullRequest, $location, $upload, $localStorage ){
 		//callback for ng-click 'createNewPullRequest'
 		$scope.pullRequestForm = {};
-		$scope.pullRequestForm.name = "";
-		$scope.pullRequestForm.description = "";
-		$scope.pullRequestForm.cover_img_file_name = "no-image-found.png";
+		$scope.pullRequestForm.user_id = "";
+		$scope.pullRequestForm.idea_id = $localStorage.current_idea.id;
 
 		$scope.createNewPullRequest = function(){
 			PullRequest.create($scope.pullRequestForm, function(){
