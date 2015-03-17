@@ -59,10 +59,6 @@ app.controller("IdeaIndexController", ['$scope', '$localStorage', 'Idea', '$loca
 				});
 		}
 		
-		$scope.showPullCreateRequestPanel = function(){
-				$rootScope.$broadcast('showPullCreateRequestPanel');
-		}
-		
 		$scope.$on('hideCreateIdeaPanel', function(event, data) {
 			$scope.isCreateIdeaPanelVisible = false;
 		});
@@ -126,6 +122,11 @@ app.controller('IdeaDetailCtrl', ['$scope', '$localStorage', '$routeParams', 'Id
 		
 		$scope.showNewDirectoryPanel = function(){
 			$('#directoryForm').slideToggle().delay(100);
+		}
+		
+		$scope.showPullRequestCreatePanel = function(){
+			alert("showing pull request panel I think");
+				$rootScope.$broadcast('showPullRequestCreatePanel');
 		}
 	}
 ]);
