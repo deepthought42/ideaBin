@@ -61,8 +61,8 @@ class PullRequestsController < ApplicationController
   def update
     @pullRequest = PullRequest.find(params[:id])
 		@git = Git.init()
-		g.remote(name).merge(branch2)
-		
+		g.pull("${idea.path}.git", master) # fetch and a merge
+
     if @pullRequest.save
 			respond_with(@pullRequest)
 		else
