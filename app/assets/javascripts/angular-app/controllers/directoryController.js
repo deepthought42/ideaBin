@@ -15,6 +15,7 @@ app.controller("DirectoryIndexCtrl", ['$scope', '$rootScope', '$localStorage', '
 				$rootScope.$broadcast('loadResources', response.id);
 			},
 			function onFail(response) {
+				alert("Could not find current directory. So you've found what you want, but aint nothing gonna work, because have no idea what it is.");
 					// handle failure
 			});
 		}		

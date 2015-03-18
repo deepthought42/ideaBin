@@ -112,6 +112,10 @@ app.controller('IdeaDetailCtrl', ['$scope', '$localStorage', '$routeParams', 'Id
 			$rootScope.ideaEditPanelVisible = false;
 		}
 		
+		$scope.showPullRequestIndexPage = function() {
+			$location.path("/pullRequests");
+		}
+		
 		$scope.cancel = function(){
 			$location.path('/ideas');
 		}

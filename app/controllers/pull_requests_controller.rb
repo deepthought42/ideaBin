@@ -34,7 +34,7 @@ class PullRequestsController < ApplicationController
   # GET /pullRequests/new
   # GET /pullRequests/new.json
   def new
-    @pullRequest = pullRequest.new
+    @pullRequest = PullRequest.new
 		
     respond_to do |format|
       format.html # new.html.erb

@@ -63,7 +63,7 @@ ideaBin.config(function ($routeProvider, $locationProvider) {
 				.when('/resources/:id', {
 					templateUrl:  'resource/edit.html',
 				})
-				.when('/pullRequest', {
+				.when('/pullRequests', {
 					templateUrl:  'pull_request/index.html',
 				})
 				.when('/pullRequest/:id', {

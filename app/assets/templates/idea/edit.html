@@ -2,9 +2,10 @@
 	<div class="col-md-2 btn-group" role="group" ng-controller="IdeaDetailCtrl">
 		<button class="btn toolbar-btn border-white fa fa-lightbulb-o" ng-click="showIdeaEditPanel()"></button>
 		<button class="btn toolbar-btn border-white fa fa-folder" id="btnAddFolder" ng-click="showNewDirectoryPanel()" />
-		<button class="btn toolbar-btn border-white fa fa-share" id="btnAddFile" ng-click="showPullRequestCreatePanel()"/>
+		<button class="btn toolbar-btn border-white fa fa-share" id="btnAddPullRequest" ng-click="showPullRequestCreatePanel()"/>
+		<button class="btn toolbar-btn border-white fa fa-share" id="btnViewPullRequests" ng-click="showPullRequestIndexPage()" />
 	</div>
-	<div ng-include="'pull_requests/new.html'"></div>
+	<div ng-include="'pull_request/new.html'"></div>
 	<div class="row">
 		<div class="col-md-12">
 				<div class="col-md-12">
