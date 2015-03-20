@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150320024150) do
+ActiveRecord::Schema.define(version: 20150320025608) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -48,17 +48,6 @@ ActiveRecord::Schema.define(version: 20150320024150) do
 
   add_index "ideas", ["user_id"], name: "index_ideas_on_user_id", using: :btree
 
-  create_table "ideas_users", force: true do |t|
-    t.integer "user_id",         null: false
-    t.integer "idea_id",         null: false
-    t.boolean "pull_request_id"
-    t.string  "repo_path"
-  end
-
-  add_index "ideas_users", ["idea_id"], name: "index_ideas_users_on_idea_id", using: :btree
-  add_index "ideas_users", ["user_id", "idea_id"], name: "index_ideas_users_on_user_id_and_idea_id", unique: true, using: :btree
-  add_index "ideas_users", ["user_id"], name: "index_ideas_users_on_user_id", using: :btree
-
   create_table "participations", force: true do |t|
     t.integer  "idea_id"
     t.integer  "user_id"
@@ -76,6 +65,17 @@ ActiveRecord::Schema.define(version: 20150320024150) do
 
   add_index "pull_requests", ["repository_id"], name: "index_pull_requests_on_repository_id", unique: true, using: :btree
   add_index "pull_requests", ["user_id"], name: "index_pull_requests_on_user_id", unique: true, using: :btree
+
+  create_table "repositories", force: true do |t|
+    t.integer "user_id",         null: false
+    t.integer "idea_id",         null: false
+    t.boolean "pull_request_id"
+    t.string  "repo_path"
+  end
+
+  add_index "repositories", ["idea_id"], name: "index_repositories_on_idea_id", using: :btree
+  add_index "repositories", ["user_id", "idea_id"], name: "index_repositories_on_user_id_and_idea_id", unique: true, using: :btree
+  add_index "repositories", ["user_id"], name: "index_repositories_on_user_id", using: :btree
 
   create_table "resources", force: true do |t|
     t.string   "comment"
