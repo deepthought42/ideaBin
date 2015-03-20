@@ -67,7 +67,6 @@ app.controller("IdeaIndexController", ['$scope', '$localStorage', 'Idea', '$loca
 app.controller('IdeaDetailCtrl', ['$scope', '$localStorage', '$routeParams', 'Idea', '$location', '$upload', '$rootScope',
 	function($scope, $localStorage, $routeParams, Idea, $location, $upload, $rootScope){
 		$scope.$storage = $localStorage;
-		$scope.idea = Idea.show({id: $routeParams.id});
 		$rootScope.ideaEditPanelVisible = false;
 
 		$scope.uploadFile = function(){

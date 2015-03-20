@@ -15,7 +15,20 @@ class IdeasController < ApplicationController
   # GET /ideas/1.json
   def show
     @idea = Idea.find(params[:id])
-
+		@idea.users << current_user unless @idea.users.include?(current_user)
+		@directoryParent = Directory.where("idea_id = ? AND is_top = ?", @idea.id, true).take		
+    #clone idea repo from owners copy if current user isn't owner
+    if(current_user.id != @idea.user_id)
+	    repo_path = "#{Rails.root}/public/data/repository/#{@idea.users.first.id}/#{@idea.name}"
+			
+			unless File.exists?(repo_path)
+				Dir.mkdir(repo_path)
+			end
+      Dir.chdir(repo_path)
+			
+			#clone not currently working, because of repo path not being a repository. Maybe think about ideas
+			@git = Git.clone(repo_path, @idea.name)
+		end
 		respond_with(@idea)
 
   end
@@ -34,14 +47,13 @@ class IdeasController < ApplicationController
   # GET /ideas/1/edit
   def edit
     @idea = Idea.find(params[:id])
-		@directoryParent = Directory.where("idea_id = ? AND is_top = ?", @idea.id, true).take
-	
-    repo_path = "#{Rails.root}/public/data/repository/#{current_user.id}/#{@idea.name}"
-		
+		@directoryParent = Directory.where("idea_id = ? AND is_top = ?", @idea.id, true).take		
     #clone idea repo from owners copy if current user isn't owner
-		@repo = IdeasUsers.find(user_id: current_user.id, parent_id: @idea.id)
+		@repo = IdeasUsers.find(user_id: current_user.id, idea_id: @idea.id)
 		
     if(current_user.id != @idea.user_id)
+	    repo_path = "#{Rails.root}/public/data/repository/#{current_user.id}/#{@idea.name}"
+			
 			unless File.exists?(repo_path)
 				Dir.mkdir(repo_path)
 			end
@@ -51,6 +63,7 @@ class IdeasController < ApplicationController
 				@repo = IdeasUsers.new()
 				@repo.user_id = current_user.id
 				@repo.idea_id = @idea.id
+				@repo.save
 			else
 				#merge parent into existing repo
 			end
@@ -72,7 +85,9 @@ class IdeasController < ApplicationController
 		unless File.exists?(repo_path)
 			Dir.mkdir(repo_path)
 		end
-		
+		@idea.path = "/data/repository/#{current_user.id}/#{@idea.name}"
+		@idea.users << current_user unless @idea.users.include?(current_user)
+		@idea.save
 			
 			#create directory in database to associate the directory created in the file systems.
 			@directory = Directory.new()
@@ -82,18 +97,12 @@ class IdeasController < ApplicationController
 			@directory.is_top = true
 			Dir.chdir(repo_path)
 			@git = Git.init(@idea.name)
-
-			@idea.path = "/data/repository/#{current_user.id}/#{@idea.name}"
+			
+			
 			DataFile.save(params[:cover_img], @directory.path)
 			
 			@directory.save
-			@idea.save
-
-			@repo = IdeasUsers.new()
-			@repo.user_id = current_user.id
-			@repo.idea_id = @idea.id
-			@repo.save
-			
+		
 		respond_with(@idea)
   end
 

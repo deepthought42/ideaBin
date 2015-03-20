@@ -47,9 +47,12 @@ class PullRequestsController < ApplicationController
   def create
     @pullRequest = PullRequest.new()
     @pullRequest.user_id = current_user.id
+		@idea = Idea.find(params[:idea_id])
 		#needs to be changed to use the repository id as soon as repos are set up
-		@ideasUser = IdeasUsers.find(idea_id: params[:idea_id], current_user: current_user.id)
-		@pullRequest.repository_id = @ideasUser.id
+		###############################################################################
+		#need the user idea for the specific repo to make request from and repo to make request the
+		########################################################
+		@pullRequest.repository_id = @idea.user.id
 		
 		@pullRequest.message = params[:name]
 		@pullRequest.save

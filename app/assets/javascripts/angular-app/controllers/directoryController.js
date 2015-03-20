@@ -34,13 +34,13 @@ app.controller("DirectoryIndexCtrl", ['$scope', '$rootScope', '$localStorage', '
 			$scope.directories.push(data);
 		});
 		
-		$rootScope.$on('loadTopDirectory', function(event, ideaId) { 
-			$http({method: "GET", url: "/directories/" + $scope.$storage.current_idea.id + "/topDir.json"})
+		$scope.$on('loadTopDirectory', function(event, directoryId) { 
+			$http({method: "GET", url: "/directories/" + directoryId + "/topDir.json"})
 					.success(function(data){ 
 							console.log("DATA :: " + data);
 							$scope.$storage.current_directory = data;
-							$scope.showDirectories($scope.$storage.current_directory.id);
-							$rootScope.$broadcast('loadResources', $scope.$storage.current_directory.id);
+							$scope.showDirectories(data.id);
+							$rootScope.$broadcast('loadResources', data.id);
 					})
 					.error(function(data){
 						alert("Failed to load Directory!");
