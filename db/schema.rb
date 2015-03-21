@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150320030231) do
+ActiveRecord::Schema.define(version: 20150321014803) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -57,23 +57,21 @@ ActiveRecord::Schema.define(version: 20150320030231) do
   end
 
   create_table "pull_requests", force: true do |t|
-    t.integer "user_id",       null: false
     t.integer "repository_id", null: false
     t.string  "message",       null: false
+    t.integer "to_repo_id"
   end
 
   add_index "pull_requests", ["repository_id"], name: "index_pull_requests_on_repository_id", unique: true, using: :btree
-  add_index "pull_requests", ["user_id"], name: "index_pull_requests_on_user_id", unique: true, using: :btree
 
   create_table "repositories", force: true do |t|
-    t.integer "user_id",         null: false
     t.integer "idea_id",         null: false
     t.boolean "pull_request_id"
-    t.string  "repo_path"
+    t.string  "path"
+    t.integer "user_id"
   end
 
   add_index "repositories", ["idea_id"], name: "index_repositories_on_idea_id", using: :btree
-  add_index "repositories", ["user_id", "idea_id"], name: "index_repositories_on_user_id_and_idea_id", unique: true, using: :btree
   add_index "repositories", ["user_id"], name: "index_repositories_on_user_id", using: :btree
 
   create_table "resources", force: true do |t|

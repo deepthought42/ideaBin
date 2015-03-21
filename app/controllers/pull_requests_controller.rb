@@ -46,16 +46,23 @@ class PullRequestsController < ApplicationController
   # POST /pullRequests.json
   def create
     @pullRequest = PullRequest.new()
-    @pullRequest.user_id = current_user.id
 		@idea = Idea.find(params[:idea_id])
+		@repo = Repository.where(user_id: current_user.id).where(idea_id: params[:idea_id]).first
+		
 		#needs to be changed to use the repository id as soon as repos are set up
 		###############################################################################
 		#need the user idea for the specific repo to make request from and repo to make request the
 		########################################################
-		@pullRequest.repository_id = @idea.user.id
+		@pullRequest.repository_id = @repo.id
+		@toRepo = Repository.where(user_id: @idea.user_id).where(idea_id: params[:idea_id]).first
+		@pullRequest.to_repo_id = @toRepo.id
 		
 		@pullRequest.message = params[:name]
 		@pullRequest.save
+		respond_to do |format|
+      format.html # new.html.erb
+      format.json { render json: @pullRequest }
+    end
   end
 
   # PUT /pullRequests/1

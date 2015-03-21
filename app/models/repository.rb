@@ -1,6 +1,6 @@
 class Repository < ActiveRecord::Base
-  attr_accessible :idea_id, :user_id, :repo_path
+  attr_accessible :idea_id, :user_id, :path
   belongs_to :user
 	belongs_to :idea
-	validates :repo_path, :presence => true
+	validates :path, :presence => true
 end

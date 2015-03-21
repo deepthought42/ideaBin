@@ -11,23 +11,31 @@ class IdeasController < ApplicationController
     respond_with(@ideas)
   end
 
-  # GET /ideas/1
+
+	#Finds an idea specified, and its top directory. If a user is not the owner of the idea
+	#then the owners repo is copied.
+	#
+	# returns the idea requested
+	#
+	# GET /ideas/1
   # GET /ideas/1.json
+	
   def show
     @idea = Idea.find(params[:id])
-		@idea.users << current_user unless @idea.users.include?(current_user)
 		@directoryParent = Directory.where("idea_id = ? AND is_top = ?", @idea.id, true).take		
     #clone idea repo from owners copy if current user isn't owner
     if(current_user.id != @idea.user_id)
-	    repo_path = "#{Rails.root}/public/data/repository/#{@idea.users.first.id}/#{@idea.name}"
-			
-			unless File.exists?(repo_path)
-				Dir.mkdir(repo_path)
+	    repo_path = "#{Rails.root}/public/data/repository/#{@idea.user_id}/#{@idea.name}"
+			unless @idea.users.include?(current_user)
+				@repo = Repository.new()
+				@repo.path = "#{Rails.root}/public/data/repository/#{current_user.id}/#{@idea.name}"
+				@repo.user = current_user
+				@idea.repositories << @repo
 			end
-      Dir.chdir(repo_path)
-			
-			#clone not currently working, because of repo path not being a repository. Maybe think about ideas
-			@git = Git.clone(repo_path, @idea.name)
+		end
+		unless File.exists?("#{Rails.root}/public/data/repository/#{current_user.id}/#{@idea.name}")
+			Dir.chdir("#{Rails.root}/public/data/repository/#{current_user.id}/")
+			@git = Git.clone("#{Rails.root}/public/data/repository/#{@idea.user_id}/#{@idea.name}", @idea.name)	
 		end
 		respond_with(@idea)
 
@@ -85,8 +93,10 @@ class IdeasController < ApplicationController
 		unless File.exists?(repo_path)
 			Dir.mkdir(repo_path)
 		end
-		@idea.path = "/data/repository/#{current_user.id}/#{@idea.name}"
-		@idea.users << current_user unless @idea.users.include?(current_user)
+		@repo = Repository.new()
+		@repo.path = "/public/data/repository/#{current_user.id}/#{@idea.name}"
+		@repo.user = current_user 
+		@idea.repositories << @repo
 		@idea.save
 			
 			#create directory in database to associate the directory created in the file systems.
@@ -98,9 +108,9 @@ class IdeasController < ApplicationController
 			Dir.chdir(repo_path)
 			@git = Git.init(@idea.name)
 			
-			
 			DataFile.save(params[:cover_img], @directory.path)
-			
+			@git.add(:all => true)
+			@git.commit("Cover image added.")
 			@directory.save
 		
 		respond_with(@idea)

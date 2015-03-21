@@ -85,8 +85,8 @@ app.controller('IdeaDetailCtrl', ['$scope', '$localStorage', '$routeParams', 'Id
 				$scope.idea.then(function onSuccess(	response){
 					$localStorage.current_idea = response;
 					$scope.$apply(function () {
-							$scope.idea = $scope.cover_img.filename;
-							$scope.message = "Timeout called!";
+						$scope.idea = $scope.cover_img.filename;
+						$scope.message = "Timeout called!";
 					});
 				},
 				function onFail(response) {
