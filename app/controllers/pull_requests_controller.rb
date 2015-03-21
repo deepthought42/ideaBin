@@ -66,6 +66,7 @@ class PullRequestsController < ApplicationController
   def update
     @pullRequest = PullRequest.find(params[:id])
 		@git = Git.init()
+		Dir.chdir(@pullRequest.source_repo.path)
 		requestor_path = "#{@pullRequest.repository.path}"
 		@git.pull(requestor_path, "master") # fetch and a merge
 
