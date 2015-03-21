@@ -14,19 +14,12 @@ app.controller("PullRequestIndexController", ['$scope', '$localStorage', 'PullRe
 		$scope.createNewPullRequest = function(){
 			PullRequest.create();
 			$location.path('/pullRequests');
-		};
+		}
 		
-		$scope.editPullRequest = function (pullRequestId) {
-			$localStorage.current_pullRequest  = PullRequest.show({id: pullRequestId}).$promise;
-			$localStorage.current_pullRequest.then(function onSuccess(	response){
-				$localStorage.current_pullRequest = response;
-				$rootScope.$broadcast("loadTopDirectory", $localStorage.current_pullRequest.id )
-			},
-			function onFail(response) {
-					// handle failure
-			});
-
-			$location.path('/pullRequests/'+pullRequestId);
+		$scope.acceptPullRequest = function (pullRequestId) {
+			console.log(pullRequestId);
+			PullRequest.update({id: pullRequestId});
+			$location.path('/ideas/'+$localStorage.current_idea.id);
 		}
 		
 		$scope.showNewPullRequest = function(){

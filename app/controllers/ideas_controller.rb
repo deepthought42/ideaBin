@@ -97,7 +97,7 @@ class IdeasController < ApplicationController
 			Dir.mkdir(repo_path)
 		end
 		@repo = Repository.new()
-		@repo.path = "/public/data/repository/#{current_user.id}/#{@idea.name}"
+				@repo.path = "#{Rails.root}/public/data/repository/#{current_user.id}/#{@idea.name}"
 		@repo.user = current_user 
 		@idea.repositories << @repo
 		@idea.save

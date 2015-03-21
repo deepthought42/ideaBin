@@ -13,7 +13,7 @@ class PullRequestsController < ApplicationController
   # GET /pullRequests.json
   def index
 		#should only grab pullRequests for current repository
-    @pullRequests = PullRequest.where(repository_id: params[:repo_id])
+    @pullRequests = PullRequest.where(to_repo_id: params[:repo_id])
 
     respond_with(@pullRequests)
   end
@@ -61,11 +61,13 @@ class PullRequestsController < ApplicationController
 
   # PUT /pullRequests/1
   # PUT /pullRequests/1.json
-	#update will be used for accepting a pull request
+	#update will be used for accepting a pull request which means pulling
+	# the requesting repo into the parent repo
   def update
     @pullRequest = PullRequest.find(params[:id])
 		@git = Git.init()
-		g.pull("${idea.path}.git", master) # fetch and a merge
+		requestor_path = "#{@pullRequest.repository.path}"
+		@git.pull(requestor_path, "master") # fetch and a merge
 
     if @pullRequest.save
 			respond_with(@pullRequest)

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150321014803) do
+ActiveRecord::Schema.define(version: 20150321145102) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -62,7 +62,8 @@ ActiveRecord::Schema.define(version: 20150321014803) do
     t.integer "to_repo_id"
   end
 
-  add_index "pull_requests", ["repository_id"], name: "index_pull_requests_on_repository_id", unique: true, using: :btree
+  add_index "pull_requests", ["repository_id"], name: "index_pull_requests_on_repository_id", using: :btree
+  add_index "pull_requests", ["to_repo_id"], name: "index_pull_requests_on_to_repo_id", using: :btree
 
   create_table "repositories", force: true do |t|
     t.integer "idea_id",         null: false

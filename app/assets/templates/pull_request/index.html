@@ -2,6 +2,7 @@
 <div class="container" ng-controller="PullRequestIndexController">
 	<div ng-repeat="pullRequest in pullRequests">
 		{{pullRequest.message}}
+		<button class="fa fa-edit btn" ng-click="acceptPullRequest(pullRequest.id)"></button>
 	</div>
 	
 
