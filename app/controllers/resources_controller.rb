@@ -53,7 +53,7 @@ class ResourcesController < ApplicationController
 		@git.commit(params[:comment])
    
 		@resource = Resource.new
-		@resource.idea_id = @parentDir.idea_id
+		@resource.repo_id = @parentDir.idea_id
 		@resource.filename = params[:file].original_filename
 		@resource.content_type = params[:file].content_type
 		@resource.comment = params[:comment]
