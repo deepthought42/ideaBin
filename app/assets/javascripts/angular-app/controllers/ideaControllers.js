@@ -1,7 +1,7 @@
 var app = angular.module('ideaBin.ideaControllers', []);
 
-app.controller("IdeaIndexController", ['$scope', '$localStorage', 'Idea', '$location', '$http', '$rootScope',
-	function($scope, $localStorage, Idea, $location, $http, $rootScope) {
+app.controller("IdeaIndexController", ['$scope', '$localStorage', 'Idea', 'Repository','$location', '$http', '$rootScope',
+	function($scope, $localStorage, Idea, Repository, $location, $http, $rootScope) {
 		$scope.$storage = $localStorage;
 		$scope.ideas = Idea.query();
 		
