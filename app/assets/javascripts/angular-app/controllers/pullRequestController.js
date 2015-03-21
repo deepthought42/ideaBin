@@ -3,7 +3,7 @@ var app = angular.module('ideaBin.pullRequestControllers', []);
 app.controller("PullRequestIndexController", ['$scope', '$localStorage', 'PullRequest', '$location', '$http', '$rootScope',
 	function($scope, $localStorage, PullRequest, $location, $http, $rootScope) {
 		$scope.$storage = $localStorage;
-		$scope.pullRequests = PullRequest.query();
+		$scope.pullRequests = PullRequest.query({repo_id: $localStorage.repo.id});
 		
   	$scope.deletePullRequest =  function(pullRequest){
 			PullRequest.delete({id: pullRequest.id});

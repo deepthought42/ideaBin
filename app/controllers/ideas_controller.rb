@@ -32,6 +32,9 @@ class IdeasController < ApplicationController
 				@repo.user = current_user
 				@idea.repositories << @repo
 			end
+		else
+			#load up existing repository
+			@repo = Repository.where(user_id: current_user.id).where(idea_id: params[:id]).first
 		end
 		unless File.exists?("#{Rails.root}/public/data/repository/#{current_user.id}/#{@idea.name}")
 			Dir.chdir("#{Rails.root}/public/data/repository/#{current_user.id}/")

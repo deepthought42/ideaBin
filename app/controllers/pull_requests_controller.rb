@@ -9,17 +9,11 @@ class PullRequestsController < ApplicationController
     respond_with(@pullRequests)
   end
 	
-	# GET /myRepositoryPullRequests
-  # GET /myRepositoryPullRequests.json
-  def myRepositoryPullRequests
-    @pullRequests = PullRequest.where(user_id: current_user.id, repository_id: params[:repo_id])
-    respond_with(@pullRequests)
-  end
-	
   # GET /pullRequests
   # GET /pullRequests.json
   def index
-    @pullRequests = PullRequest.all
+		#should only grab pullRequests for current repository
+    @pullRequests = PullRequest.where(repository_id: params[:repo_id])
 
     respond_with(@pullRequests)
   end

@@ -20,12 +20,13 @@ app.controller("IdeaIndexController", ['$scope', '$localStorage', 'Idea', '$loca
 			$localStorage.current_idea  = Idea.show({id: ideaId}).$promise;
 			$localStorage.current_idea.then(function onSuccess(	response){
 				$localStorage.current_idea = response;
+				$localStorage.repo = Repository.query({user_id: $localStorage.user.id, idea_id: $localStorage.current_idea.id});
 				$rootScope.$broadcast("loadTopDirectory", $localStorage.current_idea.id )
 			},
 			function onFail(response) {
 					// handle failure
 			});
-
+		
 			$location.path('/ideas/'+ideaId);
 		}
 		
