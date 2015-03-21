@@ -16,8 +16,8 @@ class PullRequestsController < ApplicationController
     respond_with(@pullRequests)
   end
 	
-  # GET /PullRequests
-  # GET /PullRequests.json
+  # GET /pullRequests
+  # GET /pullRequests.json
   def index
     @pullRequests = PullRequest.all
 

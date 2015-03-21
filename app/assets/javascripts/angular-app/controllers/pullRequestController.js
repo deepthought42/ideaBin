@@ -1,6 +1,6 @@
 var app = angular.module('ideaBin.pullRequestControllers', []);
 
-app.controller("pullRequestIndexController", ['$scope', '$localStorage', 'PullRequest', '$location', '$http', '$rootScope',
+app.controller("PullRequestIndexController", ['$scope', '$localStorage', 'PullRequest', '$location', '$http', '$rootScope',
 	function($scope, $localStorage, PullRequest, $location, $http, $rootScope) {
 		$scope.$storage = $localStorage;
 		$scope.pullRequests = PullRequest.query();
@@ -64,7 +64,7 @@ app.controller("pullRequestIndexController", ['$scope', '$localStorage', 'PullRe
 		});
 }]);
 
-app.controller('PullRequestDetailCtrl', ['$scope', '$localStorage', '$routeParams', 'PullRequest', '$location', '$upload', '$rootScope',
+app.controller('PullRequestDetailController', ['$scope', '$localStorage', '$routeParams', 'PullRequest', '$location', '$upload', '$rootScope',
 	function($scope, $localStorage, $routeParams, PullRequest, $location, $upload, $rootScope){
 		$scope.$storage = $localStorage;
 		$scope.pullRequest = PullRequest.show({id: $routeParams.id});

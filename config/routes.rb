@@ -24,7 +24,7 @@ IdeaBin::Application.routes.draw do
 		end
 	end
 	
-	resource :pull_requests
+	resources :pull_requests
   devise_for :users
 
 
