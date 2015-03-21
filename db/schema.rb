@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150321145102) do
+ActiveRecord::Schema.define(version: 20150321194906) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -81,12 +81,12 @@ ActiveRecord::Schema.define(version: 20150321145102) do
     t.datetime "updated_at",   null: false
     t.string   "filename"
     t.string   "content_type"
-    t.integer  "idea_id"
+    t.integer  "repo_id"
     t.integer  "directory_id"
   end
 
   add_index "resources", ["directory_id"], name: "index_resources_on_directory_id", using: :btree
-  add_index "resources", ["idea_id"], name: "index_resources_on_idea_id", using: :btree
+  add_index "resources", ["repo_id"], name: "index_resources_on_repo_id", using: :btree
 
   create_table "sessions", force: true do |t|
     t.string   "session_id", null: false

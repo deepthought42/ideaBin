@@ -43,17 +43,17 @@ class ResourcesController < ApplicationController
   # POST /resources
   # POST /resources.json
   def create
-    @parentDir = Directory.find(params[:directory_id])
+		@repo = Repository.find(params[:repo_id])
 		
-    post = DataFile.save(params['file'], @parentDir.path)
+    post = DataFile.save(params['file'], @repo.path)
     
-    Dir.chdir(@parentDir.path)
+    Dir.chdir(@repo.path)
 		@git = Git.init()
 		@git.add(:all => true)
 		@git.commit(params[:comment])
    
 		@resource = Resource.new
-		@resource.repo_id = @parentDir.idea_id
+		@resource.repo_id = params[:repo_id]
 		@resource.filename = params[:file].original_filename
 		@resource.content_type = params[:file].content_type
 		@resource.comment = params[:comment]

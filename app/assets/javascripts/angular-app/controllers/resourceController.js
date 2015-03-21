@@ -60,7 +60,8 @@ app.controller("ResourceIndexCtrl", ['$rootScope', '$scope', '$localStorage', '$
 					//withCredentials: true,
 					data: {	comment: comment, 
 									resource: $scope.resource, 
-									directory_id: $scope.$storage.current_directory.id},
+									directory_id: $scope.$storage.current_directory.id,
+									repo_id:	$localStorage.repo.id},
 					file: file, // or list of files ($files) for html5 only
 					//fileName: 'doc.jpg' or ['1.jpg', '2.jpg', ...] // to modify the name of the file(s)
 					// customize file formData name ('Content-Disposition'), server side file variable name. 
