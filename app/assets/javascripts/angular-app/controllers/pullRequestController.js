@@ -17,8 +17,7 @@ app.controller("PullRequestIndexController", ['$scope', '$localStorage', 'PullRe
 		}
 		
 		$scope.showPullRequest = function(pullRequestId){
-			$scope.pull_request = PullRequest.show({id: pullRequestId})
-			$("#pullRequestDetailsPanel").show();
+			$rootScope.$broadcast('showPullRequest', pullRequestId);
 		}
 		
 		$scope.acceptPullRequest = function (pullRequestId) {
@@ -64,8 +63,6 @@ app.controller("PullRequestIndexController", ['$scope', '$localStorage', 'PullRe
 app.controller('PullRequestDetailController', ['$scope', '$localStorage', '$routeParams', 'PullRequest', '$location', '$upload', '$rootScope',
 	function($scope, $localStorage, $routeParams, PullRequest, $location, $upload, $rootScope){
 		$scope.$storage = $localStorage;
-		$scope.pullRequest = PullRequest.show({id: $routeParams.id});
-		$rootScope.pullRequestEditPanelVisible = false;
 
 		$scope.updatePullRequest = function (pullRequestId){
 			PullRequest.update($scope.pullRequest,{id: pullRequestId}, function(){
@@ -73,21 +70,15 @@ app.controller('PullRequestDetailController', ['$scope', '$localStorage', '$rout
 			});
 		}
 		
-		$scope.hidePullRequestEditPanel = function() {
-			$rootScope.pullRequestEditPanelVisible = false;
+		$scope.hidePullRequestDetailPanel = function() {
+			//$rootScope.pullRequestEditPanelVisible = false;
 		}
 		
-		$scope.cancel = function(){
-			$location.path('/pullRequests');
-		}
-		
-		$scope.showNewPullRequest = function(){
-			$rootScope.isCreatePullRequestPanelVisible = true;
-		}
-		
-		$scope.showNewDirectoryPanel = function(){
-			$('#directoryForm').slideToggle().delay(100);
-		}
+		$scope.$on('showPullRequest', function(event, pullRequestId){
+			console.log("PULL REQUEST ID :: " + pullRequestId);
+			$scope.pull_request = PullRequest.show({id: pullRequestId});
+			$("#pullRequestDetailsPanel").show();
+		})
 	}
 ]);
 
