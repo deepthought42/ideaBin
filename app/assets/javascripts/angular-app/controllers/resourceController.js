@@ -5,8 +5,8 @@ app.controller("ResourceIndexCtrl", ['$rootScope', '$scope', '$localStorage', '$
 		$scope.$storage = $localStorage;
 		
 		//move to event
-		$rootScope.$on('loadResources', function(event, directoryId){
-			$scope.resources = Resource.query({directory_id: directoryId});
+		$scope.$on('loadResources', function(event, path){
+			$scope.resources = Resource.query({path: path});
 		});
 		
 		$scope.$watch('files', function () {
@@ -60,7 +60,6 @@ app.controller("ResourceIndexCtrl", ['$rootScope', '$scope', '$localStorage', '$
 					//withCredentials: true,
 					data: {	comment: comment, 
 									resource: $scope.resource, 
-									directory_id: $scope.$storage.current_directory.id,
 									repo_id:	$localStorage.repo.id},
 					file: file, // or list of files ($files) for html5 only
 					//fileName: 'doc.jpg' or ['1.jpg', '2.jpg', ...] // to modify the name of the file(s)
@@ -73,7 +72,7 @@ app.controller("ResourceIndexCtrl", ['$rootScope', '$scope', '$localStorage', '$
 				}).success(function(data, status, headers, config) {
 					// file is uploaded successfully
 					console.log("UPLOAD SUCCESSFUL");
-					$scope.resources = Resource.query({directory_id: $scope.$storage.current_directory.id});
+					$scope.resources = Resource.query({path: $localStorage.repo.path + $scope.$storage.dir_path});
 				});
 				//.error(...)
 				//.then(success, error, progress); 

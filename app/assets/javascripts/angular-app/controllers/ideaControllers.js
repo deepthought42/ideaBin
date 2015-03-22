@@ -27,6 +27,7 @@ app.controller("IdeaIndexController", ['$scope', '$localStorage', 'Idea', 'Repos
 				$localStorage.current_idea.then(function onSuccess(	response){
 					$localStorage.current_idea = response;
 					$rootScope.$broadcast("loadDirectory", $localStorage.repo.path )
+					$rootScope.$broadcast("loadResources", $localStorage.repo.path)
 				},
 				function onFail(response) {
 						alert("failed to load idea for editing");

@@ -6,8 +6,14 @@ class ResourcesController < ApplicationController
   # GET /resources
   # GET /resources.json
   def index
-    @resources = Resource.where(directory_id: params[:directory_id])
-    respond_with(@resources)
+    @resources = []
+		Dir.glob("#{params[:path]}/*").each do |f| 
+			unless File.directory?(f)
+				@resources.push(File.basename(f))
+			end
+		end
+		
+		respond_with(@resources)
   end
 
   # GET /resources/1
