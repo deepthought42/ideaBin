@@ -13,7 +13,7 @@ class ResourcesController < ApplicationController
 			end
 		end
 		
-		respond_with(@resources)
+		render json: @resources
   end
 
   # GET /resources/1
@@ -121,6 +121,12 @@ class ResourcesController < ApplicationController
 			render plain: "OH NO!"
 		end
 	end
+	
+	# GET /resources/1
+  # GET /resources/1.json
+  def download
+		send_file(params[:path])
+  end
 	
 	private
 		def set_resource

@@ -14,6 +14,7 @@ IdeaBin::Application.routes.draw do
   resources :resources do
 		member do
 			get 'contents'
+			get 'download'
 		end
 	end
 	

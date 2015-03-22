@@ -32,16 +32,18 @@ app.controller("ResourceIndexCtrl", ['$rootScope', '$scope', '$localStorage', '$
 		}
 		
 		$scope.downloadResource = function(path, filename){
-			var resource = Resource.show({id: 0, path: path+filename})
-			console.log("PATH :: " + path+filename);
-			var hiddenElement = document.createElement('a');
-
-			hiddenElement.href = 'data:attachment/*,' + encodeURI(path+filename);
-			hiddenElement.target = '_blank';
-			hiddenElement.download = filename;
-			hiddenElement.click();
-			
-			//alert("Failed to load resource!");
+			$http.get('/resources/1/download', {params: {path: path+filename}}).
+				success(function(data, status, headers, config) {
+					 var element = angular.element('<a/>');
+					 element.attr({
+							 href: 'data:attachment/*;' + encodeURI(data),
+							 target: '_blank',
+							 download: filename
+					 })[0].click();
+				}).
+				error(function(data, status, headers, config) {
+					alert("Error downloading file");
+				});
 		}
 		
 		$scope.upload = function(files) {			
