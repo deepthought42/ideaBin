@@ -42,6 +42,12 @@ Getting Started:
 			6.1)  Install bower dependencies
 							bower install
 			6.2)  Setup Database
+					6.2.1)
+						rename ideaBin/config/database.tmp.yml to ideaBin/config/database.yml
+						Replace 'user_here' with your username
+						Raplace 'password_here' with your password
+					
+					6.2.2)
 							rake db:setup
 			6.3)  install bundled gems
 							bundle install
