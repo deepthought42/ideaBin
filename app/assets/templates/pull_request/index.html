@@ -3,6 +3,7 @@
 	<div ng-repeat="pullRequest in pullRequests">
 		{{pullRequest.message}}
 		<button class="fa fa-edit btn" ng-click="acceptPullRequest(pullRequest.id)"></button>
+		<button class="fa fa-times btn" ng-click="rejectPullRequest(pullRequest.id)"></button>
 	</div>
 	
 

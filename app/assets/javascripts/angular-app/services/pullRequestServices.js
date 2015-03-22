@@ -6,5 +6,6 @@ services.factory('PullRequest', function ($resource) {
 		create: { method: 'POST' },
 		show: { method: 'GET', isArray: false},
 		update: {method: 'PUT'},
+		delete: { method: 'DELETE' }, 
 	})
 });

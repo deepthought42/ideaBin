@@ -13,7 +13,7 @@ class PullRequestsController < ApplicationController
   # GET /pullRequests.json
   def index
 		#should only grab pullRequests for current repository
-    @pullRequests = PullRequest.where(to_repo_id: params[:repo_id])
+    @pullRequests = PullRequest.where(to_repo_id: params[:repo_id]).where( status: "SUBMITTED")
 
     respond_with(@pullRequests)
   end
@@ -69,11 +69,29 @@ class PullRequestsController < ApplicationController
 		Dir.chdir(@pullRequest.source_repo.path)
 		requestor_path = "#{@pullRequest.repository.path}"
 		@git.pull(requestor_path, "master") # fetch and a merge
-
+		@pullRequest.status = "ACCEPTED"
     if @pullRequest.save
 			respond_with(@pullRequest)
 		else
 			respond_with(error:	"An error occurred while updating your pull request")
+    end
+  end
+	
+	#
+	# Sets a pull-request as rejected
+	#
+	# DELETE /pullRequests/1
+  # DELETE /pullRequests/1.json
+	#
+	# the requesting repo into the parent repo
+  def destroy
+    @pullRequest = PullRequest.find(params[:id])
+
+		@pullRequest.status = "REJECTED"
+    if @pullRequest.save
+			respond_with(@pullRequest)
+		else
+			respond_with(error:	"An error occurred while rejecting the pull request")
     end
   end
 end
