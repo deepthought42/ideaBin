@@ -22,8 +22,6 @@ class DirectoriesController < ApplicationController
 		unless File.exists?(@path)
 			Dir.mkdir(@path)
 		end
-		
-		respond_with(@path)
   end
 
 	#will rename a folder within a given directory path.

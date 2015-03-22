@@ -4,6 +4,7 @@ app.controller("DirectoryIndexCtrl", ['$scope', '$rootScope', '$localStorage', '
 	function($scope, $rootScope, $localStorage, $routeParams, Directory, $location, $http) {
 		$rootScope.showCreateDirectoryPanel = false;
 		$scope.$storage = $localStorage;
+		$scope.$storage.dir_path = "/";
 		
   	$scope.deleteDirectory =  function(directory){
 			Directory.delete({id: directory.id});
@@ -19,31 +20,17 @@ app.controller("DirectoryIndexCtrl", ['$scope', '$rootScope', '$localStorage', '
 			$scope.directories.push(data);
 		});
 		
-		$scope.$on('loadTopDirectory', function(event, path) {
+		$scope.loadDirectory = function(name, path){
+			$scope.directories = Directory.query({'path': path+"/"+name})
+			$scope.$storage.dir_path = "/"+name;
+		}
+		
+		$scope.$on('loadDirectory', function(event, path) {
 			console.log("REPO :: " + $scope.$storage.repo);
 			console.log("REPO PATH :: " + $scope.$storage.repo.path);
-			$scope.directories = Directory.query({'path': $localStorage.repo.path})
+			$scope.loadDirectory("", path)
 		});	
 }]);
-
-app.controller('DirectoryDetailCtrl', ['$scope', '$routeParams', 'Directory', '$location',
-	function($scope, $routeParams, Directory, $location){
-		$scope.directory = Directory.show({id: $routeParams.id});
-		
-		$scope.hideDirectoryPanel = function(event){
-			$rootScope.createDirectoryPanelVisible = false;
-		}
-		
-		$scope.updateDirectory = function (){
-			Directory.update($scope.directory);
-			$location.path('/directories');
-		}
-		
-		$scope.cancel = function(){
-			$location.path('/directories');
-		}
-	}
-]);
 
 app.controller('DirectoryCreationCtrl', ['$scope', '$rootScope', '$localStorage', '$routeParams', 'Directory', '$location',
 	function($scope, $rootScope, $localStorage, $routeParams, Directory, $location ){
@@ -53,7 +40,7 @@ app.controller('DirectoryCreationCtrl', ['$scope', '$rootScope', '$localStorage'
 		$scope.directoryForm.name = ""
 		$scope.createNewDirectory = function(){
 			$scope.directoryForm.idea_id = $scope.$storage.current_idea.id;
-			$scope.directoryForm.path = $scope.$storage.repo.path;
+			$scope.directoryForm.path = $localStorage.repo.path + $localStorage.dir_path;
 			$scope.directory = Directory.create($scope.directoryForm);
 			console.log("DIRECTORY NAME :: " + $scope.directoryForm.name);
 			$rootScope.$broadcast("addDirectory", $scope.directory )

@@ -83,13 +83,13 @@ class ResourcesController < ApplicationController
   # DELETE /resources/1.json
   def destroy
     @resource = Resource.find(params[:id])
-    
-		@directory = Directory.find(@resource.directory_id)
-		image_path = "#{@directory.path}/#{@resource.filename}"
+    @repo = Repository.find(params[:repo_path])
+		
+		image_path = "#{@repo.path}#{params[:dir_path]}/#{@resource.filename}"
 		if(FileUtils.rm(image_path))
 		
 			@resource.destroy
-			Dir.chdir(@directory.path)
+			Dir.chdir(@repo.path)
 			@git = Git.init()
 			@git.add(:all => true)
 			@git.commit("Removed file :: #{@resource.filename}")

@@ -22,7 +22,6 @@ class IdeasController < ApplicationController
 	
   def show
     @idea = Idea.find(params[:id])
-		@directoryParent = Directory.where("idea_id = ? AND is_top = ?", @idea.id, true).take		
     #clone idea repo from owners copy if current user isn't owner
     if(current_user.id != @idea.user_id)
 	    repo_path = "#{Rails.root}/public/data/repository/#{@idea.user_id}/#{@idea.name}"
