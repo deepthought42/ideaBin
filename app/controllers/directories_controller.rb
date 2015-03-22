@@ -13,24 +13,6 @@ class DirectoriesController < ApplicationController
     respond_with(@directories)
   end
 
-	def topDir
-		@directory = Directory.where(idea_id: params[:id], is_top: true).first
-		respond_with(@directory)
-  end
-	
-  def show
-		@directory = Directory.find(params[:id])
-		respond_with(@directory)
-  end
-
-  def new
-    @directory = Directory.new(:parent_id => params[:parent_id])
-		respond_with(@directory)
-  end
-
-  def edit
-  end
-
   def create
 		@idea = Idea.find(params[:idea_id])
 		@parentDir = Directory.find(params[:parent_id])
