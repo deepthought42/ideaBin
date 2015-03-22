@@ -98,8 +98,7 @@ app.controller('PullRequestCreationController', ['$scope', '$rootScope', 'PullRe
 		$scope.createNewPullRequest = function(){
 			$scope.pullRequestForm.idea_id = $localStorage.current_idea.id;
 			PullRequest.create($scope.pullRequestForm, function(){
-				alert("Successfully posted pullRequest");
-			});
+				});
 		}
 		
 		$scope.$on('showPullRequestCreatePanel', function() {
