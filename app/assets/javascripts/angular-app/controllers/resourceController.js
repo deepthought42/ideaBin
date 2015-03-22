@@ -27,13 +27,13 @@ app.controller("ResourceIndexCtrl", ['$rootScope', '$scope', '$localStorage', '$
 			$location.path('/resources');
 		};
 		
-		$scope.editResource = function (resourceId) {
-			$rootScope.$broadcast("editResource", resourceId );
+		$scope.editResource = function (resource_name) {
+			$rootScope.$broadcast("editResource", resource_name );
 		}
 		
 		$scope.downloadResource = function(path, filename){
-			var resource = Resource.show({path: path+filename})
-			
+			var resource = Resource.show({id: 0, path: path+filename})
+			console.log("PATH :: " + path+filename);
 			var hiddenElement = document.createElement('a');
 
 			hiddenElement.href = 'data:attachment/*,' + encodeURI(path+filename);
@@ -93,10 +93,11 @@ app.controller('ResourceDetailCtrl', ['$rootScope', '$scope', '$localStorage', '
 			//TODO : Save changes
 		};
 		
-		$rootScope.$on('editResource', function(event, resourceId) { 
-			$http({method: "GET", url: "/resources/" + resourceId + "/contents"})
+		$scope.$on('editResource', function(event, resource_name) { 
+			console.log("FILENAME :: " + resource_name);
+			$http.get("/resources/1/contents", {params: {filename: resource_name, path: $localStorage.repo.path + $localStorage.dir_path}})
 				.success(function(data){ 
-						$scope.resource = Resource.show({id: resourceId});
+						$scope.resource = {};
 						$scope.resource.content = data;
 						$scope.editor.setValue(data);
 				})

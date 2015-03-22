@@ -109,25 +109,17 @@ class ResourcesController < ApplicationController
 	
 	#GET /resources/1/contents.json
 	def contents
-		@resource = Resource.find(params[:id])
-		@directory = Directory.find(@resource.directory_id)
-		
-		extname = File.extname(@resource.filename)[1..-1]
+		extname = File.extname(params[:filename])[1..-1]
     mime_type = Mime::Type.lookup_by_extension(extname)
     content_type = mime_type.to_s unless mime_type.nil?
 
-		@content = IO.read("#{@directory.path}/#{@resource.filename}")
+		@content = IO.read("#{params[:path]}/#{params[:filename]}")
 		
-		if(@resource)
+		if(@content)
 			render text: @content
 		else
 			render plain: "OH NO!"
 		end
-	end
-	
-	#GET /resources/1/download.json
-	def download
-		send_file(params[:path])
 	end
 	
 	private
