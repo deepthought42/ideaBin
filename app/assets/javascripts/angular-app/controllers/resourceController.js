@@ -31,20 +31,17 @@ app.controller("ResourceIndexCtrl", ['$rootScope', '$scope', '$localStorage', '$
 			$rootScope.$broadcast("editResource", resourceId );
 		}
 		
-		$scope.downloadResource = function(resourceId, filename){
-			$http({method: "GET", url: "/resources/" + resourceId + "/download"})
-				.success(function(data){ 
-						console.log("DOWNLOAD DATA :: " + data);
-						var hiddenElement = document.createElement('a');
+		$scope.downloadResource = function(path, filename){
+			var resource = Resource.show({path: path+filename})
+			
+			var hiddenElement = document.createElement('a');
 
-						hiddenElement.href = 'data:attachment/*,' + encodeURI(data);
-						hiddenElement.target = '_blank';
-						hiddenElement.download = filename;
-						hiddenElement.click();
-				})
-				.error(function(data){
-					alert("Failed to load resource!");
-				});
+			hiddenElement.href = 'data:attachment/*,' + encodeURI(path+filename);
+			hiddenElement.target = '_blank';
+			hiddenElement.download = filename;
+			hiddenElement.click();
+			
+			//alert("Failed to load resource!");
 		}
 		
 		$scope.upload = function(files) {			

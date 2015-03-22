@@ -3,7 +3,7 @@
 		<div class="col-md-12" ng-repeat="resource in resources">
 			<span class="col-md-10 pointerCursor" id="resourceName" ng-click="editResource(resource.id)">{{ resource }}</span>
 			<span class="col-md-2 resourceButtons" >
-				<i id="downloadResource" ng-click="downloadResource(resource.id, resource.filename)" class="dock-item fa fa-download"></i>
+				<i id="downloadResource" ng-click="downloadResource($storage.repo.path + $storage.dir_path, resource)" class="dock-item fa fa-download"></i>
 				<i id="removeResource" ng-click="deleteResource(resource.id)" class="fa fa-times"></i>
 			</span>
 		</div>

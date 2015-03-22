@@ -19,6 +19,7 @@ class ResourcesController < ApplicationController
   # GET /resources/1
   # GET /resources/1.json
   def show
+		send_file(params[:path])
   end
 
   # GET /resources/new
@@ -126,14 +127,7 @@ class ResourcesController < ApplicationController
 	
 	#GET /resources/1/download.json
 	def download
-		@resource = Resource.find(params[:id])
-		@directory = Directory.find(@resource.directory_id)
-		
-		if(@resource)
-			send_file("#{@directory.path}/#{@resource.filename}")
-		else
-			render json:	{errors: "Could not find file with id #{params[:id]}"}	
-		end
+		send_file(params[:path])
 	end
 	
 	private
