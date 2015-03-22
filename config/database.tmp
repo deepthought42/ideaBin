@@ -1,0 +1,18 @@
+development:
+  adapter: postgresql
+  database: ideaBin_development
+  username: user_here
+  password: password_here
+  host: localhost
+test:
+  adapter: postgresql
+  database: ideaBin_test
+  username: user_here
+  password: password_here
+  host: localhost
+production:
+  adapter: postgresql
+  database: ideaBin_production
+  username: user_here
+  password: password_here
+  host: localhost
