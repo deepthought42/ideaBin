@@ -16,8 +16,12 @@ app.controller("PullRequestIndexController", ['$scope', '$localStorage', 'PullRe
 			$location.path('/pullRequests');
 		}
 		
+		$scope.showPullRequest = function(pullRequestId){
+			$scope.pull_request = PullRequest.show({id: pullRequestId})
+			$("#pullRequestDetailsPanel").show();
+		}
+		
 		$scope.acceptPullRequest = function (pullRequestId) {
-			console.log(pullRequestId);
 			PullRequest.update({id: pullRequestId});
 			$location.path('/ideas/'+$localStorage.current_idea.id);
 		}
@@ -68,8 +72,6 @@ app.controller('PullRequestDetailController', ['$scope', '$localStorage', '$rout
 					
 			});
 		}
-		
-		
 		
 		$scope.hidePullRequestEditPanel = function() {
 			$rootScope.pullRequestEditPanelVisible = false;

@@ -125,7 +125,7 @@ app.controller('IdeaDetailCtrl', ['$scope', '$localStorage', '$routeParams', 'Id
 		}
 		
 		$scope.showPullRequestIndexPage = function() {
-			$location.path("/pullRequests");
+			$("#pullRequestIndexPanel").toggle();
 		}
 		
 		$scope.cancel = function(){
