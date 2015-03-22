@@ -18,14 +18,25 @@ app.controller("IdeaIndexController", ['$scope', '$localStorage', 'Idea', 'Repos
 		
 		$scope.editIdea = function (ideaId) {
 			$localStorage.current_idea  = Idea.show({id: ideaId}).$promise;
-			$localStorage.current_idea.then(function onSuccess(	response){
-				$localStorage.current_idea = response;
-				$localStorage.repo = Repository.show({user_id: $localStorage.user.id, id: ideaId});
-				$rootScope.$broadcast("loadTopDirectory", $localStorage.current_idea.id )
+			$localStorage.repo = Repository.show({user_id: $localStorage.user.id, id: ideaId}).$promise;
+
+			
+			$localStorage.repo.then(function onSuccess(	response){
+				$localStorage.repo = response;
+
+				$localStorage.current_idea.then(function onSuccess(	response){
+					$localStorage.current_idea = response;
+					$rootScope.$broadcast("loadTopDirectory", $localStorage.repo.path )
+				},
+				function onFail(response) {
+						alert("failed to load idea for editing");
+				});
 			},
 			function onFail(response) {
-					// handle failure
+				alert("failed to load repo while opening idea for editing");
 			});
+			
+			
 		
 			$location.path('/ideas/'+ideaId);
 		}
@@ -91,7 +102,7 @@ app.controller('IdeaDetailCtrl', ['$scope', '$localStorage', '$routeParams', 'Id
 					});
 				},
 				function onFail(response) {
-						// handle failure
+					$('.error').html("Could not upload file. Response was " + response);
 				});
 				console.log('file ' + config.file + ' was uploaded successfully. Status: ' + status);
 			});

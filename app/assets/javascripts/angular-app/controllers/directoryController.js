@@ -4,21 +4,6 @@ app.controller("DirectoryIndexCtrl", ['$scope', '$rootScope', '$localStorage', '
 	function($scope, $rootScope, $localStorage, $routeParams, Directory, $location, $http) {
 		$rootScope.showCreateDirectoryPanel = false;
 		$scope.$storage = $localStorage;
-		var curr_idea = $scope.$storage.current_idea;
-		
-		$scope.showDirectories = function(dir_id){
-			$scope.current_directory = Directory.show({id: dir_id}).$promise;
-			$scope.current_directory.then(function onSuccess(response) {
-				// access data from 'response'
-				$scope.$storage.current_directory = response;
-				$scope.directories = Directory.query({parent_id: response.id});
-				$rootScope.$broadcast('loadResources', response.id);
-			},
-			function onFail(response) {
-				alert("Could not find current directory. So you've found what you want, but aint nothing gonna work, because have no idea what it is.");
-					// handle failure
-			});
-		}		
 		
   	$scope.deleteDirectory =  function(directory){
 			Directory.delete({id: directory.id});
@@ -30,21 +15,14 @@ app.controller("DirectoryIndexCtrl", ['$scope', '$rootScope', '$localStorage', '
 			$location.path('/directories/new');
 		}
 		
-		$rootScope.$on('addDirectory', function(event, data) { 
+		$scope.$on('addDirectory', function(event, data) { 
 			$scope.directories.push(data);
 		});
 		
-		$scope.$on('loadTopDirectory', function(event, directoryId) { 
-			$http({method: "GET", url: "/directories/" + directoryId + "/topDir.json"})
-					.success(function(data){ 
-							console.log("DATA :: " + data);
-							$scope.$storage.current_directory = data;
-							$scope.showDirectories(data.id);
-							$rootScope.$broadcast('loadResources', data.id);
-					})
-					.error(function(data){
-						alert("Failed to load Directory!");
-					});
+		$scope.$on('loadTopDirectory', function(event, path) {
+			console.log("REPO :: " + $scope.$storage.repo);
+			console.log("REPO PATH :: " + $scope.$storage.repo.path);
+			$scope.directories = Directory.query({'path': $localStorage.repo.path})
 		});	
 }]);
 
@@ -75,11 +53,9 @@ app.controller('DirectoryCreationCtrl', ['$scope', '$rootScope', '$localStorage'
 		$scope.directoryForm.name = ""
 		$scope.createNewDirectory = function(){
 			$scope.directoryForm.idea_id = $scope.$storage.current_idea.id;
-			if($scope.$storage.current_directory){
-				$scope.directoryForm.parent_id = $scope.$storage.current_directory.id;
-			}
-			console.log($scope.directoryForm)
+			$scope.directoryForm.path = $scope.$storage.repo.path;
 			$scope.directory = Directory.create($scope.directoryForm);
+			console.log("DIRECTORY NAME :: " + $scope.directoryForm.name);
 			$rootScope.$broadcast("addDirectory", $scope.directory )
 		}
 		

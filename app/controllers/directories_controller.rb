@@ -6,50 +6,37 @@ class DirectoriesController < ApplicationController
 	# GET /directories
   # GET /directories.json
   def index
-		if(params[:parent_id])
-			@directories = Directory.where(parent_id: params[:parent_id])
+		#@directories = Directory.where(parent_id: params[:parent_id])
+		@directories = []
+		Dir.glob("#{params[:path]}/*").each do |f| 
+			if(File.directory?(f))
+				@directories.push(File.basename(f))
+			end
 		end
-		
     respond_with(@directories)
   end
 
   def create
-		@idea = Idea.find(params[:idea_id])
-		@parentDir = Directory.find(params[:parent_id])
-		
-    @directory = Directory.new(directory_params)
-		@directory.name = directory_params[:name]
-		@directory.idea_id = @idea.id
-		
-		#needs to be altered to reflect infinite level depth of folder structure
-		@directory.path = "#{@parentDir.path}/#{@directory.name}"
+		@path = "#{params[:path]}/#{directory_params[:name]}"
 
-		unless File.exists?(@directory.path)
-			Dir.mkdir(@directory.path)
+		unless File.exists?(@path)
+			Dir.mkdir(@path)
 		end
 		
-		if(directory_params[:parent_id])
-			@directory.is_top = false
-			@directory.parent_id = directory_params[:parent_id]
-		else
-			@directory.is_top = true
-		end
-		
-		flash[:notice] = "#{directory_params} : #{@directory.name}" if @directory.save
-		respond_with(@directory)
+		respond_with(@path)
   end
 
-  def update
-    @directory.update(directory_params)
-    @directory.name = directory_params[:name]
-		flash[:notice] = "#{directory_params} : #{@directory.name}" if @directory.save
-		respond_with(@directory)
+	#will rename a folder within a given directory path.
+  def update	
+		@file = File.rename "#{params[:path]}/#{params[:old_name]}", "#{params[:path]}/#{directory_params[:name]}"
+
+		respond_with({status:		'successfully renamed folder'})
   end
 
+	#destroys a directory in file system at given path with given name
   def destroy
-		@directory = Directory.find(params[:id])
-    @directory.destroy
-    respond_with(@directory)
+		FileUtils.rm_rf("#{params[:path]}/#{directory_params[:name]}")
+    respond_with({status:	"successfully delected directory #{params[:path]}"})
   end
 
   private
