@@ -5,8 +5,8 @@ app.controller("PullRequestIndexController", ['$scope', '$localStorage', 'PullRe
 		$scope.$storage = $localStorage;
 		$scope.pullRequests = PullRequest.query({repo_id: $localStorage.repo.id});
 		
-  	$scope.rejectPullRequest =  function(id){
-			PullRequest.delete({id: id});
+  	$scope.rejectPullRequest =  function(pullRequest){
+			PullRequest.delete({id: pullRequest.id});
 			var index = $scope.pullRequests.indexOf(pullRequest);
 			$scope.pullRequests.splice(index, 1);
 		}
