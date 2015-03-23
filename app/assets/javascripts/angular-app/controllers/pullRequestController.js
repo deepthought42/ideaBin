@@ -38,7 +38,8 @@ app.controller("PullRequestIndexController", ['$scope', '$localStorage', 'PullRe
 		});
 		
 		$scope.$on('showAllPullRequests', function(event, data){
-			$scope.pullRequests = PullRequest.query();
+			$scope.pullRequests = PullRequest.query({repo_id: $localStorage.repo.id});
+			$("#pullRequestIndexPanel").toggle();
 		});
 		
 		$scope.$on('addPullRequestToList', function(event, data){

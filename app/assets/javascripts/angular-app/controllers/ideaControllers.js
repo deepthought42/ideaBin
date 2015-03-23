@@ -125,7 +125,7 @@ app.controller('IdeaDetailCtrl', ['$scope', '$localStorage', '$routeParams', 'Id
 		}
 		
 		$scope.showPullRequestIndexPage = function() {
-			$("#pullRequestIndexPanel").toggle();
+			$rootScope.$broadcast("showAllPullRequests");
 		}
 		
 		$scope.cancel = function(){
