@@ -3,6 +3,7 @@ var app = angular.module('ideaBin.pullRequestControllers', []);
 app.controller("PullRequestIndexController", ['$scope', '$localStorage', 'PullRequest', '$location', '$http', '$rootScope',
 	function($scope, $localStorage, PullRequest, $location, $http, $rootScope) {
 		$scope.$storage = $localStorage;
+		$scope.getSubmittedPullRequestCountForCurrentRepo();
 		
   	$scope.rejectPullRequest =  function(pullRequest){
 			PullRequest.delete({id: pullRequest.id});
@@ -57,6 +58,16 @@ app.controller("PullRequestIndexController", ['$scope', '$localStorage', 'PullRe
 		
 		$scope.$on('hideCreatePullRequestPanel', function(event, data) {
 			$scope.isCreatePullRequestPanelVisible = false;
+		});
+		
+		$scope.$on('getSubmittedPullRequestCountForCurrentRepo', function(event, data){
+			$http.get("/pull_requests/count.json", {params: {repo_id: $localStorage.repo.id, status: "SUBMITTED"}})
+				.success(function(data){
+					$("submittedPullRequestCount").html(data);
+				})
+				.error(function(data){
+					alert(data.errors);
+				})
 		});
 }]);
 

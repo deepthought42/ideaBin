@@ -81,7 +81,8 @@ app.controller('IdeaDetailCtrl', ['$scope', '$localStorage', '$routeParams', 'Id
 	function($scope, $localStorage, $routeParams, Idea, $location, $upload, $rootScope){
 		$scope.$storage = $localStorage;
 		$rootScope.ideaEditPanelVisible = false;
-
+		$rootScope.$broadcast('getSubmittedPullRequestCountForCurrentRepo');
+		
 		$scope.uploadFile = function(){
 			var ideaFormVals = angular.toJson($scope.idea);
 			$scope.upload = $upload.upload({
@@ -126,10 +127,6 @@ app.controller('IdeaDetailCtrl', ['$scope', '$localStorage', '$routeParams', 'Id
 		
 		$scope.showPullRequestIndexPage = function() {
 			$rootScope.$broadcast("showAllPullRequests");
-		}
-		
-		$scope.cancel = function(){
-			$location.path('/ideas');
 		}
 		
 		$scope.showNewIdea = function(){

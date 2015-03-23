@@ -26,13 +26,15 @@ class PullRequestsController < ApplicationController
   end
 
 	#
+	# Gets the current count of PullRequests that have the given repo as the destination 
+	# repository and a given status
 	#
-	#
+	# @param status - {"SUBMITTED","ACCEPTED","REJECTED"}
 	#
   # GET /pullRequests/count
   # GET /pullRequests/count.json
   def count
-    @pullRequest = PullRequest.where(to_repo_id: params[:repo_id]).where( status: "SUBMITTED").count
+    @pullRequest = PullRequest.where(to_repo_id: params[:repo_id]).where( status: params[:status]).count
 		
     respond_to do |format|
       format.html # count.html.erb
