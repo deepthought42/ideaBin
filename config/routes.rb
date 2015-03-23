@@ -3,6 +3,7 @@ IdeaBin::Application.routes.draw do
 	resources :application
   root 'application#index'
   get '/userIdeas/:id' => 'ideas#userIdeas'
+	get '/pull_requests/:id' => 'pullRequestS#count'
 	
   resources :directories do
 		member do

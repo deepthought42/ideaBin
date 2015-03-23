@@ -25,17 +25,25 @@ class PullRequestsController < ApplicationController
 		respond_with(@pullRequest)
   end
 
-  # GET /pullRequests/new
-  # GET /pullRequests/new.json
-  def new
-    @pullRequest = PullRequest.new
+	#
+	#
+	#
+	#
+  # GET /pullRequests/count
+  # GET /pullRequests/count.json
+  def count
+    @pullRequest = PullRequest.where(to_repo_id: params[:repo_id]).where( status: "SUBMITTED").count
 		
     respond_to do |format|
-      format.html # new.html.erb
+      format.html # count.html.erb
       format.json { render json: @pullRequest }
     end
   end
 
+	#
+	# Looks for an existing pull request, if one doesn't exist a new one is created for the 
+	# current repository to the idea owners repository
+	#
   # POST /pullRequests
   # POST /pullRequests.json
   def create
@@ -52,7 +60,6 @@ class PullRequestsController < ApplicationController
 	    @pullRequest = PullRequest.new()
 
 			@pullRequest.repository_id = @repo.id
-			@toRepo = Repository.where(user_id: @idea.user_id).where(idea_id: params[:idea_id]).first
 			@pullRequest.to_repo_id = @toRepo.id
 			
 			@pullRequest.message = params[:name]
