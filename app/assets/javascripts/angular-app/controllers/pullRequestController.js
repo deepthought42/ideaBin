@@ -63,6 +63,7 @@ app.controller("PullRequestIndexController", ['$scope', '$localStorage', 'PullRe
 app.controller('PullRequestDetailController', ['$scope', '$localStorage', '$routeParams', 'PullRequest', '$location', '$upload', '$rootScope',
 	function($scope, $localStorage, $routeParams, PullRequest, $location, $upload, $rootScope){
 		$scope.$storage = $localStorage;
+		$scope.pullRequest = {}
 
 		$scope.updatePullRequest = function (pullRequestId){
 			PullRequest.update($scope.pullRequest,{id: pullRequestId}, function(){
@@ -76,7 +77,15 @@ app.controller('PullRequestDetailController', ['$scope', '$localStorage', '$rout
 		
 		$scope.$on('showPullRequest', function(event, pullRequestId){
 			console.log("PULL REQUEST ID :: " + pullRequestId);
-			$scope.pull_request = PullRequest.show({id: pullRequestId});
+			$scope.pull_request = PullRequest.show({id: pullRequestId}).$promise;
+			$localStorage.pull_request = PullRequest.show({id: pullRequestId});
+			$scope.pull_request.then( function onSuccess(response){
+				$scope.pull_request = response;
+			},
+			function onFail(response) {
+					alert("failed to load idea for editing");
+			});
+			//console.log("PULL REQUEST MESSAGE :: " + $scope.pull_request.message);
 			$("#pullRequestDetailsPanel").show();
 		})
 	}
