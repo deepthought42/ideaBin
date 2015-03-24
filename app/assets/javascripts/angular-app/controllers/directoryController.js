@@ -8,7 +8,7 @@ app.controller("DirectoryIndexCtrl", ['$scope', '$rootScope', '$localStorage', '
 		
   	$scope.deleteDirectory =  function(directory){
 			Directory.delete({id: 1, path: $localStorage.repo.path + $localStorage.dir_path + "/"+directory });
-			var index = $scope.directories.indexOf(idea);
+			var index = $scope.directories.indexOf(directory);
 			$scope.directories.splice(index, 1);
 		}
 		
