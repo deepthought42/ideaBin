@@ -1,6 +1,8 @@
 <div class="container" >
 	<div class="col-md-2 btn-group" role="group" ng-controller="IdeaDetailCtrl">
-		<div id="submittedPullRequestCount"> 0</div>
+	<div ng-controller="PullRequestIndexController">
+		<div id="submittedPullRequestCount">{{submittedCount}}</div>
+	</div>
 		<button class="btn toolbar-btn border-white fa fa-lightbulb-o" ng-click="showIdeaEditPanel()"></button>
 		<button class="btn toolbar-btn border-white fa fa-folder" id="btnAddFolder" ng-click="showNewDirectoryPanel()" />
 		<button class="btn toolbar-btn border-white fa fa-share" id="btnAddPullRequest" ng-click="showPullRequestCreatePanel()"/>

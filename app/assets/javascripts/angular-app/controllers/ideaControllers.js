@@ -28,6 +28,7 @@ app.controller("IdeaIndexController", ['$scope', '$localStorage', 'Idea', 'Repos
 					$localStorage.current_idea = response;
 					$rootScope.$broadcast("loadDirectory", $localStorage.repo.path )
 					$rootScope.$broadcast("loadResources", $localStorage.repo.path)
+					$rootScope.$broadcast("getSubmittedPullRequests", $localStorage.repo.id)
 				},
 				function onFail(response) {
 						alert("failed to load idea for editing");
@@ -77,11 +78,10 @@ app.controller("IdeaIndexController", ['$scope', '$localStorage', 'Idea', 'Repos
 		});
 }]);
 
-app.controller('IdeaDetailCtrl', ['$scope', '$localStorage', '$routeParams', 'Idea', '$location', '$upload', '$rootScope',
-	function($scope, $localStorage, $routeParams, Idea, $location, $upload, $rootScope){
+app.controller('IdeaDetailCtrl', ['$scope', '$localStorage', '$routeParams', 'Idea', '$location', '$upload', '$rootScope', '$http',
+	function($scope, $localStorage, $routeParams, Idea, $location, $upload, $rootScope, $http){
 		$scope.$storage = $localStorage;
 		$rootScope.ideaEditPanelVisible = false;
-		$rootScope.$broadcast('getSubmittedPullRequestCountForCurrentRepo');
 		
 		$scope.uploadFile = function(){
 			var ideaFormVals = angular.toJson($scope.idea);
@@ -108,38 +108,38 @@ app.controller('IdeaDetailCtrl', ['$scope', '$localStorage', '$routeParams', 'Id
 				});
 				console.log('file ' + config.file + ' was uploaded successfully. Status: ' + status);
 			});
-		}
+		};
 		
 		$scope.updateIdea = function (ideaId){
 			$scope.uploadFile();
 			Idea.update($scope.idea,{id: ideaId}, function(){
 					$location.path('/ideas');
 			});
-		}
+		};
 		
 		$scope.showIdeaEditPanel = function() {
 			$rootScope.ideaEditPanelVisible = true;
-		}
+		};
 		
 		$scope.hideIdeaEditPanel = function() {
 			$rootScope.ideaEditPanelVisible = false;
-		}
+		};
 		
 		$scope.showPullRequestIndexPage = function() {
 			$rootScope.$broadcast("showAllPullRequests");
-		}
+		};
 		
 		$scope.showNewIdea = function(){
 			$rootScope.isCreateIdeaPanelVisible = true;
-		}
+		};
 		
 		$scope.showNewDirectoryPanel = function(){
 			$('#directoryForm').slideToggle().delay(100);
-		}
+		};
 		
 		$scope.showPullRequestCreatePanel = function(){
 			$rootScope.$broadcast('showPullRequestCreatePanel');
-		}
+		};
 	}
 ]);
 
