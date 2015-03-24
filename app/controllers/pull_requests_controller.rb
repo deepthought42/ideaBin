@@ -66,11 +66,19 @@ class PullRequestsController < ApplicationController
 			
 			@pullRequest.message = params[:name]
 			@pullRequest.save
+			
+			Dir.chdir(@repo.path)
+			@git = Git.init()
+			@git.pull(@toRepo.path, "master") # fetch and a merge
 		end 
-		respond_to do |format|
-      format.html # new.html.erb
-      format.json { render json: @pullRequest }
-    end
+		if(@pullRequest)
+			respond_to do |format|
+				format.html # new.html.erb
+				format.json { render json: @pullRequest }
+			end
+		else
+			render json: {error: "Looks like something went wrong with creating a repo. Perhaps you already have one."}
+		end
   end
 
   # PUT /pullRequests/1
@@ -87,7 +95,7 @@ class PullRequestsController < ApplicationController
     if @pullRequest.save
 			respond_with(@pullRequest)
 		else
-			respond_with(error:	"An error occurred while updating your pull request")
+			render json: {error: "An error occurred while updating your pull request"}
     end
   end
 	
@@ -105,7 +113,7 @@ class PullRequestsController < ApplicationController
     if @pullRequest.save
 			respond_with(@pullRequest)
 		else
-			respond_with(error:	"An error occurred while rejecting the pull request")
+			render json: {error: "An error occurred while rejecting the pull request"}
     end
   end
 end
