@@ -1,0 +1,13 @@
+<div id="CommentContainer" ng-controller="CommentIndexController">
+	<div id="comment_container" class="row">
+		<div class="col-md-12" ng-repeat="comment in comments">
+			<textarea ng-model="comment.message" placeholder="type here"/>
+			<span class="col-md-10 pointerCursor" id="commentName" ng-click="editComment(comment)">{{ comment }}</span>
+			<span class="col-md-2 commentButtons" >
+				<i id="removeComment" ng-click="deleteComment(comment)" class="fa fa-times"></i>
+			</span>
+		</div>
+		<div class="col-md-12">
+		</div>
+	</div>
+</div>
