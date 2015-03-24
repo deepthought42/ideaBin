@@ -19,9 +19,10 @@ app.controller("ResourceIndexCtrl", ['$rootScope', '$scope', '$localStorage', '$
 		
   	$scope.deleteResource =  function(resourceName){
 			$localStorage.repo.path + $localStorage.dir_path + resourceName;
-			alert("resource id :: " + resourceName);
-			Resource.delete({id: 0, path: resourceName});
-			$scope.resources = Resource.query({directory_id: $localStorage.current_directory.id});
+			Resource.delete({id: $localStorage.repo.id, path: resourceName});
+			
+			var index = $scope.resources.indexOf(resourceName);
+			$scope.resources.splice(index, 1);
 		}
 		
 		$scope.createNewResource = function(){

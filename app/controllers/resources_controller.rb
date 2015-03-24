@@ -89,17 +89,16 @@ class ResourcesController < ApplicationController
   # DELETE /resources/1
   # DELETE /resources/1.json
   def destroy
-		if(FileUtils.rm(params[:path]))
+    @repo = Repository.find(params[:id])
 		
+		#REMOVE FILE FROM FILE SYSTEM AND DO A GIT commit
+		if(FileUtils.rm(params[:path]))
 			Dir.chdir(@repo.path)
 			@git = Git.init()
 			@git.add(:all => true)
-			@git.commit("Removed file :: #{@resource.filename}")
+			@git.commit("Removed file :: #{params[:path]}")
 		end
-		#REMOVE FILE FROM FILE SYSTEM AND DO A GIT commit
-    respond_to do |format|
-      format.json { head :no_content }
-    end
+
   end
 	
 	#GET /resources/1/contents.json
