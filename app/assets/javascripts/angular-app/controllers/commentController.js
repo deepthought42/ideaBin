@@ -1,6 +1,6 @@
 var app = angular.module('ideaBin.commentControllers', []);
 
-app.controller("CommentIndexCtrl", ['$rootScope', '$scope', '$localStorage', '$rootScope', '$routeParams', 'Comment', '$location', '$upload', '$http',
+app.controller("CommentIndexController", ['$rootScope', '$scope', '$localStorage', '$rootScope', '$routeParams', 'Comment', '$location', '$upload', '$http',
 	function($rootScope, $scope, $localStorage, $rootScope, $routeParams, Comment, $location, $upload, $http) {
 		$scope.$storage = $localStorage;
 		
@@ -26,7 +26,7 @@ app.controller("CommentIndexCtrl", ['$rootScope', '$scope', '$localStorage', '$r
 		}
 }]);
 
-app.controller('CommentDetailCtrl', ['$rootScope', '$scope', '$localStorage', '$routeParams', 'Comment', '$http', '$location',
+app.controller('CommentDetailController', ['$rootScope', '$scope', '$localStorage', '$routeParams', 'Comment', '$http', '$location',
 	function($rootScope, $scope, $localStorage, $routeParams, Comment, $http, $location){
 		$scope.updateComment = function (message){
 			$scope.comment.comment = message;
@@ -37,7 +37,7 @@ app.controller('CommentDetailCtrl', ['$rootScope', '$scope', '$localStorage', '$
 	}
 ]);
 
-app.controller('CommentCreationCtrl', ['$scope', 'Comment', '$location',
+app.controller('CommentCreationController', ['$scope', 'Comment', '$location',
 	function($scope, Comment, $location ){
 		//callback for ng-click 'createNewCommentFactory'
 		$scope.commentForm = {};
