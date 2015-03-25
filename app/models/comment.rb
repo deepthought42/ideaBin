@@ -1,7 +1,7 @@
 class Comment < ActiveRecord::Base
 	attr_accessible :comment
 	belongs_to :user
-	belongs_to :repository_comments
-	delegate :repository, to: :repository_comments
+	has_one :repository, through: :repository_comment
+	
 	validates :comment, presence: true
 end
