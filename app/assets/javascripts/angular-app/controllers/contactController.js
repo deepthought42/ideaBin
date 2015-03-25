@@ -1,7 +1,7 @@
-var app = angular.module('ideaBin.contactControllers', []);
+var app = angular.module('ideaBin.contactController', []);
 
 
-app.controller('ResourceCreationCtrl', ['$scope', 'Contact', '$location',
+app.controller('contactController', ['$scope', 'Contact', '$location',
 	function($scope, Contact, $location ){
 		//callback for ng-click 'createNewResourceFactory'
 		$scope.contact = {};
