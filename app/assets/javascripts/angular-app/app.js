@@ -66,8 +66,8 @@ ideaBin.config(function ($routeProvider, $locationProvider) {
 					templateUrl: 'user/register.html',
 					controller:	'UserSessionCtrl'
 				})
-				.when('/resources/:id', {
-					templateUrl:  'resource/edit.html',
+				.when('/contact_us', {
+					templateUrl:  'contact_us.html',
 				})
 				.otherwise({redirectTo : '/ideas'});
 				

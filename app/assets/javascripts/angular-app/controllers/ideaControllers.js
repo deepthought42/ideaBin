@@ -16,6 +16,10 @@ app.controller("IdeaIndexController", ['$scope', '$localStorage', 'Idea', 'Repos
 			$location.path('/ideas');
 		};
 		
+		$scope.showContactUs = function(){
+			$location.path('/contact_us');
+		};
+		
 		$scope.editIdea = function (ideaId) {
 			$localStorage.current_idea  = Idea.show({id: ideaId}).$promise;
 			$localStorage.repo = Repository.show({user_id: $localStorage.user.id, id: ideaId}).$promise;
