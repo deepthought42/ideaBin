@@ -7,7 +7,7 @@ app.controller('contactController', ['$scope', 'Contact', '$location',
 		$scope.contact = {};
 		$scope.createContact = function(){
 			console.log($scope.contact)
-			Resource.create($scope.contact);
+			Contact.create($scope.contact);
 			$location.path('/contact');
 		}
 	}

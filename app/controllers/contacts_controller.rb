@@ -1,9 +1,14 @@
-class ContactController < ApplicationController
+class ContactsController < ApplicationController
+	def show
+    @contact = Contact.find(params[:id])
+		render json: @contact
+  end
+	
 	#creates a new contact record
 	#
-  # POST /repository_comments.json
+  # POST /contacts.json
   def create
-		@contact = Comment.new()
+		@contact = Contact.new()
 		@contact.fname = params[:fname] 
 		@contact.lname = params[:lname]
 		@contact.email = params[:email]
@@ -11,6 +16,6 @@ class ContactController < ApplicationController
 		@contact.message = params[:message]
 		@contact.save
 		
-		respond_with(@comment)
+		respond_with(@contact)
   end
 end

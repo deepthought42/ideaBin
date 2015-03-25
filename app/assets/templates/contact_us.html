@@ -6,11 +6,13 @@
 		<input placeholder="Last Name" ng-model="contact.lname" />
 		<input placeholder="Email" ng-model="contact.email" />
 		<select ng-model="contact.reason">
-			<option value="PRAISE">Praise</option>
+			<option value="PRAISE" selected>Praise</option>
 			<option value="ISSUE">Issue/Error</option>
 			<option value="FUNC_REQUEST">Request Functionality</option>
 			<option value="QUESTION">Question</option>
 		</select>
 		<textarea placeholder="text goes here" ng-model="contact.message" />
+		
+		<button ng-click="createContact()">Submit</button>
 	</form>
 </div>
