@@ -4,6 +4,15 @@ class CommentsController < ApplicationController
 
 	respond_to :json
 	
+	
+  # GET /comments/1.json
+  def show
+		@comment = Comment.find(params[:id])
+		
+		respond_with(@comment)
+  end
+	
+	
 	#creates a new comment with the given message
 	#
   # POST /comments.json

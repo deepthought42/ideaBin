@@ -67,12 +67,6 @@ ideaBin.config(function ($routeProvider, $locationProvider) {
 				.when('/resources/:id', {
 					templateUrl:  'resource/edit.html',
 				})
-				.when('/pullRequests', {
-					templateUrl:  'pull_request/index.html',
-				})
-				.when('/pullRequest/:id', {
-					templateUrl:  'pull_request/show.html',
-				})
 				.otherwise({redirectTo : '/ideas'});
 				
         $locationProvider.html5Mode({

@@ -29,6 +29,7 @@ app.controller("IdeaIndexController", ['$scope', '$localStorage', 'Idea', 'Repos
 					$rootScope.$broadcast("loadDirectory", $localStorage.repo.path )
 					$rootScope.$broadcast("loadResources", $localStorage.repo.path)
 					$rootScope.$broadcast("getSubmittedPullRequests", $localStorage.repo.id)
+					$rootScope.$broadcast("loadComments")
 				},
 				function onFail(response) {
 						alert("failed to load idea for editing");

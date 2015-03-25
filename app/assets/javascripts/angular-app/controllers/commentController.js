@@ -7,8 +7,15 @@ app.controller("CommentIndexController", ['$scope', '$localStorage', 'Comment', 
 		/**
 		*	Loads all comments for a given repo. 
 		*/
-		$scope.$on('loadComments', function(event, path){
+		$scope.$on('loadComments', function(event, data){
 			$scope.comments = Comment.query();
+		});
+		
+		/**
+		* Adds a comment to the current index of comments
+		*/
+		$scope.$on('addCommentToIndex', function(event, comment){
+			$scope.comments.push(comment);
 		});
 		
 		/**
@@ -34,14 +41,14 @@ app.controller('CommentDetailController', ['$scope', '$localStorage', 'Comment',
 	}
 ]);
 
-app.controller('CommentCreationController', ['$scope', 'Comment',
-	function($scope, Comment){
+app.controller('CommentCreationController', ['$scope', '$rootScope', 'Comment',
+	function($scope, $rootScope, Comment){
 		//callback for ng-click 'createNewCommentFactory'
 		$scope.comment = {};
 
 		$scope.createComment = function(){
-			console.log($scope.comment.message)
-			Comment.create({message: $scope.comment.message});
+			var comment = Comment.create({message: $scope.comment.message});
+			$rootScope.$broadcast('addCommentToIndex', comment);
 		}
 		
 	}
