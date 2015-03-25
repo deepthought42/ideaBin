@@ -29,6 +29,8 @@ IdeaBin::Application.routes.draw do
 	resources :repositories
 	resources :comments
 	resources :repository_comments
+	resources :contacts
+	
   devise_for :users
 
 
