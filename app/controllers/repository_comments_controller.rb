@@ -1,0 +1,2 @@
+class RepositoryCommentsController < ApplicationController
+end
