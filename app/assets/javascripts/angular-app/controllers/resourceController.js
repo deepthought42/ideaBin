@@ -1,7 +1,7 @@
 var app = angular.module('ideaBin.resourceControllers', []);
 
-app.controller("ResourceIndexCtrl", ['$rootScope', '$scope', '$localStorage', '$rootScope', '$routeParams', 'Resource', '$location', '$upload', '$http',
-	function($rootScope, $scope, $localStorage, $rootScope, $routeParams, Resource, $location, $upload, $http) {
+app.controller("ResourceIndexCtrl", ['$rootScope', '$scope', '$localStorage', 'Resource', '$location', '$upload', '$http',
+	function($rootScope, $scope, $localStorage, Resource, $location, $upload, $http) {
 		$scope.$storage = $localStorage;
 		$scope.editableResourceTypes = ["txt", "rb", "html"];
 		//move to event
@@ -91,9 +91,8 @@ app.controller("ResourceIndexCtrl", ['$rootScope', '$scope', '$localStorage', '$
 		};
 }]);
 
-app.controller('ResourceDetailCtrl', ['$rootScope', '$scope', '$localStorage', '$routeParams', 'Resource', '$http', '$location',
-	function($rootScope, $scope, $localStorage, $routeParams, Resource, $http, $location){
-		//$scope.resource = Resource.show({id: $routeParams.id});
+app.controller('ResourceDetailCtrl', ['$scope', '$localStorage', 'Resource', '$http',
+	function($scope, $localStorage, Resource, $http){
 		
 		$scope.aceLoaded = function(_editor) {
 			$scope.editor = _editor;
@@ -125,10 +124,6 @@ app.controller('ResourceDetailCtrl', ['$rootScope', '$scope', '$localStorage', '
 			if($scope.resource.comment){
 				Resource.update($scope.resource);
 			}
-		}
-
-		$scope.cancel = function(){
-			$location.path('/resources');
 		}
 	}
 ]);

@@ -1,7 +1,7 @@
 var app = angular.module('ideaBin.commentControllers', []);
 
-app.controller("CommentIndexController", ['$rootScope', '$scope', '$localStorage', '$rootScope', '$routeParams', 'Comment', '$location', '$upload', '$http',
-	function($rootScope, $scope, $localStorage, $rootScope, $routeParams, Comment, $location, $upload, $http) {
+app.controller("CommentIndexController", ['$scope', '$localStorage', 'Comment', '$upload',
+	function($scope, $localStorage, Comment, $location) {
 		$scope.$storage = $localStorage;
 		
 		/**
