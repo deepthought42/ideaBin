@@ -3,7 +3,7 @@ var app = angular.module('ideaBin.resourceControllers', []);
 app.controller("ResourceIndexCtrl", ['$rootScope', '$scope', '$localStorage', '$rootScope', '$routeParams', 'Resource', '$location', '$upload', '$http',
 	function($rootScope, $scope, $localStorage, $rootScope, $routeParams, Resource, $location, $upload, $http) {
 		$scope.$storage = $localStorage;
-		
+		$scope.editableResourceTypes = ["txt", "rb", "html"];
 		//move to event
 		$scope.$on('loadResources', function(event, path){
 			$scope.resources = Resource.query({path: path});
@@ -31,7 +31,14 @@ app.controller("ResourceIndexCtrl", ['$rootScope', '$scope', '$localStorage', '$
 		};
 		
 		$scope.editResource = function (resource_name) {
-			$rootScope.$broadcast("editResource", resource_name );
+			//check for if resource name is of a type that is supported
+			var ext = resource_name.substr(resource_name.lastIndexOf('.') + 1);
+			if($scope.editableResourceTypes.indexOf(ext) > -1){
+				$rootScope.$broadcast("editResource", resource_name );
+			}
+			else{
+				alert(resource_name + " is not currently editable in IdeaBin. Please download to make changes");
+			}
 		}
 		
 		$scope.downloadResource = function(path, filename){

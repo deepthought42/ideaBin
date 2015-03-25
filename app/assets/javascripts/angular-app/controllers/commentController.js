@@ -4,10 +4,16 @@ app.controller("CommentIndexController", ['$rootScope', '$scope', '$localStorage
 	function($rootScope, $scope, $localStorage, $rootScope, $routeParams, Comment, $location, $upload, $http) {
 		$scope.$storage = $localStorage;
 		
+		/**
+		*	Loads all comments for a given repo. 
+		*/
 		$scope.$on('loadComments', function(event, path){
-			$scope.comments = Comment.query();
+			$scope.comments = Comment.query({idea_id: $localStorage.repo.id});
 		});
 		
+		/**
+		*	Deletes a comment with a given comment id.
+		*/
   	$scope.deleteComment =  function(comment_id){
 			$localStorage.repo.path + $localStorage.dir_path + commentName;
 			Comment.delete({id: comment_id});
@@ -15,11 +21,6 @@ app.controller("CommentIndexController", ['$rootScope', '$scope', '$localStorage
 			var index = $scope.comments.indexOf(comment_id);
 			$scope.comments.splice(index, 1);
 		}
-		
-		$scope.createNewComment = function(){
-			Comment.create();
-			$location.path('/comments');
-		};
 		
 		$scope.editComment = function (comment_name) {
 			$rootScope.$broadcast("editComment", comment_name );
@@ -40,13 +41,12 @@ app.controller('CommentDetailController', ['$rootScope', '$scope', '$localStorag
 app.controller('CommentCreationController', ['$scope', 'Comment', '$location',
 	function($scope, Comment, $location ){
 		//callback for ng-click 'createNewCommentFactory'
-		$scope.commentForm = {};
-		$scope.commentForm.name = "";
-		$scope.commentForm.description = "";
-		$scope.createNewComment = function(){
-			console.log($scope.commentForm)
-			Comment.create($scope.commentForm);
-			$location.path('/comments');
+		$scope.comment = {};
+
+		$scope.createComment = function(){
+			console.log($scope.comment.message)
+			Comment.create($scope.comment);
 		}
+		
 	}
 ]);

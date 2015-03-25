@@ -7,6 +7,8 @@
 	</div>
 </div>
 <div  class="col-md-12" ng-controller="CommentCreationController">
-	<textarea ng-model="comment.message" placeholder="type here"/>
-	<i id="createCommentButton" ng-click="createComment(comment)" class="fa fa-plus"></i>
+	<form novalidate>
+		<textarea ng-model="comment.message" placeholder="type here"/>
+		<i id="createCommentButton" ng-click="createComment()" class="fa fa-plus"></i>
+	</form>
 </div>
