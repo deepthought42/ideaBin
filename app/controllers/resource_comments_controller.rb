@@ -1,0 +1,2 @@
+class ResourceCommentsController < ApplicationController
+end
