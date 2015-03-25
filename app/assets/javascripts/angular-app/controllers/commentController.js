@@ -8,7 +8,7 @@ app.controller("CommentIndexController", ['$rootScope', '$scope', '$localStorage
 		*	Loads all comments for a given repo. 
 		*/
 		$scope.$on('loadComments', function(event, path){
-			$scope.comments = Comment.query({idea_id: $localStorage.repo.id});
+			$scope.comments = Comment.query();
 		});
 		
 		/**
@@ -21,14 +21,10 @@ app.controller("CommentIndexController", ['$rootScope', '$scope', '$localStorage
 			var index = $scope.comments.indexOf(comment_id);
 			$scope.comments.splice(index, 1);
 		}
-		
-		$scope.editComment = function (comment_name) {
-			$rootScope.$broadcast("editComment", comment_name );
-		}
 }]);
 
-app.controller('CommentDetailController', ['$rootScope', '$scope', '$localStorage', '$routeParams', 'Comment', '$http', '$location',
-	function($rootScope, $scope, $localStorage, $routeParams, Comment, $http, $location){
+app.controller('CommentDetailController', ['$scope', '$localStorage', 'Comment',
+	function($scope, $localStorage, Comment){
 		$scope.updateComment = function (message){
 			$scope.comment.comment = message;
 			if($scope.comment.comment){
@@ -38,14 +34,14 @@ app.controller('CommentDetailController', ['$rootScope', '$scope', '$localStorag
 	}
 ]);
 
-app.controller('CommentCreationController', ['$scope', 'Comment', '$location',
-	function($scope, Comment, $location ){
+app.controller('CommentCreationController', ['$scope', 'Comment',
+	function($scope, Comment){
 		//callback for ng-click 'createNewCommentFactory'
 		$scope.comment = {};
 
 		$scope.createComment = function(){
 			console.log($scope.comment.message)
-			Comment.create($scope.comment);
+			Comment.create({message: $scope.comment.message});
 		}
 		
 	}
