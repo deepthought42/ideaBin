@@ -1,0 +1,16 @@
+<div ng-controller="contactController">
+	Contact us:
+	
+	<form>
+		<input placeholder="First Name" ng-model="contact.fname" />
+		<input placeholder="Last Name" ng-model="contact.lname" />
+		<input placeholder="Email" ng-model="contact.email" />
+		<select ng-model="contact.reason">
+			<option value="PRAISE">Praise</option>
+			<option value="ISSUE">Issue/Error</option>
+			<option value="FUNC_REQUEST">Request Functionality</option>
+			<option value="QUESTION">Question</option>
+		</select>
+		<textarea placeholder="text goes here" ng-model="contact.message" />
+	</form>
+</div>
