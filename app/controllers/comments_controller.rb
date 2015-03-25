@@ -4,6 +4,12 @@ class CommentsController < ApplicationController
 
 	respond_to :json
 	
+	# GET /comments.json
+  def index
+    @comments = Comment.where({user_id: current_user})
+		
+		render json: @comments
+  end
 	
   # GET /comments/1.json
   def show
