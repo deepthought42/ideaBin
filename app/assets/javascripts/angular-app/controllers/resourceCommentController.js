@@ -3,12 +3,13 @@ var app = angular.module('ideaBin.resourceCommentControllers', []);
 app.controller("ResourceCommentIndexController", ['$scope', '$localStorage', 'ResourceComment', '$upload',
 	function($scope, $localStorage, ResourceComment, $location) {
 		$scope.$storage = $localStorage;
-		$scope.resourceComments = {};
+		$scope.resourceComment = {};
+
 		/**
 		*	Loads all comments for a given repo. 
 		*/
 		$scope.$on('loadResourceComments', function(event, data){
-			$scope.resourceComments = ResourceComment.query({repo_id: $localStorage.repo.id});
+			$scope.resourceComments = ResourceComment.query({path: $localStorage.repo.path + $localStorage.dir_path + $localStorage.resource});
 		});
 		
 		/**
@@ -44,8 +45,6 @@ app.controller('ResourceCommentDetailController', ['$scope', '$localStorage', 'R
 
 app.controller('ResourceCommentCreationController', ['$scope', '$localStorage', '$rootScope', 'ResourceComment',
 	function($scope, $localStorage, $rootScope, ResourceComment){
-		$scope.resourceComment = {};
-		console.log("SOMETHING NOT RIGHT MAN...");
 		$scope.createResourceComment = function(){
 			if($localStorage.resource){
 				var resourceComment = ResourceComment.create({path: $localStorage.repo.path + $localStorage.dir_path + $localStorage.resource, repo_id: $localStorage.repo.id, message: $scope.resource_comment.message});

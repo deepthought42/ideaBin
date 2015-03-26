@@ -1,4 +1,18 @@
 class ResourceCommentsController < ApplicationController
+		# GET /resource_comments.json
+  def index
+    @resource_comments = ResourceComment.where(resource_path: params[:path])
+		@comments = Comment.where(id: @resource_comments)
+		render json: @comments
+  end
+	
+	# GET /comments/1.json
+  def show
+		@resource_comment = ResourceComment.find(params[:id])
+		
+		respond_with(@resource_comment)
+  end
+	
 	#creates a new comment with the given message
 	#
   # POST /repository_comments.json
