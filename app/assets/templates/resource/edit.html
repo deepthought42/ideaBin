@@ -1,16 +1,17 @@
-<div class="col-md-8" id="ace-wrapper" ng-controller="ResourceDetailCtrl">
+<div class="col-md-12" id="ace-wrapper" ng-controller="ResourceDetailCtrl">
 	<div ui-ace="{
 			onLoad : aceLoaded,
-			maxLines: 5,
+			maxLines: 40,
 			require: ['ace/ext/language_tools'],
 			advanced: {
-					enableSnippets: true,
-					enableBasicAutocompletion: true,
-					enableLiveAutocompletion: true
+				enableSnippets: true,
+				enableBasicAutocompletion: true,
+				enableLiveAutocompletion: true
 			}
 		}">
 	</div>
-		<div class="actions">
-			<button class="btn btn-default" ng-click="updateResource()">Save</button>
-		</div>
+	<div class="actions">
+		<button class="btn btn-default" ng-click="updateResource()">Save</button>
+	</div>
+	<div ng-include="'resource_comment/index.html'"></div>
 </div>
