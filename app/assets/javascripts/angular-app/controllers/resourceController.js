@@ -84,11 +84,10 @@ app.controller("ResourceIndexCtrl", ['$rootScope', '$scope', '$localStorage', 'R
 					}).progress(function(evt) {
 						console.log('percent: ' + parseInt(100.0 * evt.loaded / evt.total));
 					}).success(function(data, status, headers, config) {
-						// file is uploaded successfully
-						console.log("UPLOAD SUCCESSFUL");
 						$scope.resources = Resource.query({path: $localStorage.repo.path + $scope.$storage.dir_path});
-					});
-					//.error(...)
+					}).error(function(data, status, headers, config) {
+						console.log("There was an error uploading for the file. It may already be up to date");
+					})
 					//.then(success, error, progress); 
 					// access or attach event listeners to the underlying XMLHttpRequest.
 					//.xhr(function(xhr){xhr.upload.addEventListener(...)})

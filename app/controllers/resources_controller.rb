@@ -60,8 +60,11 @@ class ResourcesController < ApplicationController
 		@resource.comment = params[:comment]
 		@resource.directory_id = params[:directory_id]
 	
-		@resource.save
-		respond_with(@resource)
+		if(@resource.save)
+			respond_with(@resource)
+		else
+			render json: {error: "File is already up to date"}
+		end
   end
 
   # PUT /resources/1
