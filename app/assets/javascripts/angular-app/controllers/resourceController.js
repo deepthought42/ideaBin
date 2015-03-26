@@ -34,6 +34,7 @@ app.controller("ResourceIndexCtrl", ['$rootScope', '$scope', '$localStorage', 'R
 			//check for if resource name is of a type that is supported
 			var ext = resource_name.substr(resource_name.lastIndexOf('.') + 1);
 			if($scope.editableResourceTypes.indexOf(ext) > -1){
+				$rootScope.$broadcast("loadResourceComments");
 				$rootScope.$broadcast("editResource", resource_name );
 			}
 			else{
@@ -111,6 +112,7 @@ app.controller('ResourceDetailCtrl', ['$scope', '$localStorage', 'Resource', '$h
 						$scope.resource = {};
 						$scope.resource.content = data;
 						$scope.editor.setValue(data);
+						$localStorage.resource = resource_name;
 				})
 				.error(function(data){
 					alert("Failed to load resource!");

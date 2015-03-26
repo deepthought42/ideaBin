@@ -6,9 +6,11 @@
 
 .btn{
   border-radius: 0px;   
-	color:  #FFD473;
 }
 
+.fa-github {
+	color:		red;
+}
 #toggleBtn{
   padding: 10px;
   background-color: rgba(0,0,0,.1);

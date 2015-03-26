@@ -3,7 +3,7 @@ var app = angular.module('ideaBin.resourceCommentControllers', []);
 app.controller("ResourceCommentIndexController", ['$scope', '$localStorage', 'ResourceComment', '$upload',
 	function($scope, $localStorage, ResourceComment, $location) {
 		$scope.$storage = $localStorage;
-		
+		$scope.resourceComments = {};
 		/**
 		*	Loads all comments for a given repo. 
 		*/
@@ -44,10 +44,15 @@ app.controller('ResourceCommentDetailController', ['$scope', '$localStorage', 'R
 app.controller('ResourceCommentCreationController', ['$scope', '$localStorage', '$rootScope', 'ResourceComment',
 	function($scope, $localStorage, $rootScope, ResourceComment){
 		$scope.resourceComment = {};
-
-		$scope.createComment = function(){
-			var resourceComment = ResourceComment.create({path: $localStorage.repo.path + $localStorage.dir_path + $localStorage.resource, repo_id: $localStorage.repo.id});
-			$rootScope.$broadcast('addResourceCommentToIndex', resourceComment);
+		console.log("SOMETHING NOT RIGHT MAN...");
+		$scope.createResourceComment = function(){
+			if($localStorage.resource){
+				var resourceComment = ResourceComment.create({path: $localStorage.repo.path + $localStorage.dir_path + $localStorage.resource, repo_id: $localStorage.repo.id, message: $resourceComment.message});
+				$rootScope.$broadcast('addResourceCommentToIndex', resourceComment);
+			}
+			else{
+				alert("Pssst. No resource is loaded, so there is nothing to comment on");
+			}
 		}
 		
 	}
