@@ -15,6 +15,7 @@ app.controller("ResourceCommentIndexController", ['$scope', '$localStorage', 'Re
 		* Adds a comment to the current index of resource comments
 		*/
 		$scope.$on('addResourceCommentToIndex', function(event, comment){
+			console.log("comment :: " + comment);
 			$scope.resourceComments.push(comment);
 		});
 		
@@ -47,7 +48,7 @@ app.controller('ResourceCommentCreationController', ['$scope', '$localStorage', 
 		console.log("SOMETHING NOT RIGHT MAN...");
 		$scope.createResourceComment = function(){
 			if($localStorage.resource){
-				var resourceComment = ResourceComment.create({path: $localStorage.repo.path + $localStorage.dir_path + $localStorage.resource, repo_id: $localStorage.repo.id, message: $resourceComment.message});
+				var resourceComment = ResourceComment.create({path: $localStorage.repo.path + $localStorage.dir_path + $localStorage.resource, repo_id: $localStorage.repo.id, message: $scope.resource_comment.message});
 				$rootScope.$broadcast('addResourceCommentToIndex', resourceComment);
 			}
 			else{
