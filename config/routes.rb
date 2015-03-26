@@ -30,6 +30,7 @@ IdeaBin::Application.routes.draw do
 	resources :comments
 	resources :repository_comments
 	resources :contacts
+	resources :resource_comments
 	
   devise_for :users
 
