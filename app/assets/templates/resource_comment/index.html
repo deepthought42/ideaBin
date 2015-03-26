@@ -8,7 +8,11 @@
 </div>
 <div  class="col-md-12" ng-controller="ResourceCommentCreationController">
 	<form novalidate>
-		<textarea ng-model="resource_comment.message" placeholder="type here"/>
-		<span id="createResourceCommentButton" ng-click="createResourceComment()" class="fa fa-plus"></span>
+		<div>
+			<textarea ng-model="resource_comment.message" placeholder="type here" class="col-md-12 resourceCommentBox"/>
+		</div>
+		<div>
+			<button id="createResourceCommentButton" ng-click="createResourceComment()" class="col-md-6">Add Comment</button>
+		</div>
 	</form>
 </div>
