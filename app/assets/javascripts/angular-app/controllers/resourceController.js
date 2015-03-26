@@ -15,7 +15,7 @@ app.controller("ResourceIndexCtrl", ['$rootScope', '$scope', '$localStorage', 'R
 		
 		$scope.showResource = function(resourceText){
 			$scope.editor.setValue(resourceText);
-		}
+		};
 		
   	$scope.deleteResource =  function(resourceName){
 			$localStorage.repo.path + $localStorage.dir_path + resourceName;
@@ -23,7 +23,7 @@ app.controller("ResourceIndexCtrl", ['$rootScope', '$scope', '$localStorage', 'R
 			
 			var index = $scope.resources.indexOf(resourceName);
 			$scope.resources.splice(index, 1);
-		}
+		};
 		
 		$scope.createNewResource = function(){
 			Resource.create();
@@ -40,7 +40,7 @@ app.controller("ResourceIndexCtrl", ['$rootScope', '$scope', '$localStorage', 'R
 			else{
 				alert(resource_name + " is not currently editable in IdeaBin. Please download to make changes");
 			}
-		}
+		};
 		
 		$scope.downloadResource = function(path, filename){
 			$http.get('/resources/1/download', {params: {path: path+filename}}).
@@ -55,39 +55,44 @@ app.controller("ResourceIndexCtrl", ['$rootScope', '$scope', '$localStorage', 'R
 				error(function(data, status, headers, config) {
 					alert("Error downloading file");
 				});
-		}
+		};
 		
 		$scope.upload = function(files) {			
-			
-			for (var i = 0; i < files.length; i++) {
-				var comment = prompt("Please describe the upload");
-				var file = files[i];
-				
-				$upload.upload({
-					url: '/resources.json', 
-					method: 'POST', // or 'PUT',
-					headers: {'XSRF-TOKEN': ''},
-					//withCredentials: true,
-					data: {	comment: comment, 
-									resource: $scope.resource, 
-									repo_id:	$localStorage.repo.id},
-					file: file, // or list of files ($files) for html5 only
-					//fileName: 'doc.jpg' or ['1.jpg', '2.jpg', ...] // to modify the name of the file(s)
-					// customize file formData name ('Content-Disposition'), server side file variable name. 
-					//fileFormDataName: myFile, //or a list of names for multiple files (html5). Default is 'file' 
-					// customize how data is added to formData. See #40#issuecomment-28612000 for sample code
-					//formDataAppender: function(formData, key, val){}
-				}).progress(function(evt) {
-					console.log('percent: ' + parseInt(100.0 * evt.loaded / evt.total));
-				}).success(function(data, status, headers, config) {
-					// file is uploaded successfully
-					console.log("UPLOAD SUCCESSFUL");
-					$scope.resources = Resource.query({path: $localStorage.repo.path + $scope.$storage.dir_path});
-				});
-				//.error(...)
-				//.then(success, error, progress); 
-				// access or attach event listeners to the underlying XMLHttpRequest.
-				//.xhr(function(xhr){xhr.upload.addEventListener(...)})
+			var confirmed = true;
+			if($scope.resources && $scope.resources.indexOf(files[0].name) > -1){
+				confirmed = confirm("Are you sure you want to overwrite the current copy?")	
+			}
+			if(confirmed){
+				for (var i = 0; i < files.length; i++) {
+					var comment = prompt("Please describe the upload");
+					var file = files[i];
+					
+					$upload.upload({
+						url: '/resources.json', 
+						method: 'POST', // or 'PUT',
+						headers: {'XSRF-TOKEN': ''},
+						//withCredentials: true,
+						data: {	comment: comment, 
+										resource: $scope.resource, 
+										repo_id:	$localStorage.repo.id},
+						file: file, // or list of files ($files) for html5 only
+						//fileName: 'doc.jpg' or ['1.jpg', '2.jpg', ...] // to modify the name of the file(s)
+						// customize file formData name ('Content-Disposition'), server side file variable name. 
+						//fileFormDataName: myFile, //or a list of names for multiple files (html5). Default is 'file' 
+						// customize how data is added to formData. See #40#issuecomment-28612000 for sample code
+						//formDataAppender: function(formData, key, val){}
+					}).progress(function(evt) {
+						console.log('percent: ' + parseInt(100.0 * evt.loaded / evt.total));
+					}).success(function(data, status, headers, config) {
+						// file is uploaded successfully
+						console.log("UPLOAD SUCCESSFUL");
+						$scope.resources = Resource.query({path: $localStorage.repo.path + $scope.$storage.dir_path});
+					});
+					//.error(...)
+					//.then(success, error, progress); 
+					// access or attach event listeners to the underlying XMLHttpRequest.
+					//.xhr(function(xhr){xhr.upload.addEventListener(...)})
+				}
 			}
 		};
 }]);

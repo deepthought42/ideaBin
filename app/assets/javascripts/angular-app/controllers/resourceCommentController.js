@@ -3,7 +3,7 @@ var app = angular.module('ideaBin.resourceCommentControllers', []);
 app.controller("ResourceCommentIndexController", ['$scope', '$localStorage', 'ResourceComment', '$upload',
 	function($scope, $localStorage, ResourceComment, $location) {
 		$scope.$storage = $localStorage;
-		$scope.resourceComment = {};
+		$scope.resourceComments = {};
 
 		/**
 		*	Loads all comments for a given repo. 
