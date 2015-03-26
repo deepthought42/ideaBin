@@ -1,13 +1,15 @@
 <div id="ResourceCommentContainer" ng-controller="ResourceCommentIndexController">
 	<div class="col-md-12" ng-repeat="resourceComment in resourceComments">
-		<span class="col-md-10 pointerCursor" ng-click="editComment(resourceComment)">{{ resourceComment.comment }}</span>
+		<span class="col-md-12 commentBox" ng-click="editComment(resourceComment)">{{ resourceComment.comment }}</span>
 		<span class="col-md-2 commentButtons" >
-
+			<!-- the following is left in place for whenever this feature is done" -->
+			<!-- <span class="pull-right fa fa-reply" ></span>  -->
 		</span>
 	</div>
 </div>
 <div  class="col-md-12" ng-controller="ResourceCommentCreationController">
 	<form novalidate>
+		Comment
 		<div>
 			<textarea ng-model="resource_comment.message" placeholder="type here" class="col-md-12 resourceCommentBox"/>
 		</div>
