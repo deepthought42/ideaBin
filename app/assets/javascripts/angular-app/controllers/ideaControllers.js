@@ -17,13 +17,13 @@ app.controller("IdeaIndexController", ['$scope', '$localStorage', 'Idea', 'Repos
 		};
 		
 		$scope.editIdea = function (ideaId) {
-			$localStorage.current_idea  = Idea.show({id: ideaId}).$promise;
+			
 			$localStorage.repo = Repository.show({user_id: $localStorage.user.id, id: ideaId}).$promise;
 
 			
 			$localStorage.repo.then(function onSuccess(	response){
 				$localStorage.repo = response;
-
+				$localStorage.current_idea  = Idea.show({id: ideaId}).$promise;
 				$localStorage.current_idea.then(function onSuccess(	response){
 					$localStorage.current_idea = response;
 					$rootScope.$broadcast("loadDirectory", $localStorage.repo.path )
@@ -38,9 +38,6 @@ app.controller("IdeaIndexController", ['$scope', '$localStorage', 'Idea', 'Repos
 			function onFail(response) {
 				alert("failed to load repo while opening idea for editing");
 			});
-			
-			
-		
 			$location.path('/ideas/'+ideaId);
 		}
 		

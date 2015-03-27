@@ -4,7 +4,7 @@ app.controller("DirectoryIndexCtrl", ['$scope', '$rootScope', '$localStorage', '
 	function($scope, $rootScope, $localStorage, $routeParams, Directory, $location, $http) {
 		$rootScope.showCreateDirectoryPanel = false;
 		$scope.$storage = $localStorage;
-		$scope.$storage.dir_path = "";
+		$scope.$storage.dir_path = "/";
 		
   	$scope.deleteDirectory =  function(directory){
 			Directory.delete({id: 1, path: $localStorage.repo.path + $localStorage.dir_path + "/"+directory });
@@ -22,7 +22,7 @@ app.controller("DirectoryIndexCtrl", ['$scope', '$rootScope', '$localStorage', '
 		
 		$scope.loadDirectory = function(name, path){
 			$scope.directories = Directory.query({'path': path+"/"+name})
-			$scope.$storage.dir_path += "/" + name;
+			$scope.$storage.dir_path +=  name + "/";
 			$rootScope.$broadcast('loadResources', $localStorage.repo.path + $localStorage.dir_path);
 		}
 		
