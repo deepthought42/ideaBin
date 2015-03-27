@@ -1,7 +1,7 @@
 var app = angular.module('ideaBin.resourceCommentControllers', []);
 
-app.controller("ResourceCommentIndexController", ['$scope', '$localStorage', 'ResourceComment', '$upload',
-	function($scope, $localStorage, ResourceComment, $location) {
+app.controller("ResourceCommentIndexController", ['$scope', '$localStorage', 'ResourceComment', 'User',
+	function($scope, $localStorage, ResourceComment, User) {
 		$scope.$storage = $localStorage;
 		$scope.resourceComments = {};
 
@@ -9,7 +9,21 @@ app.controller("ResourceCommentIndexController", ['$scope', '$localStorage', 'Re
 		*	Loads all comments for a given repo. 
 		*/
 		$scope.$on('loadResourceComments', function(event, data){
-			$scope.resourceComments = ResourceComment.query({path: $localStorage.repo.path + $localStorage.dir_path + $localStorage.resource});
+			ResourceComment.query({path: $localStorage.repo.path + $localStorage.dir_path + $localStorage.resource})
+				.$then(function(response){
+						$scope.resourceComments = response;
+						$scope.users = [];
+						console.log("total resources :: " + $scope.resourceComments);
+						for(var i = 0; i < Object.keys($scope.resourceComments).length; i++){
+							if(!$scope.users.indexOf($scope.resourceComments[i].id)){
+								$scope.users.push($scope.resourceComments[i].id)
+							}
+						}
+						$scope.commentUsers = User.query({user_ids: $scope.users})
+					 },function(response){
+								alert("there was a problem loading users for resources");
+					 });
+			
 		});
 		
 		/**

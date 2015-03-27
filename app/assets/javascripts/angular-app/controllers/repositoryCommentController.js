@@ -9,12 +9,14 @@ app.controller("RepositoryCommentIndexController", ['$scope', '$localStorage', '
 		*/
 		$scope.$on('loadRepositoryComments', function(event, data){
 			$scope.repositoryComments = RepositoryComment.query({repo_id: $localStorage.repo.id});
+			$scope.users = [];
+
 			for(var i = 0; i < $scope.repositoryComments.length; i++){
-				if($scope.users.indexOf($scope.repositoryComments[i])){
-					$scope.users.push($scope.repositoryComments[i])
+				if($scope.users.indexOf($scope.repositoryComments[i].id)){
+					$scope.users.push($scope.repositoryComments[i].id)
 				}
 			}
-			$scope.commentUsers = User.query({id: $scope.repositoryComments})
+			$scope.commentUsers = User.query({user_ids: $scope.users})
 		});
 		
 		/**
