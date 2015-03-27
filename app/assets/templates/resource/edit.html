@@ -1,4 +1,4 @@
-<div class="col-md-12" id="ace-wrapper" ng-controller="ResourceDetailCtrl">
+<div class="col-md-12 fullHeight" id="ace-wrapper" ng-controller="ResourceDetailCtrl">
 	<div ui-ace="{
 			onLoad : aceLoaded,
 			maxLines: 40,
@@ -11,7 +11,7 @@
 		}">
 	</div>
 	<div class="actions">
-		<button class="btn btn-default" ng-click="updateResource()">Save</button>
+		<button class="btn btn-default pull-right" ng-click="updateResource()">Save</button>
 	</div>
 	<div ng-include="'resource_comment/index.html'"></div>
 </div>

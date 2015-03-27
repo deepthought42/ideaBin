@@ -1,49 +1,47 @@
-<div class="container" >
-	<div class="col-md-2 btn-group" role="group" ng-controller="IdeaDetailCtrl">
-		<div ng-controller="PullRequestIndexController">
-			<div id="submittedPullRequestCount">{{submittedCount}}</div>
-		</div>
-		<button class="btn toolbar-btn border-white fa fa-lightbulb-o" ng-click="showIdeaEditPanel()"></button>
-		<button class="btn toolbar-btn border-white fa fa-folder" id="btnAddFolder" ng-click="showNewDirectoryPanel()" />
-		<button class="btn toolbar-btn border-white fa fa-share" id="btnAddPullRequest" ng-click="showPullRequestCreatePanel()"/>
-		<button class="btn toolbar-btn border-white fa fa-share" id="btnViewPullRequests" ng-click="showPullRequestIndexPage()" />
-	</div>
+<div class="col-md-12 fullHeight" >	
 	<div ng-include="'pull_request/new.html'" id="pullRequestCreatePanel" ></div>
 	<div ng-include="'pull_request/show.html'" id="pullRequestDetailsPanel"></div>
 	<div ng-include="'pull_request/index.html'" id="pullRequestIndexPanel"></div>
 	
-	<div class="row">
-		<div class="col-md-12">
-			<div class="col-md-4" >
-				<div ng-include="'directory/new.html'" ></div>
-				<div ng-include="'directory/index.html'" ></div>
-				<div ng-include="'resource/index.html'" ></div>
-			</div>
-
-			<div class="col-md-8" >
-				<div ng-include="'repository_comment/index.html'" id="RepositoryCommentIndexPanel"></div>
-				<div ng-include="'resource/edit.html'" id="resourceEditPanel"></div>
-			</div>
-			<div class="col-md-12" id="ideaEditPanel" ng-controller="IdeaDetailCtrl" ng-show="ideaEditPanelVisible">
-				<span class="hidePanelButton">
-					<i class="fa fa-times" ng-click="hideIdeaEditPanel()"></i>
-				</span>
-				<div class="col-md-12" >
-					<form enctype="multipart/form-data" novalidate>
-						<div class="col-md-12 ideaCoverImage" ng-file-drop ng-file-change="uploadFile($files)" ng-model="cover_img" drop-available="dropSupported">			
-							<img class="col-md-12 cover_img" ng-src="/images/cover_images/{{idea.cover_img_file_name}}" />
-						</div>
-						<div>
-							<h3 class="title ideaName">{{idea.name}}</h3>
-						</div>
-						<div class="field">
-							<input type="text" name="idea[description]" ng-model="idea.description" id="description" placeholder="Description"/>
-						</div>
-						<div class="actions">
-							<button class="btn btn-default" ng-click="updateIdea(idea)">Save</button>      
-						</div>
-					</form>
+	<div class="col-md-12 fullHeight">
+		<div class="col-md-3" >
+			<div class="col-md-12 btn-group" role="group" ng-controller="IdeaDetailCtrl">
+				<div ng-controller="PullRequestIndexController">
+					<div id="submittedPullRequestCount">{{submittedCount}}</div>
 				</div>
+				<button class="btn toolbar-btn border-white fa fa-lightbulb-o" ng-click="showIdeaEditPanel()"></button>
+				<button class="btn toolbar-btn border-white fa fa-folder" id="btnAddFolder" ng-click="showNewDirectoryPanel()" />
+				<button class="btn toolbar-btn border-white fa fa-share" id="btnAddPullRequest" ng-click="showPullRequestCreatePanel()"/>
+				<button class="btn toolbar-btn border-white fa fa-share" id="btnViewPullRequests" ng-click="showPullRequestIndexPage()" />
+			</div>
+			<div ng-include="'directory/new.html'" ></div>
+			<div ng-include="'directory/index.html'" ></div>
+			<div ng-include="'resource/index.html'" ></div>
+		</div>
+		
+		<div class="col-md-9 fullHeight" >
+			<div ng-include="'repository_comment/index.html'" id="RepositoryCommentIndexPanel"></div>
+			<div ng-include="'resource/edit.html'" class="col-md-12" id="resourceEditPanel"></div>
+		</div>
+		<div class="col-md-12" id="ideaEditPanel" ng-controller="IdeaDetailCtrl" ng-show="ideaEditPanelVisible">
+			<span class="hidePanelButton">
+				<i class="fa fa-times" ng-click="hideIdeaEditPanel()"></i>
+			</span>
+			<div class="col-md-12" >
+				<form enctype="multipart/form-data" novalidate>
+					<div class="col-md-12 ideaCoverImage" ng-file-drop ng-file-change="uploadFile($files)" ng-model="cover_img" drop-available="dropSupported">			
+						<img class="col-md-12 cover_img" ng-src="/images/cover_images/{{idea.cover_img_file_name}}" />
+					</div>
+					<div>
+						<h3 class="title ideaName">{{idea.name}}</h3>
+					</div>
+					<div class="field">
+						<input type="text" name="idea[description]" ng-model="idea.description" id="description" placeholder="Description"/>
+					</div>
+					<div class="actions">
+						<button class="btn btn-default" ng-click="updateIdea(idea)">Save</button>      
+					</div>
+				</form>
 			</div>
 		</div>
 	</div>
