@@ -19,13 +19,16 @@
 
 #toggleBtn{
   padding: 					10px;
-  background-color: rgba(17,38,94,.8);
-  color: 						#FFFFE0;
+	background-color: transparent;
+	color:						black;
   top:							0px;
   border-radius: 		0px;
   margin: 					0px;
   transition: 			all .5s;
   z-index: 					5;
+}
+#toggleBtn:hover{
+	background-color: rgba(17,38,94,.1)!important;
 }
 
 #sideMenu{
@@ -35,7 +38,7 @@
   height: 					100vh;
   display: 					inline-block;
   position: 				relative;
-  right: 						150px;
+  right: 						0px;
 	top:							0px;
   transition: 			right .5s;
   float: 						left;
@@ -75,13 +78,13 @@
 }
 
 .show-menu{
-  right: 0px!important;
+  right: 150px!important;
 }
 
-.make-transparent{
+.make-opaque{
   border: none!important;
-  background-color: transparent!important;
-	color:						black!important;
+	background-color: rgba(17,38,94,.8)!important;
+  color: 						#FFFFE0!important;
 }
 
 #wrapper-add-folder, #wrapper-add-file{

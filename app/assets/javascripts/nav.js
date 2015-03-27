@@ -6,7 +6,7 @@ $(document).ready(function(){
 
 	$btnMenuToggle.click(function(){
 	    $('#sideMenu').toggleClass('show-menu');
-	    $(this).toggleClass('make-transparent');
+	    $(this).toggleClass('make-opaque');
 	});
 
 	$btnAddFolder.click(function(){
