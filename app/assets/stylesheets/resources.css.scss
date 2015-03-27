@@ -51,8 +51,14 @@
 }
 
 #resourceEditPanel {
-	height: 100%;
-	display: none;
-	overflow-y:		scroll;
+	height: 					100%;
+	display: 					none;
+	overflow-y:				scroll;
+}
+
+#resourceToolbar {
+	position:			relative;
+	top:					7%;
+	right:				0px;
 }
 
