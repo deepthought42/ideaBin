@@ -19,11 +19,11 @@
 
 #toggleBtn{
   padding: 					10px;
-  background-color: rgba(0,0,0,.1);
-  color: 						#17385e;
+  background-color: rgba(17,38,94,.8);
+  color: 						#FFFFE0;
   top:							0px;
   border-radius: 		0px;
-  margin: 					3px;
+  margin: 					0px;
   transition: 			all .5s;
   z-index: 					5;
 }
@@ -32,7 +32,7 @@
   padding: 					15px;
   width: 						150px;
   background-color: #17385e;
-  height: 					99vh;
+  height: 					100vh;
   display: 					inline-block;
   position: 				relative;
   right: 						150px;
@@ -81,6 +81,7 @@
 .make-transparent{
   border: none!important;
   background-color: transparent!important;
+	color:						black!important;
 }
 
 #wrapper-add-folder, #wrapper-add-file{
