@@ -1,7 +1,7 @@
 var app = angular.module('ideaBin.repositoryCommentControllers', []);
 
-app.controller("RepositoryCommentIndexController", ['$scope', '$localStorage', 'RepositoryComment', '$upload',
-	function($scope, $localStorage, RepositoryComment, $location) {
+app.controller("RepositoryCommentIndexController", ['$scope', '$localStorage', 'RepositoryComment', 'User',
+	function($scope, $localStorage, RepositoryComment, User) {
 		$scope.$storage = $localStorage;
 		
 		/**
@@ -9,6 +9,12 @@ app.controller("RepositoryCommentIndexController", ['$scope', '$localStorage', '
 		*/
 		$scope.$on('loadRepositoryComments', function(event, data){
 			$scope.repositoryComments = RepositoryComment.query({repo_id: $localStorage.repo.id});
+			for(var i = 0; i < $scope.repositoryComments.length; i++){
+				if($scope.users.indexOf($scope.repositoryComments[i])){
+					$scope.users.push($scope.repositoryComments[i])
+				}
+			}
+			$scope.commentUsers = User.query({id: $scope.repositoryComments})
 		});
 		
 		/**

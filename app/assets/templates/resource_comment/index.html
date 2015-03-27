@@ -1,6 +1,7 @@
 <div id="ResourceCommentContainer" ng-controller="ResourceCommentIndexController">
 	<div class="col-md-12 commentBox" ng-repeat="resourceComment in resourceComments">
 		<span class="col-md-10 " ng-click="editComment(resourceComment)">{{ resourceComment.comment }}</span>
+		<span class="pull-right">{{ resourceComment.user_id }}</span>
 		<span class="col-md-2 " >
 			<!-- the following is left in place for whenever this feature is done" -->
 			<!-- <span class="pull-right fa fa-reply" ></span>  -->

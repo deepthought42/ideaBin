@@ -115,7 +115,8 @@ app.controller('UserRegisterController', ['$scope', 'Auth', '$location', '$local
 			};
 
 			Auth.register(credentials).then(function(registeredUser) {
-				console.log(registeredUser); // => {id: 1, ect: '...'}
+				//show some sort of statement that indicates they are welcome to enjoy
+				alert("registered user :: " + registeredUser);
 			}, function(error) {
 				alert("Something went wrong during registration. Womp womp");
 			});
