@@ -128,7 +128,10 @@ app.controller('IdeaDetailCtrl', ['$scope', '$localStorage', '$routeParams', 'Id
 		
 		$scope.showPullRequestIndexPage = function() {
 			$rootScope.$broadcast("showAllPullRequests", $localStorage.repo.id);
-			$("#pullRequestIndexPanel").toggle();
+			$("#pullRequestDetailsPanel").hide();
+			$("#RepositoryCommentIndexPanel").hide();
+			$("#resourceEditPanel").hide();
+			$("#pullRequestIndexPanel").show();
 		};
 		
 		$scope.showNewIdea = function(){

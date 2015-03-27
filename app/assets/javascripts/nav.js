@@ -16,6 +16,4 @@ $(document).ready(function(){
 	$btnAddFile.click(function(){
 	    $('#wrapper-add-file').slideToggle('fast');
 	});
-
-
 });

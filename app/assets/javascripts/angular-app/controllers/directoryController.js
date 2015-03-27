@@ -23,6 +23,7 @@ app.controller("DirectoryIndexCtrl", ['$scope', '$rootScope', '$localStorage', '
 		$scope.loadDirectory = function(name, path){
 			$scope.directories = Directory.query({'path': path+"/"+name})
 			$scope.$storage.dir_path += "/" + name;
+			$rootScope.$broadcast('loadResources', $localStorage.repo.path + $localStorage.dir_path);
 		}
 		
 		$scope.$on('loadDirectory', function(event, path) {

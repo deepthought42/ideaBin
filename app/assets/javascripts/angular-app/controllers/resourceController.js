@@ -31,6 +31,11 @@ app.controller("ResourceIndexCtrl", ['$rootScope', '$scope', '$localStorage', 'R
 		};
 		
 		$scope.editResource = function (resource_name) {
+			$("#pullRequestIndexPanel").hide();
+			$("#pullRequestDetailsPanel").hide();
+			$("#RepositoryCommentIndexPanel").hide();
+			$("#resourceEditPanel").show();
+			
 			//check for if resource name is of a type that is supported
 			var ext = resource_name.substr(resource_name.lastIndexOf('.') + 1);
 			$rootScope.$broadcast("loadResourceComments")

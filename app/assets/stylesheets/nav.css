@@ -1,7 +1,7 @@
 .btn-toggle-wrapper{
   position: absolute;
-  left: 200px;
-  top:0px;
+  left: 		150px;
+  top:			0px;
 }
 
 .btn{
@@ -18,27 +18,28 @@
 }
 
 #toggleBtn{
-  padding: 10px;
+  padding: 					10px;
   background-color: rgba(0,0,0,.1);
-  color: #333;
-  top:0px;
-  border-radius: 0px;
-  margin: 3px;
-  transition: all .5s;
-  z-index: 5;
+  color: 						#17385e;
+  top:							0px;
+  border-radius: 		0px;
+  margin: 					3px;
+  transition: 			all .5s;
+  z-index: 					5;
 }
 
 #sideMenu{
-  padding: 15px;
-  width: 200px;
+  padding: 					15px;
+  width: 						150px;
   background-color: #17385e;
-  height: 99vh;
-  display: inline-block;
-  position: relative;
-  right: 200px;
-  transition: right .5s;
-  float: left;
-  z-index: 5;
+  height: 					99vh;
+  display: 					inline-block;
+  position: 				relative;
+  right: 						150px;
+	top:							0px;
+  transition: 			right .5s;
+  float: 						left;
+  z-index: 					5;
 }
 
 #sidebarList{
@@ -91,14 +92,14 @@
 }
 
 #ideabin{
-  position: absolute;
-  bottom: 0px;
-  left: 5px;
-  color: #fff;
+  position: 	absolute;
+  bottom: 		0px;
+  left: 			5px;
+  color: 			#fff;
 }
 
 div#ideabin h1{
-  margin: 0px;
+  margin: 	0px;
 	color:		#FFCB73;
 }
 

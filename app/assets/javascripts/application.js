@@ -36,15 +36,3 @@
 //= require_tree ./angular-app/services
 //= require_tree ./angular-app/controllers
 //= require_tree ../templates
-
-
-
-
-
-
-/*$(document).ready( function() {
-   $('#resource_container').fileTree({ root: '/public/repositories/' }, function(file) {
-     alert(file);
-   });
-});
-*/
