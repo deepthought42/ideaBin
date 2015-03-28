@@ -67,6 +67,7 @@ app.controller('RepositoryCommentCreationController', ['$scope', '$localStorage'
 		$scope.createComment = function(){
 			var repositoryComment = RepositoryComment.create({message: $scope.repository_comment.message, repo_id: $localStorage.repo.id});
 			$rootScope.$broadcast('addRepositoryCommentToIndex', repositoryComment);
+			$scope.repository_comment.message = '';
 		}
 		
 	}
