@@ -67,6 +67,7 @@ app.controller('ResourceCommentCreationController', ['$scope', '$localStorage', 
 			if($localStorage.resource){
 				var resourceComment = ResourceComment.create({path: $localStorage.repo.path + $localStorage.dir_path + $localStorage.resource, repo_id: $localStorage.repo.id, message: $scope.resource_comment.message});
 				$rootScope.$broadcast('addResourceCommentToIndex', resourceComment);
+				$scope.resource_comment.message = '';
 			}
 			else{
 				alert("Pssst. No resource is loaded, so there is nothing to comment on");
