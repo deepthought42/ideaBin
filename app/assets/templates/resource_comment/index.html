@@ -1,7 +1,9 @@
-<div class="col-md-12" id="ResourceCommentContainer" ng-controller="ResourceCommentIndexController">
-	<div class="col-md-12 commentBox" ng-repeat="resourceComment in resourceComments">
+<div class="col-md-12" id="ResourceCommentContainer" ng-controller="ResourceCommentIndexController" ng-mouseleave="avatarMouseOut()">
+	<div class="col-md-12 commentBox" ng-repeat="resourceComment in resourceComments" >
 		<span class="col-md-10 resourceCommentComment" ng-click="editComment(resourceComment)" ng-show="mouseOverAvatars">{{ resourceComment.comment }}</span>
-		<span class="pull-right resourceCommentUserAvatar" ng-mouseover="avatarMouseOver()" ng-mouseout="avatarMouseOut()"><img alt="{{ resourceComment.user_id }}"></img></span>
+		<span class="pull-right resourceCommentUserAvatar" ng-mouseenter="avatarMouseOver()" >
+			<img alt="{{ resourceComment.user_id }}" />
+		</span>
 		<span class="col-md-2 " >
 			<!-- the following is left in place for whenever this feature is done" -->
 			<!-- <span class="pull-right fa fa-reply" ></span>  -->
