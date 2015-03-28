@@ -8,8 +8,8 @@ app.controller("ResourceCommentIndexController", ['$scope', '$localStorage', 'Re
 		/**
 		*	Loads all comments for a given repo. 
 		*/
-		$scope.$on('loadResourceComments', function(event, data){
-			ResourceComment.query({path: $localStorage.repo.path + $localStorage.dir_path + $localStorage.resource}).$promise
+		$scope.$on('loadResourceComments', function(event, name){
+			ResourceComment.query({path: $localStorage.repo.path + $localStorage.dir_path + name}).$promise
 				.then(function(response){
 						$scope.resourceComments = response;
 						var users = [];
