@@ -1,14 +1,14 @@
 <div id="RepositoryCommentContainer" ng-controller="RepositoryCommentIndexController">
 	<div class="col-md-12" ng-repeat="repositoryComment in repositoryComments">
-		<span class="col-md-10 commentBox" id="resourceName" ng-click="editComment(repositoryComment)">{{ repositoryComment.comment_id }}</span>
+		<span class="col-md-10 commentBox" ng-click="editComment(repositoryComment)">{{ repositoryComment.comment_id }}</span>
 		<span class="col-md-2 commentButtons " >
-			<i id="removeComment" ng-click="deleteComment(repositoryComment)" class="fa fa-times"></i>
+			<i ng-click="updateComment(repositoryComment)" class="fa fa-pencil"></i>
 		</span>
 	</div>
 </div>
 <div  class="col-md-12" ng-controller="RepositoryCommentCreationController">
 	<form novalidate>
 		<textarea ng-model="repository_comment.message" placeholder="Comment goes here" class="col-md-12"/>
-		<button id="createCommentButton" ng-click="createComment()" class="pull-right col-md-3">Save Comment</button>
+		<button ng-click="createComment()" class="pull-right col-md-3">Save Comment</button>
 	</form>
 </div>

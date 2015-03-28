@@ -2,7 +2,11 @@ class ResourceCommentsController < ApplicationController
 		# GET /resource_comments.json
   def index
     @resource_comments = ResourceComment.where(resource_path: params[:path])
-		@comments = Comment.where(id: @resource_comments)
+		comment_ids = []
+		@resource_comments.each do |res|
+			comment_ids << res.comment_id
+		end
+		@comments = Comment.where(id: comment_ids)
 		render json: @comments
   end
 	

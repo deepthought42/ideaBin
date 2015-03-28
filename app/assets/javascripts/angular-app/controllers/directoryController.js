@@ -4,10 +4,10 @@ app.controller("DirectoryIndexCtrl", ['$scope', '$rootScope', '$localStorage', '
 	function($scope, $rootScope, $localStorage, $routeParams, Directory, $location, $http) {
 		$rootScope.showCreateDirectoryPanel = false;
 		$scope.$storage = $localStorage;
-		$scope.$storage.dir_path = "/";
+
 		
   	$scope.deleteDirectory =  function(directory){
-			Directory.delete({id: 1, path: $localStorage.repo.path + $localStorage.dir_path + "/"+directory });
+			Directory.delete({id: 1, path: $localStorage.repo.path + $localStorage.dir_path + directory });
 			var index = $scope.directories.indexOf(directory);
 			$scope.directories.splice(index, 1);
 		}
@@ -22,8 +22,14 @@ app.controller("DirectoryIndexCtrl", ['$scope', '$rootScope', '$localStorage', '
 		
 		$scope.loadDirectory = function(name, path){
 			$scope.directories = Directory.query({'path': path+"/"+name})
-			$scope.$storage.dir_path +=  name + "/";
-			$rootScope.$broadcast('loadResources', $localStorage.repo.path + $localStorage.dir_path);
+			if(typeof name != 'undefined' && name != null && name != ''){
+				console.log("NAME " + name );
+				$scope.$storage.dir_path +=  name + "/";
+			}
+			else{
+				$scope.$storage.dir_path =  "/";
+			}
+			$rootScope.$broadcast('loadResources', $scope.$storage.repo.path + $scope.$storage.dir_path);
 		}
 		
 		$scope.$on('loadDirectory', function(event, path) {
