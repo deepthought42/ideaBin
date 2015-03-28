@@ -4,8 +4,12 @@ class RepositoryCommentsController < ApplicationController
 	
 	# GET /comments.json
   def index
-    @comments = RepositoryComment.where(repository_id: params[:repo_id])
-		
+    @repository_comments = RepositoryComment.where(repository_id: params[:repo_id])
+		comment_ids = []
+		@repository_comments.each do |res|
+			comment_ids << res.comment_id
+		end
+		@comments = Comment.where(id: comment_ids)
 		render json: @comments
   end
 	
