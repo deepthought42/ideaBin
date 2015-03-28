@@ -140,17 +140,21 @@
 }
 
 #ideaEditPanel {
+	display:			none;
 	position: 		absolute;
 	background: 	white;
-	top:					0px;
+	top:					8%;
+	left:					5%;
 	border: 			solid 1px;
 	width:				30%;
-	height:				350px;
+	height:				90vh;
+	z-index:			10;
 }
 
 
 #ideaEditPanel .cover_img {
-	height:				100%;
+	left:					2.5%;
+	height:				200px;
 }
 
 .ideaCoverImage {
@@ -164,7 +168,8 @@
 } 
 
 #ideaEditPanel .ideaName {
-	text-align: center;
+	top:						40%;
+	text-align: 		center;
 }
 
 .hidePanelButton{
@@ -255,5 +260,10 @@
 	transform: rotateY(180deg);
 }
 
+
+#ideaDescription {
+	width: 					100%;
+	height:					20em;
+}
 
 

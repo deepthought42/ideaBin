@@ -116,11 +116,14 @@ app.controller('IdeaDetailCtrl', ['$scope', '$localStorage', '$routeParams', 'Id
 		};
 		
 		$scope.showIdeaEditPanel = function() {
-			$rootScope.ideaEditPanelVisible = true;
+			console.log("showing edit panel");
+			$("#ideaEditPanel").show();
 		};
 		
 		$scope.hideIdeaEditPanel = function() {
-			$rootScope.ideaEditPanelVisible = false;
+						console.log("hiding edit panel");
+
+			$("#ideaEditPanel").hide();
 		};
 		
 		$scope.showPullRequestIndexPage = function() {
