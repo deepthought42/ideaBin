@@ -79,7 +79,6 @@ app.controller("IdeaIndexController", ['$scope', '$localStorage', 'Idea', 'Repos
 app.controller('IdeaDetailCtrl', ['$scope', '$localStorage', '$routeParams', 'Idea', '$location', '$upload', '$rootScope', '$http',
 	function($scope, $localStorage, $routeParams, Idea, $location, $upload, $rootScope, $http){
 		$scope.$storage = $localStorage;
-		$rootScope.ideaEditPanelVisible = false;
 		
 		$scope.uploadFile = function(){
 			var ideaFormVals = angular.toJson($scope.idea);

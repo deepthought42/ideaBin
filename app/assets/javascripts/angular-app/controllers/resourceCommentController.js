@@ -4,7 +4,16 @@ app.controller("ResourceCommentIndexController", ['$scope', '$localStorage', 'Re
 	function($scope, $localStorage, ResourceComment, User, $http) {
 		$scope.$storage = $localStorage;
 		$scope.resourceComments = {};
-
+		$scope.mouseOverAvatars = false;
+		
+		$scope.avatarMouseOver = function() {
+			$scope.mouseOverAvatars = true;
+		}
+		
+		$scope.avatarMouseOut = function(){
+			$scope.mouseOverAvatars = false;
+		}
+		
 		/**
 		*	Loads all comments for a given repo. 
 		*/
