@@ -1,7 +1,7 @@
-var app = angular.module('ideaBin.resourceCommentControllers', []);
+var app = angular.module('ideaBin.resourceCommentControllers', ['ngResource']);
 
-app.controller("ResourceCommentIndexController", ['$scope', '$localStorage', 'ResourceComment', 'User',
-	function($scope, $localStorage, ResourceComment, User) {
+app.controller("ResourceCommentIndexController", ['$scope', '$localStorage', 'ResourceComment', 'User', '$http',
+	function($scope, $localStorage, ResourceComment, User, $http) {
 		$scope.$storage = $localStorage;
 		$scope.resourceComments = {};
 
@@ -9,17 +9,21 @@ app.controller("ResourceCommentIndexController", ['$scope', '$localStorage', 'Re
 		*	Loads all comments for a given repo. 
 		*/
 		$scope.$on('loadResourceComments', function(event, data){
-			ResourceComment.query({path: $localStorage.repo.path + $localStorage.dir_path + $localStorage.resource})
-				.$then(function(response){
+			ResourceComment.query({path: $localStorage.repo.path + $localStorage.dir_path + $localStorage.resource}).$promise
+				.then(function(response){
 						$scope.resourceComments = response;
-						$scope.users = [];
-						console.log("total resources :: " + $scope.resourceComments);
-						for(var i = 0; i < Object.keys($scope.resourceComments).length; i++){
-							if(!$scope.users.indexOf($scope.resourceComments[i].id)){
-								$scope.users.push($scope.resourceComments[i].id)
+						var users = [];
+						for(var key in $scope.resourceComments){
+							if(typeof $scope.resourceComments[key].id != 'undefined' && users.indexOf($scope.resourceComments[key].user_id) == -1){
+								users.push($scope.resourceComments[key].user_id)
 							}
 						}
-						$scope.commentUsers = User.query({user_ids: $scope.users})
+						
+						$http.get('/users.json',
+						{ params: {
+								user_ids: JSON.stringify(users) // ids is [1, 2, 3, 4]
+						}}
+						)
 					 },function(response){
 								alert("there was a problem loading users for resources");
 					 });

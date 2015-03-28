@@ -9,4 +9,6 @@ class User < ActiveRecord::Base
   # attr_accessible :title, :body
   has_many :repositories
 	has_many :ideas, through: :repositories
+	has_many :comments
+	
 end

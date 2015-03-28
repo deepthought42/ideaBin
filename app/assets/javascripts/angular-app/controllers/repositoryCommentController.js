@@ -1,22 +1,33 @@
 var app = angular.module('ideaBin.repositoryCommentControllers', []);
 
-app.controller("RepositoryCommentIndexController", ['$scope', '$localStorage', 'RepositoryComment', 'User',
-	function($scope, $localStorage, RepositoryComment, User) {
+app.controller("RepositoryCommentIndexController", ['$scope', '$localStorage', 'RepositoryComment', 'User', '$http',
+	function($scope, $localStorage, RepositoryComment, User, $http) {
 		$scope.$storage = $localStorage;
-		
+
 		/**
 		*	Loads all comments for a given repo. 
 		*/
 		$scope.$on('loadRepositoryComments', function(event, data){
-			$scope.repositoryComments = RepositoryComment.query({repo_id: $localStorage.repo.id});
-			$scope.users = [];
-
-			for(var i = 0; i < $scope.repositoryComments.length; i++){
-				if($scope.users.indexOf($scope.repositoryComments[i].id)){
-					$scope.users.push($scope.repositoryComments[i].id)
-				}
-			}
-			$scope.commentUsers = User.query({user_ids: $scope.users})
+			RepositoryComment.query({repo_id: $localStorage.repo.id}).$promise
+				.then(function(response){
+					$scope.repositoryComments = response;
+					console.log("REPOSITORY COMMENTS SIZE :: " + $scope.repositoryComments.length);
+					/*var users = [];
+					for(var key in $scope.repositoryComments){
+						if(typeof $scope.repositoryComments[key].id != 'undefined' && users.indexOf($scope.repositoryComments[key].user_id) == -1){
+							users.push($scope.repositoryComments[key].user_id)
+						}
+					}
+					
+					$http.get('/users.json',
+						{ params: {
+								user_ids: JSON.stringify(users) // ids is [1, 2, 3, 4]
+						}}
+					)
+					*/
+				 },function(response){
+							alert("there was a problem loading users for resources");
+				 });
 		});
 		
 		/**
