@@ -157,6 +157,10 @@
 	height:				200px;
 }
 
+#ideaEditPanel #ideaEditPanelTopRight{
+	height:				100%;
+}
+
 .ideaCoverImage {
 	position:			relative;
 	height:				70%;
@@ -174,6 +178,7 @@
 
 .hidePanelButton{
 	position: 	    absolute;
+	z-index: 				20;
 	font-size:			1.5em;
 	top:		    		3%;
 	right:					3%;
@@ -267,3 +272,6 @@
 }
 
 
+.ideaEditPanelTop {
+	height:				40%;
+}
