@@ -117,6 +117,7 @@ app.controller('UserRegisterController', ['$scope', 'Auth', '$location', '$local
 			Auth.register(credentials).then(function(registeredUser) {
 				//show some sort of statement that indicates they are welcome to enjoy
 				alert("registered user :: " + registeredUser);
+				$scope.uploadFile();
 			}, function(error) {
 				alert("Something went wrong during registration. Womp womp");
 			});
@@ -126,6 +127,33 @@ app.controller('UserRegisterController', ['$scope', 'Auth', '$location', '$local
 				$rootScope.$broadcast('userRegistered', user);
 				$location.path('/ideas');
 			});
+		}
+		
+		$scope.uploadFile = function(){
+			var ideaFormVals = angular.toJson($scope.ideaForm);
+			$scope.$upload = $upload.upload({
+				url: '/ideas.json',
+				method: 'POST',
+				data: {idea: ideaFormVals},
+				file: $scope.cover_img,
+        fileFormDataName: 'cover_img'
+			}).
+			progress(function(evt) {
+				console.log('progress: ' + parseInt(100.0 * evt.loaded / evt.total));
+			}).success(function(data, status, headers, config) {
+				console.log('file ' + config.file.name + 'is uploaded successfully. Response: ' + data);
+				$rootScope.$broadcast('hideCreateIdeaPanel');
+				$rootScope.$broadcast('addIdeaToList', data);
+			});
+		}
+		
+		$scope.previewImage = function(files){
+			var reader = new FileReader();
+			reader.readAsDataURL(files[0]);
+			reader.onload = function(event){
+				$('#ideaCreationImage').attr('src', reader.result);
+				$scope.ideaForm.cover_img = files[0];
+			}
 		}
 	}
 ]);
