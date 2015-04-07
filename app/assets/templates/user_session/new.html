@@ -5,9 +5,9 @@
 				<input type="email" name="email" id="userFormEmailField" ng-model="loginForm.email" required="required" class="form-control" placeholder="Email"> 
 			</div> 
 			<div class="form-group"> 
-				<input type="password" name="password" id="passwordFormPasswordField" ng-model="loginForm.password" required="required" class="form-control" placeholder="Password"> 
+				<input type="password" name="password" id="userFormPasswordField" ng-model="loginForm.password" required="required" class="form-control" placeholder="Password"> 
 			</div> 
-			<button type="submit" class="btn btn-primary btn-sm" ng-click="signIn(loginForm)">Sign in</button> 
+			<button type="submit" id="userFormSignInButton" class="btn btn-primary btn-sm" ng-click="signIn(loginForm)">Sign in</button> 
 			<button class="btn btn-primary btn-sm pull-right" ng-click="hideSignInPanel()">Cancel</button>
 		</form>
 	</div>
