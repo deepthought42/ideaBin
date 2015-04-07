@@ -6,10 +6,10 @@
 	* # UserSessionsCtrl 
 	* Controller of the fakeLunchHubApp 
 	*/ 
-var app = angular.module('UserBin.userControllers', []);
+var app = angular.module('ideaBin.userControllers', []);
 
-app.controller('UserSessionCtrl', ['$scope', 'Auth', '$location', '$localStorage', '$upload', '$http',
-	function ($scope, Auth, $location, $localStorage, $upload, $http) { 
+app.controller('UserSessionCtrl', ['$scope', 'Auth', '$location', '$localStorage',
+	function ($scope, Auth, $location, $localStorage) { 
 		$scope.$storage = $localStorage;
 		
 		$scope.signedIn = Auth.isAuthenticated;
@@ -54,22 +54,22 @@ app.controller('UserSessionCtrl', ['$scope', 'Auth', '$location', '$localStorage
 		$scope.editProfile = function(){
 			$scope.user = $scope.$storage.user;
 		}
-		
-		$scope.previewImage = function(files){
+				$scope.previewImage = function(files){
 			var reader = new FileReader();
 			reader.readAsDataURL(files[0]);
 			reader.onload = function(event){
-				$('#UserCreationImage').attr('src', reader.result);
-				$scope.userForm.cover_img = files[0];
+				$('#ideaCreationImage').attr('src', reader.result);
+				$scope.ideaForm.cover_img = files[0];
 			}
 		}
+		
 				
 		$scope.uploadFile = function(){
-			var userFormVals = angular.toJson($scope.userForm);
+			var ideaFormVals = angular.toJson($scope.ideaForm);
 			$scope.$upload = $upload.upload({
-				url: '/Users.json',
+				url: '/ideas.json',
 				method: 'POST',
-				data: {user: userFormVals},
+				data: {idea: ideaFormVals},
 				file: $scope.cover_img,
         fileFormDataName: 'cover_img'
 			}).
@@ -77,36 +77,38 @@ app.controller('UserSessionCtrl', ['$scope', 'Auth', '$location', '$localStorage
 				console.log('progress: ' + parseInt(100.0 * evt.loaded / evt.total));
 			}).success(function(data, status, headers, config) {
 				console.log('file ' + config.file.name + 'is uploaded successfully. Response: ' + data);
-				$rootScope.$broadcast('hideCreateUserPanel');
-				$rootScope.$broadcast('addUserToList', data);
+				$rootScope.$broadcast('hideCreateIdeaPanel');
+				$rootScope.$broadcast('addIdeaToList', data);
 			});
 		}
+		
 	}
 ]);
 
-app.controller('UserDetailController', ['$scope', '$location', '$localStorage', '$upload', '$http',
-	function ($scope, $location, $localStorage, $upload, $http) { 
+app.controller('UserDetailController', ['$scope', '$location', '$localStorage',
+	function ($scope, $location, $localStorage) { 
 		$scope.hideEditProfilePanel =  function(){
 			$('#editProfileForm').hide();
 		}
-
+		
 		$scope.uploadFile = function(){
-			var userFormVals = angular.toJson($scope.userForm);
+			var ideaFormVals = angular.toJson($scope.idea);
 			$scope.upload = $upload.upload({
-				url: '/Users/' + $scope.User.id + '/uploadCover.json',
+				url: '/ideas/' + $scope.idea.id + '/uploadCover.json',
 				method: 'PUT',
-				data: {user: userFormVals},
+				data: {idea: ideaFormVals},
 				file: $scope.cover_img,
 				fileFormDataName: 'cover_img'
 			}).
 			progress(function(evt) {
 				console.log('progress: ' + parseInt(100.0 * evt.loaded / evt.total));
 			}).success(function(data, status, headers, config) {
-				$scope.user  = User.show({id: $scope.$storage.current_user.id});
-				$scope.user.then(function onSuccess( response ){
-					$localStorage.current_user = response;
+				$scope.idea  = Idea.show({id: $scope.$storage.current_idea.id});
+				$scope.idea.then(function onSuccess(	response){
+					$localStorage.current_idea = response;
 					$scope.$apply(function () {
-						$scope.user = $scope.cover_img.filename;
+						$scope.idea = $scope.cover_img.filename;
+						$scope.message = "Timeout called!";
 					});
 				},
 				function onFail(response) {
@@ -118,11 +120,13 @@ app.controller('UserDetailController', ['$scope', '$location', '$localStorage', 
 		
 		$scope.updateUser = function (userId){
 			$scope.uploadFile();
-			user.update($scope.user,{id: userId}, function(){
-				//hide edit panel
+			User.update($scope.user,{id: userId}, function(){
+					//close edit form panel
 			});
-		}
+		};
 	}
+	
+	
 ]);
 
 app.controller('UserAuthenticateController', ['$scope', '$rootScope', 'Auth', '$location', '$localStorage',
