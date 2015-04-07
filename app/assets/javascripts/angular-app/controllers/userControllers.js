@@ -67,30 +67,16 @@ app.controller('UserDetailController', ['$scope', 'User', 'Auth', '$location', '
 		}
 		
 		$scope.uploadFile = function(){
-			var ideaFormVals = angular.toJson($scope.user);
 			$scope.upload = $upload.upload({
-				url: '/users/' + $scope.user.id + '.json',
+				url: '/users',
 				method: 'PUT',
-				data: {user: ideaFormVals},
-				file: $scope.avatar,
+				data: {user: $scope.userForm},
+				file: $scope.user_avatar,
 				fileFormDataName: 'avatar'
 			}).
 			progress(function(evt) {
 				console.log('progress: ' + parseInt(100.0 * evt.loaded / evt.total));
 			}).success(function(data, status, headers, config) {
-				/*$scope.user  = User.show({id: $localStorage.user.id});
-				$scope.user.then(function onSuccess(	response){
-					$localStorage.current_user = response;
-					$scope.$apply(function () {
-						$scope.user = $scope.avatar.filename;
-						$scope.message = "Timeout called!";
-					});
-				},
-				function onFail(response) {
-					$('.error').html("Could not upload file. Response was " + response);
-					console.log("ERROR UPLOADING IMAGE :: " + response);
-				});
-				*/
 				console.log('file ' + config.file + ' was uploaded successfully. Status: ' + status);
 			});
 		}
@@ -100,7 +86,7 @@ app.controller('UserDetailController', ['$scope', 'User', 'Auth', '$location', '
 			reader.readAsDataURL(files[0]);
 			reader.onload = function(event){
 				$('#userAvatar').attr('src', reader.result);
-				$scope.user.avatar = files[0];
+				$scope.user_avatar = files[0];
 			}
 		}
 		

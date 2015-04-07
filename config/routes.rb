@@ -31,7 +31,7 @@ IdeaBin::Application.routes.draw do
 	resources :repository_comments
 	resources :contacts
 	resources :resource_comments
-  devise_for :users, controllers: {sessions: 'users/sessions', registrations: 'registrations'}
+  devise_for :users, controllers: {sessions: 'users/sessions', registrations: 'users/registrations'}
 
 
   # The priority is based upon order of creation:

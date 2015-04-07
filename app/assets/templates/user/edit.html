@@ -1,19 +1,19 @@
 <div id="editProfileForm" ng-controller="UserDetailController" >
 	<div class="col-md-12">
-		<form role="form"> 
+		<form enctype="multipart/form-data" role="form"> 
 			<div class="form-group" ng-file-drop ng-file-change="previewImage($files)" ng-model="avatar" drop-available="dropSupported">			
 				<img id="userAvatar" class="avatar" ng-src="/images/{{ideaForm.avatar_file_name || 'missing.png'}}" />
 			</div>
 			<div class="form-group">
-				<input placeholder= "Email" type="email" name="email" id="email" ng-model="user.email" required="required" class="form-control"> 
+				{{user.email}}
 			</div> 
 			
 			Change Password
 			<div class="form-group"> 
-				<input placeholder= "Password" type="password" name="password" id="password" ng-model="user.password" class="form-control"> 
+				<input placeholder= "Password" type="password" name="password" id="password" ng-model="userForm.password" class="form-control"> 
 			</div> 
 			<div class="form-group"> 
-				<input placeholder= "Confirm Password" type="password" name="confirmation_password" ng-model="user.confirmation_password" required="required" class="form-control"> 
+				<input placeholder= "Confirm Password" type="password" name="confirmation_password" ng-model="userForm.confirmation_password" class="form-control"> 
 			</div> 
 			<button type="submit" class="btn btn-primary btn-md" ng-click="updateUser()">Save</button> 
 			<button class="btn btn-primary btn-md pull-right" ng-click="hideEditProfilePanel()">Cancel</button>

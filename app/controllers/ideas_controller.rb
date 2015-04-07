@@ -8,7 +8,7 @@ class IdeasController < ApplicationController
   def index
     @ideas = Idea.all
 
-    respond_with(@ideas)
+    render json: @ideas
   end
 
 
@@ -39,7 +39,7 @@ class IdeasController < ApplicationController
 			Dir.chdir("#{Rails.root}/public/data/repository/#{current_user.id}/")
 			@git = Git.clone("#{Rails.root}/public/data/repository/#{@idea.user_id}/#{@idea.name}", @idea.name)	
 		end
-		respond_with(@idea)
+		render json: @idea
 
   end
 
@@ -142,7 +142,7 @@ class IdeasController < ApplicationController
     end
 
     if @idea.save
-			respond_with(@idea)
+			render json: @idea
 		else
 			puts "THERE WAS AN ISSUE UPDATING"
     end
