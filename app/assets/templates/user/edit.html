@@ -1,8 +1,9 @@
 <div id="editProfileForm" ng-controller="UserDetailController" >
 	<div class="col-md-12">
 		<form role="form"> 
+		<img src=""/>
 			<div class="form-group" ng-file-drop ng-file-change="previewImage($files)" ng-model="avatar" drop-available="dropSupported">			
-				<img id="userAvatar" class="avatar" ng-src="{{ideaForm.avatar_file_name}}" />
+				<img id="userAvatar" class="avatar" src="" ng-src="{{ideaForm.avatar_file_name}}" />
 			</div>
 			<div class="form-group">
 				<input placeholder= "Email" type="email" name="email" id="email" ng-model="user.email" required="required" class="form-control"> 
