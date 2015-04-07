@@ -54,31 +54,31 @@ app.controller('UserSessionCtrl', ['$scope', 'Auth', '$location', '$localStorage
 		$scope.editProfile = function(){
 			$scope.user = $scope.$storage.user;
 		}
-				$scope.previewImage = function(files){
+				
+		$scope.previewImage = function(files){
 			var reader = new FileReader();
 			reader.readAsDataURL(files[0]);
 			reader.onload = function(event){
-				$('#ideaCreationImage').attr('src', reader.result);
-				$scope.ideaForm.cover_img = files[0];
+				$('#userAvatar').attr('src', reader.result);
+				$scope.userForm.avatar = files[0];
 			}
 		}
 		
 				
 		$scope.uploadFile = function(){
-			var ideaFormVals = angular.toJson($scope.ideaForm);
+			var ideaFormVals = angular.toJson($scope.userForm);
 			$scope.$upload = $upload.upload({
 				url: '/ideas.json',
 				method: 'POST',
-				data: {idea: ideaFormVals},
-				file: $scope.cover_img,
-        fileFormDataName: 'cover_img'
+				data: {idea: userFormVals},
+				file: $scope.avatar,
+        fileFormDataName: 'avatar'
 			}).
 			progress(function(evt) {
 				console.log('progress: ' + parseInt(100.0 * evt.loaded / evt.total));
 			}).success(function(data, status, headers, config) {
 				console.log('file ' + config.file.name + 'is uploaded successfully. Response: ' + data);
-				$rootScope.$broadcast('hideCreateIdeaPanel');
-				$rootScope.$broadcast('addIdeaToList', data);
+				$rootScope.$broadcast('hideEditUserPanel');
 			});
 		}
 		
@@ -92,22 +92,22 @@ app.controller('UserDetailController', ['$scope', '$location', '$localStorage',
 		}
 		
 		$scope.uploadFile = function(){
-			var ideaFormVals = angular.toJson($scope.idea);
+			var ideaFormVals = angular.toJson($scope.user);
 			$scope.upload = $upload.upload({
-				url: '/ideas/' + $scope.idea.id + '/uploadCover.json',
+				url: '/ideas/' + $scope.user.id + '/uploadCover.json',
 				method: 'PUT',
-				data: {idea: ideaFormVals},
-				file: $scope.cover_img,
-				fileFormDataName: 'cover_img'
+				data: {user: ideaFormVals},
+				file: $scope.avatar,
+				fileFormDataName: 'avatar'
 			}).
 			progress(function(evt) {
 				console.log('progress: ' + parseInt(100.0 * evt.loaded / evt.total));
 			}).success(function(data, status, headers, config) {
-				$scope.idea  = Idea.show({id: $scope.$storage.current_idea.id});
-				$scope.idea.then(function onSuccess(	response){
-					$localStorage.current_idea = response;
+				$scope.user  = User.show({id: $scope.$storage.current_user.id});
+				$scope.user.then(function onSuccess(	response){
+					$localStorage.current_user = response;
 					$scope.$apply(function () {
-						$scope.idea = $scope.cover_img.filename;
+						$scope.user = $scope.avatar.filename;
 						$scope.message = "Timeout called!";
 					});
 				},
