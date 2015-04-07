@@ -32,7 +32,7 @@ app.controller('UserSessionCtrl', ['$scope', 'Auth', '$location', '$localStorage
 			$('#userRegistrationForm').hide();
 			$('#signInForm').show();
 		}
-		
+
 		$scope.logout = function(user){
 			Auth.logout().then(function(user) {
 				$('#editProfileForm').hide();
@@ -54,6 +54,34 @@ app.controller('UserSessionCtrl', ['$scope', 'Auth', '$location', '$localStorage
 		$scope.editProfile = function(){
 			$scope.user = $scope.$storage.user;
 		}
+				$scope.previewImage = function(files){
+			var reader = new FileReader();
+			reader.readAsDataURL(files[0]);
+			reader.onload = function(event){
+				$('#ideaCreationImage').attr('src', reader.result);
+				$scope.ideaForm.cover_img = files[0];
+			}
+		}
+		
+				
+		$scope.uploadFile = function(){
+			var ideaFormVals = angular.toJson($scope.ideaForm);
+			$scope.$upload = $upload.upload({
+				url: '/ideas.json',
+				method: 'POST',
+				data: {idea: ideaFormVals},
+				file: $scope.cover_img,
+        fileFormDataName: 'cover_img'
+			}).
+			progress(function(evt) {
+				console.log('progress: ' + parseInt(100.0 * evt.loaded / evt.total));
+			}).success(function(data, status, headers, config) {
+				console.log('file ' + config.file.name + 'is uploaded successfully. Response: ' + data);
+				$rootScope.$broadcast('hideCreateIdeaPanel');
+				$rootScope.$broadcast('addIdeaToList', data);
+			});
+		}
+		
 	}
 ]);
 
@@ -127,33 +155,6 @@ app.controller('UserRegisterController', ['$scope', 'Auth', '$location', '$local
 				$rootScope.$broadcast('userRegistered', user);
 				$location.path('/ideas');
 			});
-		}
-		
-		$scope.uploadFile = function(){
-			var ideaFormVals = angular.toJson($scope.ideaForm);
-			$scope.$upload = $upload.upload({
-				url: '/ideas.json',
-				method: 'POST',
-				data: {idea: ideaFormVals},
-				file: $scope.cover_img,
-        fileFormDataName: 'cover_img'
-			}).
-			progress(function(evt) {
-				console.log('progress: ' + parseInt(100.0 * evt.loaded / evt.total));
-			}).success(function(data, status, headers, config) {
-				console.log('file ' + config.file.name + 'is uploaded successfully. Response: ' + data);
-				$rootScope.$broadcast('hideCreateIdeaPanel');
-				$rootScope.$broadcast('addIdeaToList', data);
-			});
-		}
-		
-		$scope.previewImage = function(files){
-			var reader = new FileReader();
-			reader.readAsDataURL(files[0]);
-			reader.onload = function(event){
-				$('#ideaCreationImage').attr('src', reader.result);
-				$scope.ideaForm.cover_img = files[0];
-			}
 		}
 	}
 ]);
