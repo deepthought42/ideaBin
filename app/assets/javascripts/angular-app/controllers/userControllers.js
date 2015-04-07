@@ -55,16 +55,7 @@ app.controller('UserSessionCtrl', ['$scope', 'Auth', '$location', '$localStorage
 			$scope.user = $scope.$storage.user;
 		}
 				
-		$scope.previewImage = function(files){
-			var reader = new FileReader();
-			reader.readAsDataURL(files[0]);
-			reader.onload = function(event){
-				$('#userAvatar').attr('src', reader.result);
-				$scope.userForm.avatar = files[0];
-			}
-		}
 		
-				
 		$scope.uploadFile = function(){
 			var ideaFormVals = angular.toJson($scope.userForm);
 			$scope.$upload = $upload.upload({
@@ -85,8 +76,11 @@ app.controller('UserSessionCtrl', ['$scope', 'Auth', '$location', '$localStorage
 	}
 ]);
 
-app.controller('UserDetailController', ['$scope', '$location', '$localStorage',
-	function ($scope, $location, $localStorage) { 
+app.controller('UserDetailController', ['$scope', 'Auth', '$location', '$localStorage',
+	function ($scope, Auth, $location, $localStorage) { 
+		$scope.signedIn = Auth.isAuthenticated;
+		$scope.user = $localStorage.user;
+		
 		$scope.hideEditProfilePanel =  function(){
 			$('#editProfileForm').hide();
 		}
@@ -113,9 +107,19 @@ app.controller('UserDetailController', ['$scope', '$location', '$localStorage',
 				},
 				function onFail(response) {
 					$('.error').html("Could not upload file. Response was " + response);
+					console.log("ERROR UPLOADING IMAGE :: " + response);
 				});
 				console.log('file ' + config.file + ' was uploaded successfully. Status: ' + status);
 			});
+		}
+		
+		$scope.previewImage = function(files){
+			var reader = new FileReader();
+			reader.readAsDataURL(files[0]);
+			reader.onload = function(event){
+				$('#userAvatar').attr('src', reader.result);
+				$scope.userForm.avatar = files[0];
+			}
 		}
 		
 		$scope.updateUser = function (userId){
