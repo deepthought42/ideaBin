@@ -10,12 +10,12 @@
 			
 			Change Password
 			<div class="form-group"> 
-				<input placeholder= "Password" type="password" name="password" id="password" ng-model="user.password" required="required" class="form-control"> 
+				<input placeholder= "Password" type="password" name="password" id="password" ng-model="user.password" class="form-control"> 
 			</div> 
 			<div class="form-group"> 
-				<input placeholder= "Confirm Password" type="password" name="confirmation_password" id="confirmation_password" ng-model="user.confirmation_password" required="required" class="form-control"> 
+				<input placeholder= "Confirm Password" type="password" name="confirmation_password" ng-model="user.confirmation_password" required="required" class="form-control"> 
 			</div> 
-			<button type="submit" class="btn btn-primary btn-md" ng-click="register()">Save</button> 
+			<button type="submit" class="btn btn-primary btn-md" ng-click="updateUser()">Save</button> 
 			<button class="btn btn-primary btn-md pull-right" ng-click="hideEditProfilePanel()">Cancel</button>
 		</form>
 	</div>

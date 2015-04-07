@@ -12,22 +12,5 @@ class UsersController < ApplicationController
 		render json: @users
   end
 	
-	# PUT /users/1
-  # PUT /users/1.json
-  def update
-    @user = User.find(params[:id])
-		@user.email = params[:email]
-		#avatar_path = "/public/images/#{current_user.id}/#{@user.name}"
-		
-		#if params[:avatar]
-		#		@user.cover_img = params[:avatar]
-		#		DataFile.save(params[:avatar], avatar_path)
-		#end#
 
-    if @user.update
-			respond_with(@user)
-		else
-			puts "THERE WAS AN ISSUE UPDATING"
-    end
-  end
 end

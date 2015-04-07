@@ -54,30 +54,11 @@ app.controller('UserSessionCtrl', ['$scope', 'Auth', '$location', '$localStorage
 		$scope.editProfile = function(){
 			$scope.user = $scope.$storage.user;
 		}
-				
-		
-		$scope.uploadFile = function(){
-			var ideaFormVals = angular.toJson($scope.userForm);
-			$scope.$upload = $upload.upload({
-				url: '/ideas.json',
-				method: 'POST',
-				data: {idea: userFormVals},
-				file: $scope.avatar,
-        fileFormDataName: 'avatar'
-			}).
-			progress(function(evt) {
-				console.log('progress: ' + parseInt(100.0 * evt.loaded / evt.total));
-			}).success(function(data, status, headers, config) {
-				console.log('file ' + config.file.name + 'is uploaded successfully. Response: ' + data);
-				$rootScope.$broadcast('hideEditUserPanel');
-			});
-		}
-		
 	}
 ]);
 
-app.controller('UserDetailController', ['$scope', 'Auth', '$location', '$localStorage',
-	function ($scope, Auth, $location, $localStorage) { 
+app.controller('UserDetailController', ['$scope', 'User', 'Auth', '$location', '$localStorage', '$upload',
+	function ($scope, User, Auth, $location, $localStorage, $upload) { 
 		$scope.signedIn = Auth.isAuthenticated;
 		$scope.user = $localStorage.user;
 		
@@ -88,7 +69,7 @@ app.controller('UserDetailController', ['$scope', 'Auth', '$location', '$localSt
 		$scope.uploadFile = function(){
 			var ideaFormVals = angular.toJson($scope.user);
 			$scope.upload = $upload.upload({
-				url: '/ideas/' + $scope.user.id + '/uploadCover.json',
+				url: '/users/' + $scope.user.id + '.json',
 				method: 'PUT',
 				data: {user: ideaFormVals},
 				file: $scope.avatar,
@@ -97,7 +78,7 @@ app.controller('UserDetailController', ['$scope', 'Auth', '$location', '$localSt
 			progress(function(evt) {
 				console.log('progress: ' + parseInt(100.0 * evt.loaded / evt.total));
 			}).success(function(data, status, headers, config) {
-				$scope.user  = User.show({id: $scope.$storage.current_user.id});
+				/*$scope.user  = User.show({id: $localStorage.user.id});
 				$scope.user.then(function onSuccess(	response){
 					$localStorage.current_user = response;
 					$scope.$apply(function () {
@@ -109,6 +90,7 @@ app.controller('UserDetailController', ['$scope', 'Auth', '$location', '$localSt
 					$('.error').html("Could not upload file. Response was " + response);
 					console.log("ERROR UPLOADING IMAGE :: " + response);
 				});
+				*/
 				console.log('file ' + config.file + ' was uploaded successfully. Status: ' + status);
 			});
 		}
@@ -118,15 +100,15 @@ app.controller('UserDetailController', ['$scope', 'Auth', '$location', '$localSt
 			reader.readAsDataURL(files[0]);
 			reader.onload = function(event){
 				$('#userAvatar').attr('src', reader.result);
-				$scope.userForm.avatar = files[0];
+				$scope.user.avatar = files[0];
 			}
 		}
 		
 		$scope.updateUser = function (userId){
 			$scope.uploadFile();
-			User.update($scope.user,{id: userId}, function(){
+			//User.update($scope.user,{id: userId}, function(){
 					//close edit form panel
-			});
+			//});
 		};
 	}
 	
