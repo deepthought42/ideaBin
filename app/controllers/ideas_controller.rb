@@ -102,18 +102,12 @@ class IdeasController < ApplicationController
 		@idea.save
 			
 			#create directory in database to associate the directory created in the file systems.
-			@directory = Directory.new()
-			@directory.name = @idea.name
-			@directory.idea_id = @idea.id
-			@directory.path = "#{repo_path}/#{@idea.name}"
-			@directory.is_top = true
 			Dir.chdir(repo_path)
 			@git = Git.init(@idea.name)
 			
 			DataFile.save(params[:cover_img], @directory.path)
 			@git.add(:all => true)
 			@git.commit("Cover image added.")
-			@directory.save
 		
 		respond_with(@idea)
   end
