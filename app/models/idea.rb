@@ -5,6 +5,6 @@ class Idea < ActiveRecord::Base
 	has_many :repositories
 	has_many :users, through: :repositories
 	has_attached_file :cover_img
-	validates_attachment :cover_img, content_type: { content_type: ["image/jpeg", "image/jpeg", "image/png", "image/gif"] }
+	validates_attachment :cover_img, content_type: { content_type: ["image/jpeg", "image/jpg", "image/png", "image/gif"] }
 	validates :name, :presence => true
 end
