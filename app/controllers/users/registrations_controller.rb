@@ -20,18 +20,18 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   # PUT /resource
    def update
-		@user = current_user
-		@user.email = params[:email]
-		avatar_path = "public/images/"
-	
-		if params[:avatar]
-				@user.avatar = params[:avatar]
-				#DataFile.save(@user.avatar, avatar_path)
-		end
+	@user = current_user
+	@user.email = params[:email]
+	avatar_path = "public/images/"
+
+	if params[:avatar]
+		@user.avatar = params[:avatar]
+		DataFile.save(@user.avatar, avatar_path)
+	end
 
     if @user.save
-			render json: @user
-		else
+	render json: @user
+	else
 			puts "THERE WAS AN ISSUE UPDATING"
     end
    end

@@ -116,15 +116,15 @@ class IdeasController < ApplicationController
   # PUT /ideas/1.json
   def update
     @idea = Idea.find(params[:id])
-		@idea.name = params[:name]
-		@idea.description = params[:description]
-    repo_path = "#{Rails.root}/public/data/repository/#{current_user.id}/#{@idea.name}"
-		cover_img_path = "/data/repository/#{current_user.id}/#{@idea.name}"
+    @idea.name = params[:name]
+    @idea.description = params[:description]
+      repo_path = "#{Rails.root}/public/data/repository/#{current_user.id}/#{@idea.name}"
+      cover_img_path = "/data/repository/#{current_user.id}/#{@idea.name}"
 		
-		if params[:cover_img]
-				@idea.cover_img = params[:cover_img]
-				DataFile.save(params[:cover_img], cover_img_path)
-		end
+      if params[:cover_img]
+	@idea.cover_img = params[:cover_img]
+	DataFile.save(params[:cover_img], cover_img_path)
+      end
 		
     Dir.chdir(repo_path)
     @git = Git.init
