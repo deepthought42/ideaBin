@@ -35,7 +35,7 @@ Getting Started:
 	npm install -g bower
 
   7.  Make sure you have imageMagick installed. For windows users this means not using the .dll file and setting up the appropriate paths
- 		
+	<a href="http://robmclarty.com/blog/how-to-install-image-magick-and-setup-paperclip"></a> 		
   7.  Open a command line and navigate to the directory that you would like to save the project and type in the following and press enter. 
 
    git clone https://github.com/deepthought42/ideaBin.git
