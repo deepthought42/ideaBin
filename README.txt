@@ -12,49 +12,59 @@ Stack:
 	AngularJS
 	Bower
 	PostGreSql
+	imageMagick
 
 Getting Started:
 
 	
 	In order to get started you'll need Ruby 2.1.2 as well as Rails 4.1.5 installed. You can find documentation on installing these and getting started with Ruby on Rails at rubyonrails.org. This project also relies on PostGreSQL, and the database file currently relies on the default user with an empty password. The following list of instructions will guide you through getting setup.
 
-    1. Install Ruby. You can find instructions <a href="https://www.ruby-lang.org/en/installation/#ruby-install">here</a>
+  1. Install Ruby. You can find instructions <a href="https://www.ruby-lang.org/en/installation/#ruby-install">here</a>
 	
-    2. Install Rails:
+  2. Install Rails:
+	
+    gem install rails
+
+  3.  Install <a href="http://git-scm.com/book/en/Getting-Started-Installing-Git">Instructions>git</a>. 
+
+  4.  Install <a href="https://wiki.postgresql.org/wiki/Detailed_installation_guides">postrgreSQL</a>
+
+  5. Install NodeJS
 		
-     	gem install rails
+  6. Install bower
+	npm install -g bower
 
-    3.  Install <a href="http://git-scm.com/book/en/Getting-Started-Installing-Git">Instructions>git</a>. 
+  7.  Make sure you have imageMagick installed. For windows users this means not using the .dll file and setting up the appropriate paths
+ 		
+  7.  Open a command line and navigate to the directory that you would like to save the project and type in the following and press enter. 
 
-    4.  Install <a href="https://wiki.postgresql.org/wiki/Detailed_installation_guides">postrgreSQL</a>
+   git clone https://github.com/deepthought42/ideaBin.git
 
-		5. Install NodeJS
-		
-		6. Install bower
-					npm install -g bower
-		
-    5.  Open a command line and navigate to the directory that you would like to save the project and type in the following and press enter. 
+  8.  create directories /public/data/repository
 
-    	git clone https://github.com/deepthought42/ideaBin.git
- 
-    6.  using the command line navigate to the ideaBin folder and run the following commands:
+  9.  using the command line navigate to the ideaBin folder and run the following commands:
 
-			6.1)  Install bower dependencies
-							bower install
-			6.2)  Setup Database
-					6.2.1)
-						rename ideaBin/config/database.tmp.yml to ideaBin/config/database.yml
-						Replace 'user_here' with your username
-						Raplace 'password_here' with your password
+    9.1)  Install bower dependencies
+	bower install
+    9.2)  Setup Database
+	9.2.1)
+		rename ideaBin/config/database.tmp.yml to ideaBin/config/database.yml
+		Replace 'user_here' with your username
+		Replace 'password_here' with your password
 					
-					6.2.2)
-							rake db:setup
-			6.3)  install bundled gems
-							bundle install
-			6.4)	Start server
-							rails server
+	9.2.2)
+	
+		rake db:setup
+	
+	9.3)  install bundled gems
+	
+		bundle install
+	
+	9.4)	Start server
+	
+		rails server
 
-    7.  Navigate to localhost:3000 and you should see the home page for ideaBin.
+    10.  Navigate to localhost:3000 and you should see the home page for ideaBin.
 
 Overview:
 
@@ -68,11 +78,4 @@ we take the liberty of generating a folder in /public/data/repository/:user_id a
 
 Contribute:
 
-	There's no shortage of things that need to be done on this project. If you are interested in contributing there are a number of things you can do. There is currently no log of bugs, but if you find one I'd love to know about it. You can also find features or whatnot that need to be fixed in the issues section of github.  Any and all help, criticism or even donations are very much appreciated. 
-
-Donate:
-
-	If you'd like to help keep my fridge full of beer and/or see
-my work on this progress you can send bitcoins to 1DZ1om2PgLMmJp8CqRwnacuGNpdGhGHhBu
-
-
+	There's no shortage of things that need to be done on this project. If you are interested in contributing there are a number of things you can do. There is currently very limited bug reporting, but if you find one I'd love to know about it. You can also find features or whatnot that need to be fixed in the issues section of github.  Any and all help, criticism or even donations are very much appreciated. 
