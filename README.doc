@@ -48,8 +48,6 @@ Getting Started:
 	bower install
     9.2)  Setup Database
 	9.2.1)
-
-	9.2.1)
 		rename ideaBin/config/database.tmp.yml to ideaBin/config/database.yml
 		Replace 'user_here' with your username
 		Replace 'password_here' with your password
@@ -80,4 +78,6 @@ we take the liberty of generating a folder in /public/data/repository/:user_id a
 
 Contribute:
 
-	There's no shortage of things that need to be done on this project. If you are interested in contributing there are a number of things you can do. There is currently very limited bug reporting, but if you find one I'd love to know about it. You can also find features or whatnot that need to be fixed in the issues section of github.  Any and all help or criticism  are very much appreciated. 
+	There's no shortage of things that need to be done on this project. If you are interested in contributing there are a number of things you can do. There is currently very limited bug reporting, but if you find one I'd love to know about it. You can also find features or whatnot that need to be fixed in the issues section of github.  Any and all help or criticism  are very much appreciated. Email us at support@ideabin.net. 
+
+
