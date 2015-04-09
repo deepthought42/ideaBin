@@ -18,7 +18,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
      super
    end
 
-  # PUT /resource
+  # PUT /users/registration
    def update
 	@user = User.find(current_user.id)
 	@user.email = params[:email]
@@ -71,4 +71,13 @@ class Users::RegistrationsController < Devise::RegistrationsController
    def after_inactive_sign_up_path_for(resource)
      super(resource)
    end
+
+  private
+
+    # Use strong_parameters for attribute whitelisting
+    # Be sure to update your create() and update() controller methods.
+
+    def user_params
+      params.require(:user).permit(:avatar)
+    end
 end

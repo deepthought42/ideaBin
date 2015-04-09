@@ -188,6 +188,6 @@ class IdeasController < ApplicationController
     end
 
     def idea_params
-			params.require(:idea).permit(:name, :description, :cover_img_file_name)
+	params.require(:idea).permit(:name, :description, :cover_img_file_name)
     end
 end

@@ -3,11 +3,12 @@
   "version": "0.0.0",
   "dependencies": {
     "angular": "~1.3.4",
-		"ng-file-upload-shim": "latest",
+    "ng-file-upload-shim": "latest",
     "ng-file-upload": "latest",
-		"ngstorage": "latest",
-		"angular-ui-ace": "latest",
-		"angular-devise": "latest",
-		"font-awesome" : "latest"
+    "ngstorage": "latest",
+    "angular-ui-ace": "latest",
+    "angular-devise": "latest",
+    "font-awesome" : "latest",
+    "ng-token-auth" : "latest"
   }
 }
