@@ -26,7 +26,8 @@ var ideaBin = angular.module('ideaBin',
 		'angularFileUpload',
 		'ui.ace',
 		'ngStorage',
-		'ng-token-auth']);
+		'ng-token-auth',
+		'ngCookies']);
 
 // for compatibility with Rails CSRF protection
 
