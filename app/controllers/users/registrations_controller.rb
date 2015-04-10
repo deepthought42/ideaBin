@@ -20,20 +20,22 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   # PUT /users/registration
    def update
-	@user = User.find(current_user.id)
-	@user.email = params[:email]
-	avatar_path = "#{Rails.root}/public/images/"
+	super
+	@user = User.find(1)
+	@user.update(user_params)
+#	@user.email = params[:email]
+#	avatar_path = "#{Rails.root}/public/images/"
 	
-	if params[:avatar]
-		@user.avatar = params[:avatar]
-		DataFile.save(params[:avatar], avatar_path)
-	end
+#	if params[:avatar]
+#		@user.avatar = params[:avatar]
+#		DataFile.save(params[:avatar], avatar_path)
+#	end
 
-    if @user.save
-	render json: @user
-	else
-	puts "THERE WAS AN ISSUE UPDATING"
-     end
+#     if @user.save
+#	render json: @user
+#     else
+#	puts "THERE WAS AN ISSUE UPDATING"
+ #    end
    end
 
   # DELETE /resource
