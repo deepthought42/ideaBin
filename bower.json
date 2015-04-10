@@ -7,8 +7,8 @@
     "ng-file-upload": "latest",
     "ngstorage": "latest",
     "angular-ui-ace": "latest",
-    "angular-devise": "latest",
     "font-awesome" : "latest",
-    "ng-token-auth" : "latest"
+    "ng-token-auth" : "latest",
+    "angular-cookies": "latest"
   }
 }

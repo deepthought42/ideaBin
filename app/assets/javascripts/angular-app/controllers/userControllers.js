@@ -8,11 +8,11 @@
 	*/ 
 var app = angular.module('ideaBin.userControllers', []);
 
-app.controller('UserSessionCtrl', ['$scope', 'Auth', '$location', '$localStorage',
-	function ($scope, Auth, $location, $localStorage) { 
+app.controller('UserSessionCtrl', ['$scope', '$auth', '$location', '$localStorage',
+	function ($scope, $auth, $location, $localStorage) { 
 		$scope.$storage = $localStorage;
 		
-		$scope.signedIn = Auth.isAuthenticated;
+		//$scope.signedIn = $auth.validateUser();
 		$scope.user = $scope.$storage.user;
 		
 		$scope.$on('userAuthenticated', function(event, user){
@@ -34,17 +34,21 @@ app.controller('UserSessionCtrl', ['$scope', 'Auth', '$location', '$localStorage
 		}
 
 		$scope.logout = function(user){
-			Auth.logout().then(function(user) {
+			$auth.signOut().then(function(user) {
 				$('#editProfileForm').hide();
 			}, function(error) {
 				// An error occurred logging out.
 			});
 
-			$scope.$on('devise:logout', function(event, oldCurrentUser) {
+			$scope.$on('auth:logout-success', function(event, oldCurrentUser) {
 				alert($scope.$storage.user.email + "you're signed out now.");
 				$scope.$storage.user = null;
 				$scope.user = null;
 			});
+
+			$scope.$on('auth:logout-failure', function(event, reason){
+				alert("There was an error signing you out. REASON :: "+reason);
+			})
 		}
 		
 		$scope.$on('userRegistered', function(event, data){
@@ -57,9 +61,9 @@ app.controller('UserSessionCtrl', ['$scope', 'Auth', '$location', '$localStorage
 	}
 ]);
 
-app.controller('UserDetailController', ['$scope', 'User', 'Auth', '$location', '$localStorage', '$upload',
-	function ($scope, User, Auth, $location, $localStorage, $upload) { 
-		$scope.signedIn = Auth.isAuthenticated;
+app.controller('UserDetailController', ['$scope', 'User', '$auth', '$location', '$localStorage', '$upload',
+	function ($scope, User, $auth, $location, $localStorage, $upload) { 
+		$scope.signedIn = $auth.isAuthenticated;
 		$scope.user = $localStorage.user;
 		
 		$scope.hideEditProfilePanel =  function(){
@@ -91,7 +95,16 @@ app.controller('UserDetailController', ['$scope', 'User', 'Auth', '$location', '
 		}
 		
 		$scope.updateUser = function (userId){
-			$scope.uploadFile();
+			$auth.updateAccount($scope.userForm)
+        		  .then(function(resp) { 
+          		    alert("successfully updated user account");
+			    // handle success response
+        		  })
+        		  .catch(function(resp) { 
+			    alert("Error updating user account");
+		            // handle error response
+        		  });
+			//$scope.uploadFile();
 			//User.update($scope.user,{id: userId}, function(){
 					//close edit form panel
 			//});
@@ -101,8 +114,8 @@ app.controller('UserDetailController', ['$scope', 'User', 'Auth', '$location', '
 	
 ]);
 
-app.controller('UserAuthenticateController', ['$scope', '$rootScope', 'Auth', '$location', '$localStorage',
-	function ($scope, $rootScope, Auth, $location, $localStorage) { 
+app.controller('UserAuthenticateController', ['$scope', '$rootScope', '$auth', '$location', '$localStorage',
+	function ($scope, $rootScope, $auth, $location, $localStorage) { 
 		$scope.$storage = $localStorage;
 		
 		$scope.hideSignInPanel = function() {
@@ -116,7 +129,7 @@ app.controller('UserAuthenticateController', ['$scope', '$rootScope', 'Auth', '$
 			};
 			
 			//Authenticate with user credentials
-			Auth.login(credentials).then(function(user) {
+			$auth.submitLogin(credentials).then(function(user) {
 				$scope.$storage.user = user;
 				$rootScope.$broadcast('userAuthenticated', user);
 				console.log($scope.$storage.user); // => {id: 1, ect: '...'}
@@ -125,21 +138,26 @@ app.controller('UserAuthenticateController', ['$scope', '$rootScope', 'Auth', '$
 					// Authentication failed...
 			});
 			
-			$scope.$on('devise:login', function(event, currentUser) {
+			$scope.$on('auth:login-success', function(event, currentUser) {
+				alert("Successfully logged on");
+			});
+			
+			$scope.$on('auth:login-error', function(event, currentUser) {
+				alert("Error logging in");
 			});
 
 			$scope.$on('devise:new-session', function(event, currentUser) {
-					$scope.$storage.user = currentUser;
-					$scope.hideSignInPanel();
-					console.log("NEW SESSION USER VALUE :: " + $scope.$storage.user);
-					$location.path('/ideas');
+				$scope.$storage.user = currentUser;
+				$scope.hideSignInPanel();
+				console.log("NEW SESSION USER VALUE :: " + $scope.$storage.user);
+				$location.path('/ideas');
 			});
 		}
 	}
 ]);
 
-app.controller('UserRegisterController', ['$scope', 'Auth', '$location', '$localStorage',
-	function ($scope, Auth, $location, $localStorage) { 
+app.controller('UserRegisterController', ['$scope', '$auth', '$location', '$localStorage',
+	function ($scope, $auth, $location, $localStorage) { 
 		$scope.hideRegistrationPanel = function(){
 			$('#userRegistrationForm').hide();
 		}
@@ -150,7 +168,7 @@ app.controller('UserRegisterController', ['$scope', 'Auth', '$location', '$local
 				password_confirmation: $scope.registrationForm.confirmation_password
 			};
 
-			Auth.register(credentials).then(function(registeredUser) {
+			$auth.submitRegistration(credentials).then(function(registeredUser) {
 				//show some sort of statement that indicates they are welcome to enjoy
 				alert("registered user :: " + registeredUser);
 				$scope.uploadFile();
@@ -158,7 +176,7 @@ app.controller('UserRegisterController', ['$scope', 'Auth', '$location', '$local
 				alert("Something went wrong during registration. Womp womp");
 			});
 
-			$scope.$on('devise:new-registration', function(event, user) {
+			$scope.$on('devise:registration-email-success', function(event, user) {
 				$scope.$storage.user = user;
 				$rootScope.$broadcast('userRegistered', user);
 				$location.path('/ideas');

@@ -25,8 +25,8 @@ var ideaBin = angular.module('ideaBin',
 		'ideaBin.resourceCommentControllers',
 		'angularFileUpload',
 		'ui.ace',
-		'Devise',
-		'ngStorage']);
+		'ngStorage',
+		'ng-token-auth']);
 
 // for compatibility with Rails CSRF protection
 
