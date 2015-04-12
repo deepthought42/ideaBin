@@ -1,7 +1,7 @@
 .btn-toggle-wrapper{
   position: absolute;
-  left: 		150px;
-  top:			0px;
+  left: 100px;
+  top: 0px;
 }
 
 .btn{
@@ -9,40 +9,41 @@
 }
 
 .social-button {
-	color:		#FFB873;
+	color: #FFB873;
 }
 
 .social-button:hover {
-	color:					#FFD473;
-	cursor:					pointer;
+	color: #FFD473;
+	cursor: pointer;
 }
 
 #toggleBtn{
-  padding: 					10px;
-	background-color: transparent;
-	color:						black;
-  top:							0px;
-  border-radius: 		0px;
-  margin: 					0px;
-  transition: 			all .5s;
-  z-index: 					5;
+  padding: 10px;
+  background-color: transparent;
+  color: black;
+  top: 0px;
+  border-radius: 0px;
+  margin: 0px;
+  transition: all .5s;
+  z-index: 5;
 }
+
 #toggleBtn:hover{
 	background-color: rgba(17,38,94,.1)!important;
 }
 
 #sideMenu{
-  padding: 					15px;
-  width: 						150px;
+  padding: 15px;
+  width: 100px;
   background-color: #17385e;
-  height: 					100vh;
-  display: 					inline-block;
-  position: 				relative;
-  right: 						0px;
-	top:							0px;
-  transition: 			right .5s;
-  float: 						left;
-  z-index: 					5;
+  height: 100vh;
+  display: inline-block;
+  position: relative;
+  right: 0px;
+  top: 0px;
+  transition: right .5s;
+  float: left;
+  z-index: 5;
 }
 
 #sidebarList{
@@ -78,7 +79,7 @@
 }
 
 .show-menu{
-  right: 150px!important;
+  right: 100px!important;
 }
 
 .make-opaque{
@@ -109,13 +110,4 @@ div#ideabin h1{
 
 #ideabin .ideaBulb {
 	color:		#FFFF66;
-}
-
-#fakeText{
-  border: 1px solid #E6E7E8;
-  margin: 15px;
-  height: 300px;
-  width: 50%%;
-  z-index: 5;
-  float: right;
 }
