@@ -186,7 +186,6 @@ DEPENDENCIES
   bootstrap-sass (~> 3.2.0)
   bower-rails
   coffee-rails
-  devise
   devise_token_auth
   font-awesome-rails
   git

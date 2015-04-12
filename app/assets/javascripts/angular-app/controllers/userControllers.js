@@ -16,7 +16,7 @@ app.controller('UserSessionCtrl', ['$scope', '$auth', '$location', '$localStorag
 		$scope.user = $scope.$storage.user;
 		
 		$scope.$on('userAuthenticated', function(event, user){
-				$scope.user = user;
+			$scope.user = user;
 		});
 		
 		$scope.showRegistrationForm = function(){
@@ -34,20 +34,15 @@ app.controller('UserSessionCtrl', ['$scope', '$auth', '$location', '$localStorag
 		}
 
 		$scope.logout = function(user){
-			$auth.signOut().then(function(user) {
-				$('#editProfileForm').hide();
-			}, function(error) {
-				alert("An error occured while signing out.");
-				// An error occurred logging out.
-			});
-
+			$auth.signOut()
 			$scope.$on('auth:logout-success', function(event, oldCurrentUser) {
+				$('#editProfileForm').hide();
 				alert($scope.$storage.user.email + "you're signed out now.");
-				$scope.$storage.user = null;
-				$scope.user = null;
+				//$scope.$storage.user = null;
+				//$scope.user = null;
 			});
 
-			$scope.$on('auth:logout-failure', function(event, reason){
+			$scope.$on('auth:logout-error', function(event, reason){
 				alert("There was an error signing you out. REASON :: "+reason);
 			})
 		}

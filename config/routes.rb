@@ -1,12 +1,5 @@
 IdeaBin::Application.routes.draw do
 
-   # define :users as the first devise mapping:
-  mount_devise_token_auth_for 'User', at: 'auth', skip: [:omniauth_callbacks], controllers: 
-	{
-	 sessions: 'users/sessions', 
-	 registrations: 'users/registrations'
-	}
-
 
   resources :application
   root 'application#index'
@@ -39,8 +32,12 @@ IdeaBin::Application.routes.draw do
 	resources :repository_comments
 	resources :contacts
 	resources :resource_comments
-#  devise_for :users, controllers: {sessions: 'users/sessions', registrations: 'users/registrations'}
+  devise_for :users, controllers: {sessions: 'users/sessions', registrations: 'users/registrations'}
 
+   # define :users as the first devise mapping:i
+  namespace :api do
+	  mount_devise_token_auth_for 'User', at: 'auth' 
+  end
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

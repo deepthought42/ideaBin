@@ -41,7 +41,7 @@ gem 'jquery-cdn', '~> 2.1'
 # To use debugger
 # gem 'debugger'
 
-gem "devise"
+
 gem 'ancestry'
 gem 'git'
 gem 'bootstrap-sass', '~> 3.2.0'
