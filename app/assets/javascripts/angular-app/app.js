@@ -39,12 +39,12 @@ ideaBin.config([
 
 ideaBin.config(function($authProvider){
 	$authProvider.configure({
-	      apiUrl: 'localhost:3000',
+	      //apiUrl: 'localhost:3000/api',
 
 	      // provide the header template
-	      tokenFormat: {
-		"Authorization": "token={{ token }} expiry={{ expiry }} uid={{ uid }}"
-	      },
+	      //tokenFormat: {
+	      //  "Authorization": "token={{ token }} expiry={{ expiry }} uid={{ uid }}"
+	      //},
 
 	      // parse the expiry from the 'Authorization' param
 	      /*parseExpiry: function(headers) {

@@ -85,7 +85,7 @@ app.controller('IdeaDetailCtrl', ['$scope', '$localStorage', '$routeParams', 'Id
 			$scope.upload = $upload.upload({
 				url: '/ideas/' + $scope.idea.id + '/uploadCover.json',
 				method: 'PUT',
-				data: {idea: ideaFormVals},
+				data: {idea: JSON.parse($scope.idea)},
 				file: $scope.cover_img,
 				fileFormDataName: 'cover_img'
 			}).
@@ -147,7 +147,7 @@ app.controller('IdeaDetailCtrl', ['$scope', '$localStorage', '$routeParams', 'Id
 ]);
 
 app.controller('IdeaCreationCtrl', ['$scope', '$auth', '$rootScope', 'Idea', '$location', '$upload',
-	function($scope, $rootScope, Idea, $location, $upload ){
+	function($scope, $auth, $rootScope, Idea, $location, $upload ){
 		//callback for ng-click 'createNewIdea'
 		$auth.validateUser();
 		$scope.ideaForm = {};
