@@ -4,7 +4,7 @@ IdeaBin::Application.routes.draw do
   resources :application
   root 'application#index'
   get '/userIdeas/:id' => 'ideas#userIdeas'
-	get '/pull_requests/count' => 'pull_requests#count'
+  get '/pull_requests/count' => 'pull_requests#count'
 	
   resources :directories do
 		member do
@@ -32,13 +32,8 @@ IdeaBin::Application.routes.draw do
 	resources :repository_comments
 	resources :contacts
 	resources :resource_comments
-  devise_for :users, controllers: {sessions: 'users/sessions', registrations: 'users/registrations'}
 
-   # define :users as the first devise mapping:i
-  namespace :api do
-	  mount_devise_token_auth_for 'User', at: 'auth' 
-  end
-
+	mount_devise_token_auth_for 'User', at: 'api/auth'
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

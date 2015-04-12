@@ -1,6 +1,6 @@
 <div id="userRegistrationForm" ng-controller="UserRegisterController">
 	<div class="col-md-12">
-		<form role="form" ng-init="registrationForm = {}"> 
+		<form role="form" ng-submit="register(registrationForm)" ng-init="registrationForm = {}"> 
 			<div class="form-group">
 				<input placeholder= "Email" type="email" name="email" id="email" ng-model="registrationForm.email" required="required" class="form-control"> 
 			</div> 
@@ -10,7 +10,7 @@
 			<div class="form-group"> 
 				<input placeholder= "Confirm Password" type="password" name="confirmation_password" id="confirmation_password" ng-model="registrationForm.confirmation_password" required="required" class="form-control"> 
 			</div> 
-			<button type="submit" class="btn btn-primary btn-sm" ng-click="register()">Sign up</button> 
+			<button type="submit" class="btn btn-primary btn-sm">Sign up</button> 
 			<button class="btn btn-primary btn-sm pull-right" ng-click="hideRegistrationPanel()">Cancel</button>
 		</form>
 	</div>
