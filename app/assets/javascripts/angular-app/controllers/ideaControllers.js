@@ -146,9 +146,10 @@ app.controller('IdeaDetailCtrl', ['$scope', '$localStorage', '$routeParams', 'Id
 	}
 ]);
 
-app.controller('IdeaCreationCtrl', ['$scope', '$rootScope', 'Idea', '$location', '$upload',
-	function($scope, $rootScope, Idea, $location, $upload ){
+app.controller('IdeaCreationCtrl', ['$scope', '$auth', '$rootScope', 'Idea', '$location', '$upload',
+	function($scope, $auth, $rootScope, Idea, $location, $upload ){
 		//callback for ng-click 'createNewIdea'
+		$auth.validateUser();
 		$scope.ideaForm = {};
 		$scope.ideaForm.name = "";
 		$scope.ideaForm.description = "";
