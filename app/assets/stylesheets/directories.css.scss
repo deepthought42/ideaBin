@@ -3,18 +3,19 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
 #directoryForm {
-  margin-bottom: 	0px;
-	display:				none;
-	z-index:				5;
+  margin-bottom: 0px;
+  display: none;
+  z-index: 5;
 }
 
 .directoryButton {
-	margin:						0px;
-	text-align:				right;
-}
-
-.directoryButton:hover {
-	cursor:				pointer;
+  margin:	0px;
+  text-align:	right;
+  
+    &:hover{
+      cursor:	pointer;
+    }
+    
 }
 
 .directoryButtons {
