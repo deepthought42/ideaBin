@@ -65,6 +65,7 @@
     &:hover{
       border: 3px solid rgba(255,255,255,0.2);
       transition: border-width .2s;
+      border-radius: 2px;
     }
   }
 }
