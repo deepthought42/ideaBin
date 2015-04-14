@@ -26,6 +26,7 @@
 //= require ../components/ng-file-upload/angular-file-upload-shim.min
 //= require ../components/ng-file-upload/angular-file-upload.min
 //= require ../components/ngStorage/ngStorage.min
+//= require ../components/angular-cookie/angular-cookie.min
 //= require ../components/angular-cookies/angular-cookies.min
 //= require ../components/ng-token-auth/dist/ng-token-auth.min
 //= require angular-resource

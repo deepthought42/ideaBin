@@ -26,7 +26,7 @@ var ideaBin = angular.module('ideaBin',
 		'angularFileUpload',
 		'ui.ace',
 		'ngStorage',
-		'ngCookies',
+		'ipCookie',
 		'ng-token-auth']);
 
 // for compatibility with Rails CSRF protection
@@ -34,24 +34,13 @@ var ideaBin = angular.module('ideaBin',
 ideaBin.config([
   '$httpProvider', function($httpProvider){
     $httpProvider.defaults.headers.common['X-CSRF-Token'] = $('meta[name=csrf-token]').attr('content');
+
 	}
 ]);
 
 ideaBin.config(function($authProvider){
 	$authProvider.configure({
-	      //apiUrl: 'localhost:3000/api',
-
-	      // provide the header template
-	      //tokenFormat: {
-	      //  "Authorization": "token={{ token }} expiry={{ expiry }} uid={{ uid }}"
-	      //},
-
-	      // parse the expiry from the 'Authorization' param
-	      /*parseExpiry: function(headers) {
-		return (parseInt(headers['Authorization'].match(/expiry=([^ ]+) /)[1], 10)) || null
-
-	      }
-		*/
+	      storage: 'cookies'
         })
 });
 
@@ -107,7 +96,7 @@ ideaBin.run(['$rootScope', '$injector', function($rootScope,$injector) {
 	$injector.get("$http").defaults.transformRequest = function(data, headersGetter) { 
 		if ($rootScope.oauth) headersGetter()['Authorization'] = "Bearer "+$rootScope.oauth.access_token; 
     	if (data) {
-		return data//angular.toJson(data); 
+		return angular.toJson(data); 
     	} 
   }
  }]);

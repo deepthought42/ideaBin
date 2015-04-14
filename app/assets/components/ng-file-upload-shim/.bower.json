@@ -1,18 +1,18 @@
 {
   "name": "angular-file-upload-shim",
   "main": "angular-file-upload-shim.js",
-  "version": "2.0.3",
+  "version": "3.2.4",
   "homepage": "https://github.com/danialfarid/angular-file-upload",
   "authors": [
     "danialf <danial.farid@gmail.com>"
   ],
   "description": "shim for anuglar-file-upload",
   "license": "MIT",
-  "_release": "2.0.3",
+  "_release": "3.2.4",
   "_resolution": {
     "type": "version",
-    "tag": "2.0.3",
-    "commit": "c8c54837f1e26ab1dfddbc0e3777059f89102338"
+    "tag": "3.2.4",
+    "commit": "f83e5e0729b5695aed64402dc9662e0437486d20"
   },
   "_source": "git://github.com/danialfarid/angular-file-upload-shim-bower.git",
   "_target": "*",

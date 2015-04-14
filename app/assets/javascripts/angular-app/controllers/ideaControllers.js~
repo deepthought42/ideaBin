@@ -81,7 +81,7 @@ app.controller('IdeaDetailCtrl', ['$scope', '$localStorage', '$routeParams', 'Id
 		$scope.$storage = $localStorage;
 		
 		$scope.uploadFile = function(){
-			var ideaFormVals = angular.toJson($scope.idea);
+			//var ideaFormVals = angular.toJson($scope.idea);
 			$scope.upload = $upload.upload({
 				url: '/ideas/' + $scope.idea.id + '/uploadCover.json',
 				method: 'PUT',
@@ -166,7 +166,7 @@ app.controller('IdeaCreationCtrl', ['$scope', '$auth', '$rootScope', 'Idea', '$l
 				method: 'POST',
 				data: {idea: ideaFormVals},
 				file: $scope.cover_img,
-        fileFormDataName: 'cover_img'
+        			fileFormDataName: 'cover_img'
 			}).
 			progress(function(evt) {
 				console.log('progress: ' + parseInt(100.0 * evt.loaded / evt.total));

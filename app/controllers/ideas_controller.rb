@@ -1,5 +1,5 @@
 class IdeasController < ApplicationController
-  before_action :authenticate_user!, except: [:create, :index]
+  before_action :authenticate_user!, except: [:index]
   before_action :set_idea, except: [:new, :create, :index, :userIdeas]
 	respond_to :json
 	
@@ -93,7 +93,7 @@ params[:idea].gsub!(/\\/, '')
 
     @idea = Idea.new(ActiveSupport::JSON.decode(params[:idea]))
     
-    @idea.user_id = current_user.id
+    @idea.user_id = @current_user.id
     repo_path = "#{Rails.root}/public/data/repository/#{current_user.id}" 
     @idea.cover_img = params[:cover_img]
 		
@@ -109,11 +109,11 @@ params[:idea].gsub!(/\\/, '')
 	#create directory in database to associate the directory created in the file systems.
 	Dir.chdir(repo_path)
 	@git = Git.init(@idea.name)
-	
-	DataFile.save(params[:cover_img], @repo.path)
-	@git.add(:all => true)
-	@git.commit("Cover image added.")
-	
+	if params[:cover_img]
+		DataFile.save(params[:cover_img], @repo.path)
+		@git.add(:all => true)
+		@git.commit("Cover image added.")
+	end
     respond_with(@idea)
   end
   # PUT /ideas/1
