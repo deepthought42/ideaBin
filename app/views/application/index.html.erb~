@@ -11,7 +11,7 @@
  <div id="sideMenu" class="text-center show-menu">
     <div ng-controller="NavigationController">
 			<ul id="sidebarList">
-              <li ng-show="user.signedIn"><img title="Create a New Idea" width="60" src="images/icon_New_Idea.svg" ng-click="showNewIdea()" /></li>
+              <li ng-show="!user.signedIn"><img title="Create a New Idea" width="60" src="images/icon_New_Idea.svg" ng-click="showNewIdea()" /></li>
               <li><img title="View All Ideas" width="60" src="images/icon_All_Ideas.svg" ng-click="showAllIdeas()"/></li>
               <li><img title="View My Ideas" width="60" src="images/icon_My_Ideas.svg" ng-click="showMyIdeas()"/></li>
               <li><img title="Contact Ideabin" width="60" src="images/icon_Contact_Us.svg" ng-click="showContactUs()"/></li>
