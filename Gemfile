@@ -1,7 +1,7 @@
 source 'http://rubygems.org'
 #ruby '2.2.1'
 gem 'protected_attributes'
-gem 'rails', '~> 4.1.8'
+gem 'rails', '~> 4.2'
 
 gem 'tzinfo-data'
 
@@ -42,7 +42,7 @@ gem 'jquery-cdn', '~> 2.1'
 # gem 'debugger'
 
 
-gem 'ancestry'
+#gem 'ancestry'
 gem 'git'
 gem 'bootstrap-sass', '~> 3.2.0'
 #gem 'autoprefixer-rails'
@@ -56,9 +56,12 @@ gem 'angularjs-rails'
 gem 'bower-rails'
 gem 'angular_rails_csrf'
 gem 'paperclip', '~> 4.1'
-gem 'devise_token_auth', '~>0.1.31.beta2'
+gem 'devise_token_auth', '~>0.1.30'
 gem 'devise'
 gem 'omniauth'
 #gem 'omniauth-github'
 #gem 'omniauth-facebook'
 #gem 'omniauth-google-oauth2'
+
+
+

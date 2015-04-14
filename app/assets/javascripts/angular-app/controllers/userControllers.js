@@ -38,8 +38,8 @@ app.controller('UserSessionCtrl', ['$scope', '$auth', '$location', '$localStorag
 			$scope.$on('auth:logout-success', function(event, oldCurrentUser) {
 				$('#editProfileForm').hide();
 				alert($scope.$storage.user.email + "you're signed out now.");
-				//$scope.$storage.user = null;
-				//$scope.user = null;
+				$scope.$storage.user = null;
+				$scope.user = null;
 			});
 
 			$scope.$on('auth:logout-error', function(event, reason){
@@ -102,7 +102,7 @@ app.controller('UserDetailController', ['$scope', 'User', '$auth', '$location', 
         		  });
 			//$scope.uploadFile();
 			//User.update($scope.user,{id: userId}, function(){
-					//close edit form panel
+             			//close edit form panel
 			//});
 		};
 	}
@@ -110,8 +110,8 @@ app.controller('UserDetailController', ['$scope', 'User', '$auth', '$location', 
 	
 ]);
 
-app.controller('UserAuthenticateController', ['$scope', '$rootScope', '$auth', '$location', '$localStorage',
-	function ($scope, $rootScope, $auth, $location, $localStorage) { 
+app.controller('UserAuthenticateController', ['$scope', '$rootScope', '$auth', '$location', '$localStorage', '$http',
+	function ($scope, $rootScope, $auth, $location, $localStorage, $http) { 
 		$scope.$storage = $localStorage;
 		
 		$scope.hideSignInPanel = function() {
@@ -125,9 +125,10 @@ app.controller('UserAuthenticateController', ['$scope', '$rootScope', '$auth', '
 			};
 			
 			//Authenticate with user credentials
-			$auth.submitLogin(credentials).then(function(user) {
-				$scope.$storage.user = user;
-				$rootScope.$broadcast('userAuthenticated', user);
+			$auth.submitLogin(credentials).then(function(response) {
+				$scope.$storage.user = response;
+				$rootScope.$broadcast('userAuthenticated', response);
+				console.log(response.data)
 				console.log($scope.$storage.user); // => {id: 1, ect: '...'}
 			}, function(error) {
 				alert("Failed to log in");
@@ -135,7 +136,13 @@ app.controller('UserAuthenticateController', ['$scope', '$rootScope', '$auth', '
 			});
 			
 			$scope.$on('auth:login-success', function(event, currentUser) {
-				alert("Successfully logged on");
+				
+				alert("Successfully logged on..."+event.headers);
+				$scope.hideSignInPanel();
+				
+				//config.headers.common.Expiry = response.headers["Expiry"]
+				//config.headers.common.Uid = response.headers["Uid"]
+				//config.headers.common.Token-Type = response.headers["Token-Type"]
 			});
 			
 			$scope.$on('auth:login-error', function(event, currentUser) {

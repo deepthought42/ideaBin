@@ -1,6 +1,6 @@
 class IdeasController < ApplicationController
-  before_filter :authenticate_user!, except: [:index]
-	before_action :set_idea, except: [:new, :create, :index, :userIdeas]
+  before_action :authenticate_user!, except: [:index]
+  before_action :set_idea, except: [:new, :create, :index, :userIdeas]
 	respond_to :json
 	
   # GET /ideas
@@ -86,32 +86,36 @@ class IdeasController < ApplicationController
   # POST /ideas
   # POST /ideas.json
   def create
+	params[:idea].gsub!(/\"{/, '{')
+	params[:idea].gsub!(/}\"/, '}')
+params[:idea].gsub!(/\\/, '')
+
+
     @idea = Idea.new(ActiveSupport::JSON.decode(params[:idea]))
+    
+    @idea.user_id = @current_user.id
+    repo_path = "#{Rails.root}/public/data/repository/#{current_user.id}" 
+    @idea.cover_img = params[:cover_img]
 		
-    @idea.user_id = current_user.id
-		repo_path = "#{Rails.root}/public/data/repository/#{current_user.id}" 
-		@idea.cover_img = params[:cover_img]
-		
-		unless File.exists?(repo_path)
-			Dir.mkdir(repo_path)
-		end
-		@repo = Repository.new()
-		@repo.path = "#{Rails.root}/public/data/repository/#{current_user.id}/#{@idea.name}"
-		@repo.user = current_user 
-		@idea.repositories << @repo
-		@idea.save
+    unless File.exists?(repo_path)
+	Dir.mkdir(repo_path)
+    end
+	@repo = Repository.new()
+	@repo.path = "#{Rails.root}/public/data/repository/#{current_user.id}/#{@idea.name}"
+	@repo.user = current_user 
+	@idea.repositories << @repo
+	@idea.save
 			
-		#create directory in database to associate the directory created in the file systems.
-		Dir.chdir(repo_path)
-		@git = Git.init(@idea.name)
-		
+	#create directory in database to associate the directory created in the file systems.
+	Dir.chdir(repo_path)
+	@git = Git.init(@idea.name)
+	if params[:cover_img]
 		DataFile.save(params[:cover_img], @repo.path)
 		@git.add(:all => true)
 		@git.commit("Cover image added.")
-		
-		respond_with(@idea)
+	end
+    respond_with(@idea)
   end
-
   # PUT /ideas/1
   # PUT /ideas/1.json
   def update
@@ -188,6 +192,6 @@ class IdeasController < ApplicationController
     end
 
     def idea_params
-	params.require(:idea).permit(:name, :description, :cover_img_file_name)
+	params.require(:idea).permit(:name, :description, :cover_img)
     end
 end

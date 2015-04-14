@@ -1,6 +1,6 @@
 {
   "name": "flow.js",
-  "version": "2.6.2",
+  "version": "2.9.0",
   "main": "./dist/flow.js",
   "ignore": [
     "**/.*",
@@ -8,14 +8,19 @@
     "bower_components",
     "test",
     "tests",
-    "samples"
+    "samples",
+    "CHANGELOG.md",
+    "karma.conf.js",
+    "package.json",
+    "src/*",
+    "Gruntfile.js"
   ],
   "homepage": "https://github.com/flowjs/flow.js",
-  "_release": "2.6.2",
+  "_release": "2.9.0",
   "_resolution": {
     "type": "version",
-    "tag": "v2.6.2",
-    "commit": "fdd4c3743ead964baff2405ca7f012aae14726b3"
+    "tag": "v2.9.0",
+    "commit": "0467da5c2820e87623c7f720c7d21493c2655511"
   },
   "_source": "git://github.com/flowjs/flow.js.git",
   "_target": "~2",

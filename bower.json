@@ -1,6 +1,6 @@
 {
   "name": "ideaBin",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "dependencies": {
     "angular": "~1.3.4",
     "ng-file-upload-shim": "latest",
@@ -8,7 +8,8 @@
     "ngstorage": "latest",
     "angular-ui-ace": "latest",
     "font-awesome" : "latest",
-    "ng-token-auth" : "latest",
-    "angular-cookies": "latest"
+    "angular-cookie": "latest",
+    "ng-token-auth" : "latest"
+//    "angular-cookies": "latest"
   }
 }

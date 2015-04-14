@@ -1,6 +1,6 @@
 class ApplicationController < ActionController::Base
   include DeviseTokenAuth::Concerns::SetUserByToken
-  protect_from_forgery with: :exception 
+  protect_from_forgery
 
   before_filter :configure_permitted_parameters, if: :devise_controller?
   after_filter :set_csrf_cookie_for_ng
