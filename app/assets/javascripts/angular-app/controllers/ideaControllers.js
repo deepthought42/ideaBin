@@ -153,7 +153,7 @@ app.controller('IdeaCreationCtrl', ['$scope', '$auth', '$rootScope', 'Idea', '$l
 		$scope.ideaForm = {};
 		$scope.ideaForm.name = "";
 		$scope.ideaForm.description = "";
-		$scope.ideaForm.cover_img_file_name = "no-image-found.png";
+		$scope.ideaForm.cover_img = "";
 
 		$scope.createNewIdea = function(){
 			$scope.uploadFile();

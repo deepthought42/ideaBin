@@ -86,13 +86,16 @@ class IdeasController < ApplicationController
   # POST /ideas
   # POST /ideas.json
   def create
-	params[:idea].gsub!(/\"{/, '{')
-	params[:idea].gsub!(/}\"/, '}')
-params[:idea].gsub!(/\\/, '')
+    data =params[:data]
+	data.gsub('\\', '')
 
+    idea = ActiveSupport::JSON.decode(data)
+    idea = idea["idea"]
+    @idea = Idea.new()
+    @idea.name = idea["name"]
+    @idea.description = idea["description"]
+    logger.debug "++++++IDEA OBJECT #{data} :++: #{idea} :: #{params}"
 
-    @idea = Idea.new(ActiveSupport::JSON.decode(params[:idea]))
-    
     @idea.user_id = @current_user.id
     repo_path = "#{Rails.root}/public/data/repository/#{current_user.id}" 
     @idea.cover_img = params[:cover_img]
@@ -192,6 +195,6 @@ params[:idea].gsub!(/\\/, '')
     end
 
     def idea_params
-	params.require(:idea).permit(:name, :description, :cover_img)
+	params.require(:idea).permit(:name, :description)
     end
 end

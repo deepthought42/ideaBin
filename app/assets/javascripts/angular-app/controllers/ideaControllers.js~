@@ -153,18 +153,18 @@ app.controller('IdeaCreationCtrl', ['$scope', '$auth', '$rootScope', 'Idea', '$l
 		$scope.ideaForm = {};
 		$scope.ideaForm.name = "";
 		$scope.ideaForm.description = "";
-		$scope.ideaForm.cover_img_file_name = "no-image-found.png";
+		$scope.ideaForm.cover_img = null;
 
 		$scope.createNewIdea = function(){
 			$scope.uploadFile();
 		}
 		
 		$scope.uploadFile = function(){
-			var ideaFormVals = angular.toJson($scope.ideaForm);
+
 			$scope.$upload = $upload.upload({
 				url: '/ideas.json',
 				method: 'POST',
-				data: {idea: ideaFormVals},
+				data: {idea: $scope.ideaForm},
 				file: $scope.cover_img,
         			fileFormDataName: 'cover_img'
 			}).

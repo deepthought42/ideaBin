@@ -1,11 +1,6 @@
 class IdeasController < ApplicationController
-<<<<<<< HEAD
-  before_action :signed_in?, except: [:index]
-	before_action :set_idea, except: [:new, :create, :index, :userIdeas]
-=======
-  before_action :authenticate_user?, except: [:index]
+  before_action :authenticate_user!, except: [:index]
   before_action :set_idea, except: [:new, :create, :index, :userIdeas]
->>>>>>> deviseAuthToken
 	respond_to :json
 	
   # GET /ideas
@@ -91,41 +86,16 @@ class IdeasController < ApplicationController
   # POST /ideas
   # POST /ideas.json
   def create
-<<<<<<< HEAD
-    @idea = Idea.new(ActiveSupport::JSON.decode(params[:idea]))
-		
-    @idea.user_id = current_user.id
-		repo_path = "#{Rails.root}/public/data/repository/#{current_user.id}" 
-		@idea.cover_img = params[:cover_img]
-		
-		unless File.exists?(repo_path)
-			Dir.mkdir(repo_path)
-		end
-		@repo = Repository.new()
-		@repo.path = "#{Rails.root}/public/data/repository/#{current_user.id}/#{@idea.name}"
-		@repo.user = current_user 
-		@idea.repositories << @repo
-		@idea.save
-			
-		#create directory in database to associate the directory created in the file systems.
-		Dir.chdir(repo_path)
-		@git = Git.init(@idea.name)
-		
-		DataFile.save(params[:cover_img], @repo.path)
-		@git.add(:all => true)
-		@git.commit("Cover image added.")
-		
-		respond_with(@idea)
-  end
+    data =params[:data]
+	data.gsub('\\', '')
 
-=======
-	params[:idea].gsub!(/\"{/, '{')
-	params[:idea].gsub!(/}\"/, '}')
-params[:idea].gsub!(/\\/, '')
+    idea = ActiveSupport::JSON.decode(data)
+    idea = idea["idea"]
+    @idea = Idea.new()
+    @idea.name = idea.name
+    @idea.description = idea.description
+    logger.debug "++++++IDEA OBJECT #{data} :++: #{idea} :: #{params}"
 
-
-    @idea = Idea.new(ActiveSupport::JSON.decode(params[:idea]))
-    
     @idea.user_id = @current_user.id
     repo_path = "#{Rails.root}/public/data/repository/#{current_user.id}" 
     @idea.cover_img = params[:cover_img]
@@ -149,7 +119,6 @@ params[:idea].gsub!(/\\/, '')
 	end
     respond_with(@idea)
   end
->>>>>>> deviseAuthToken
   # PUT /ideas/1
   # PUT /ideas/1.json
   def update
@@ -226,10 +195,6 @@ params[:idea].gsub!(/\\/, '')
     end
 
     def idea_params
-<<<<<<< HEAD
-	params.require(:idea).permit(:name, :description, :cover_img_file_name)
-=======
-	params.require(:idea).permit(:name, :description, :cover_img)
->>>>>>> deviseAuthToken
+	params.require(:idea).permit(:name, :description)
     end
 end
