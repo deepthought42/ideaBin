@@ -10,6 +10,5 @@
     "font-awesome" : "latest",
     "angular-cookie": "latest",
     "ng-token-auth" : "latest"
-//    "angular-cookies": "latest"
   }
 }

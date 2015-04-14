@@ -21,4 +21,4 @@
 /public/system/*
 
 #ignore all components
-
+/app/assets/components/*
