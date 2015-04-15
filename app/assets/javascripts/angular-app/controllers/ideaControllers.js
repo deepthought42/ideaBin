@@ -18,17 +18,17 @@ app.controller("IdeaIndexController", ['$scope', '$localStorage', 'Idea', 'Repos
 		
 		$scope.editIdea = function (ideaId) {
 			
-			$localStorage.repo = Repository.show({user_id: $localStorage.user.id, id: ideaId}).$promise;
+			$scope.$storage.repo = Repository.show({user_id: $localStorage.user.id, id: ideaId}).$promise;
 
 			
-			$localStorage.repo.then(function onSuccess(	response){
-				$localStorage.repo = response;
-				$localStorage.current_idea  = Idea.show({id: ideaId}).$promise;
-				$localStorage.current_idea.then(function onSuccess(	response){
-					$localStorage.current_idea = response;
-					$rootScope.$broadcast("loadDirectory", $localStorage.repo.path )
-					$rootScope.$broadcast("loadResources", $localStorage.repo.path)
-					$rootScope.$broadcast("getSubmittedPullRequests", $localStorage.repo.id)
+			$localStorage.repo.then(function onSuccess(response){
+				$scope.$storage.repo = response;
+				$scope.$storage.current_idea  = Idea.show({id: ideaId}).$promise;
+				$scope.$storage.current_idea.then(function onSuccess(	response){
+					$scope.$storage.current_idea = response;
+					$rootScope.$broadcast("loadDirectory", $scope.$storage.repo.path )
+					$rootScope.$broadcast("loadResources", $scope.$storage.repo.path)
+					$rootScope.$broadcast("getSubmittedPullRequests", $scope.$storage.repo.id)
 					$rootScope.$broadcast("loadRepositoryComments")
 				},
 				function onFail(response) {
