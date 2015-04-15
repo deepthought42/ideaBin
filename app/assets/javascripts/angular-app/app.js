@@ -45,14 +45,14 @@ ideaBin.config([
 	function() {
             return {
                 'request': function(config) {
-		console.log("attack of the request interceptor");
-		console.log("header " + config.headers['access-token']);
-		for( var key in config.headers){
-			console.log("Header Key :: " +key+" ; Val :: " + config.headers[key])
+		console.log("why suddenly no worky");
+		for(var key in config.headers){
+			console.log("KEY :: " + key + " val :: " +config.headers[key]);
 		}
       		if (config.headers['access-token']) {
-                  $httpProvider.defaults.headers.common['Access-token'] = config.headers['access-token'];
-		  $httpProvider.defaults.headers.common['Token-type'] = config.headers['token-type'];
+		  console.log("SETTING HEADERS ");
+                  $httpProvider.defaults.headers.common['Access-Token'] = config.headers['access-token'];
+		  $httpProvider.defaults.headers.common['Token-Type'] = config.headers['token-type'];
                   $httpProvider.defaults.headers.common['Client'] = config.headers['client'];
 		  $httpProvider.defaults.headers.common['Expiry'] = config.headers['expiry'];
 		  $httpProvider.defaults.headers.common['Uid'] = config.headers['uid'];

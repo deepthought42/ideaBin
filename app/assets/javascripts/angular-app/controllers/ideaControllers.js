@@ -173,7 +173,7 @@ app.controller('IdeaCreationCtrl', ['$scope', '$auth', '$rootScope', 'Idea', '$l
 			}).success(function(data, status, headers, config) {
 				console.log('file ' + config.file.name + 'is uploaded successfully. Response: ' + data);
 				$rootScope.$broadcast('hideCreateIdeaPanel');
-				$rootScope.$broadcast('addIdeaToList', data);
+				$rootScope.$broadcast('addIdeaToList', data.data);
 			});
 		}
 		
