@@ -131,40 +131,37 @@
 }
 
 #headerIdeas{
-	font-family: 'Fira Sans', sans-serif;
-    font-weight: 400;
-    display: inline-block;
-    background-color: #17385e;
-    padding: 15px;
-    margin-bottom: 30px;
-    color: #FFD473;
-    border-top: 3px solid #1b4f7d;
-}
-
-#ideabinLogo{
-  width: 100%;
+  font-family: 'Fira Sans', sans-serif;
+  font-weight: 400;
+  display: inline-block;
+  background-color: #17385e;
+  padding: 15px;
+  margin-bottom: 30px;
+  color: #FFD473;
+  border-top: 3px solid #1b4f7d;
 }
 
 #ideaEditPanel {
-	display:			none;
-	position: 		absolute;
-	background: 	white;
-	top:					8%;
-	left:					5%;
-	border: 			solid 1px;
-	width:				30%;
-	height:				90vh;
-	z-index:			10;
-}
-
-
-#ideaEditPanel .cover_img {
-	left:					2.5%;
-	height:				200px;
-}
-
-#ideaEditPanel #ideaEditPanelTopRight{
-	height:				100%;
+  display: none;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translateX(-50%) translateY(-50%);
+  background: white;
+  border: solid 1px;
+  width: 400px;
+  z-index: 10;
+  padding: 15px;
+  
+  .cover_img{
+	height: 200px;
+  }
+  
+  .ideaName{
+    top: 40%;
+	text-align: center;
+  } 
+  
 }
 
 .ideaCoverImage {
@@ -176,11 +173,6 @@
 #ideaCreationImage{
   width: 100%;
 } 
-
-#ideaEditPanel .ideaName {
-	top:						40%;
-	text-align: 		center;
-}
 
 .hidePanelButton{
 	position: 	    absolute;
@@ -208,7 +200,7 @@
 }
 
 #ideaCreatePanel {
-	background-color:		white;
+	background-color: #FFFFFF;
     position: absolute;
     top: 50%;
     left: 50%;
@@ -279,8 +271,9 @@
 
 
 #ideaDescription {
-	width: 					100%;
-	height:					20em;
+	width: 100%;
+    max-width: 100%;
+	height: 200px;
 }
 
 
