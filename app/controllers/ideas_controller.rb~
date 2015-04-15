@@ -92,8 +92,8 @@ class IdeasController < ApplicationController
     idea = ActiveSupport::JSON.decode(data)
     idea = idea["idea"]
     @idea = Idea.new()
-    @idea.name = idea.name
-    @idea.description = idea.description
+    @idea.name = idea["name"]
+    @idea.description = idea["description"]
     logger.debug "++++++IDEA OBJECT #{data} :++: #{idea} :: #{params}"
 
     @idea.user_id = @current_user.id
