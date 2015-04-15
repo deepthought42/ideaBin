@@ -13,7 +13,6 @@
 // require jquery
 // require jquery_ujs
 
-//= require dropzone.min
 //= require site
 //= require resources
 //= require directories
@@ -27,7 +26,8 @@
 //= require ../components/ng-file-upload/angular-file-upload-shim.min
 //= require ../components/ng-file-upload/angular-file-upload.min
 //= require ../components/ngStorage/ngStorage.min
-//= require ../components/angular-devise/lib/devise-min
+//= require ../components/angular-cookie/angular-cookie.min
+//= require ../components/ng-token-auth/dist/ng-token-auth.min
 //= require angular-resource
 //= require angular-route
 //= require angular-rails-templates
@@ -37,15 +37,3 @@
 //= require_tree ./angular-app/services
 //= require_tree ./angular-app/controllers
 //= require_tree ../templates
-
-
-
-
-
-
-/*$(document).ready( function() {
-   $('#resource_container').fileTree({ root: '/public/repositories/' }, function(file) {
-     alert(file);
-   });
-});
-*/

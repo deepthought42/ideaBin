@@ -1,28 +1,30 @@
 IdeaBin::Application.routes.draw do
+
+
   resources :application
   root 'application#index'
   get '/userIdeas/:id' => 'ideas#userIdeas'
   get '/pull_requests/count' => 'pull_requests#count'
 	
   resources :directories do
-	member do
-		get 'topDir'
+		member do
+			get 'topDir'
+		end
 	end
-  end
 	
   resources :uploads
   resources :resources do
-	member do
-		get 'contents'
-		get 'download'
+		member do
+			get 'contents'
+			get 'download'
+		end
 	end
-  end
 	
   resources :ideas do
-	member do
-		put 'uploadCover'
+		member do
+			put 'uploadCover'
+		end
 	end
-  end
 	
 	resources :pull_requests
 	resources :repositories
@@ -30,13 +32,14 @@ IdeaBin::Application.routes.draw do
 	resources :repository_comments
 	resources :contacts
 	resources :resource_comments
-#	namespace :api, defaults: { format: :json } do
-#	  mount_devise_token_auth_for 'User', at: 'auth'
- #	end
+ 
+	devise_for :users
+#	mount_devise_token_auth_for 'User', at: 'api/auth'
 
+  namespace :api, defaults: { format: :json } do
+      mount_devise_token_auth_for 'User', at: '/auth', skip: []
+  end
 
-#	devise_for :users
-	mount_devise_token_auth_for 'User', at: 'api/auth'
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
