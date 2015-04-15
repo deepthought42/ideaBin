@@ -94,7 +94,7 @@ class IdeasController < ApplicationController
     @idea = Idea.new()
     @idea.name = idea["name"]
     @idea.description = idea["description"]
-    logger.debug "++++++IDEA OBJECT #{data} :++: #{idea} :: #{params}"
+
 
     @idea.user_id = @current_user.id
     repo_path = "#{Rails.root}/public/data/repository/#{current_user.id}" 

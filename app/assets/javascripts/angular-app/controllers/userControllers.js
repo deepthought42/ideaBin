@@ -8,13 +8,12 @@
 	*/ 
 var app = angular.module('ideaBin.userControllers', []);
 
-app.controller('UserSessionCtrl', ['$scope', '$auth', '$location', '$sessionStorage	',
+app.controller('UserSessionCtrl', ['$scope', '$auth', '$location', '$sessionStorage',
 	function ($scope, $auth, $location, $sessionStorage) { 
-		$scope.$storage = $sessionStorage;
+
 		$scope.session = $sessionStorage;
 
-		//$scope.signedIn = $auth.validateUser();
-		$scope.user = $scope.$storage.user;
+		$scope.signedIn = $auth.validateUser();
 		
 		$scope.$on('userAuthenticated', function(event, user){
 			$scope.user = user;
@@ -53,7 +52,7 @@ app.controller('UserSessionCtrl', ['$scope', '$auth', '$location', '$sessionStor
 		})
 		
 		$scope.editProfile = function(){
-			$scope.user = $scope.$storage.user;
+			$scope.user = $scope.$session.user;
 		}
 	}
 ]);
@@ -130,7 +129,7 @@ app.controller('UserAuthenticateController', ['$scope', '$rootScope', '$auth', '
 				$scope.$session.user = response;
 				$rootScope.$broadcast('userAuthenticated', response);
 				console.log(response.data)
-				console.log($scope.$storage.user); // => {id: 1, ect: '...'}
+				console.log($scope.$session.user); // => {id: 1, ect: '...'}
 			}, function(error) {
 				alert("Failed to log in");
 					// Authentication failed...
@@ -151,7 +150,7 @@ app.controller('UserAuthenticateController', ['$scope', '$rootScope', '$auth', '
 			});
 
 			$scope.$on('devise:new-session', function(event, currentUser) {
-				$scope.$storage.user = currentUser;
+				$scope.$session.user = currentUser;
 				$scope.hideSignInPanel();
 				console.log("NEW SESSION USER VALUE :: " + $scope.$storage.user);
 				$location.path('/ideas');
