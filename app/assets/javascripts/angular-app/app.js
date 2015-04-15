@@ -27,7 +27,8 @@ var ideaBin = angular.module('ideaBin',
 		'ui.ace',
 		'ngStorage',
 		'ipCookie',
-		'ng-token-auth']);
+		'ng-token-auth',
+		'wu.masonry']);
 
 // for compatibility with Rails CSRF protection
 
