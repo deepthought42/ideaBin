@@ -2,11 +2,6 @@
 <div class="container" ng-controller="IdeaIndexController">
 	<div ng-include="'idea/new.html'" ></div>
     <div class="row text-center">
-      <h1 id="headerIdeas">
-        These are your ideas.<br>Make the most of them.
-      </h1>
-    </div>
-    <div class="row text-center">
       <div class="col-md-3 ideaItem text-center" ng-repeat="idea in ideas">
         <div class="flip-container" ontouchstart="this.classList.toggle('hover');">
           <div class="flipper">
