@@ -9,6 +9,7 @@
     "angular-ui-ace": "latest",
     "font-awesome" : "latest",
     "angular-cookie": "latest",
+    "angular-cookies": "latest",
     "ng-token-auth" : "latest"
   }
 }

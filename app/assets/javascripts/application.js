@@ -29,6 +29,7 @@
 //= require ../components/angular-cookie/angular-cookie.min
 //= require ../components/angular-cookies/angular-cookies.min
 //= require ../components/ng-token-auth/dist/ng-token-auth.min
+//= require ../components/angular-masonry/angular-masonry
 //= require angular-resource
 //= require angular-route
 //= require angular-rails-templates
