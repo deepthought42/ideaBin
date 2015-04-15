@@ -3,7 +3,7 @@ class User < ActiveRecord::Base
 
   attr_accessible :email, :password, :password_confirmation
 
-  before_create :skip_confirmation!
+
  # before_validation :set_provider
 
 
