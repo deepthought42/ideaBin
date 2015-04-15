@@ -1,10 +1,10 @@
 var app = angular.module('ideaBin.ideaControllers', []);
 
-app.controller("IdeaIndexController", ['$scope', '$localStorage', 'Idea', 'Repository','$location', '$http', '$rootScope',
-	function($scope, $localStorage, Idea, Repository, $location, $http, $rootScope) {
+app.controller("IdeaIndexController", ['$scope', '$localStorage', '$sessionStorage', 'Idea', 'Repository','$location', '$http', '$rootScope',
+	function($scope, $localStorage, $sessionStorage, Idea, Repository, $location, $http, $rootScope) {
 		$scope.$storage = $localStorage;
 		$scope.ideas = Idea.query();
-		
+		$scope.$session = $sessionStorage;
   		$scope.deleteIdea =  function(idea){
 			Idea.delete({id: idea.id});
 			var index = $scope.ideas.indexOf(idea);
@@ -26,9 +26,9 @@ app.controller("IdeaIndexController", ['$scope', '$localStorage', 'Idea', 'Repos
 				$scope.$storage.current_idea  = Idea.show({id: ideaId}).$promise;
 				$scope.$storage.current_idea.then(function onSuccess(	response){
 					$scope.$storage.current_idea = response;
-					$rootScope.$broadcast("loadDirectory", $localStorage.repo.path )
-					$rootScope.$broadcast("loadResources", $localStorage.repo.path)
-					$rootScope.$broadcast("getSubmittedPullRequests", $localStorage.repo.id)
+					$rootScope.$broadcast("loadDirectory", $scope.$storage.repo.path )
+					$rootScope.$broadcast("loadResources", $scope.$storage.repo.path)
+					$rootScope.$broadcast("getSubmittedPullRequests", $scope.$storage.repo.id)
 					$rootScope.$broadcast("loadRepositoryComments")
 				},
 				function onFail(response) {
@@ -76,10 +76,10 @@ app.controller("IdeaIndexController", ['$scope', '$localStorage', 'Idea', 'Repos
 		});
 }]);
 
-app.controller('IdeaDetailCtrl', ['$scope', '$localStorage', '$routeParams', 'Idea', '$location', '$upload', '$rootScope', '$http',
-	function($scope, $localStorage, $routeParams, Idea, $location, $upload, $rootScope, $http){
+app.controller('IdeaDetailCtrl', ['$scope', '$localStorage', '$sessionStorage', '$routeParams', 'Idea', '$location', '$upload', '$rootScope', '$http',
+	function($scope, $localStorage, $sessionStorage, $routeParams, Idea, $location, $upload, $rootScope, $http){
 		$scope.$storage = $localStorage;
-		
+		$scope.$session = $sessionStorage;
 		$scope.uploadFile = function(){
 			//var ideaFormVals = angular.toJson($scope.idea);
 			$scope.upload = $upload.upload({

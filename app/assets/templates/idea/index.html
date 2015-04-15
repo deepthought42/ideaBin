@@ -18,9 +18,9 @@
                       </p>
                   </div>
                   <div class="btn-group" role="group" aria-label="...">
-                    <i type="button" class="fa fa-pencil ideaIcon" ng-click="editIdea(idea.id)" ng-show="$storage.user">
+                    <i type="button" class="fa fa-pencil ideaIcon" ng-click="editIdea(idea.id)" ng-show="$session.user">
                     </i>
-                    <i type="button" class="fa fa-times ideaIcon deleteButton" ng-click="deleteIdea(idea)" ng-show="$storage.user">
+                    <i type="button" class="fa fa-times ideaIcon deleteButton" ng-click="deleteIdea(idea)" ng-show="$session.user">
                     </i>
                   </div>
               </div>
