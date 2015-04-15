@@ -5,7 +5,7 @@ app.controller("IdeaIndexController", ['$scope', '$localStorage', 'Idea', 'Repos
 		$scope.$storage = $localStorage;
 		$scope.ideas = Idea.query();
 		
-  	$scope.deleteIdea =  function(idea){
+  		$scope.deleteIdea =  function(idea){
 			Idea.delete({id: idea.id});
 			var index = $scope.ideas.indexOf(idea);
 			$scope.ideas.splice(index, 1);
@@ -63,12 +63,12 @@ app.controller("IdeaIndexController", ['$scope', '$localStorage', 'Idea', 'Repos
 		
 		$scope.showUserIdeas = function(userId){
 			$http.get("/userIdeas/" + userId+".json")
-				.success(function(data){ 
-					$scope.ideas = data;
-				})
-				.error(function(data){
-					alert(data.errors);
-				});
+			.success(function(data){ 
+				$scope.ideas = data;
+			})
+			.error(function(data){
+				alert(data.errors);
+			});
 		}
 		
 		$scope.$on('hideCreateIdeaPanel', function(event, data) {
