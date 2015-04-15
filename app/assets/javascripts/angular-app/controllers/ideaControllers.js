@@ -165,7 +165,7 @@ app.controller('IdeaCreationCtrl', ['$scope', '$auth', '$rootScope', 'Idea', '$l
 				url: '/ideas.json',
 				method: 'POST',
 				data: {idea: $scope.ideaForm},
-				file: $scope.ideaForm.cover_img,
+				file: $scope.cover_img,
         			fileFormDataName: 'cover_img'
 			}).
 			progress(function(evt) {

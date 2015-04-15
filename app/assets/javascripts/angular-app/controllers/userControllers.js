@@ -8,10 +8,11 @@
 	*/ 
 var app = angular.module('ideaBin.userControllers', []);
 
-app.controller('UserSessionCtrl', ['$scope', '$auth', '$location', '$localStorage',
-	function ($scope, $auth, $location, $localStorage) { 
-		$scope.$storage = $localStorage;
-		
+app.controller('UserSessionCtrl', ['$scope', '$auth', '$location', '$sessionStorage	',
+	function ($scope, $auth, $location, $sessionStorage) { 
+		$scope.$storage = $sessionStorage;
+		$scope.session = $sessionStorage;
+
 		//$scope.signedIn = $auth.validateUser();
 		$scope.user = $scope.$storage.user;
 		
@@ -37,7 +38,7 @@ app.controller('UserSessionCtrl', ['$scope', '$auth', '$location', '$localStorag
 			$auth.signOut()
 			$scope.$on('auth:logout-success', function(event, oldCurrentUser) {
 				$('#editProfileForm').hide();
-				alert($scope.$storage.user.email + "you're signed out now.");
+				alert($scope.session.user.email + "you're signed out now.");
 				$scope.$storage.user = null;
 				$scope.user = null;
 			});
@@ -57,10 +58,10 @@ app.controller('UserSessionCtrl', ['$scope', '$auth', '$location', '$localStorag
 	}
 ]);
 
-app.controller('UserDetailController', ['$scope', 'User', '$auth', '$location', '$localStorage', '$upload',
-	function ($scope, User, $auth, $location, $localStorage, $upload) { 
+app.controller('UserDetailController', ['$scope', 'User', '$auth', '$location', '$sessionStorage', '$upload',
+	function ($scope, User, $auth, $location, $sessionStorage, $upload) { 
 		$scope.signedIn = $auth.isAuthenticated;
-		$scope.user = $localStorage.user;
+		$scope.user = $sessionStorage.user;
 		
 		$scope.hideEditProfilePanel =  function(){
 			$('#editProfileForm').hide();
@@ -110,9 +111,9 @@ app.controller('UserDetailController', ['$scope', 'User', '$auth', '$location', 
 	
 ]);
 
-app.controller('UserAuthenticateController', ['$scope', '$rootScope', '$auth', '$location', '$localStorage', '$http',
-	function ($scope, $rootScope, $auth, $location, $localStorage, $http) { 
-		$scope.$storage = $localStorage;
+app.controller('UserAuthenticateController', ['$scope', '$rootScope', '$auth', '$location', '$sessionStorage', '$http',
+	function ($scope, $rootScope, $auth, $location, $sessionStorage, $http) { 
+		$scope.$session = $sessionStorage;
 		
 		$scope.hideSignInPanel = function() {
 			$('#signInForm').hide();
@@ -126,7 +127,7 @@ app.controller('UserAuthenticateController', ['$scope', '$rootScope', '$auth', '
 			
 			//Authenticate with user credentials
 			$auth.submitLogin(credentials).then(function(response) {
-				$scope.$storage.user = response;
+				$scope.$session.user = response;
 				$rootScope.$broadcast('userAuthenticated', response);
 				console.log(response.data)
 				console.log($scope.$storage.user); // => {id: 1, ect: '...'}
@@ -159,8 +160,8 @@ app.controller('UserAuthenticateController', ['$scope', '$rootScope', '$auth', '
 	}
 ]);
 
-app.controller('UserRegisterController', ['$scope', '$auth', '$location', '$localStorage',
-	function ($scope, $auth, $location, $localStorage) { 
+app.controller('UserRegisterController', ['$scope', '$auth', '$location',
+	function ($scope, $auth, $location) { 
 		$scope.hideRegistrationPanel = function(){
 			$('#userRegistrationForm').hide();
 		}
