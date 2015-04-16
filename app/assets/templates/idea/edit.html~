@@ -35,7 +35,7 @@
 								   ng-model="cover_img" drop-available="dropSupported">			
 						<span class="col-md-6 ideaCoverImage" >
 							<img class="col-md-12 cover_img" 
-							     alt="Idea cover image" ng-src="/images/ideas/{{$storage.current_idea.id}}/thumb/{{$storage.current_idea.cover_img_file_name ||'no-image-found.png'}}"
+							     alt="Idea cover image" ng-src="/images/ideas/{{current_user.id}}/thumb/{{$storage.current_idea.cover_img_file_name ||'no-image-found.png'}}"
 							     ng-model="$storage.current_idea.cover_img" />
 						</span>	
 						<span id="ideaEditPanelTopRight" class="col-md-6">

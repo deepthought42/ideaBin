@@ -7,13 +7,9 @@ class UsersController < ApplicationController
   # PUT /users
   # PUT /users
   def update
-
-      avatar_path = "public/images"
-		
-      if params[:avatar]
-	current_user.avatar = params[:avatar]
-	DataFile.save(params[:avatar], avatar_path)
-      end
+    if params[:avatar]
+      current_user.avatar = params[:avatar]
+    end
 		
     if current_user.save
 	render json: @idea
