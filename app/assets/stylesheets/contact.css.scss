@@ -2,9 +2,14 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-#contactForm{
-  input, select, textarea{
-    display: block;
-    margin: 15px;
+#contactFormWrapper{
+  background-color: #FFF;
+  border-radius: 4px;
+  
+  #contactForm{
+    input, select, textarea, button{
+      display: block;
+      margin: 15px 0px;
+    }
   }
 }

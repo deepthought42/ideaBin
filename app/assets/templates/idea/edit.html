@@ -1,7 +1,4 @@
-<div class="col-md-12 fullHeight" >	
-	<div ng-include="'pull_request/new.html'" id="pullRequestCreatePanel" ></div>
-	
-	<div class="col-md-12 fullHeight">
+<!--<div class="row">	  
 		<div class="col-md-3" >
 			<div class="col-md-12 btn-group" role="group" ng-controller="IdeaDetailCtrl">
 				<div ng-controller="PullRequestIndexController">
@@ -11,18 +8,23 @@
 				<button class="btn toolbar-btn border-white fa fa-folder" id="btnAddFolder" ng-click="showNewDirectoryPanel()" />
 				<button class="btn toolbar-btn border-white fa fa-share" id="btnAddPullRequest" ng-click="showPullRequestCreatePanel()"/>
 				<button class="btn toolbar-btn border-white fa fa-share" id="btnViewPullRequests" ng-click="showPullRequestIndexPage()" />
+              
+                <div ng-include="'pull_request/new.html'" id="pullRequestCreatePanel" ></div>
 			</div>
 			<div ng-include="'directory/new.html'" ></div>
 			<div ng-include="'directory/index.html'" ></div>
 			<div ng-include="'resource/index.html'" ></div>
 		</div>
 		
-		<div class="col-md-9 fullHeight" >
+		<div class="col-md-9" >
 			<div ng-include="'pull_request/show.html'" id="pullRequestDetailsPanel"></div>
 			<div ng-include="'pull_request/index.html'" id="pullRequestIndexPanel"></div>
 			<div ng-include="'repository_comment/index.html'" id="RepositoryCommentIndexPanel"></div>
 			<div ng-include="'resource/edit.html'" class="col-md-12" id="resourceEditPanel"></div>
 		</div>
+<<<<<<< HEAD
+  </div>
+=======
 		<div class="col-md-12" id="ideaEditPanel" ng-controller="IdeaDetailCtrl" >
 			<span class="hidePanelButton">
 				<i class="fa fa-times" ng-click="hideIdeaEditPanel()"></i>
@@ -53,4 +55,108 @@
 		</div>
 	</div>
 </div>
+>>>>>>> cdafa21f66adf4058d97b6ec24a631a17d466e71
 
+  <div id="ideaEditPanel" ng-controller="IdeaDetailCtrl">
+      <button class="hidePanelButton">
+          <i class="fa fa-times" ng-click="hideIdeaEditPanel()"></i>
+      </button>
+    <div class="row">
+      <div class="col-md-12" >
+          <form enctype="multipart/form-data" novalidate>
+              <div id="ideaEditPanelTop" class="col-md-12 " ng-file-drop ng-file-change="uploadFile($files)" ng-model="cover_img" drop-available="dropSupported">	
+                
+                  <div class="col-md-12" id="ideaEditPanelTopRight">
+                      <h3 class="title ideaName" >{{$storage.current_idea.name}}</h3>
+                  </div>
+                  <div class="col-md-12 ideaCoverImage" >
+                      <img class="col-md-12 cover_img" alt="Idea cover image" ng-src="/data/repository/{{current_user.id}}/{{$storage.current_idea.name}}/{{$storage.current_idea.cover_img_file_name||'no-image-found.png'}}" />
+                  </div>
+                
+              </div>
+              <div class="field">
+                  <textarea name="idea[description]" ng-model="$storage.current_idea.description" id="ideaDescription" placeholder="Description" />
+              </div>
+              <div class="actions">
+                  <button class="btn btn-default pull-right" ng-click="updateIdea(idea)">Save</button>      
+              </div>
+          </form>
+       </div>
+     </div>
+  </div>-->
+    
+    <div class="container">
+      <div class="row">
+        <div id="ideaEditPanel" ng-controller="IdeaDetailCtrl" class="col-md-8 col-md-offset-1">
+          <div class="col-md-3" id="ideaCoverImageWrapper">
+            <div id="ideaCoverImage" class="outline">
+              <img ng-src="/data/repository/{{$session.id}}/{{$storage.current_idea.name}}/{{$storage.current_idea.cover_img_file_name}}"/>
+            </div>
+          </div>
+          <div class="col-md-9">
+            <h2 id="ideaName">{{$storage.current_idea.name}}<a href="#" class="edit">Edit</a></h2>
+            <h5 id="ideaMetadata">Idea created by <a href="#">plushyObject</a> on January 1, 2015</h5>
+            <p id="ideaDescription" ng-model="$storage.current_idea.description">
+              You think water moves fast? You should see ice. It moves like it has a mind. Like it knows it killed the world once and got a taste for murder. After the avalanche, it took us a week to climb out. Now, I don't know exactly when we turned on each other, but I know that seven of us survived the slide...<!--<a href="#" class="edit">Edit</a>-->
+            </p>
+          </div>
+          <div class="col-md-12" id="ideaAdditionalInfo">
+            <ul id="ideaAdditionalInfoList">
+              <li class="ideaAdditionalInfoListItem"><span class="ideaInfoNumber">427</span> Total Commits</li>
+              <li class="ideaAdditionalInfoListItem"><span class="ideaInfoNumber">12</span> Contributors</li>
+              <li class="ideaAdditionalInfoListItem"><span class="ideaInfoNumber">95</span> Following</li>
+            </ul>
+          </div>
+        </div>
+        <div class="col-md-2" id="ideaButtonListWrapper">
+          <ul id="ideaButtonList">
+            <button class="btn btn-default btn-block">Follow</button>
+            <button class="btn btn-default btn-block">Create Pull Request</button>
+            <button class="btn btn-default btn-block">View Pull Requests</button>
+          </ul>
+        </div>
+      </div>
+      
+      <div class="row">
+        <div id="ideaBody" class="col-md-10 col-md-offset-1">
+          <div class="col-md-3" id="ideaDirectoriesResourcesWrapper">
+            <h3 class="no-margin">Directories</h3>
+            <ul id="ideaDirectoryList">
+              <li class="ideaDirectoryListItem">Directory 1</li>
+              <li class="ideaDirectoryListItem">Directory 2</li>
+              <li class="ideaDirectoryListItem">Directory 3</li>
+              <li class="ideaDirectoryListItem">Directory 4</li>
+            </ul>
+            <button class="btn btn-default">+ Directory</button>
+            
+            <hr/>
+            
+            <h3>Resources</h3>
+            <ul id="ideaResourcesList">
+              <li class="ideaResourcesListItem">Resource 1</li>
+              <li class="ideaResourcesListItem">Resource 2</li>
+              <li class="ideaResourcesListItem">Resource 3</li>
+              <li class="ideaResourcesListItem">Resource 4</li>
+            </ul>
+            <button class="btn btn-default btn-block" id="addResourceButton">Drag Resource Files Here</button>
+          </div>
+          
+          <div id="ideaRecentUpdatesCommentsWrapper" class="col-md-9">
+            
+            <h3>Recent Updates</h3>
+            <ul id="ideaRecentUpdatesList">
+              <li class="ideaRecentUpdatesListItem">Well, the way they make shows is, they make one show.</li>
+              <li class="ideaRecentUpdatesListItem">That show's called a pilot.</li>
+              <li class="ideaRecentUpdatesListItem">Then they show that show to the people who make shows.</li>
+              <li class="ideaRecentUpdatesListItem">On the strength of that one show they decide if they're going to make more shows.</li>
+            </ul>
+            
+            <hr/>
+            
+            <h3>Comments</h3>
+            <div ng-include="'repository_comment/index.html'" id="RepositoryCommentIndexPanel"></div>
+            
+          </div>
+        </div>
+      </div>
+    </div>

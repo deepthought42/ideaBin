@@ -46,6 +46,10 @@
   z-index: 5;
 }
 
+#ideabinLogo{
+  width: 100%;
+}
+
 #sidebarList{
   list-style-type: 	none;
   padding: 					0px;
@@ -63,8 +67,9 @@
     transition: border-width .2s;
     
     &:hover{
-      border: 3px solid rgba(255,255,255,0.2);
+      border: 3px solid rgba(255,255,255,0);
       transition: border-width .2s;
+      border-radius: 2px;
     }
   }
 }
