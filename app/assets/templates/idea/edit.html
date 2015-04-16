@@ -124,8 +124,9 @@
       </div>
       
       <div class="row">
-        <div id="ideaBody" class="col-md-10 col-md-offset-1">
-          <div class="col-md-3" id="ideaDirectoriesResourcesWrapper">
+        <div id="ideaBody" class="col-md-12">
+          
+          <div class="col-md-3 col-push-right-1" id="ideaDirectoriesResourcesWrapper">
             <h3 class="no-margin">Directories</h3>
             <ul id="ideaDirectoryList">
               <li class="ideaDirectoryListItem">Directory 1</li>
@@ -144,10 +145,15 @@
               <li class="ideaResourcesListItem">Resource 3</li>
               <li class="ideaResourcesListItem">Resource 4</li>
             </ul>
-            <button class="btn btn-default btn-block" id="addResourceButton">Drag Resource Files Here</button>
+            <button class="btn btn-default btn-block" id="resourceDragDropBtn" ng-file-drop ng-model="files" class="drop-box" 
+						drag-over-class="dragover" ng-multiple="true" allow-dir="true" >
+              Drag Resource Files Here
+            </button>
+            <span ng-no-file-drop>File Drag/Drop is not supported for this browser</span>
+            
           </div>
           
-          <div id="ideaRecentUpdatesCommentsWrapper" class="col-md-9">
+          <div id="ideaRecentUpdatesCommentsWrapper" class="col-md-8">
             
             <h3>Recent Updates</h3>
             <ul id="ideaRecentUpdatesList">
@@ -161,6 +167,7 @@
             
             <h3>Comments</h3>
             <div ng-include="'repository_comment/index.html'" id="RepositoryCommentIndexPanel"></div>
+            <div ng-include="'resource_comment/index.html'" id="ResourceCommentIndexPanel"></div>
             
           </div>
         </div>
