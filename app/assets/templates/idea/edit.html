@@ -94,7 +94,7 @@
             </div>
           </div>
           <div class="col-md-9">
-            <h2 id="ideaName">{{$storage.current_idea.name}}<a href="#" class="edit">Edit</a></h2>
+            <h2 id="ideaName" ng-click="convertToInput('ideaName', $storage.current_idea.name)" >{{$storage.current_idea.name}}<a href="#" class="edit">Edit</a></h2>
             <h5 id="ideaMetadata">Idea created by <a href="#">{{$session.user.email}}</a> on {{$storage.current_idea.created_at | date:'longDate'}}</h5>
             <p id="ideaDescription" ng-model="$storage.current_idea.description">
               {{$storage.current_idea.description || 'Description here ...'}}

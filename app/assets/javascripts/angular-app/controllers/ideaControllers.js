@@ -79,6 +79,10 @@ app.controller('IdeaDetailCtrl', ['$scope', '$localStorage', '$sessionStorage', 
 		$scope.$storage = $localStorage;
 		$scope.$session = $sessionStorage;
 
+		$scope.convertToInput = function(id, val) {
+			$("#"+id).html("<input type='text' value='" + val + "' />")
+		}
+
 		$scope.uploadFile = function(){
 
 			$scope.upload = $upload.upload({
