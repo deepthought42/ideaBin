@@ -79,7 +79,7 @@ app.controller('IdeaDetailCtrl', ['$scope', '$localStorage', '$sessionStorage', 
 		$scope.$storage = $localStorage;
 		$scope.$session = $sessionStorage;
 		$scope.uploadFile = function(){
-			//var ideaFormVals = angular.toJson($scope.idea);
+
 			$scope.upload = $upload.upload({
 				url: '/ideas/' + $scope.$storage.current_idea.id + '/uploadCover.json',
 				method: 'PUT',

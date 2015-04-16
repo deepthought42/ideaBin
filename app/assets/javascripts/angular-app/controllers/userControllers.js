@@ -16,7 +16,7 @@ app.controller('UserSessionCtrl', ['$scope', '$auth', '$location', '$sessionStor
 		$scope.signedIn = $auth.validateUser();
 		
 		$scope.$on('userAuthenticated', function(event, user){
-			$scope.user = user;
+			$scope.user = user.data;
 		});
 		
 		$scope.showRegistrationForm = function(){
@@ -127,7 +127,7 @@ app.controller('UserAuthenticateController', ['$scope', '$rootScope', '$auth', '
 			
 			//Authenticate with user credentials
 			$auth.submitLogin(credentials).then(function(response) {
-				$scope.$session.user = response;
+				$scope.$session.user = response.data;
 				$rootScope.$broadcast('userAuthenticated', response);
 				console.log(response.data)
 				console.log($scope.$session.user); // => {id: 1, ect: '...'}
