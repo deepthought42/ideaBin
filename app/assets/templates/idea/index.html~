@@ -12,7 +12,7 @@
           <div class="flipper">
               <div class="front">
                 <div class="ideaImg">
-		  <img ng-src="/data/repository/{{idea.user_id}}/{{idea.name}}/{{idea.cover_img_file_name}}" />
+		  <img ng-src="{{ idea.cover_img_file_name ? '/images/ideas/'+idea.id +'/medium/' + idea.cover_img_file_name : '/images/missing.ng' }}" />
                 </div>
               </div>
               <div class="back">

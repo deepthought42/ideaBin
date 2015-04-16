@@ -22,7 +22,40 @@
 			<div ng-include="'repository_comment/index.html'" id="RepositoryCommentIndexPanel"></div>
 			<div ng-include="'resource/edit.html'" class="col-md-12" id="resourceEditPanel"></div>
 		</div>
+<<<<<<< HEAD
   </div>
+=======
+		<div class="col-md-12" id="ideaEditPanel" ng-controller="IdeaDetailCtrl" >
+			<span class="hidePanelButton">
+				<i class="fa fa-times" ng-click="hideIdeaEditPanel()"></i>
+			</span>
+			<div class="col-md-12" >
+				<form enctype="multipart/form-data" novalidate>
+					<div id="ideaEditPanelTop" class="col-md-12 " 
+								   ng-file-drop 
+								   ng-file-change="uploadFile($files)"
+								   ng-model="cover_img" drop-available="dropSupported">			
+						<span class="col-md-6 ideaCoverImage" >
+							<img class="col-md-12 cover_img" 
+							     alt="Idea cover image" ng-src="/images/ideas/{{$storage.current_idea.id}}/thumb/{{$storage.current_idea.cover_img_file_name ||'no-image-found.png'}}"
+							     ng-model="$storage.current_idea.cover_img" />
+						</span>	
+						<span id="ideaEditPanelTopRight" class="col-md-6">
+							<h3 class="title ideaName" >{{$storage.current_idea.name}}</h3>
+						</span>
+					</div>
+					<div class="field">
+						<textarea name="idea[description]" ng-model="$storage.current_idea.description" id="ideaDescription" placeholder="Description" />
+					</div>
+					<div class="actions">
+						<button class="btn btn-default pull-right" ng-click="updateIdea(idea)">Save</button>      
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
+>>>>>>> cdafa21f66adf4058d97b6ec24a631a17d466e71
 
   <div id="ideaEditPanel" ng-controller="IdeaDetailCtrl">
       <button class="hidePanelButton">

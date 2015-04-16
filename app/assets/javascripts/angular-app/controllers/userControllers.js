@@ -66,12 +66,12 @@ app.controller('UserDetailController', ['$scope', 'User', '$auth', '$location', 
 			$('#editProfileForm').hide();
 		}
 		
-		$scope.uploadFile = function(){
+	$scope.uploadFile = function(){
 			$scope.upload = $upload.upload({
 				url: '/users',
 				method: 'PUT',
 				data: {user: $scope.userForm},
-				file: $scope.user_avatar,
+				file: $scope.userForm.avatar,
 				fileFormDataName: 'avatar'
 			}).
 			progress(function(evt) {
@@ -80,7 +80,7 @@ app.controller('UserDetailController', ['$scope', 'User', '$auth', '$location', 
 				console.log('file ' + config.file + ' was uploaded successfully. Status: ' + status);
 			});
 		}
-		
+
 		$scope.previewImage = function(files){
 			var reader = new FileReader();
 			reader.readAsDataURL(files[0]);
@@ -90,8 +90,8 @@ app.controller('UserDetailController', ['$scope', 'User', '$auth', '$location', 
 			}
 		}
 		
-		$scope.updateUser = function (userId){
-			$auth.updateAccount($scope.userForm)
+		$scope.updateUser = function (user){
+			/*$auth.updateAccount(user)
         		  .then(function(resp) { 
           		    alert("successfully updated user account");
 			    // handle success response
@@ -100,7 +100,8 @@ app.controller('UserDetailController', ['$scope', 'User', '$auth', '$location', 
 			    alert("Error updating user account");
 		            // handle error response
         		  });
-			//$scope.uploadFile();
+*/
+			$scope.uploadFile();
 			//User.update($scope.user,{id: userId}, function(){
              			//close edit form panel
 			//});

@@ -93,9 +93,9 @@ class PullRequestsController < ApplicationController
 		@git.pull(requestor_path, "master") # fetch and a merge
 		@pullRequest.status = "ACCEPTED"
     if @pullRequest.save
-			respond_with(@pullRequest)
-		else
-			render json: {error: "An error occurred while updating your pull request"}
+		respond_with(@pullRequest)
+	else
+		render json: {error: "An error occurred while updating your pull request"}
     end
   end
 	
