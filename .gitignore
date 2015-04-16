@@ -19,6 +19,6 @@
 /public/data
 /public/data/repositories
 /public/system/*
-/public/images/*
+#/public/images/*
 #ignore all components
 /app/assets/components/*
