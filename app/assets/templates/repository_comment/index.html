@@ -1,4 +1,4 @@
-<div id="RepositoryCommentContainer" ng-controller="RepositoryCommentIndexController">
+<!--<div id="RepositoryCommentContainer" ng-controller="RepositoryCommentIndexController">
 	<div class="col-md-12" ng-repeat="repositoryComment in repositoryComments">
 		<span class="col-md-10 commentBox" ng-click="editComment(repositoryComment)">{{ repositoryComment.comment }}</span>
 		<span class="col-md-2 commentButtons " >
@@ -11,4 +11,32 @@
 		<textarea ng-model="repository_comment.message" placeholder="Comment goes here" class="col-md-12"/>
 		<button ng-click="createComment()" class="pull-right col-md-3">Save Comment</button>
 	</form>
-</div>
+</div>-->
+
+<div id="ideaCommentsListWrapper" ng-controller="RepositoryCommentIndexController">
+  <ul id="ideaCommentsList" ng-repeat="repositoryComment in repositoryComments">
+    <li class="ideaCommentsListItem">
+      <div class="row">
+        <div class="ideaCommentsAvatarWrapper col-md-2">
+          <div class="ideaCommentsAvatar outline">
+<!--            <img ng-src="{{$session.user.avatar_file_name ? '/images/'+$session.user.id +'/medium/' + $session.user.avatar_file_name : '/images/missing.png'}}" />-->
+          </div>
+        </div>
+        <div class="ideaCommentWrapper col-md-10">
+          <h4><b>{{$session.user.email}} said:</b></h4>
+          <p class="ideaComment" ng-click="editComment(repositoryComment)">
+            {{ repositoryComment.comment }}
+          </p>
+          <i ng-click="updateComment(repositoryComment)" class="fa fa-pencil"></i>
+          <h6>Posted January 1, 2015 at 14:27 EST</h6>
+        </div>
+      </div>
+    </li>
+  </ul>
+  <div class="col-md-12" ng-controller="RepositoryCommentCreationController">
+    <form novalidate>
+		<textarea rows="5" cols="100" ng-model="repository_comment.message" placeholder="Create Repository Comment Here" class="form-control"></textarea>
+		<button ng-click="createComment()" class="btn btn-default btn-lg">Save Repository Comment</button>
+	</form>
+  </div>
+</div>   
