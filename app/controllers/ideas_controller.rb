@@ -119,6 +119,9 @@ class IdeasController < ApplicationController
 	end
     respond_with(@idea)
   end
+  ## Calling this method with the appropriate paramaters will result in saving
+  #   an uploaded image if present as well as commit the changes to the users repo
+  #
   # PUT /ideas/1
   # PUT /ideas/1.json
   def update

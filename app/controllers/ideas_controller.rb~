@@ -94,7 +94,7 @@ class IdeasController < ApplicationController
     @idea = Idea.new()
     @idea.name = idea["name"]
     @idea.description = idea["description"]
-    logger.debug "++++++IDEA OBJECT #{data} :++: #{idea} :: #{params}"
+
 
     @idea.user_id = @current_user.id
     repo_path = "#{Rails.root}/public/data/repository/#{current_user.id}" 
@@ -119,6 +119,8 @@ class IdeasController < ApplicationController
 	end
     respond_with(@idea)
   end
+  ## Calling this method with the appropriate paramaters will result in saving
+  #   an uploaded image if present as well as commit the changes to the users repo
   # PUT /ideas/1
   # PUT /ideas/1.json
   def update

@@ -1,4 +1,4 @@
-<div id="editProfileForm" ng-controller="UserDetailController" ng-init="userForm = {}">
+<div id="editProfileForm" ng-controller="UserDetailController" >
   <div class="col-md-12">
     <form ng-submit="updateUser(userForm) " enctype="multipart/form-data" novalidate > 
       <div class="form-group" ng-file-drop ng-file-change="previewImage($files)" ng-model="userForm.avatar" drop-available="dropSupported">			
