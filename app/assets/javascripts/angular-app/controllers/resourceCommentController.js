@@ -1,7 +1,7 @@
 var app = angular.module('ideaBin.resourceCommentControllers', ['ngResource']);
 
-app.controller("ResourceCommentIndexController", ['$scope', '$localStorage', '$session', 'ResourceComment', 'User', '$http',
-	function($scope, $localStorage, $session, ResourceComment, User, $http) {
+app.controller("ResourceCommentIndexController", ['$scope', '$localStorage', '$sessionStorage', 'ResourceComment', 'User', '$http',
+	function($scope, $localStorage, $sessionStorage, ResourceComment, User, $http) {
 		$scope.$storage = $localStorage;
 		$scope.resourceComments = {};
 		$scope.mouseOverAvatars = false;

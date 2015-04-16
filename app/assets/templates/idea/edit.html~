@@ -86,15 +86,15 @@
   </div>-->
     
     <div class="container">
-      <div class="row">
-        <div id="ideaEditPanel" ng-controller="IdeaDetailCtrl" class="col-md-8 col-md-offset-1">
+      <div class="row" ng-controller="IdeaDetailCtrl">
+        <div id="ideaEditPanel"  class="col-md-8 col-md-offset-1">
           <div class="col-md-3" id="ideaCoverImageWrapper">
             <div id="ideaCoverImage" class="outline">
               <img ng-src="/data/repository/{{$session.id}}/{{$storage.current_idea.name}}/{{$storage.current_idea.cover_img_file_name}}"/>
             </div>
           </div>
           <div class="col-md-9">
-            <h2 id="ideaName" ng-click="convertToInput(ideaName, $storage.current_idea.name)" >{{$storage.current_idea.name}}<a href="#" class="edit">Edit</a></h2>
+            <h2 id="ideaName" ng-click="convertToInput('ideaName', $storage.current_idea.name)" >{{$storage.current_idea.name}}<a href="#" class="edit">Edit</a></h2>
             <h5 id="ideaMetadata">Idea created by <a href="#">{{$session.user.email}}</a> on {{$storage.current_idea.created_at | date:'longDate'}}</h5>
             <p id="ideaDescription" ng-model="$storage.current_idea.description">
               {{$storage.current_idea.description || 'Description here ...'}}
@@ -124,8 +124,11 @@
       </div>
       
       <div class="row">
-        <div id="ideaBody" class="col-md-10 col-md-offset-1">
-          <div class="col-md-3" id="ideaDirectoriesResourcesWrapper">
+       <div ng-include="'pull_request/new.html'" id="pullRequestCreatePanel" ></div>
+
+        <div id="ideaBody" class="col-md-12">
+          
+          <div class="col-md-3 col-push-right-1" id="ideaDirectoriesResourcesWrapper">
             <h3 class="no-margin">Directories</h3>
             <ul id="ideaDirectoryList">
               <li class="ideaDirectoryListItem">Directory 1</li>
@@ -144,10 +147,15 @@
               <li class="ideaResourcesListItem">Resource 3</li>
               <li class="ideaResourcesListItem">Resource 4</li>
             </ul>
-            <button class="btn btn-default btn-block" id="addResourceButton">Drag Resource Files Here</button>
+            <button class="btn btn-default btn-block" id="resourceDragDropBtn" ng-file-drop ng-model="files" class="drop-box" 
+						drag-over-class="dragover" ng-multiple="true" allow-dir="true" >
+              Drag Resource Files Here
+            </button>
+            <span ng-no-file-drop>File Drag/Drop is not supported for this browser</span>
+            
           </div>
           
-          <div id="ideaRecentUpdatesCommentsWrapper" class="col-md-9">
+          <div id="ideaRecentUpdatesCommentsWrapper" class="col-md-8">
             
             <h3>Recent Updates</h3>
             <ul id="ideaRecentUpdatesList">
@@ -161,6 +169,7 @@
             
             <h3>Comments</h3>
             <div ng-include="'repository_comment/index.html'" id="RepositoryCommentIndexPanel"></div>
+            <div ng-include="'resource_comment/index.html'" id="ResourceCommentIndexPanel"></div>
             
           </div>
         </div>

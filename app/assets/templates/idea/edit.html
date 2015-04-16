@@ -86,8 +86,8 @@
   </div>-->
     
     <div class="container">
-      <div class="row">
-        <div id="ideaEditPanel" ng-controller="IdeaDetailCtrl" class="col-md-8 col-md-offset-1">
+      <div class="row" ng-controller="IdeaDetailCtrl">
+        <div id="ideaEditPanel" class="col-md-8 col-md-offset-1">
           <div class="col-md-3" id="ideaCoverImageWrapper">
             <div id="ideaCoverImage" class="outline">
               <img ng-src="/data/repository/{{$session.id}}/{{$storage.current_idea.name}}/{{$storage.current_idea.cover_img_file_name}}"/>
@@ -124,6 +124,8 @@
       </div>
       
       <div class="row">
+       <div ng-include="'pull_request/new.html'" id="pullRequestCreatePanel" ></div>
+
         <div id="ideaBody" class="col-md-12">
           
           <div class="col-md-3 col-push-right-1" id="ideaDirectoriesResourcesWrapper">
