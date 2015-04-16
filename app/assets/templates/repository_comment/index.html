@@ -19,16 +19,16 @@
       <div class="row">
         <div class="ideaCommentsAvatarWrapper col-md-2">
           <div class="ideaCommentsAvatar outline">
-<!--            <img ng-src="{{$session.user.avatar_file_name ? '/images/'+$session.user.id +'/medium/' + $session.user.avatar_file_name : '/images/missing.png'}}" />-->
+            <img ng-src="{{$session.user.avatar_file_name ? '/images/'+$session.user.id +'/medium/' + $session.user.avatar_file_name : '/images/missing.png'}}" />
           </div>
         </div>
         <div class="ideaCommentWrapper col-md-10">
-          <h4><b>{{$session.user.email}} said:</b></h4>
+          <h4><b>plushyObject said:</b></h4>
           <p class="ideaComment" ng-click="editComment(repositoryComment)">
             {{ repositoryComment.comment }}
           </p>
-          <i ng-click="updateComment(repositoryComment)" class="fa fa-pencil"></i>
           <h6>Posted January 1, 2015 at 14:27 EST</h6>
+          <i ng-click="updateComment(repositoryComment)" class="fa fa-pencil"></i>
         </div>
       </div>
     </li>
