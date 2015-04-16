@@ -87,24 +87,37 @@
     
     <div class="container">
       <div class="row" ng-controller="IdeaDetailCtrl">
-        <div id="ideaEditPanel"  class="col-md-8 col-md-offset-1">
+        <div id="ideaEditPanel" class="col-md-8 col-md-offset-1">
           <div class="col-md-3" id="ideaCoverImageWrapper">
             <div id="ideaCoverImage" class="outline">
               <img ng-src="/data/repository/{{$session.id}}/{{$storage.current_idea.name}}/{{$storage.current_idea.cover_img_file_name}}"/>
             </div>
           </div>
           <div class="col-md-9">
-            <h2 id="ideaName" ng-click="convertToInput('ideaName', $storage.current_idea.name)" >{{$storage.current_idea.name}}<a href="#" class="edit">Edit</a></h2>
-            <h5 id="ideaMetadata">Idea created by <a href="#">{{$session.user.email}}</a> on {{$storage.current_idea.created_at | date:'longDate'}}</h5>
+            <h2 id="ideaName" ng-click="convertToInput('ideaName', $storage.current_idea.name)" >
+	      {{$storage.current_idea.name}}
+              <a href="#" class="edit">Edit</a>
+            </h2>
+            <h5 id="ideaMetadata">
+		Idea created by 
+                <a href="#">{{$session.user.email}}</a> 
+                on {{$storage.current_idea.created_at | date:'longDate'}}
+	    </h5>
             <p id="ideaDescription" ng-model="$storage.current_idea.description">
               {{$storage.current_idea.description || 'Description here ...'}}
             </p>
           </div>
           <div class="col-md-12" id="ideaAdditionalInfo">
             <ul id="ideaAdditionalInfoList">
-              <li class="ideaAdditionalInfoListItem"><span class="ideaInfoNumber">427</span> Total Commits</li>
-              <li class="ideaAdditionalInfoListItem"><span class="ideaInfoNumber">12</span> Contributors</li>
-              <li class="ideaAdditionalInfoListItem"><span class="ideaInfoNumber">95</span> Following</li>
+              <li class="ideaAdditionalInfoListItem">
+		<span class="ideaInfoNumber">427</span> Total Commits
+	      </li>
+              <li class="ideaAdditionalInfoListItem">
+		<span class="ideaInfoNumber">12</span> Contributors
+	      </li>
+              <li class="ideaAdditionalInfoListItem">
+		<span class="ideaInfoNumber">95</span> Following
+              </li>
             </ul>
           </div>
         </div>
@@ -124,35 +137,14 @@
       </div>
       
       <div class="row">
-       <div ng-include="'pull_request/new.html'" id="pullRequestCreatePanel" ></div>
-
+        <div ng-include="'pull_request/new.html'" id="pullRequestCreatePanel" ></div>
+ 
         <div id="ideaBody" class="col-md-12">
           
           <div class="col-md-3 col-push-right-1" id="ideaDirectoriesResourcesWrapper">
-            <h3 class="no-margin">Directories</h3>
-            <ul id="ideaDirectoryList">
-              <li class="ideaDirectoryListItem">Directory 1</li>
-              <li class="ideaDirectoryListItem">Directory 2</li>
-              <li class="ideaDirectoryListItem">Directory 3</li>
-              <li class="ideaDirectoryListItem">Directory 4</li>
-            </ul>
-            <button class="btn btn-default">+ Directory</button>
-            
-            <hr/>
-            
-            <h3>Resources</h3>
-            <ul id="ideaResourcesList">
-              <li class="ideaResourcesListItem">Resource 1</li>
-              <li class="ideaResourcesListItem">Resource 2</li>
-              <li class="ideaResourcesListItem">Resource 3</li>
-              <li class="ideaResourcesListItem">Resource 4</li>
-            </ul>
-            <button class="btn btn-default btn-block" id="resourceDragDropBtn" ng-file-drop ng-model="files" class="drop-box" 
-						drag-over-class="dragover" ng-multiple="true" allow-dir="true" >
-              Drag Resource Files Here
-            </button>
-            <span ng-no-file-drop>File Drag/Drop is not supported for this browser</span>
-            
+  	    <div ng-include="'directory/new.html'" ></div>
+	    <div ng-include="'directory/index.html'" ></div>
+	    <div ng-include="'resource/index.html'" ></div>            
           </div>
           
           <div id="ideaRecentUpdatesCommentsWrapper" class="col-md-8">
@@ -169,9 +161,13 @@
             
             <h3>Comments</h3>
             <div ng-include="'repository_comment/index.html'" id="RepositoryCommentIndexPanel"></div>
-            <div ng-include="'resource_comment/index.html'" id="ResourceCommentIndexPanel"></div>
+	    <div ng-include="'resource/edit.html'" class="col-md-12" id="resourceEditPanel"></div>
             
           </div>
-        </div>
+	  <div class="col-md-9" >
+	    <div ng-include="'pull_request/show.html'" id="pullRequestDetailsPanel"></div>
+	    <div ng-include="'pull_request/index.html'" id="pullRequestIndexPanel"></div>
+	    <div ng-include="'resource/edit.html'" class="col-md-12" id="resourceEditPanel"></div>
+	  </div>
       </div>
     </div>
