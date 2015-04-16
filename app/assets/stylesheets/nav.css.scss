@@ -33,17 +33,20 @@
 }
 
 #sideMenu{
-  padding: 15px;
-  width: 100px;
+  width: 60px;
   background-color: #17385e;
   height: 100vh;
   display: inline-block;
-  position: relative;
-  right: 0px;
-  top: 0px;
+  position: fixed;
+  left: 0px;
   transition: right .5s;
   float: left;
-  z-index: 5;
+  z-index: 500;
+}
+
+#socialMediaList{
+  position: absolute;
+  bottom: 12%;
 }
 
 #ideabinLogo{
@@ -92,9 +95,9 @@
   width:96%;
 }
 
-.show-menu{
+/*.show-menu{
   right: 100px!important;
-}
+}*/
 
 .make-opaque{
   border: none!important;

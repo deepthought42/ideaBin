@@ -1,4 +1,4 @@
-<div class="col-md-12" id="ResourceCommentContainer" ng-controller="ResourceCommentIndexController" ng-mouseleave="avatarMouseOut()">
+<!--<div class="col-md-12" id="ResourceCommentContainer" ng-controller="ResourceCommentIndexController" ng-mouseleave="avatarMouseOut()">
 	<div class="col-md-12 commentBox" ng-repeat="resourceComment in resourceComments" >
 		<span class="col-md-10 resourceCommentComment" ng-click="editComment(resourceComment)" ng-show="mouseOverAvatars">{{ resourceComment.comment }}</span>
 		<span class="pull-right resourceCommentUserAvatar" ng-mouseenter="avatarMouseOver()" >
@@ -7,7 +7,7 @@
 		<span class="col-md-2 " >
 			<!-- the following is left in place for whenever this feature is done" -->
 			<!-- <span class="pull-right fa fa-reply" ></span>  -->
-		</span>
+<!--		</span>
 	</div>
 </div>
 <div  class="col-md-12" ng-controller="ResourceCommentCreationController">
@@ -19,5 +19,34 @@
 			<button id="createResourceCommentButton" ng-click="createResourceComment()" class="col-md-4 pull-right">Add Comment</button>
 		</div>
 	</form>
-</div>
+</div>-->
 
+<div id="ideaCommentsListWrapper" ng-controller="ResourceCommentIndexController">
+  <ul id="ideaCommentsList" ng-repeat="resourceComment in resourceComments">
+    <li class="ideaCommentsListItem">
+      <div class="row">
+        <div class="ideaCommentsAvatarWrapper col-md-2">
+          <div class="ideaCommentsAvatar outline">
+            <img ng-src="{{$session.user.avatar_file_name ? '/images/'+$session.user.id +'/medium/' + $session.user.avatar_file_name : '/images/missing.png'}}" />
+          </div>
+        </div>
+        <div class="ideaCommentWrapper col-md-10">
+          <h4><b>plushyObject said:</b></h4>
+          <p class="ideaComment" ng-click="editComment(resourceComment)">
+            {{ resourceComment.comment }}
+          </p>
+          <h6>Posted January 1, 2015 at 14:27 EST</h6>
+          <i ng-click="updateComment(resourceComment)" class="fa fa-pencil"></i>
+        </div>
+      </div>
+    </li>
+  </ul>
+  <div class="col-md-12" ng-controller="ResourceCommentCreationController">
+    <form novalidate> 
+      <textarea rows="5" cols="100" ng-model="resource_comment.message" placeholder="Create Resource Comment Here" class="form-control"></textarea>
+		<button id="createResourceCommentButton" ng-click="createResourceComment()" class="btn btn-default btn-lg">
+          Save Resource Comment
+      </button>
+	</form>
+  </div>
+</div>
