@@ -7,13 +7,13 @@ class ResourcesController < ApplicationController
   # GET /resources.json
   def index
     @resources = []
-		Dir.glob("#{params[:path]}/*").each do |f| 
-			unless File.directory?(f)
-				@resources.push(File.basename(f))
-			end
+	Dir.glob("#{params[:path]}/*").each do |f| 
+		unless File.directory?(f)
+			@resources.push(File.basename(f))
 		end
-		
-		render json: @resources
+	end
+	
+	render json: @resources
   end
 
   # GET /resources/1
@@ -39,13 +39,18 @@ class ResourcesController < ApplicationController
 		respond_with(@resource)
   end
 
-	#Takes directory id and resouce in.
-	#
+  #Takes directory id and resouce in.
+  #
   # POST /resources
   # POST /resources.json
   def create
-		@repo = Repository.find(params[:repo_id])
-		
+    data =params[:data]
+   # data.gsub('\\', '')
+
+    resource = ActiveSupport::JSON.decode(data)
+    logger.debug "REPO ID ::  #{resource}"
+    @repo = Repository.find(resource["repo_id"])
+
     post = DataFile.save(params['file'], @repo.path)
     
     Dir.chdir(@repo.path)
@@ -71,9 +76,9 @@ class ResourcesController < ApplicationController
   # PUT /resources/1.json
   def update
     @resource = Resource.find(params[:id])
-		@parentDir = Directory.find(@resource.directory_id)
+	@parentDir = Directory.find(@resource.directory_id)
 		
-		file_path = "#{@parentDir.path}/#{@resource.filename}"
+	file_path = "#{@parentDir.path}/#{@resource.filename}"
 		
     respond_to do |format|
       if File.open(file_path, 'w') {|f| f.write(params[:content]) }

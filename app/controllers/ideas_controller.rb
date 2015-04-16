@@ -87,7 +87,7 @@ class IdeasController < ApplicationController
   # POST /ideas.json
   def create
     data =params[:data]
-	data.gsub('\\', '')
+    data.gsub('\\', '')
 
     idea = ActiveSupport::JSON.decode(data)
     idea = idea["idea"]
