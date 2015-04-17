@@ -5,7 +5,7 @@
         <img ng-src="/data/repository/{{$session.id}}/{{$storage.current_idea.name}}/{{$storage.current_idea.cover_img_file_name}}"/>
       </div>
     </div>
-    <div class="col-md-8 pull-right">
+    <div class="col-md-9">
       <h2 id="ideaName" ng-click="convertToInput('ideaName', $storage.current_idea.name)" >
         {{$storage.current_idea.name}}
         <a href="#" class="edit">Edit</a>
