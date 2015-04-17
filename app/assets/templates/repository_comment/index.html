@@ -27,7 +27,7 @@
           <p class="ideaComment" ng-click="editComment(repositoryComment)">
             {{ repositoryComment.comment }}
           </p>
-          <h6>Posted January 1, 2015 at 14:27 EST</h6>
+          <h6>Posted {{repositoryComment.created_at | date:'longDate'}} at {{repositoryComment.created_at | date:'shortTime'}}</h6>
           <i ng-click="updateComment(repositoryComment)" class="fa fa-pencil"></i>
         </div>
       </div>
