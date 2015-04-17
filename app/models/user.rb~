@@ -17,9 +17,4 @@ class User < ActiveRecord::Base
           :recoverable, :rememberable, :trackable, :validatable
 
   include DeviseTokenAuth::Concerns::User
-	private
-
-	def set_provider
-#	  self.provider = "email"
-	end
 end

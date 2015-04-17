@@ -2,7 +2,7 @@ class User < ActiveRecord::Base
   attr_accessible :email, :password, :password_confirmation, :avatar
 
   has_many :user_ideas
-  has_many :ideas through: :user_ideas
+  has_many :ideas, through: :user_ideas
   has_many :repositories
   has_many :comments 
 
