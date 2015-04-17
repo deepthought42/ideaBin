@@ -12,7 +12,7 @@
           <p class="ideaComment" ng-click="editComment(resourceComment)">
             {{ resourceComment.comment }}
           </p>
-          <h6>Posted {{resourceComment.created_at | date:'longDate'}}</h6>
+          <h6>Posted {{resourceComment.created_at | date:'longDate'}} at {{resourceComment.created_at | date:'shortTime'}}</h6>
           <i ng-click="updateComment(resourceComment)" class="fa fa-pencil"></i>
         </div>
       </div>

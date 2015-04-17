@@ -1,11 +1,10 @@
 class User < ActiveRecord::Base
-
-
   attr_accessible :email, :password, :password_confirmation, :avatar
 
-
- # before_validation :set_provider
-
+  has_many :user_ideas
+  has_many :ideas through: :user_ideas
+  has_many :repositories
+  has_many :comments 
 
   has_attached_file :avatar, 
 		    :styles => { :medium => "300x300>", :thumb => "100x100#" },
@@ -18,9 +17,4 @@ class User < ActiveRecord::Base
           :recoverable, :rememberable, :trackable, :validatable
 
   include DeviseTokenAuth::Concerns::User
-	private
-
-	def set_provider
-#	  self.provider = "email"
-	end
 end
