@@ -115,17 +115,17 @@ app.controller('ResourceDetailCtrl', ['$scope', '$localStorage', 'Resource', '$h
 		};
 		
 		$scope.$on('editResource', function(event, resource_name) { 
-			console.log("FILENAME :: " + resource_name);
-			$http.get("/resources/1/contents", {params: {filename: resource_name, path: $localStorage.repo.path + $localStorage.dir_path}})
-				.success(function(data){ 
-						$scope.resource = {};
-						$scope.resource.content = data;
-						$scope.editor.setValue(data);
-						$localStorage.resource = resource_name;
-				})
-				.error(function(data){
-					alert("Failed to load resource!");
-				});
+			$http.get("/resources/1/contents", {params: 
+								{filename: resource_name, 
+								 path: $localStorage.repo.path + $localStorage.dir_path}
+			}).success(function(data){ 
+				$scope.resource = {};
+				$scope.resource.content = data;
+				$scope.editor.setValue(data);
+				$localStorage.resource = resource_name;
+			}).error(function(data){
+				alert("Failed to load resource!");
+			});
 		});
 		
 		$scope.updateResource = function (){
