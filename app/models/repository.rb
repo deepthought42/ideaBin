@@ -8,7 +8,7 @@ class Repository < ActiveRecord::Base
 	
   validates :path, :presence => true
   validates :idea, :presence => true
-  validates :pull_request, :presence => true
+  validates :pull_request_id, :presence => true
   validates :user, :presence => true
 
 end

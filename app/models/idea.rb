@@ -4,6 +4,7 @@ class Idea < ActiveRecord::Base
   has_many   :resources
   has_many :repositories
   has_many :users, through: :repositories
+
   has_attached_file :cover_img, :styles => { :medium => "300x300>", :thumb => "100x100>" },
 		    :url => "/images/ideas/:id/:style/:basename\.:extension",
     		    :path => ":rails_root/public/images/ideas/:id/:style/:basename\.:extension"

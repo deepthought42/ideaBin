@@ -4,5 +4,5 @@ class ResourceComment < ActiveRecord::Base
 	
   validates :comment, :presence => true
   validates :resource_path, :presence => true
-  validates :resource_path, :presence => true
+
 end

@@ -5,6 +5,6 @@ class RepositoryComment < ActiveRecord::Base
   belongs_to :repository
   belongs_to :comment
 
-  validates :repository, :presence => true
-  validates :comment, :presence => true
+  validates :repository_id, :presence => true
+  validates :comment_id, :presence => true
 end

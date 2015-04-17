@@ -8,5 +8,6 @@ class Idea < ActiveRecord::Base
 		    :url => "/images/ideas/:id/:style/:basename\.:extension",
     		    :path => ":rails_root/public/images/ideas/:id/:style/:basename\.:extension"
   validates_attachment :cover_img, content_type: { content_type: ["image/jpeg", "image/jpg", "image/png", "image/gif"] }
+  
   validates :name, :presence => true
 end
