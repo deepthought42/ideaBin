@@ -1,4 +1,4 @@
-<div id="ideaEditPanel" class="col-md-12" ng-controller="IdeaDetailCtrl">
+<div id="ideaEditPanel" class="col-md-9" ng-controller="IdeaDetailCtrl">
   <div class="col-md-10">
     <div class="col-md-3" id="ideaCoverImageWrapper">
       <div id="ideaCoverImage" 

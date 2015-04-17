@@ -10,7 +10,8 @@
         <div ng-include="'directory/index.html'" ></div>
         <div ng-include="'resource/index.html'" ></div>            
       </div>
-       <div ng-include="'idea/show.html'"></div>
+      
+      <div ng-include="'idea/show.html'"></div>
       <div id="ideaRecentUpdatesCommentsWrapper" class="col-md-8">
     
         <h3>Recent Updates</h3>
