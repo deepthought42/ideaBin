@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150412181457) do
+ActiveRecord::Schema.define(version: 20150417015350) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -53,15 +53,6 @@ ActiveRecord::Schema.define(version: 20150412181457) do
   end
 
   add_index "ideas", ["user_id"], name: "index_ideas_on_user_id", using: :btree
-
-  create_table "participations", force: :cascade do |t|
-    t.integer  "idea_id"
-    t.integer  "user_id"
-    t.boolean  "owner"
-    t.boolean  "admin"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
 
   create_table "pull_requests", force: :cascade do |t|
     t.integer "repository_id",                                   null: false

@@ -1,0 +1,4 @@
+class DropParticipationsTable < ActiveRecord::Migration
+  def change
+  end
+end
