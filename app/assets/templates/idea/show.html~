@@ -1,11 +1,16 @@
-<div id="ideaEditPanel" class="col-md-8 col-md-offset-1" ng-controller="IdeaDetailCtrl">
+<div id="ideaEditPanel" class="col-md-12" ng-controller="IdeaDetailCtrl">
   <div class="col-md-10">
     <div class="col-md-3" id="ideaCoverImageWrapper">
-      <div id="ideaCoverImage" class="outline">
-        <img ng-src="/data/repository/{{$session.id}}/{{$storage.current_idea.name}}/{{$storage.current_idea.cover_img_file_name}}"/>
+      <div id="ideaCoverImage" 
+	   class="outline" 
+           ng-file-drop 
+           ng-file-change="uploadFile($files)" 
+           ng-model="cover_img" 
+           drop-available="dropSupported">
+        <img ng-src="{{ $storage.current_idea.cover_img_file_name ? '/images/ideas/'+$storage.current_idea.id +'/medium/' + $storage.current_idea.cover_img_file_name : '/images/missing.png' }}"/>
       </div>
     </div>
-    <div class="col-md-9">
+    <div class="col-md-8 pull-right">
       <h2 id="ideaName" ng-click="convertToInput('ideaName', $storage.current_idea.name)" >
         {{$storage.current_idea.name}}
         <a href="#" class="edit">Edit</a>

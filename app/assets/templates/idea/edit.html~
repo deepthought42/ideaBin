@@ -1,125 +1,36 @@
-<!--<div class="row">	  
-		<div class="col-md-3" >
-			<div class="col-md-12 btn-group" role="group" ng-controller="IdeaDetailCtrl">
-				<div ng-controller="PullRequestIndexController">
-					<div id="submittedPullRequestCount">{{submittedCount}}</div>
-				</div>
-				<button class="btn toolbar-btn border-white fa fa-lightbulb-o" ng-click="showIdeaEditPanel()"></button>
-				<button class="btn toolbar-btn border-white fa fa-folder" id="btnAddFolder" ng-click="showNewDirectoryPanel()" />
-				<button class="btn toolbar-btn border-white fa fa-share" id="btnAddPullRequest" ng-click="showPullRequestCreatePanel()"/>
-				<button class="btn toolbar-btn border-white fa fa-share" id="btnViewPullRequests" ng-click="showPullRequestIndexPage()" />
-              
-                <div ng-include="'pull_request/new.html'" id="pullRequestCreatePanel" ></div>
-			</div>
-			<div ng-include="'directory/new.html'" ></div>
-			<div ng-include="'directory/index.html'" ></div>
-			<div ng-include="'resource/index.html'" ></div>
-		</div>
-		
-		<div class="col-md-9" >
-			<div ng-include="'pull_request/show.html'" id="pullRequestDetailsPanel"></div>
-			<div ng-include="'pull_request/index.html'" id="pullRequestIndexPanel"></div>
-			<div ng-include="'repository_comment/index.html'" id="RepositoryCommentIndexPanel"></div>
-			<div ng-include="'resource/edit.html'" class="col-md-12" id="resourceEditPanel"></div>
-		</div>
-<<<<<<< HEAD
-  </div>
-=======
-		<div class="col-md-12" id="ideaEditPanel" ng-controller="IdeaDetailCtrl" >
-			<span class="hidePanelButton">
-				<i class="fa fa-times" ng-click="hideIdeaEditPanel()"></i>
-			</span>
-			<div class="col-md-12" >
-				<form enctype="multipart/form-data" novalidate>
-					<div id="ideaEditPanelTop" class="col-md-12 " 
-								   ng-file-drop 
-								   ng-file-change="uploadFile($files)"
-								   ng-model="cover_img" drop-available="dropSupported">			
-						<span class="col-md-6 ideaCoverImage" >
-							<img class="col-md-12 cover_img" 
-							     alt="Idea cover image" ng-src="/images/ideas/{{$storage.current_idea.id}}/thumb/{{$storage.current_idea.cover_img_file_name ||'no-image-found.png'}}"
-							     ng-model="$storage.current_idea.cover_img" />
-						</span>	
-						<span id="ideaEditPanelTopRight" class="col-md-6">
-							<h3 class="title ideaName" >{{$storage.current_idea.name}}</h3>
-						</span>
-					</div>
-					<div class="field">
-						<textarea name="idea[description]" ng-model="$storage.current_idea.description" id="ideaDescription" placeholder="Description" />
-					</div>
-					<div class="actions">
-						<button class="btn btn-default pull-right" ng-click="updateIdea(idea)">Save</button>      
-					</div>
-				</form>
-			</div>
-		</div>
-	</div>
-</div>
->>>>>>> cdafa21f66adf4058d97b6ec24a631a17d466e71
+<div class="container">
+     
+  <div class="row">
+    <div ng-include="'pull_request/new.html'" id="pullRequestCreatePanel" ></div>
 
-  <div id="ideaEditPanel" ng-controller="IdeaDetailCtrl">
-      <button class="hidePanelButton">
-          <i class="fa fa-times" ng-click="hideIdeaEditPanel()"></i>
-      </button>
-    <div class="row">
-      <div class="col-md-12" >
-          <form enctype="multipart/form-data" novalidate>
-              <div id="ideaEditPanelTop" class="col-md-12 " ng-file-drop ng-file-change="uploadFile($files)" ng-model="cover_img" drop-available="dropSupported">	
-                
-                  <div class="col-md-12" id="ideaEditPanelTopRight">
-                      <h3 class="title ideaName" >{{$storage.current_idea.name}}</h3>
-                  </div>
-                  <div class="col-md-12 ideaCoverImage" >
-                      <img class="col-md-12 cover_img" alt="Idea cover image" ng-src="/data/repository/{{current_user.id}}/{{$storage.current_idea.name}}/{{$storage.current_idea.cover_img_file_name||'no-image-found.png'}}" />
-                  </div>
-                
-              </div>
-              <div class="field">
-                  <textarea name="idea[description]" ng-model="$storage.current_idea.description" id="ideaDescription" placeholder="Description" />
-              </div>
-              <div class="actions">
-                  <button class="btn btn-default pull-right" ng-click="updateIdea(idea)">Save</button>      
-              </div>
-          </form>
-       </div>
-     </div>
-  </div>-->
-    
-    <div class="container">
-      <div class="row" >
-	<div ng-include="'idea/update.html'"></div>
+    <div id="ideaBody" class="col-md-12">
+  
+      <div class="col-md-3 col-push-right-1" id="ideaDirectoriesResourcesWrapper">
+        <div ng-include="'directory/new.html'" ></div>
+        <div ng-include="'directory/index.html'" ></div>
+        <div ng-include="'resource/index.html'" ></div>            
       </div>
-      
-      <div class="row">
-        <div ng-include="'pull_request/new.html'" id="pullRequestCreatePanel" ></div>
- 
-        <div id="ideaBody" class="col-md-12">
-          
-          <div class="col-md-3 col-push-right-1" id="ideaDirectoriesResourcesWrapper">
-  	    <div ng-include="'directory/new.html'" ></div>
-	    <div ng-include="'directory/index.html'" ></div>
-	    <div ng-include="'resource/index.html'" ></div>            
-          </div>
-          
-          <div id="ideaRecentUpdatesCommentsWrapper" class="col-md-8">
-            
-            <h3>Recent Updates</h3>
-            <ul id="ideaRecentUpdatesList">
-              <li class="ideaRecentUpdatesListItem">Well, the way they make shows is, they make one show.</li>
-              <li class="ideaRecentUpdatesListItem">That show's called a pilot.</li>
-              <li class="ideaRecentUpdatesListItem">Then they show that show to the people who make shows.</li>
-              <li class="ideaRecentUpdatesListItem">On the strength of that one show they decide if they're going to make more shows.</li>
-            </ul>
-            
-            <hr/>
-            
-            <h3>Comments</h3>
-            <div ng-include="'repository_comment/index.html'" id="RepositoryCommentIndexPanel"></div>
-          </div>
-	  <div class="col-md-9" >
-	    <div ng-include="'pull_request/show.html'" id="pullRequestDetailsPanel"></div>
-	    <div ng-include="'pull_request/index.html'" id="pullRequestIndexPanel"></div>
-	    <div ng-include="'resource/edit.html'" class="col-md-12" id="resourceEditPanel"></div>
-	  </div>
+       <div ng-include="'idea/show.html'"></div>
+      <div id="ideaRecentUpdatesCommentsWrapper" class="col-md-8">
+    
+        <h3>Recent Updates</h3>
+        <ul id="ideaRecentUpdatesList">
+          <li class="ideaRecentUpdatesListItem">Well, the way they make shows is, they make one show.</li>
+          <li class="ideaRecentUpdatesListItem">That show's called a pilot.</li>
+          <li class="ideaRecentUpdatesListItem">Then they show that show to the people who make shows.</li>
+          <li class="ideaRecentUpdatesListItem">On the strength of that one show they decide if they're going to make more shows.</li>
+        </ul>
+    
+        <hr/>
+    
+        <h3>Comments</h3>
+        <div ng-include="'repository_comment/index.html'" id="RepositoryCommentIndexPanel"></div>
+      </div>
+      <div class="col-md-9" >
+        <div ng-include="'pull_request/show.html'" id="pullRequestDetailsPanel"></div>
+        <div ng-include="'pull_request/index.html'" id="pullRequestIndexPanel"></div>
+        <div ng-include="'resource/edit.html'" class="col-md-12" id="resourceEditPanel"></div>
       </div>
     </div>
+  </div>
+</div>
