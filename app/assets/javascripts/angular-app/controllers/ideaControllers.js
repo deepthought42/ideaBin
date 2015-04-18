@@ -96,7 +96,7 @@ app.controller('IdeaDetailCtrl', ['$scope', '$localStorage', '$sessionStorage', 
 				console.log('progress: ' + parseInt(100.0 * evt.loaded / evt.total));
 			}).success(function(data, status, headers, config) {
 				$scope.idea  = Idea.show({id: $scope.$storage.current_idea.id});
-				$scope.idea.then(function onSuccess(	response){
+				$scope.idea.then(function onSuccess(response){
 					$localStorage.current_idea = response;
 					$scope.$apply(function () {
 						$scope.idea = $scope.cover_img.filename;

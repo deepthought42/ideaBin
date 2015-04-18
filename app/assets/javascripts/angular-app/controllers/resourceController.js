@@ -4,7 +4,7 @@ app.controller("ResourceIndexCtrl", ['$rootScope', '$scope', '$localStorage', 'R
 	function($rootScope, $scope, $localStorage, Resource, $location, $upload, $http) {
 		$scope.$storage = $localStorage;
 		$scope.editableResourceTypes = ["txt", "rb", "html", "log", "js", "php"];
-		$scope.resourceLogos = {"text":"text.png", "rb": "ruby.png", "html": "html.png" , "log":"file.png", "js":"code.png", "php":"php.png"}
+		$scope.resourceLogos = {"text":"txt.png", "rb": "ruby.png", "html": "html.png" , "log":"file.png", "js":"code.png", "php":"php.png", "jpg": "picture.png", "css": "css.png", "scss": "css.png", "no-format": "file.png"}
 	
 		//move to event
 		$scope.$on('loadResources', function(event, path){
@@ -21,7 +21,10 @@ app.controller("ResourceIndexCtrl", ['$rootScope', '$scope', '$localStorage', 'R
 		
 		$scope.getResourceIcon = function(resource_name){
 			extension = resource_name.substr(resource_name.lastIndexOf('.') + 1);
-			return $scope.resourceLogos["extension"];
+			if( $scope.resourceLogos[extension])
+				return $scope.resourceLogos[extension]
+			else
+				return $scope.resourceLogos["no-format"]
 		}
 
   	$scope.deleteResource =  function(resourceName){

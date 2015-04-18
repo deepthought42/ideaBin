@@ -4,35 +4,38 @@
     <a href="http://www.ribbet.com/app/?_import=&_export=ideabin.net&_exclude=out,home&
 _export_title=SAVE_BUTTON_TITLE&_export_agent=browser&embed=true">Ribbit</a>
     <div class="col-md-12" ng-repeat="resource in resources">
-	<span class="col-md-10 pointerCursor" 
-	      id="resourceName" 
-	      ng-click="editResource(resource)">
-		{{ resource }}
-	</span>
-	<span class="col-md-2 resourceButtons" >
-	  <i id="downloadResource" 
-	     ng-click="downloadResource($storage.repo.path + $storage.dir_path, resource)" 
-	     class="dock-item fa fa-download">
-	  </i>
-	  <i id="removeResource" 
-	     ng-click="deleteResource(resource)" 
-             class="fa fa-times deleteButton"></i>
-	</span>
-    </div>
-    <div class="col-md-12">
-      <span >
-	<button class="btn btn-default btn-block" 
-		id="resourceDragDropBtn" 
-		ng-file-drop ng-model="files" 
-		class="drop-box" 
-  	        drag-over-class="dragover" 
-                ng-multiple="true" 
-                allow-dir="true">
-			Drop files here
-	</button>
-	<div ng-no-file-drop>
-	  File Drag/Drop is not supported for this browser
-	</div>
+				<span class="col-md-1">
+					<img ng-src="/images/icons/resources/{{getResourceIcon(resource)}}" />
+				</span>
+				<span class="col-md-9 pointerCursor" 
+							id="resourceName" 
+							ng-click="editResource(resource)">
+					{{ resource }}
+				</span>
+				<span class="col-md-2 resourceButtons" >
+					<i id="downloadResource" 
+						 ng-click="downloadResource($storage.repo.path + $storage.dir_path, resource)" 
+						 class="dock-item fa fa-download">
+					</i>
+					<i id="removeResource" 
+						 ng-click="deleteResource(resource)" 
+						       class="fa fa-times deleteButton"></i>
+				</span>
+					</div>
+					<div class="col-md-12">
+						<span >
+				<button class="btn btn-default btn-block" 
+					id="resourceDragDropBtn" 
+					ng-file-drop ng-model="files" 
+					class="drop-box" 
+							    drag-over-class="dragover" 
+						          ng-multiple="true" 
+						          allow-dir="true">
+						Drop files here
+				</button>
+				<div ng-no-file-drop>
+					File Drag/Drop is not supported for this browser
+				</div>
       </span>
     </div>
   </div>

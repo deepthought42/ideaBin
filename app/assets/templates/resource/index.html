@@ -4,7 +4,10 @@
     <a href="http://www.ribbet.com/app/?_import=&_export=ideabin.net&_exclude=out,home&
 _export_title=SAVE_BUTTON_TITLE&_export_agent=browser&embed=true">Ribbit</a>
     <div class="col-md-12" ng-repeat="resource in resources">
-				<span class="col-md-10 pointerCursor" 
+				<span class="col-md-1">
+					<img ng-src="/images/icons/resources/{{getResourceIcon(resource)}}" />
+				</span>
+				<span class="col-md-8 pointerCursor" 
 							id="resourceName" 
 							ng-click="editResource(resource)">
 					{{ resource }}
