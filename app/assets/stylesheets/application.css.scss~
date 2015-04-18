@@ -30,9 +30,9 @@ body{
 }
 
 .item {
-  width: 	220px;
+  width: 220px;
   margin: 10px;
-  float: 	left;
+  float: left;
 }
 
 .item img {

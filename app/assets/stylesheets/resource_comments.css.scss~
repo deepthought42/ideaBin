@@ -15,7 +15,7 @@
 
 .resourceCommentsListItem img {
 	position:			absolute;
-	right:				0px;
+	right:				2px;
   max-width:  	30px;
   max-height:	  30px;
 }
