@@ -1,5 +1,5 @@
 class Drop < ActiveRecord::Migration
   def change
-    drop_table :resources
+    drop_resources :table
   end
 end
