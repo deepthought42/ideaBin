@@ -18,7 +18,7 @@
     <li class="ideaCommentsListItem">
       <div class="row">
         <div class="ideaCommentsAvatarWrapper col-md-2">
-          <div class="ideaCommentsAvatar outline">
+          <div class="repositoryCommentAvatar outline">
             <img ng-src="{{$session.user.avatar_file_name ? '/images/'+$session.user.id +'/medium/' + $session.user.avatar_file_name : '/images/missing.png'}}" />
           </div>
         </div>
@@ -27,7 +27,7 @@
           <p class="ideaComment" ng-click="editComment(repositoryComment)">
             {{ repositoryComment.comment }}
           </p>
-          <h6>Posted {{repositoryComment.created_at | date:'longDate'}}</h6>
+          <h6>Posted {{repositoryComment.created_at | date:'longDate'}} at {{repositoryComment.created_at | date:'shortTime'}}</h6>
           <i ng-click="updateComment(repositoryComment)" class="fa fa-pencil"></i>
         </div>
       </div>
