@@ -40,10 +40,10 @@ app.controller("ResourceIndexCtrl", ['$rootScope', '$scope', '$localStorage', 'R
 		var ext = resource_name.substr(resource_name.lastIndexOf('.') + 1);
 		$rootScope.$broadcast("loadResourceComments", resource_name)
 		if($scope.editableResourceTypes.indexOf(ext) > -1){
-			$rootScope.$broadcast("editResource", resource_name );
+		  $rootScope.$broadcast("editResource", resource_name );
 		}
 		else{
-			alert(resource_name + " is not currently editable in IdeaBin. Please download to make changes");
+		  alert(resource_name + " is not currently editable in IdeaBin. Please download to make changes");
 		}
 	};
 		
@@ -122,6 +122,7 @@ app.controller('ResourceDetailCtrl', ['$scope', '$localStorage', 'Resource', '$h
 				$scope.resource = {};
 				$scope.resource.content = data;
 				$scope.editor.setValue(data);
+				console.log("DATA :: " + data);
 				$localStorage.resource = resource_name;
 			}).error(function(data){
 				alert("Failed to load resource!");
