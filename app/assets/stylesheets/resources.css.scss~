@@ -59,6 +59,10 @@
 #resourceToolbar {
 	position:			relative;
 	top:					7%;
-	left:					5%;
+	left:					2%;
+}
+
+.fa-folder {
+	color:		red;
 }
 

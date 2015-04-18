@@ -3,7 +3,7 @@ var app = angular.module('ideaBin.resourceControllers', []);
 app.controller("ResourceIndexCtrl", ['$rootScope', '$scope', '$localStorage', 'Resource', '$location', '$upload', '$http',
 	function($rootScope, $scope, $localStorage, Resource, $location, $upload, $http) {
 		$scope.$storage = $localStorage;
-		$scope.editableResourceTypes = ["txt", "rb", "html", "log", "js", "php"];
+		$scope.editableResourceTypes = ["txt", "rb", "html", "log", "js", "php", "scss"];
 		$scope.resourceLogos = {"text":"txt.png", "rb": "ruby.png", "html": "html.png" , "log":"file.png", "js":"code.png", "php":"php.png", "jpg": "picture.png", "css": "css.png", "scss": "css.png", "no-format": "file.png"}
 	
 		//move to event
