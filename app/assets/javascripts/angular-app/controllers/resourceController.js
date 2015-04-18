@@ -38,8 +38,9 @@ app.controller("ResourceIndexCtrl", ['$rootScope', '$scope', '$localStorage', 'R
 		
 		//check for if resource name is of a type that is supported
 		var ext = resource_name.substr(resource_name.lastIndexOf('.') + 1);
-		$rootScope.$broadcast("loadResourceComments", resource_name)
+		
 		if($scope.editableResourceTypes.indexOf(ext) > -1){
+		  $rootScope.$broadcast("loadResourceComments", resource_name)
 		  $rootScope.$broadcast("editResource", resource_name );
 		}
 		else{
@@ -52,9 +53,9 @@ app.controller("ResourceIndexCtrl", ['$rootScope', '$scope', '$localStorage', 'R
 			success(function(data, status, headers, config) {
 				 var element = angular.element('<a/>');
 				 element.attr({
-						 href: 'data:attachment/*;' + encodeURI(data),
-						 target: '_blank',
-						 download: filename
+					   href: 'data:attachment/*;' + encodeURI(data),
+					   target: '_blank',
+					   download: filename
 				 })[0].click();
 			}).
 			error(function(data, status, headers, config) {
