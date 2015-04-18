@@ -1,18 +1,19 @@
 <div id="ideaCommentsListWrapper" ng-controller="ResourceCommentIndexController">
   <ul id="ideaCommentsList" ng-repeat="resourceComment in resourceComments">
     <li class="resourceCommentsListItem col-md-12">
-      <div class="ideaCommentWrapper col-md-9">
-				<span class="ideaComment col-md-12" ng-click="editComment(resourceComment)">
+      <div class="resourceCommentWrapper col-md-9">
+				<span class="resourceComment col-md-12" ng-click="editComment(resourceComment)">
    				{{ resourceComment.comment }}
   			</span>
-  			<span id="resourceCommentTimestamp" class="col-md'12">
+  			<span id="resourceCommentTimestamp" class="col-md-12 pull-right">
 					{{resourceComment.created_at | date:'shortDate'}} at {{resourceComment.created_at | date:'shortTime'}}
 				</span>
     		
 			</div>
-<div ng-click="updateComment(resourceComment)" class="fa fa-pencil col-md-1 pull-left resourceEditIcon"></div>     
-			<div class="col-md-2 pull-right">  
-				
+			<div class="col-md-1 pull-right resourceEditIconWrapper ">
+				<span ng-click="updateComment(resourceComment)" class="fa fa-pencil resourceEditIcon"></span>     
+			</div>
+			<div class="col-md-2 pull-right resourceCommentUserAvatar">  
 			  <img ng-src="{{$session.user.avatar_file_name ? '/images/'+$session.user.id +'/thumb/' + $session.user.avatar_file_name : '/images/missing.png'}}" />
 			</div>
     </li>

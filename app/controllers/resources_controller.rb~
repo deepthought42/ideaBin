@@ -7,7 +7,7 @@ class ResourcesController < ApplicationController
   # GET /resources.json
   def index
     @resources = []
-	Dir.glob("#{params[:path]}/*").each do |f| 
+		Dir.glob("#{params[:path]}/*").each do |f| 
 		unless File.directory?(f)
 			@resources.push(File.basename(f))
 		end
@@ -45,31 +45,26 @@ class ResourcesController < ApplicationController
   # POST /resources.json
   def create
     data =params[:data]
-   # data.gsub('\\', '')
 
     resource = ActiveSupport::JSON.decode(data)
-    logger.debug "REPO ID ::  #{resource}"
-    @repo = Repository.find(resource[:repo_id])
+		logger.debug "REPO ID :: #{resource["repo_id"]}"
+    @repo = Repository.find(resource["repo_id"])
 
     post = DataFile.save(params['file'], @repo.path)
     
     Dir.chdir(@repo.path)
 		@git = Git.init()
 		@git.add(:all => true)
-		@git.commit(params[:comment])
+		#@git.commit(params[:comment])
    
-		@resource = Resource.new
-		@resource.repo_id = params[:repo_id]
-		@resource.filename = params[:file].original_filename
-		@resource.content_type = params[:file].content_type
-		@resource.comment = params[:comment]
-		@resource.directory_id = params[:directory_id]
+		#@resource.filename = params[:file].original_filename
+		#@resource.content_type = params[:file].content_type
 	
-		if(@resource.save)
-			respond_with(@resource)
-		else
-			render json: {error: "File is already up to date"}
-		end
+		#if(@resource.save)
+			render json: {success: "file successfully uploaded"}
+		#else
+		#	render json: {error: "File is already up to date"}
+		#end
   end
 
   # PUT /resources/1

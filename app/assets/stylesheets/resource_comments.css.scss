@@ -9,20 +9,27 @@
 .resourceCommentsListItem {
 	margin:  	0px;
   padding:  0px;
-	width:		110%;
 	border:		1px solid;
 }
 
 .resourceCommentsListItem img {
-	position:			absolute;
-	right:				0px;
   max-width:  	30px;
   max-height:	  30px;
 }
 
-.resourceEditIcon{
-	position:		absolute;
-	bottom:			10px;
+.resourceCommentWrapper {
+  margin: 	inherit;
+  padding: 	inherit;
+}
+
+.resourceEditIconWrapper{
+	margin: 		inherit;
+	padding: 		inherit;
+}
+
+.resourceCommentUserAvatar {
+	margin: inherit;
+	padding: inherit;
 }
 
 
