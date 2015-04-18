@@ -28,7 +28,7 @@
             {{ repositoryComment.comment }}
           </p>
           <h6>Posted {{repositoryComment.created_at | date:'longDate'}} at {{repositoryComment.created_at | date:'shortTime'}}</h6>
-          <i ng-click="updateComment(repositoryComment)" class="fa fa-pencil"></i>
+          <i ng-click="updateComment(repositoryComment)" class="fa fa-pencil pull-right"></i>
         </div>
       </div>
     </li>

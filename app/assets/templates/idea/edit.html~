@@ -10,9 +10,7 @@
         <div ng-include="'resource/index.html'" ></div>            
       </div>
       <div class="col-md-9" id="ideaMainPanel">
-        
-      
-        <div ng-include="'idea/show.html'"></div>
+          <div ng-include="'idea/show.html'"></div>
         <div id="ideaRecentUpdatesCommentsWrapper" class="col-md-8">
           <h3>Comments</h3>
           <div ng-include="'repository_comment/index.html'" id="RepositoryCommentIndexPanel"></div>
