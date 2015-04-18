@@ -1,6 +1,6 @@
 <div id="ideaEditPanel" class="col-md-12" ng-controller="IdeaDetailCtrl">
   <div class="col-md-12">
-    <div class="col-md-2" id="ideaCoverImageWrapper">
+    <div class="col-md-3" id="ideaCoverImageWrapper">
       <div id="ideaCoverImage" 
 	   class="outline" 
            ng-file-drop 
@@ -10,13 +10,13 @@
         <img ng-src="{{ $storage.current_idea.cover_img_file_name ? '/images/ideas/'+$storage.current_idea.id +'/medium/' + $storage.current_idea.cover_img_file_name : '/images/missing.png' }}"/>
       </div>
     </div>
-    <div class="col-md-7">
+    <div class="col-md-6">
       <h2 id="ideaName" ng-click="convertToInput('ideaName', $storage.current_idea.name)" >
         {{$storage.current_idea.name}}
         <a href="#" class="edit">Edit</a>
       </h2>
       <h5 id="ideaMetadata">
-  	Idea created by 
+  			Idea created by 
         <a href="#">{{$session.user.email}}</a> 
         on {{$storage.current_idea.created_at | date:'longDate'}}
       </h5>
@@ -50,5 +50,4 @@
       </li>
     </ul>
   </div>
- 
 </div>
