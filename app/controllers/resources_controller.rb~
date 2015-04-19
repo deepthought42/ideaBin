@@ -55,37 +55,31 @@ class ResourcesController < ApplicationController
     Dir.chdir(@repo.path)
 		@git = Git.init()
 		@git.add(:all => true)
-		#@git.commit(params[:comment])
+		@git.commit(resource["comment"])
    
-		#@resource.filename = params[:file].original_filename
-		#@resource.content_type = params[:file].content_type
-	
-		#if(@resource.save)
-			render json: {success: "file successfully uploaded"}
-		#else
-		#	render json: {error: "File is already up to date"}
-		#end
+		render json: {success: "file successfully uploaded"}
   end
 
   # PUT /resources/1
   # PUT /resources/1.json
   def update
-    @resource = Resource.find(params[:id])
-	@parentDir = Directory.find(@resource.directory_id)
+    @resource = params[:content]
+	
+		if params[:dir_path] == "/"
+			params[:dir_path]=""			
+		end
+
+		file_path = "#{params[:dir_path]}/#{params[:filename]}"
 		
-	file_path = "#{@parentDir.path}/#{@resource.filename}"
-		
-    respond_to do |format|
-      if File.open(file_path, 'w') {|f| f.write(params[:content]) }
-				Dir.chdir(@parentDir.path)
-				@git = Git.init()
-				@git.add(:all => true)
-				@git.commit(params[:comment])
-				
-        format.json { head :no_content }
-      else
-        format.json { render json: @resource.errors, status: :unprocessable_entity }
-      end
+    if File.open(file_path, 'w') {|f| f.write(params[:content]) }
+			Dir.chdir(params[:dir_path])
+			@git = Git.init()
+			@git.add(:all => true)
+			@git.commit(params[:comment])
+			
+			render json: {success: "file successfully uploaded"}
+    else
+      render json: { error: "SOMETHING WENT WRONG SAVING RESOURCE" }
     end
   end
 

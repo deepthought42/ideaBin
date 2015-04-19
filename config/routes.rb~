@@ -4,6 +4,8 @@ IdeaBin::Application.routes.draw do
   get '/userIdeas/:id' => 'ideas#userIdeas'
   get '/pull_requests/count' => 'pull_requests#count'
   put '/users' => 'users#update'
+	put '/resources' => 'resources#update'
+
   resources :directories do
 	member do
 		get 'topDir'

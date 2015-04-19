@@ -115,7 +115,7 @@ app.controller("ResourceIndexCtrl", ['$rootScope', '$scope', '$localStorage', 'R
 
 app.controller('ResourceDetailCtrl', ['$scope', '$localStorage', 'Resource', '$http',
 	function($scope, $localStorage, Resource, $http){
-
+		$scope.$storage = $localStorage
 		$scope.aceLoaded = function(_editor) {
 			$scope.editor = _editor;
 			// Options
@@ -155,8 +155,13 @@ app.controller('ResourceDetailCtrl', ['$scope', '$localStorage', 'Resource', '$h
 			var content = $scope.editor.getValue();
 			$scope.resource.content = content;
 			$scope.resource.comment = prompt("Please describe the changes made");
+			$scope.resource.filename = $scope.$storage.resource;
+			$scope.resource.dir_path = $scope.$storage.repo.path + $scope.$storage.dir_path;
 			if($scope.resource.comment){
 				Resource.update($scope.resource);
+			}
+			else{
+				alert("A comment is required in order to save");
 			}
 		}
 	}
