@@ -19,8 +19,7 @@
 //= require nav
 
 //= require bootstrap
-//= require ../components/ace-builds/src-min-noconflict/ace.js
-
+//= require_tree ../components/ace-builds/src-min-noconflict
 //= require ../components/angular/angular
 //= require ../components/angular-ui-ace/ui-ace.min
 //= require ../components/ng-file-upload/angular-file-upload-shim.min

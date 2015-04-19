@@ -115,7 +115,6 @@ app.controller("ResourceIndexCtrl", ['$rootScope', '$scope', '$localStorage', 'R
 
 app.controller('ResourceDetailCtrl', ['$scope', '$localStorage', 'Resource', '$http',
 	function($scope, $localStorage, Resource, $http){
-		$scope.resourceModes = {"js":"javascript", }
 
 		$scope.aceLoaded = function(_editor) {
 			$scope.editor = _editor;
@@ -134,9 +133,18 @@ app.controller('ResourceDetailCtrl', ['$scope', '$localStorage', 'Resource', '$h
 			}).success(function(data){ 
 				$scope.resource = {};
 				$scope.resource.content = data;
+
+ 				var modelist = ace.require("ace/ext/modelist");
+        // the file path could come from an xmlhttp request, a drop event,
+        // or any other scriptable file loading process.
+        // Extensions could consume the modelist and use it to dynamically
+        // set the editor mode. Webmasters could use it in their scripts
+        // for site specific purposes as well.
+        var mode = modelist.getModeForPath(resource_name).mode;
+				$scope.editor.session.setMode(mode);
+
 				$scope.editor.setValue(data);
-				$scope.editor.session.setMode("ace/mode/" + $scope.resourceModes[extension]);
-				console.log("DATA :: " + data);
+
 				$localStorage.resource = resource_name;
 			}).error(function(data){
 				alert("Failed to load resource!");
