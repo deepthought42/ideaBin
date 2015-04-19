@@ -1,6 +1,6 @@
 <div id="ideaEditPanel" class="col-md-12" ng-controller="IdeaDetailCtrl">
   <div class="col-md-12">
-    <div class="col-md-2" id="ideaCoverImageWrapper">
+    <div class="col-md-3" id="ideaCoverImageWrapper">
       <div id="ideaCoverImage" 
 	   class="outline" 
            ng-file-drop 
@@ -10,7 +10,7 @@
         <img ng-src="{{ $storage.current_idea.cover_img_file_name ? '/images/ideas/'+$storage.current_idea.id +'/medium/' + $storage.current_idea.cover_img_file_name : '/images/missing.png' }}"/>
       </div>
     </div>
-    <div class="col-md-7">
+    <div class="col-md-6">
       <h2 id="ideaName" ng-click="convertToInput('ideaName', $storage.current_idea.name)" >
         {{$storage.current_idea.name}}
         <a href="#" class="edit">Edit</a>
@@ -30,12 +30,12 @@
 					Follow
 				</button>
 		    <button class="btn btn-default btn-block" 
-			    ng-click="showPullRequestCreatePanel()">
+			    			ng-click="showPullRequestCreatePanel()">
 			    Create Pull Request
 		    </button>
 		    <button class="btn btn-default btn-block"
 		 	      ng-click="showPullRequestIndexPage()">
-				View Pull Requests
+					View Pull Requests
 		    </button>
 		  </ul>
 		</div>

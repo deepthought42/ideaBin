@@ -1,0 +1,4 @@
+class DropUserIdeasTable < ActiveRecord::Migration
+  def change
+  end
+end

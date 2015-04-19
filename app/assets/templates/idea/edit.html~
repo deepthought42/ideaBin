@@ -13,7 +13,7 @@
       </div>
 			
 			<div class="col-md-9">
-<div ng-include="'idea/show.html'"></div>
+				<div ng-include="'idea/show.html'"></div>
 		    <div class="col-md-12" id="ideaMainPanel">
 		      <div id="ideaRecentUpdatesCommentsWrapper" class="col-md-12">
 		        <h3>Comments</h3>
