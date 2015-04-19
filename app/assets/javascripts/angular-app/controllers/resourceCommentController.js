@@ -44,8 +44,7 @@ app.controller("ResourceCommentIndexController", ['$scope', '$localStorage', '$s
 		/**
 		* Adds a comment to the current index of resource comments
 		*/
-		$scope.$on('addResourceCommentToIndex', function(comment){
-			console.log("comment :: " + comment);
+		$scope.$on('addResourceCommentToIndex', function(event, comment){
 			$scope.resourceComments.push(comment);
 		});
 		
@@ -76,16 +75,21 @@ app.controller('ResourceCommentCreationController', ['$scope', '$localStorage', 
   function($scope, $localStorage, $rootScope, ResourceComment){
     $scope.createResourceComment = function(){
       if($localStorage.resource){
-	var resourceComment = ResourceComment.create(
-						{path: $localStorage.repo.path + $localStorage.dir_path + $localStorage.resource, 
-						 repo_id: $localStorage.repo.id, 
-						 message: $scope.resource_comment.message
-        });
-	$rootScope.$broadcast('addResourceCommentToIndex', resourceComment);
-	$scope.resource_comment.message = '';
+				var resourceComment = ResourceComment.create(
+					{
+					 	path: $localStorage.repo.path + $localStorage.dir_path + $localStorage.resource, 
+					 	repo_id: $localStorage.repo.id, 
+					 	message: $scope.resource_comment.message
+			    }
+				).$promise;
+				resourceComment.then(function onSuccess(response){
+					console.log("RESPONSER :: " + response + ", :: " + response.comment);
+					$rootScope.$broadcast('addResourceCommentToIndex', response);
+					$scope.resource_comment.message = '';
+				})
       }
       else{
-	alert("Pssst. No resource is loaded, so there is nothing to comment on");
+				alert("No resource is loaded, so there is nothing to comment on");
       }
     }
   }
