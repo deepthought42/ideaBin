@@ -26,14 +26,15 @@
     </div>
    	<div class="col-md-3 pull-right" id="ideaButtonListWrapper">
 		  <ul id="ideaButtonList">
-		    <button class="btn btn-default btn-block">
+		    <button class="btn btn-default btn-block"   
+								ng-show="{{$storage.current_idea.user_id != $session.user.id}}">
 					Follow
 				</button>
-		    <button class="btn btn-default btn-block" 
+		    <div class="btn btn-default btn-block" 
 			    			ng-click="showPullRequestCreatePanel()" 
 								ng-show="{{$storage.current_idea.user_id != $session.user.id}}">
 			    Create Pull Request
-		    </button>
+		    </div>
 		    <button class="btn btn-default btn-block"
 		 	      		ng-click="showPullRequestIndexPage()">
 					View Pull Requests
