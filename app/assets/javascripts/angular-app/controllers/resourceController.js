@@ -133,7 +133,7 @@ app.controller('ResourceDetailCtrl', ['$scope', '$localStorage', 'Resource', '$h
 			}).success(function(data){ 
 				$scope.resource = {};
 				$scope.resource.content = data;
-
+				ace.require('ace/ext/settings_menu').init($scope.editor);
  				var modelist = ace.require("ace/ext/modelist");
         // the file path could come from an xmlhttp request, a drop event,
         // or any other scriptable file loading process.
@@ -142,6 +142,13 @@ app.controller('ResourceDetailCtrl', ['$scope', '$localStorage', 'Resource', '$h
         // for site specific purposes as well.
         var mode = modelist.getModeForPath(resource_name).mode;
 				$scope.editor.session.setMode(mode);
+				$scope.editor.commands.addCommands([{
+					name: "showSettingsMenu",
+					bindKey: {win: "Ctrl-q", mac: "Command-q"},
+					exec: function(editor) {
+						editor.showSettingsMenu();
+					}
+				}]);
 
 				$scope.editor.setValue(data);
 
