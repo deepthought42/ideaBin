@@ -17,13 +17,13 @@ app.controller("IdeaIndexController", ['$scope', '$localStorage', '$sessionStora
 		};
 		
 		$scope.editIdea = function (ideaId) {
-			$scope.$storage.repo = Repository.show({user_id: $scope.$session.user.id, id: ideaId}).$promise;
+			$scope.$storage.current_idea  = Idea.show({id: ideaId}).$promise;
+			$scope.$storage.current_idea.then(function onSuccess(response){
+				$scope.$storage.current_idea = response;
+				$scope.$storage.repo = Repository.show({user_id: $scope.$session.user.id, id: ideaId}).$promise;
+				$localStorage.repo.then(function onSuccess(response){
+					$scope.$storage.repo = response;
 
-			$localStorage.repo.then(function onSuccess(response){
-				$scope.$storage.repo = response;
-				$scope.$storage.current_idea  = Idea.show({id: ideaId}).$promise;
-				$scope.$storage.current_idea.then(function onSuccess(response){
-					$scope.$storage.current_idea = response;
 					$rootScope.$broadcast("loadDirectory", $scope.$storage.repo.path )
 					$rootScope.$broadcast("loadResources", $scope.$storage.repo.path)
 					$rootScope.$broadcast("getSubmittedPullRequests", $scope.$storage.repo.id)

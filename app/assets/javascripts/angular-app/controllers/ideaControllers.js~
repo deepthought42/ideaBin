@@ -17,12 +17,10 @@ app.controller("IdeaIndexController", ['$scope', '$localStorage', '$sessionStora
 		};
 		
 		$scope.editIdea = function (ideaId) {
-			$scope.$storage.repo = Repository.show({user_id: $scope.$session.user.id, id: ideaId}).$promise;
-
-			$localStorage.repo.then(function onSuccess(response){
-				$scope.$storage.repo = response;
-				$scope.$storage.current_idea  = Idea.show({id: ideaId}).$promise;
-				$scope.$storage.current_idea.then(function onSuccess(response){
+			$scope.$storage.current_idea  = Idea.show({id: ideaId}).$promise;
+			$scope.$storage.current_idea.then(function onSuccess(response){
+				$scope.$storage.repo = Repository.show({user_id: $scope.$session.user.id, id: ideaId}).$promise;
+				$localStorage.repo.then(function onSuccess(response){
 					$scope.$storage.current_idea = response;
 					$rootScope.$broadcast("loadDirectory", $scope.$storage.repo.path )
 					$rootScope.$broadcast("loadResources", $scope.$storage.repo.path)
@@ -96,7 +94,7 @@ app.controller('IdeaDetailCtrl', ['$scope', '$localStorage', '$sessionStorage', 
 				console.log('progress: ' + parseInt(100.0 * evt.loaded / evt.total));
 			}).success(function(data, status, headers, config) {
 				$scope.idea  = Idea.show({id: $scope.$storage.current_idea.id});
-				$scope.idea.then(function onSuccess(	response){
+				$scope.idea.then(function onSuccess(response){
 					$localStorage.current_idea = response;
 					$scope.$apply(function () {
 						$scope.idea = $scope.cover_img.filename;
