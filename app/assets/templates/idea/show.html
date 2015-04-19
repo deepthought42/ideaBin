@@ -36,7 +36,8 @@
 			    Create Pull Request
 		    </div>
 		    <button class="btn btn-default btn-block"
-		 	      		ng-click="showPullRequestIndexPage()">
+		 	      		ng-click="showPullRequestIndexPage()"
+								ng-show="$storage.current_idea.user_id == $session.user.id">
 					View Pull Requests
 		    </button>
 		  </ul>
