@@ -5,7 +5,7 @@ app.controller("ResourceIndexCtrl", ['$rootScope', '$scope', '$localStorage', 'R
 		$scope.$storage = $localStorage;
 		$scope.editableResourceTypes = ["txt", "rb", "html", "log", "js", "php", "scss"];
 		$scope.resourceLogos = {"text":"txt.png", "rb": "ruby.png", "html": "html.png" , "log":"file.png", "js":"code.png", "php":"php.png", "jpg": "picture.png", "css": "css.png", "scss": "css.png", "no-format": "file.png"}
-	
+
 		//move to event
 		$scope.$on('loadResources', function(event, path){
 			$scope.resources = Resource.query({path: path});
@@ -51,7 +51,7 @@ app.controller("ResourceIndexCtrl", ['$rootScope', '$scope', '$localStorage', 'R
 			
 			if($scope.editableResourceTypes.indexOf(ext) > -1){
 				$rootScope.$broadcast("loadResourceComments", resource_name)
-				$rootScope.$broadcast("editResource", resource_name );
+				$rootScope.$broadcast("editResource", resource_name, ext);
 			}
 			else{
 				alert(resource_name + " is not currently editable in IdeaBin. Please download to make changes");
@@ -115,7 +115,8 @@ app.controller("ResourceIndexCtrl", ['$rootScope', '$scope', '$localStorage', 'R
 
 app.controller('ResourceDetailCtrl', ['$scope', '$localStorage', 'Resource', '$http',
 	function($scope, $localStorage, Resource, $http){
-		
+		$scope.resourceModes = {"js":"javascript", }
+
 		$scope.aceLoaded = function(_editor) {
 			$scope.editor = _editor;
 			// Options
@@ -126,7 +127,7 @@ app.controller('ResourceDetailCtrl', ['$scope', '$localStorage', 'Resource', '$h
 			//TODO : Save changes
 		};
 		
-		$scope.$on('editResource', function(event, resource_name) { 
+		$scope.$on('editResource', function(event, resource_name, extension) { 
 			$http.get("/resources/1/contents", {params: 
 								{filename: resource_name, 
 								 path: $localStorage.repo.path + $localStorage.dir_path}
@@ -134,6 +135,7 @@ app.controller('ResourceDetailCtrl', ['$scope', '$localStorage', 'Resource', '$h
 				$scope.resource = {};
 				$scope.resource.content = data;
 				$scope.editor.setValue(data);
+				$scope.editor.session.setMode("ace/mode/" + $scope.resourceModes[extension]);
 				console.log("DATA :: " + data);
 				$localStorage.resource = resource_name;
 			}).error(function(data){
