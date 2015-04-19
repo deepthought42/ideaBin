@@ -30,7 +30,8 @@
 					Follow
 				</button>
 		    <button class="btn btn-default btn-block" 
-			    			ng-click="showPullRequestCreatePanel()">
+			    			ng-click="showPullRequestCreatePanel()" 
+								ng-show="{{$scope.$storage.current_idea.user_id != $scope.$session.user.id}}">
 			    Create Pull Request
 		    </button>
 		    <button class="btn btn-default btn-block"
