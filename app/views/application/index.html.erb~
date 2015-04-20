@@ -9,13 +9,14 @@
 </head>
 <body ng-app="ideaBin">
  <div id="sideMenu" class="text-center show-menu">
+   
     <div ng-controller="NavigationController">
 			<ul id="sidebarList">
-              <li ng-show="true"><img title="Create a New Idea" width="60" src="images/icon_New_Idea.svg" ng-click="showNewIdea()" /></li>
-              <li><img title="View All Ideas" width="60" src="images/icon_All_Ideas.svg" ng-click="showAllIdeas()"/></li>
-              <li><img title="View My Ideas" width="60" src="images/icon_My_Ideas.svg" ng-click="showMyIdeas()"/></li>
-              <li><img title="Contact Ideabin" width="60" src="images/icon_Contact_Us.svg" ng-click="showContactUs()"/></li>
-				<li>
+              <li ng-show="user.signedIn"><img title="Create a New Idea" width="40" src="images/icon_New_Idea.svg" ng-click="showNewIdea()" /></li>
+              <li><img title="View All Ideas" width="40" src="images/icon_All_Ideas.svg" ng-click="showAllIdeas()"/></li>
+              <li><img title="View My Ideas" width="40" src="images/icon_My_Ideas.svg" ng-click="showMyIdeas()"/></li>
+              <li><img title="Contact Ideabin" width="40" src="images/icon_Contact_Us.svg" ng-click="showContactUs()"/></li>
+				<li id="socialMediaList">
 					<a href="http://github.com/deepthought42/ideaBin"><span class="fa fa-github btn social-button" ></span></a>
 					<a href="#" ><span class="fa fa-facebook btn social-button"></span></a>
 					<a href="#"><span class="fa fa-google-plus btn social-button" ></span></a>
@@ -24,23 +25,20 @@
 				</li>
 			</ul>
     </div>
-
-		<div class="btn-toggle-wrapper">
-			<i id="toggleBtn" class="btn fa fa-bars"></i>
-    </div>
     <div id="ideabin">
         <img id="ideabinLogo" src="/images/ideabin.jpg" />
     </div>
-	</div>
+   
+  </div>
 
 	<div id="authorizationPanels">
 		<div ng-include="'user/edit.html'" ></div>
 		<div ng-include="'user/register.html'" ></div>
 		<div ng-include="'user_session/new.html'" ></div>
 	</div>
-	<div class="container-fluid fixed-top fullHeight">
+	<div class="container-fluid fixed-top">
 		<div class="row" ng-include="'user/sessionToolbar.html'"></div>
-		<div class="row fullHeight" id="mainPanel" ng-view=""></div>
+		<div class="container" id="mainPanel" ng-view=""></div>
 	</div>
 </body>
 </html>

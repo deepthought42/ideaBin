@@ -1,4 +1,4 @@
-var app = angular.module('ideaBin.resourceControllers', []);
+var app = angular.module('ideaBin.resourceControllers', [])
 
 app.controller("ResourceIndexCtrl", ['$rootScope', '$scope', '$localStorage', 'Resource', '$location', '$upload', '$http',
 	function($rootScope, $scope, $localStorage, Resource, $location, $upload, $http) {
@@ -61,12 +61,13 @@ app.controller("ResourceIndexCtrl", ['$rootScope', '$scope', '$localStorage', 'R
 		$scope.downloadResource = function(path, filename){
 			$http.get('/resources/1/download', {params: {path: path+filename}}).
 				success(function(data, status, headers, config) {
-					 var element = angular.element('<a/>');
-					 element.attr({
-							 href: 'data:attachment/*;' + encodeURI(data),
-							 target: '_blank',
-							 download: filename
-					 })[0].click();
+					//alert("SUCCESS");
+					var hiddenElement = document.createElement('a');
+
+					hiddenElement.href = 'data:attachment/*,' + encodeURI(data);
+					hiddenElement.target = '_blank';
+					hiddenElement.download = filename;
+					hiddenElement.click();
 				}).
 				error(function(data, status, headers, config) {
 					alert("Error downloading file");

@@ -116,6 +116,7 @@ class ResourcesController < ApplicationController
 	# GET /resources/1
   # GET /resources/1.json
   def download
+		#send_file(params[:path], :disposition => 'attachment', :x_sendfile=>true)
 		send_file(params[:path])
   end
 	

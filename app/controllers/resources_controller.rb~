@@ -57,7 +57,7 @@ class ResourcesController < ApplicationController
 		@git.add(:all => true)
 		@git.commit(resource["comment"])
    
-		render json: {success: "file successfully uploaded"}
+		render json: {success: "file uploaded"}
   end
 
   # PUT /resources/1
@@ -116,7 +116,9 @@ class ResourcesController < ApplicationController
 	# GET /resources/1
   # GET /resources/1.json
   def download
-		send_file(params[:path])
+		#send_file(params[:path], :disposition => 'attachment', :x_sendfile=>true)
+		#send_file(params[:path])
+		send_file("#{Rails.root}/public/data/repository/2/fdsafasfaddd/ideas.css.scss")
   end
 	
 	private

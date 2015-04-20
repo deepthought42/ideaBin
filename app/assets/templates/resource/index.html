@@ -7,12 +7,11 @@ _export_title=SAVE_BUTTON_TITLE&_export_agent=browser&embed=true">Ribbit</a>
 				<span class="col-md-1">
 					<img ng-src="/images/icons/resources/{{getResourceIcon(resource)}}" />
 				</span>
-				<span class="col-md-8 pointerCursor" 
+				<span class="col-md-7 pointerCursor" 
 							id="resourceName" 
 							ng-click="editResource(resource)">
 					{{ resource }}
 				</span>
-				<span class="col-md-2 resourceButtons" >
 					<i id="downloadResource" 
 						 ng-click="downloadResource($storage.repo.path + $storage.dir_path, resource)" 
 						 class="dock-item fa fa-download">
