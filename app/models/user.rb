@@ -3,6 +3,7 @@ class User < ActiveRecord::Base
 
   has_many :repositories
   has_many :comments 
+	has_many :ideas
 	
   has_attached_file :avatar, 
 		    :styles => { :medium => "300x300>", :thumb => "100x100#" },
