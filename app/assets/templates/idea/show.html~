@@ -1,5 +1,5 @@
-<div id="ideaEditPanel" class="col-md-9" ng-controller="IdeaDetailCtrl">
-  <div class="col-md-10">
+<div id="ideaEditPanel" class="col-md-12" ng-controller="IdeaDetailCtrl">
+  <div class="col-md-12">
     <div class="col-md-3" id="ideaCoverImageWrapper">
       <div id="ideaCoverImage" 
 	   class="outline" 
@@ -10,13 +10,13 @@
         <img ng-src="{{ $storage.current_idea.cover_img_file_name ? '/images/ideas/'+$storage.current_idea.id +'/medium/' + $storage.current_idea.cover_img_file_name : '/images/missing.png' }}"/>
       </div>
     </div>
-    <div class="col-md-8 pull-right">
+    <div class="col-md-6">
       <h2 id="ideaName" ng-click="convertToInput('ideaName', $storage.current_idea.name)" >
         {{$storage.current_idea.name}}
         <a href="#" class="edit">Edit</a>
       </h2>
       <h5 id="ideaMetadata">
-  	Idea created by 
+  			Idea created by 
         <a href="#">{{$session.user.email}}</a> 
         on {{$storage.current_idea.created_at | date:'longDate'}}
       </h5>
@@ -24,28 +24,32 @@
         {{$storage.current_idea.description || 'Description here ...'}}
       </p>
     </div>
-    <div class="col-md-12" id="ideaAdditionalInfo">
-      <ul id="ideaAdditionalInfoList">
-        <li class="ideaAdditionalInfoListItem">
-	  <span class="ideaInfoNumber">427</span> Total Commits
-        </li>
-        <li class="ideaAdditionalInfoListItem">
-	  <span class="ideaInfoNumber">12</span> Contributors
-        </li>
-      </ul>
-    </div>
+   	<div class="col-md-3 pull-right" id="ideaButtonListWrapper">
+		  <ul id="ideaButtonList">
+		    <button class="btn btn-default btn-block"   
+								ng-show="$storage.current_idea.user_id != $session.user.id">
+					Follow
+				</button>
+		    <div class="btn btn-default btn-block" 
+			    			ng-click="showPullRequestCreatePanel()" 
+								ng-show="$storage.current_idea.user_id != $session.user.id">
+			    Create Pull Request
+		    </div>
+		    <button class="btn btn-default btn-block"
+		 	      		ng-click="showPullRequestIndexPage()">
+					View Pull Requests
+		    </button>
+		  </ul>
+		</div>
   </div>
-  <div class="col-md-2" id="ideaButtonListWrapper">
-    <ul id="ideaButtonList">
-      <button class="btn btn-default btn-block">Follow</button>
-      <button class="btn btn-default btn-block" 
-	      ng-click="showPullRequestCreatePanel()">
-	      Create Pull Request
-      </button>
-      <button class="btn btn-default btn-block"
-   	      ng-click="showPullRequestIndexPage()">
-  		View Pull Requests
-      </button>
+	<div class="col-md-12" id="ideaAdditionalInfo">
+    <ul id="ideaAdditionalInfoList">
+      <li class="ideaAdditionalInfoListItem">
+  			<span class="ideaInfoNumber">427</span> Total Commits
+      </li>
+      <li class="ideaAdditionalInfoListItem">
+  			<span class="ideaInfoNumber">12</span> Contributors
+      </li>
     </ul>
   </div>
 </div>

@@ -1,29 +1,29 @@
 <div id="ideaCommentsListWrapper" ng-controller="ResourceCommentIndexController">
   <ul id="ideaCommentsList" ng-repeat="resourceComment in resourceComments">
-    <li class="ideaCommentsListItem">
-      <div class="row">
-        <div class="ideaCommentsAvatarWrapper col-md-2">
-          <div class="ideaCommentsAvatar outline">
-            <img ng-src="{{$session.user.avatar_file_name ? '/images/'+$session.user.id +'/medium/' + $session.user.avatar_file_name : '/images/missing.png'}}" />
-          </div>
-        </div>
-        <div class="ideaCommentWrapper col-md-10">
-          <h4><b>{{$session.user.nickname || $session.user.email}} said:</b></h4>
-          <p class="ideaComment" ng-click="editComment(resourceComment)">
-            {{ resourceComment.comment }}
-          </p>
-          <h6>Posted {{resourceComment.created_at | date:'longDate'}} at {{resourceComment.created_at | date:'shortTime'}}</h6>
-          <i ng-click="updateComment(resourceComment)" class="fa fa-pencil"></i>
-        </div>
-      </div>
+    <li class="resourceCommentsListItem col-md-12">
+      <div class="resourceCommentWrapper col-md-9">
+				<span class="resourceComment col-md-12" ng-click="editComment(resourceComment)">
+   				{{ resourceComment.comment }}
+  			</span>
+  			<span id="resourceCommentTimestamp" class="col-md-12 pull-right">
+					{{resourceComment.created_at | date:'shortDate'}} at {{resourceComment.created_at | date:'shortTime'}}
+				</span>
+    		
+			</div>
+			<div class="col-md-1 pull-right resourceEditIconWrapper ">
+				<span ng-click="updateComment(resourceComment)" class="fa fa-pencil resourceEditIcon"></span>     
+			</div>
+			<div class="col-md-2 pull-right resourceCommentUserAvatar">  
+			  <img ng-src="{{$session.user.avatar_file_name ? '/images/'+$session.user.id +'/thumb/' + $session.user.avatar_file_name : '/images/missing.png'}}" />
+			</div>
     </li>
   </ul>
   <div class="col-md-12" ng-controller="ResourceCommentCreationController">
     <form novalidate> 
       <textarea rows="5" cols="100" ng-model="resource_comment.message" placeholder="Create Resource Comment Here" class="form-control"></textarea>
-		<button id="createResourceCommentButton" ng-click="createResourceComment()" class="btn btn-default btn-lg">
+	<button id="createResourceCommentButton" ng-click="createResourceComment()" class="btn btn-default btn-lg">
           Save Resource Comment
-      </button>
-	</form>
+        </button>
+    </form>
   </div>
 </div>

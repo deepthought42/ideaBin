@@ -55,10 +55,9 @@ class PullRequestsController < ApplicationController
 		@toRepo = Repository.where(user_id: @idea.user_id).where(idea_id: params[:idea_id]).first
 		@repo = Repository.where(user_id: current_user.id).where(idea_id: params[:idea_id]).first
 		
-		
+
 		@pull_request = PullRequest.where(to_repo_id: @toRepo.id).where(repository_id: @repo.id).where(status: "SUBMITTED").first
-		
-		unless @pull_request
+		if( @pull_request && current_user != @idea.user)
 	    @pullRequest = PullRequest.new()
 
 			@pullRequest.repository_id = @repo.id
@@ -70,8 +69,9 @@ class PullRequestsController < ApplicationController
 			Dir.chdir(@repo.path)
 			@git = Git.init()
 			@git.pull(@toRepo.path, "master") # fetch and a merge
-		end 
-		if(@pullRequest)
+		end
+		
+		if @pull_request
 			respond_to do |format|
 				format.html # new.html.erb
 				format.json { render json: @pullRequest }
@@ -93,9 +93,9 @@ class PullRequestsController < ApplicationController
 		@git.pull(requestor_path, "master") # fetch and a merge
 		@pullRequest.status = "ACCEPTED"
     if @pullRequest.save
-			respond_with(@pullRequest)
-		else
-			render json: {error: "An error occurred while updating your pull request"}
+		respond_with(@pullRequest)
+	else
+		render json: {error: "An error occurred while updating your pull request"}
     end
   end
 	

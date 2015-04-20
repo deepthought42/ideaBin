@@ -27,6 +27,10 @@
 	padding: 		inherit;
 }
 
+.resourceEditIcon {
+	vertical-align: 	bottom;
+}
+
 .resourceCommentUserAvatar {
 	margin: inherit;
 	padding: inherit;

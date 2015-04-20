@@ -25,12 +25,18 @@ class IdeasController < ApplicationController
     #clone idea repo from owners copy if current user isn't owner
     if(current_user.id != @idea.user_id)
 	    repo_path = "#{Rails.root}/public/data/repository/#{@idea.user_id}/#{@idea.name}"
-			unless @idea.users.include?(current_user)
-				@repo = Repository.new()
-				@repo.path = "#{Rails.root}/public/data/repository/#{current_user.id}/#{@idea.name}"
-				@repo.user = current_user
-				@idea.repositories << @repo
-			end
+			#unless @idea.users.include?(current_user)
+			@repo = Repository.new()
+
+			@repo.path = "#{Rails.root}/public/data/repository/#{current_user.id}/#{@idea.name}"
+			@repo.user = current_user
+			@repo.idea = @idea
+			#@idea.repositories << @repo
+			#@idea.save
+
+			@repo.save
+			logger.debug "REPOSITORY :: #{@repo.path}"
+			#end
 		else
 			#load up existing repository
 			@repo = Repository.where(user_id: current_user.id).where(idea_id: params[:id]).first
@@ -56,31 +62,7 @@ class IdeasController < ApplicationController
 
   # GET /ideas/1/edit
   def edit
-    @idea = Idea.find(params[:id])
-		@directoryParent = Directory.where("idea_id = ? AND is_top = ?", @idea.id, true).take		
-    #clone idea repo from owners copy if current user isn't owner
-		@repo = IdeasUsers.find(user_id: current_user.id, idea_id: @idea.id)
-		
-    if(current_user.id != @idea.user_id)
-	    repo_path = "#{Rails.root}/public/data/repository/#{current_user.id}/#{@idea.name}"
-			
-			unless File.exists?(repo_path)
-				Dir.mkdir(repo_path)
-			end
-      Dir.chdir(repo_path)
-			if(!@repo)
-				@git = Git.clone(repo_path, @idea.name)
-				@repo = IdeasUsers.new()
-				@repo.user_id = current_user.id
-				@repo.idea_id = @idea.id
-				@repo.save
-			else
-				#merge parent into existing repo
-			end
-			
-    end
-		
-		respond_with(@idea)
+    
   end
 
   # POST /ideas
@@ -101,22 +83,22 @@ class IdeasController < ApplicationController
     @idea.cover_img = params[:cover_img]
 		
     unless File.exists?(repo_path)
-	Dir.mkdir(repo_path)
-    end
-	@repo = Repository.new()
-	@repo.path = "#{Rails.root}/public/data/repository/#{current_user.id}/#{@idea.name}"
-	@repo.user = current_user 
-	@idea.repositories << @repo
-	@idea.save
+		Dir.mkdir(repo_path)
+		  end
+		@repo = Repository.new()
+		@repo.path = "#{Rails.root}/public/data/repository/#{current_user.id}/#{@idea.name}"
+		@repo.user = current_user 
+		@idea.repositories << @repo
+		@idea.save
 			
-	#create directory in database to associate the directory created in the file systems.
-	Dir.chdir(repo_path)
-	@git = Git.init(@idea.name)
-	if params[:cover_img]
-		DataFile.save(params[:cover_img], @repo.path)
-		@git.add(:all => true)
-		@git.commit("Cover image added.")
-	end
+		#create directory in database to associate the directory created in the file systems.
+		Dir.chdir(repo_path)
+		@git = Git.init(@idea.name)
+		if params[:cover_img]
+			DataFile.save(params[:cover_img], @repo.path)
+			@git.add(:all => true)
+			@git.commit("Cover image added.")
+		end
     respond_with(@idea)
   end
   ## Calling this method with the appropriate paramaters will result in saving

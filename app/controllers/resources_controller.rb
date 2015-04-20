@@ -7,7 +7,7 @@ class ResourcesController < ApplicationController
   # GET /resources.json
   def index
     @resources = []
-	Dir.glob("#{params[:path]}/*").each do |f| 
+		Dir.glob("#{params[:path]}/*").each do |f| 
 		unless File.directory?(f)
 			@resources.push(File.basename(f))
 		end
@@ -45,10 +45,9 @@ class ResourcesController < ApplicationController
   # POST /resources.json
   def create
     data =params[:data]
-   # data.gsub('\\', '')
 
     resource = ActiveSupport::JSON.decode(data)
-    logger.debug "REPO ID ::  #{resource}"
+		logger.debug "REPO ID :: #{resource["repo_id"]}"
     @repo = Repository.find(resource["repo_id"])
 
     post = DataFile.save(params['file'], @repo.path)
@@ -56,41 +55,31 @@ class ResourcesController < ApplicationController
     Dir.chdir(@repo.path)
 		@git = Git.init()
 		@git.add(:all => true)
-		@git.commit(params[:comment])
+		@git.commit(resource["comment"])
    
-		@resource = Resource.new
-		@resource.repo_id = params[:repo_id]
-		@resource.filename = params[:file].original_filename
-		@resource.content_type = params[:file].content_type
-		@resource.comment = params[:comment]
-		@resource.directory_id = params[:directory_id]
-	
-		if(@resource.save)
-			respond_with(@resource)
-		else
-			render json: {error: "File is already up to date"}
-		end
+		render json: {success: "file uploaded"}
   end
 
   # PUT /resources/1
   # PUT /resources/1.json
   def update
-    @resource = Resource.find(params[:id])
-	@parentDir = Directory.find(@resource.directory_id)
+    @resource = params[:content]
+	
+		if params[:dir_path] == "/"
+			params[:dir_path]=""			
+		end
+
+		file_path = "#{params[:dir_path]}/#{params[:filename]}"
 		
-	file_path = "#{@parentDir.path}/#{@resource.filename}"
-		
-    respond_to do |format|
-      if File.open(file_path, 'w') {|f| f.write(params[:content]) }
-				Dir.chdir(@parentDir.path)
-				@git = Git.init()
-				@git.add(:all => true)
-				@git.commit(params[:comment])
-				
-        format.json { head :no_content }
-      else
-        format.json { render json: @resource.errors, status: :unprocessable_entity }
-      end
+    if File.open(file_path, 'w') {|f| f.write(params[:content]) }
+			Dir.chdir(params[:dir_path])
+			@git = Git.init()
+			@git.add(:all => true)
+			@git.commit(params[:comment])
+			
+			render json: {success: "file successfully uploaded"}
+    else
+      render json: { error: "SOMETHING WENT WRONG SAVING RESOURCE" }
     end
   end
 
@@ -127,6 +116,7 @@ class ResourcesController < ApplicationController
 	# GET /resources/1
   # GET /resources/1.json
   def download
+		#send_file(params[:path], :disposition => 'attachment', :x_sendfile=>true)
 		send_file(params[:path])
   end
 	

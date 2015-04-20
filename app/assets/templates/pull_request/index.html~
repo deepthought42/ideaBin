@@ -1,12 +1,9 @@
 
 <div class="col-md-12" ng-controller="PullRequestIndexController">
 	<div ng-repeat="pullRequest in pullRequests">
-		<span class="col-md-6" 
+		<span class="col-md-9" 
 					ng-click="showPullRequest(pullRequest.id)">
 			{{pullRequest.message}}
-		</span>
-		<span class="col-md-3">
-			{{pullRequest.status}}
 		</span>
 		<span class="col-md-3 pull-right">
 			<span class="fa fa-edit" ng-click="acceptPullRequest(pullRequest.id)"></span>

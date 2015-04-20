@@ -8,6 +8,7 @@
 
 #resource_container {
 	padding:	15px;
+	float:		left;
 	display:	inline;
 }
 
@@ -62,6 +63,6 @@
 }
 
 .fa-folder {
-	color:		yellow;
+	color:		red;
 }
 
