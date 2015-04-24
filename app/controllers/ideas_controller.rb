@@ -81,16 +81,18 @@ class IdeasController < ApplicationController
     @idea.user_id = @current_user.id
     repo_path = "#{Rails.root}/public/data/repository/#{current_user.id}" 
     @idea.cover_img = params[:cover_img]
-		
-    unless File.exists?(repo_path)
-		Dir.mkdir(repo_path)
+
+		if @idea.save
+			@repo = Repository.new()
+			@repo.path = "#{Rails.root}/public/data/repository/#{current_user.id}/#{@idea.name}"
+			@repo.idea = @idea 
+			@repo.user = current_user 
+			@repo.save
+	    unless File.exists?(repo_path)
+				Dir.mkdir(repo_path)
 		  end
-		@repo = Repository.new()
-		@repo.path = "#{Rails.root}/public/data/repository/#{current_user.id}/#{@idea.name}"
-		@repo.user = current_user 
-		@idea.repositories << @repo
-		@idea.save
-			
+		end 
+
 		#create directory in database to associate the directory created in the file systems.
 		Dir.chdir(repo_path)
 		@git = Git.init(@idea.name)
