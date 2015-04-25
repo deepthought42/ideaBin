@@ -14,10 +14,6 @@ app.controller('UserSessionCtrl', ['$scope', '$auth', '$location', '$sessionStor
 		$scope.$session = $sessionStorage;
 		$scope.signedIn = $auth.validateUser();
 		
-		$scope.$on('userAuthenticated', function(event, user){
-			$scope.$session.user = user.data;
-		});
-		
 		$scope.showRegistrationForm = function(){
 			$('#signInForm').hide();
 			$('#userRegistrationForm').show();
@@ -127,40 +123,28 @@ app.controller('UserAuthenticateController', ['$scope', '$rootScope', '$auth', '
 			//Authenticate with user credentials
 			$auth.submitLogin(credentials).then(function(response) {
 				$scope.$session.user = response.data;
-				$rootScope.$broadcast('userAuthenticated', response);
 				console.log(response.data)
 				console.log($scope.$session.user); // => {id: 1, ect: '...'}
 			}, function(error) {
 				alert("Failed to log in");
-					// Authentication failed...
 			});
 			
 			$scope.$on('auth:login-success', function(event, currentUser) {
-				
-				alert("Successfully logged on..."+event.headers);
+				$scope.$session.user = currentUser.data;
+				$location.path('/ideas');
 				$scope.hideSignInPanel();
-				
-				//config.headers.common.Expiry = response.headers["Expiry"]
-				//config.headers.common.Uid = response.headers["Uid"]
-				//config.headers.common.Token-Type = response.headers["Token-Type"]
 			});
 			
 			$scope.$on('auth:login-error', function(event, currentUser) {
 				alert("Error logging in");
 			});
-
-			$scope.$on('devise:new-session', function(event, currentUser) {
-				$scope.$session.user = currentUser;
-				$scope.hideSignInPanel();
-				console.log("NEW SESSION USER VALUE :: " + $scope.$storage.user);
-				$location.path('/ideas');
-			});
 		}
 	}
 ]);
 
-app.controller('UserRegisterController', ['$scope', '$rootScope', '$auth', '$location',
-	function ($scope, $rootScope, $auth, $location) { 
+app.controller('UserRegisterController', ['$scope', '$rootScope', '$auth', '$sessionStorage',
+	function ($scope, $rootScope, $auth, $sessionStorage ) { 
+		$scope.$session = $sessionStorage;		
 		$scope.hideRegistrationPanel = function(){
 			$('#userRegistrationForm').hide();
 		}
