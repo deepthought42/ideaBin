@@ -2,32 +2,35 @@ var app = angular.module('ideaBin.ideaControllers', []);
 
 app.controller("IdeaIndexController", ['$scope', '$localStorage', '$sessionStorage', 'Idea', 'Repository','$location', '$http', '$rootScope',
 	function($scope, $localStorage, $sessionStorage, Idea, Repository, $location, $http, $rootScope) {
-		$scope.$storage = $localStorage;
-		$scope.ideas = Idea.query();
-		$scope.$session = $sessionStorage;
-  		$scope.deleteIdea =  function(idea){
-			Idea.delete({id: idea.id});
-			var index = $scope.ideas.indexOf(idea);
-			$scope.ideas.splice(index, 1);
-		}
+	$scope.$storage = $localStorage;
+	$scope.ideas = Idea.query();
+	$scope.$session = $sessionStorage;
+  	$scope.deleteIdea =  function(idea){
+		Idea.delete({id: idea.id});
+		var index = $scope.ideas.indexOf(idea);
+		$scope.ideas.splice(index, 1);
+	}
 		
-		$scope.createNewIdea = function(){
-			Idea.create();
-			$location.path('/ideas');
-		};
-		
-		$scope.editIdea = function (ideaId) {
-			$scope.$storage.current_idea  = Idea.show({id: ideaId}).$promise;
-			$scope.$storage.current_idea.then(function onSuccess(response){
-				$scope.$storage.current_idea = response;
-				$scope.$storage.repo = Repository.show({user_id: $scope.$session.user.id, id: ideaId}).$promise;
-				$localStorage.repo.then(function onSuccess(response){
-					$scope.$storage.repo = response;
+	$scope.createNewIdea = function(){
+		Idea.create();
+		$location.path('/ideas');
+	};
+	
+	$scope.editIdea = function (ideaId) {
+		$scope.$storage.current_idea  = Idea.show({id: ideaId}).$promise;
+		$scope.$storage.current_idea.then(function onSuccess(response){
+			$scope.$storage.current_idea = response;
+			$scope.$storage.repo = Repository.show(
+				{user_id: $scope.$session.user.id, 
+				 id: ideaId}
+			).$promise;
+			$localStorage.repo.then(function onSuccess(response){
+				$scope.$storage.repo = response;
 
-					$rootScope.$broadcast("loadDirectory", $scope.$storage.repo.path )
-					$rootScope.$broadcast("loadResources", $scope.$storage.repo.path)
-					$rootScope.$broadcast("getSubmittedPullRequests", $scope.$storage.repo.id)
-					$rootScope.$broadcast("loadRepositoryComments")
+				$rootScope.$broadcast("loadDirectory", $scope.$storage.repo.path )
+				$rootScope.$broadcast("loadResources", $scope.$storage.repo.path)
+				$rootScope.$broadcast("getSubmittedPullRequests", $scope.$storage.repo.id)
+				$rootScope.$broadcast("loadRepositoryComments")
 				},
 				function onFail(response) {
 						alert("failed to load idea for editing");
