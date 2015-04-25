@@ -20,7 +20,7 @@
 
 //= require bootstrap
 //= require_tree ../components/ace-builds/src-min-noconflict
-//= require ../components/angular/angular
+//= require ../components/angular/angular.min
 //= require ../components/angular-ui-ace/ui-ace.min
 //= require ../components/ng-file-upload/angular-file-upload-shim.min
 //= require ../components/ng-file-upload/angular-file-upload.min
@@ -29,6 +29,7 @@
 //= require ../components/angular-cookies/angular-cookies.min
 //= require ../components/ng-token-auth/dist/ng-token-auth.min
 //= require ../components/angular-masonry/angular-masonry
+//= require ../components/angular-messages/angular-messages.min
 //= require angular-resource
 //= require angular-route
 //= require angular-rails-templates

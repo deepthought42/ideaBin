@@ -11,13 +11,8 @@ var app = angular.module('ideaBin.userControllers', []);
 app.controller('UserSessionCtrl', ['$scope', '$auth', '$location', '$sessionStorage',
 	function ($scope, $auth, $location, $sessionStorage) { 
 
-		$scope.session = $sessionStorage;
-
+		$scope.$session = $sessionStorage;
 		$scope.signedIn = $auth.validateUser();
-		
-		$scope.$on('userAuthenticated', function(event, user){
-			$scope.user = user;
-		});
 		
 		$scope.showRegistrationForm = function(){
 			$('#signInForm').hide();
@@ -38,8 +33,7 @@ app.controller('UserSessionCtrl', ['$scope', '$auth', '$location', '$sessionStor
 			$scope.$on('auth:logout-success', function(event, oldCurrentUser) {
 				$('#editProfileForm').hide();
 				alert($scope.session.user.email + "you're signed out now.");
-				$scope.$storage.user = null;
-				$scope.user = null;
+				$scope.$session.user = null;
 			});
 
 			$scope.$on('auth:logout-error', function(event, reason){
@@ -48,7 +42,8 @@ app.controller('UserSessionCtrl', ['$scope', '$auth', '$location', '$sessionStor
 		}
 		
 		$scope.$on('userRegistered', function(event, data){
-			$scope.user = data;
+			$scope.$session.user = data;
+			$auth.validateUser();
 		})
 		
 		$scope.editProfile = function(){
@@ -66,7 +61,7 @@ app.controller('UserDetailController', ['$scope', 'User', '$auth', '$location', 
 			$('#editProfileForm').hide();
 		}
 		
-	$scope.uploadFile = function(){
+		$scope.uploadFile = function(){
 			$scope.upload = $upload.upload({
 				url: '/users',
 				method: 'PUT',
@@ -128,63 +123,51 @@ app.controller('UserAuthenticateController', ['$scope', '$rootScope', '$auth', '
 			//Authenticate with user credentials
 			$auth.submitLogin(credentials).then(function(response) {
 				$scope.$session.user = response.data;
-				$rootScope.$broadcast('userAuthenticated', response);
 				console.log(response.data)
 				console.log($scope.$session.user); // => {id: 1, ect: '...'}
 			}, function(error) {
 				alert("Failed to log in");
-					// Authentication failed...
 			});
 			
 			$scope.$on('auth:login-success', function(event, currentUser) {
-				
-				alert("Successfully logged on..."+event.headers);
+				$scope.$session.user = currentUser.data;
+				$location.path('/ideas');
 				$scope.hideSignInPanel();
-				
-				//config.headers.common.Expiry = response.headers["Expiry"]
-				//config.headers.common.Uid = response.headers["Uid"]
-				//config.headers.common.Token-Type = response.headers["Token-Type"]
 			});
 			
 			$scope.$on('auth:login-error', function(event, currentUser) {
 				alert("Error logging in");
 			});
-
-			$scope.$on('devise:new-session', function(event, currentUser) {
-				$scope.$session.user = currentUser;
-				$scope.hideSignInPanel();
-				console.log("NEW SESSION USER VALUE :: " + $scope.$storage.user);
-				$location.path('/ideas');
-			});
 		}
 	}
 ]);
 
-app.controller('UserRegisterController', ['$scope', '$auth', '$location',
-	function ($scope, $auth, $location) { 
+app.controller('UserRegisterController', ['$scope', '$rootScope', '$auth', '$sessionStorage',
+	function ($scope, $rootScope, $auth, $sessionStorage ) { 
+		$scope.$session = $sessionStorage;		
+		$scope.submitted = false;
 		$scope.hideRegistrationPanel = function(){
 			$('#userRegistrationForm').hide();
 		}
-		$scope.register = function(){
+		$scope.register = function(isValid){
 			var credentials = {
-				email: $scope.registrationForm.email,
+				email: $scope.userRegistration.email,
 				password: $scope.registrationForm.password,
 				password_confirmation: $scope.registrationForm.confirmation_password
 			};
+			$scope.submitted = true;
+			if(isValid){
+				$auth.submitRegistration(credentials).then(function(registeredUser) {
+					//show some sort of statement that indicates they are welcome to enjoy
+				}, function(error) {
+					alert("Something went wrong during registration. Womp womp");
+				});
 
-			$auth.submitRegistration(credentials).then(function(registeredUser) {
-				//show some sort of statement that indicates they are welcome to enjoy
-				alert("registered user :: " + registeredUser);
-				$scope.uploadFile();
-			}, function(error) {
-				alert("Something went wrong during registration. Womp womp");
-			});
-
-			$scope.$on('auth:registration-email-success', function(event, user) {
-				$scope.$storage.user = user;
-				$rootScope.$broadcast('userRegistered', user);
-		//		$location.path('/ideas');
-			});
+				$scope.$on('auth:registration-email-success', function(event, user) {
+					$rootScope.$broadcast('userRegistered', user);
+					$('#userRegistrationForm').hide()
+				});
+			}
 		}
 	}
 ]);

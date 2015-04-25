@@ -28,7 +28,8 @@ var ideaBin = angular.module('ideaBin',
 		'ngStorage',
 		'ipCookie',
 		'ng-token-auth',
-		'wu.masonry']);
+		'wu.masonry',
+		'angular-messages']);
 
 // for compatibility with Rails CSRF protection
 
@@ -46,12 +47,7 @@ ideaBin.config([
 	function() {
             return {
                 'request': function(config) {
-		console.log("why suddenly no worky");
-		for(var key in config.headers){
-			console.log("KEY :: " + key + " val :: " +config.headers[key]);
-		}
       		if (config.headers['access-token']) {
-		  console.log("SETTING HEADERS ");
                   $httpProvider.defaults.headers.common['Access-Token'] = config.headers['access-token'];
 		  $httpProvider.defaults.headers.common['Token-Type'] = config.headers['token-type'];
                   $httpProvider.defaults.headers.common['Client'] = config.headers['client'];

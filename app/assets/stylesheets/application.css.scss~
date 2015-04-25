@@ -30,9 +30,9 @@ body{
 }
 
 .item {
-  width: 220px;
+  width: 	220px;
   margin: 10px;
-  float: left;
+  float: 	left;
 }
 
 .item img {
@@ -49,6 +49,7 @@ body{
   width: 			100%;
   position: 	absolute;
   top: 				0;
+  height: 100%;
 }
 
 .pointerCursor {
@@ -93,4 +94,17 @@ body{
 	font-size: 					.8em;
 	text-decoration:   	underline;
 	color:							gray;
+}
+
+.margin-bottom-15{
+  margin-bottom: 15px;
+}
+
+/*********************
+Angular error styling
+**********************/
+
+form.ng-submitted.ng-invalid {
+  border-color: red;
+  border-width: 2px;
 }
