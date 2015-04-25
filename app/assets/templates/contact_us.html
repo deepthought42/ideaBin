@@ -3,18 +3,12 @@
       <div class="row">
         <div class="col-md-6 col-md-offset-3" id="contactFormWrapper">
           <h2>Contact the Ideabin Team</h2>
-          <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla eget est bibendum libero placerat sagittis. Aliquam aliquet metus eu mauris fermentum, eget varius sem mollis. Etiam elementum dignissim imperdiet. Donec pulvinar nec elit in ultricies. Integer eleifend tincidunt sem. 
-          </p>
           <form id="contactForm">
               <input class="form-control" placeholder="First Name" ng-model="contact.fname" />
               <input class="form-control" placeholder="Last Name" ng-model="contact.lname" />
               <input class="form-control"  placeholder="Email" ng-model="contact.email" />
               <select class="form-control" ng-model="contact.reason">
-                  <option value="PRAISE" selected="selected">Praise</option>
-                  <option value="ISSUE">Issue/Error</option>
-                  <option value="FUNC_REQUEST">Request Functionality</option>
-                  <option value="QUESTION">Question</option>
+                <option ng-repeat="option in options" value="{{option}}">{{option}}</option>  
               </select>
               <textarea class="form-control" placeholder="Your Message" ng-model="contact.message" />
 
