@@ -65,3 +65,27 @@
 	color:		yellow;
 }
 
+.resource-row{
+    height: 28px;
+    background-color: #F1F2F3;
+    line-height: 28px;
+    border-bottom: 1px solid #D1D2D3;
+    position: relative;
+    min-width: 100px;
+    
+    .fa{
+       margin-right: 5px; 
+    }
+    
+    .resource-row-tool-list{
+        list-style-type: none;
+        padding-left: 0px;
+        display: inline;
+        position: absolute;
+        right: 15px;
+        
+        li{
+            display: inline;
+        }
+    }
+}
