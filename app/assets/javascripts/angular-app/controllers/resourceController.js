@@ -4,7 +4,7 @@ app.controller("ResourceIndexCtrl", ['$rootScope', '$scope', '$localStorage', 'R
 	function($rootScope, $scope, $localStorage, Resource, $location, $upload, $http) {
 		$scope.$storage = $localStorage;
 		$scope.editableResourceTypes = ["txt", "rb", "html", "log", "js", "php", "scss"];
-		$scope.resourceLogos = {"text":"file-text", "rb": "file-code-o", "html": "file-code-o" , "log":"file-o", "js":"file-code-o", "php":"file-code-o", "jpg": "file-image-o", "css": "file-code-o", "scss": "file-code-o", "no-format": "file-o"}
+		$scope.resourceLogos = {"text":"fa-file-text", "rb": "fa-file-code-o", "html": "fa-file-code-o" , "log":"fa-file-o", "js":"fa-file-code-o", "php":"fa-file-code-o", "jpg": "fa-file-image-o", "css": "fa-file-code-o", "scss": "fa-file-code-o", "no-format": "fa-file-o"}
 
 		//move to event
 		$scope.$on('loadResources', function(event, path){
