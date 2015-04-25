@@ -1,42 +1,16 @@
 <div id="ideaResourceContainer" ng-controller="ResourceIndexCtrl">
   <div id="resource_container" class="row">
-    <a href=" http://www.picmonkey.com/service ?_apikey=00112233445566778899aabbccddeeff &_import=http%3A%2F%2Ffarm8.staticflickr.com%2F7129%2F7113442667_efa2b2181a_b_d.jpg">PIC MONKEY</a>
-    <a href="http://www.ribbet.com/app/?_import=&_export=ideabin.net&_exclude=out,home&
-_export_title=SAVE_BUTTON_TITLE&_export_agent=browser&embed=true">Ribbit</a>
-    <div class="col-md-12" ng-repeat="resource in resources">
-				<span class="col-md-1">
-					<img ng-src="/images/icons/resources/{{getResourceIcon(resource)}}" />
-				</span>
-				<span class="col-md-7 pointerCursor" 
-							id="resourceName" 
-							ng-click="editResource(resource)">
-					{{ resource }}
-				</span>
-					<a ng-href="{{'localhost:3000/resources/1/download?path='+$storage.repo.path + $storage.dir_path + resource}}" target="_self">download</a>
-					<i id="downloadResource" 
-						 ng-click="downloadResource($storage.repo.path + $storage.dir_path, resource)" 
-						 class="dock-item fa fa-download">
-					</i>
-					<i id="removeResource" 
-						 ng-click="deleteResource(resource)" 
-						       class="fa fa-times deleteButton"></i>
-				</span>
-					</div>
-					<div class="col-md-12">
-						<span >
-				<button class="btn btn-default btn-block" 
-					id="resourceDragDropBtn" 
-					ng-file-drop ng-model="files" 
-					class="drop-box" 
-							    drag-over-class="dragover" 
-						          ng-multiple="true" 
-						          allow-dir="true">
-						Drop files here
-				</button>
-				<div ng-no-file-drop>
-					File Drag/Drop is not supported for this browser
-				</div>
-      </span>
+    <div class="container-fluid" ng-repeat="resource in resources">
+      <div class="row resource-row">
+        <div class="col-md-12">
+            <span class="pointerCursor" id="resourceName" ng-click="editResource(resource)"><i class="fa fa-file-code-o"></i>{{ resource }}</span>
+            <ul class="resource-row-tool-list">
+                <li><i id="downloadResource" ng-click="downloadResource($storage.repo.path + $storage.dir_path, resource)" class="dock-item fa fa-download"></i></li>
+                <li><i id="removeResource" ng-click="deleteResource(resource)" class="fa fa-times deleteButton"></i></li>
+            </ul>
+        </div>
+      </div>
     </div>
+    <hr/>
   </div>
 </div>
