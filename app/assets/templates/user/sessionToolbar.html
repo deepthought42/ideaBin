@@ -1,4 +1,4 @@
-<div id="userInfo" class="col-md-12 pull-right" ng-controller="UserSessionCtrl">
+<div id="userInfo" class="col-md-12 pull-right" ng-controller="UserSessionCtrl"> 
 	<span ng-show="!user.signedIn" class="pull-right">
 		<a id="signInLink" class="pointerCursor" ng-click="showSignInForm()">Sign in</a> |
 		<a class='pointerCursor navbar-link' ng-click="showRegistrationForm()">Sign up</a>
@@ -6,7 +6,7 @@
 	<span  ng-show="user.signedIn" class="pull-right">
 		<div class="col-md-12 pull-right">
 			<span>
-				Welcome <strong>{{user.data.email}}</strong>.
+				Welcome <strong>{{$session.user.nickname || $session.user.email}}</strong>
 			</span>			
 			<span>
 				<span class="pointerCursor link" ng-click='logout(user)'>Sign out</span> |

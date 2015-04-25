@@ -11,12 +11,11 @@ var app = angular.module('ideaBin.userControllers', []);
 app.controller('UserSessionCtrl', ['$scope', '$auth', '$location', '$sessionStorage',
 	function ($scope, $auth, $location, $sessionStorage) { 
 
-		$scope.session = $sessionStorage;
-
+		$scope.$session = $sessionStorage;
 		$scope.signedIn = $auth.validateUser();
 		
 		$scope.$on('userAuthenticated', function(event, user){
-			$scope.user = user.data;
+			$scope.$session.user = user.data;
 		});
 		
 		$scope.showRegistrationForm = function(){
@@ -38,8 +37,7 @@ app.controller('UserSessionCtrl', ['$scope', '$auth', '$location', '$sessionStor
 			$scope.$on('auth:logout-success', function(event, oldCurrentUser) {
 				$('#editProfileForm').hide();
 				alert($scope.session.user.email + "you're signed out now.");
-				$scope.$storage.user = null;
-				$scope.user = null;
+				$scope.$session.user = null;
 			});
 
 			$scope.$on('auth:logout-error', function(event, reason){
@@ -48,7 +46,8 @@ app.controller('UserSessionCtrl', ['$scope', '$auth', '$location', '$sessionStor
 		}
 		
 		$scope.$on('userRegistered', function(event, data){
-			$scope.user = data;
+			$scope.$session.user = data;
+			$auth.validateUser();
 		})
 		
 		$scope.editProfile = function(){
@@ -66,7 +65,7 @@ app.controller('UserDetailController', ['$scope', 'User', '$auth', '$location', 
 			$('#editProfileForm').hide();
 		}
 		
-	$scope.uploadFile = function(){
+		$scope.uploadFile = function(){
 			$scope.upload = $upload.upload({
 				url: '/users',
 				method: 'PUT',
@@ -160,8 +159,8 @@ app.controller('UserAuthenticateController', ['$scope', '$rootScope', '$auth', '
 	}
 ]);
 
-app.controller('UserRegisterController', ['$scope', '$auth', '$location',
-	function ($scope, $auth, $location) { 
+app.controller('UserRegisterController', ['$scope', '$rootScope', '$auth', '$location',
+	function ($scope, $rootScope, $auth, $location) { 
 		$scope.hideRegistrationPanel = function(){
 			$('#userRegistrationForm').hide();
 		}
@@ -174,16 +173,13 @@ app.controller('UserRegisterController', ['$scope', '$auth', '$location',
 
 			$auth.submitRegistration(credentials).then(function(registeredUser) {
 				//show some sort of statement that indicates they are welcome to enjoy
-				alert("registered user :: " + registeredUser);
-				$scope.uploadFile();
 			}, function(error) {
 				alert("Something went wrong during registration. Womp womp");
 			});
 
 			$scope.$on('auth:registration-email-success', function(event, user) {
-				$scope.$storage.user = user;
 				$rootScope.$broadcast('userRegistered', user);
-		//		$location.path('/ideas');
+				$('#userRegistrationForm').hide()
 			});
 		}
 	}
