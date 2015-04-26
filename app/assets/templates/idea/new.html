@@ -12,8 +12,15 @@
 			<div>
 				<button class="fa fa-times hidePanelButton" ng-click="hideCreateIdeaPanel()"></button>
 				<form name="idea" enctype="multipart/form-data" novalidate>
-					<div class=" text-center field" ng-file-drop ng-file-change="previewImage($files)" ng-model="cover_img" drop-available="dropSupported">			
-						<img id="ideaCreationImage" class="cover_img" ng-src="/images/{{ideaForm.cover_img.name || 'missing.png'}}" />
+					<div class=" text-center field" 
+								ng-file-drop 
+								ng-file-change="previewImage($files)" 
+								ng-model="cover_img" 
+								drop-available="dropSupported">			
+									<img id="ideaCreationImage" 
+												class="cover_img" 
+												ng-src="/images/{{ideaForm.cover_img.name || 'missing.png'}}"
+												ng-file-select />
                       
 					</div>
 					<div class="field">

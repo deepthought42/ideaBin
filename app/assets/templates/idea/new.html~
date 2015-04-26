@@ -3,24 +3,34 @@
 	  <div  class="col-md-4"></div>
 		<div id="ideaCreatePanel" class="col-md-4">
 			<div class="row text-center">
-				<h1>
-					Create an idea, then share it with the world.
-				</h1>
+              <div class="col-md-12">
+                <h2>
+					Create an idea.<br/>Share it with the world.
+				</h2>
+              </div>
 			</div>
 			<div>
 				<button class="fa fa-times hidePanelButton" ng-click="hideCreateIdeaPanel()"></button>
 				<form name="idea" enctype="multipart/form-data" novalidate>
-					<div class="field" ng-file-drop ng-file-change="previewImage($files)" ng-model="ideaForm.cover_img" drop-available="dropSupported">			
-						<img id="ideaCreationImage" class="cover_img" ng-src="/images/{{ideaForm.cover_img.name || 'missing.png'}}" />
+					<div class=" text-center field" 
+								ng-file-select
+								ng-file-drop 
+								ng-file-change="previewImage($files)" 
+								ng-model="cover_img" 
+								drop-available="dropSupported">			
+									<img id="ideaCreationImage" 
+												class="cover_img" 
+												ng-src="/images/{{ideaForm.cover_img.name || 'missing.png'}}" />
+                      
 					</div>
 					<div class="field">
-						<input type="text" name="idea[name]" ng-model="ideaForm.name" id="name" placeholder="Name"/>
+						<input class="form-control" type="text" name="idea[name]" ng-model="ideaForm.name" id="name" placeholder="Name"/>
 					</div>
 					<div class="field">
-						<input type="text" name="idea[description]" ng-model="ideaForm.description" id="description" placeholder="Description"/>
+						<input type="text" class="form-control" name="idea[description]" ng-model="ideaForm.description" id="description" placeholder="Description"/>
 					</div>
 					<div class="actions">
-				        <button ng-click="createNewIdea(idea)">SAVE</button>      
+				        <button class="btn btn-primary" ng-click="createNewIdea(idea)"><i class="fa fa-save"></i> Save Cover Image</button>      
 					</div>
 				</form>
 			</div>
