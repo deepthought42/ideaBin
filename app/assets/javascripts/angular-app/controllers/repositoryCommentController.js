@@ -64,13 +64,16 @@ app.controller("RepositoryCommentIndexController", ['$scope', '$localStorage', '
 app.controller('RepositoryCommentCreationController', ['$scope', '$localStorage', '$rootScope', 'RepositoryComment',
   function($scope, $localStorage, $rootScope, RepositoryComment){
     $scope.repositoryComment = {};
-    $scope.createComment = function(){
-      var repositoryComment = RepositoryComment.create({
-						message: $scope.repository_comment.message, 
-						repo_id: $localStorage.repo.id
-      });
-      $rootScope.$broadcast('addRepositoryCommentToIndex', repositoryComment);
-      $scope.repository_comment.message = '';
+    $scope.createComment = function(isValid){
+
+			if(isValid){
+		    var repositoryComment = RepositoryComment.create({
+							message: $scope.repository_comment.message, 
+							repo_id: $localStorage.repo.id
+		    });
+		    $rootScope.$broadcast('addRepositoryCommentToIndex', repositoryComment);
+		    $scope.repository_comment.message = '';
+			}
     }	
   }
 ]);

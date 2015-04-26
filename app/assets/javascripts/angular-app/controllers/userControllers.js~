@@ -152,8 +152,8 @@ app.controller('UserRegisterController', ['$scope', '$rootScope', '$auth', '$ses
 		$scope.register = function(isValid){
 			var credentials = {
 				email: $scope.userRegistration.email,
-				password: $scope.registrationForm.password,
-				password_confirmation: $scope.registrationForm.confirmation_password
+				password: $scope.userRegistration.password,
+				password_confirmation: $scope.userRegistration.confirmation_password
 			};
 			$scope.submitted = true;
 			if(isValid){

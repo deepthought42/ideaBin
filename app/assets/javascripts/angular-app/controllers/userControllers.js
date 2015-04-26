@@ -155,7 +155,7 @@ app.controller('UserRegisterController', ['$scope', '$rootScope', '$auth', '$ses
 				password: $scope.userRegistration.password,
 				password_confirmation: $scope.userRegistration.confirmation_password
 			};
-			$scope.submitted = true;
+
 			if(isValid){
 				$auth.submitRegistration(credentials).then(function(registeredUser) {
 					//show some sort of statement that indicates they are welcome to enjoy
