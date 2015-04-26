@@ -11,6 +11,10 @@ app.controller("ResourceIndexCtrl", ['$rootScope', '$scope', '$localStorage', 'R
 			$scope.resources = Resource.query({path: path});
 		});
 	
+		$scope.$on('addResourceToIndex', function(event, resource){
+			$scope.resources.push(resource);
+		});
+
 		$scope.showResource = function(resourceText){
 			$scope.editor.setValue(resourceText);
 		};
@@ -135,11 +139,12 @@ app.controller('ResourceDetailCtrl', ['$scope', '$localStorage', 'Resource', '$h
 	}
 ]);
 
-app.controller('ResourceCreationCtrl', ['$scope', 'Resource', '$upload',
-	function($scope, Resource, $upload ){
+app.controller('ResourceCreationCtrl', ['$scope', '$rootScope', 'Resource', '$upload',
+	function($scope, $rootScope, Resource, $upload ){
 
 		$scope.$watch('files', function () {
-        $scope.upload($scope.files);
+      $scope.upload($scope.files);
+
     });
 
 		$scope.upload = function(files) {			
@@ -151,31 +156,24 @@ app.controller('ResourceCreationCtrl', ['$scope', 'Resource', '$upload',
 				for (var i = 0; i < files.length; i++) {
 					var comment = prompt("Please describe the upload");
 					var file = files[i];
-				
+					$scope.filename = file.filename;
 					$upload.upload({
 						url: '/resources.json', 
 						method: 'POST', // or 'PUT',
 						headers: {'XSRF-TOKEN': ''},
 						//withCredentials: true,
 						data: {	comment: comment, 
-						resource: $scope.resource, 
-						repo_id:	$scope.$storage.repo.id},
-						file: file, // or list of files ($files) for html5 only
-						//fileName: 'doc.jpg' or ['1.jpg', '2.jpg', ...] // to modify the name of the file(s)
-						// customize file formData name ('Content-Disposition'), server side file variable name. 
-						//fileFormDataName: myFile, //or a list of names for multiple files (html5). Default is 'file' 
-						// customize how data is added to formData. See #40#issuecomment-28612000 for sample code
-						//formDataAppender: function(formData, key, val){}
+										resource: $scope.resource, 
+										repo_id:	$scope.$storage.repo.id
+						},
+						file: file
 					}).progress(function(evt) {
 						console.log('percent: ' + parseInt(100.0 * evt.loaded / evt.total));
 					}).success(function(data, status, headers, config) {
-						$scope.resources = Resource.query({path: $localStorage.repo.path + $scope.$storage.dir_path});
+						$rootScope.$broadcast('addResourceToIndex', file.name);
 					}).error(function(data, status, headers, config) {
 						console.log("There was an error uploading for the file. It may already be up to date");
 					})
-					//.then(success, error, progress); 
-					// access or attach event listeners to the underlying XMLHttpRequest.
-					//.xhr(function(xhr){xhr.upload.addEventListener(...)})
 				}
 			}
 		};

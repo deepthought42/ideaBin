@@ -117,8 +117,7 @@ class ResourcesController < ApplicationController
   # GET /resources/1.json
   def download
 		#send_file(params[:path], :disposition => 'attachment', :x_sendfile=>true)
-		#send_file(params[:path])
-		send_file("#{Rails.root}/public/data/repository/2/fdsafasfaddd/ideas.css.scss")
+		send_file(params[:path])
   end
 	
 	private
