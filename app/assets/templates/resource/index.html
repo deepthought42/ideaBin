@@ -17,13 +17,15 @@
 		  <div class="col-md-12" id="resource-drag-drop-wrapper">
 		    <span >
 		      <button class="btn btn-primary btn-block" 
-		          id="resourceDragDropBtn" 
-		          ng-file-drop ng-model="files" 
-		          class="drop-box" 
-		              drag-over-class="dragover" 
-		                  ng-multiple="true" 
-		                  allow-dir="true">
-		              Drop Resource Files Here
+						      id="resourceDragDropBtn" 
+									ng-file-select		          
+									ng-file-drop 
+									ng-model="files" 
+						      class="drop-box" 
+						      drag-over-class="dragover" 
+						      ng-multiple="true" 
+						      allow-dir="true">
+		              	Drop Resource Files Here
 		      </button>
 		      <div ng-no-file-drop>
 		        File Drag/Drop is not supported for this browser
