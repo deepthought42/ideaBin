@@ -177,7 +177,7 @@ app.controller('IdeaCreationCtrl', ['$scope', '$auth', '$rootScope', 'Idea', '$l
 			progress(function(evt) {
 				console.log('progress: ' + parseInt(100.0 * evt.loaded / evt.total));
 			}).success(function(data, status, headers, config) {
-				console.log('file ' + config.file.name + 'is uploaded successfully. Response: ' + data);
+				//console.log('file ' + $scope.cover_img.name + 'is uploaded successfully. Response: ' + data);
 				$rootScope.$broadcast('hideCreateIdeaPanel');
 				$rootScope.$broadcast('addIdeaToList', data.data);
 			});
@@ -185,7 +185,9 @@ app.controller('IdeaCreationCtrl', ['$scope', '$auth', '$rootScope', 'Idea', '$l
 		
 		$scope.previewImage = function(files){
 			var reader = new FileReader();
-			reader.readAsDataURL(files[0]);
+			if(typeof files[0] === 'Blob'){
+				reader.readAsDataURL(files[0]);
+			}
 			reader.onload = function(event){
 				$('#ideaCreationImage').attr('src', reader.result);
 				$scope.ideaForm.cover_img = files[0];

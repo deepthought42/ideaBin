@@ -6,7 +6,8 @@
            ng-file-drop 
            ng-file-change="uploadFile($files)" 
            ng-model="cover_img" 
-           drop-available="dropSupported">
+           drop-available="dropSupported"
+					 ng-file-select>
         <img ng-src="{{ $storage.current_idea.cover_img_file_name ? '/images/ideas/'+$storage.current_idea.id +'/medium/' + $storage.current_idea.cover_img_file_name : '/images/missing.png' }}"/>
       </div>
     </div>

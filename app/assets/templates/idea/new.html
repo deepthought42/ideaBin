@@ -16,12 +16,12 @@
 								ng-file-drop 
 								ng-file-change="previewImage($files)" 
 								ng-model="cover_img" 
-								drop-available="dropSupported">			
+								drop-available="dropSupported"
+								ng-file-select
+								accept="image/*">			
 									<img id="ideaCreationImage" 
 												class="cover_img" 
-												ng-src="/images/{{ideaForm.cover_img.name || 'missing.png'}}"
-												ng-file-select
-												accept="image/*"/>
+												ng-src="/images/{{ideaForm.cover_img.name || 'missing.png'}}"/>
                       
 					</div>
 					<div class="field">
