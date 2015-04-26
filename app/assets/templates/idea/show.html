@@ -2,12 +2,13 @@
   <div class="col-md-12">
     <div class="col-md-3" id="ideaCoverImageWrapper">
       <div id="ideaCoverImage" 
-	   class="outline" 
+	   			 class="outline" 
            ng-file-drop 
            ng-file-change="uploadFile($files)" 
            ng-model="cover_img" 
            drop-available="dropSupported">
-        <img ng-src="{{ $storage.current_idea.cover_img_file_name ? '/images/ideas/'+$storage.current_idea.id +'/medium/' + $storage.current_idea.cover_img_file_name : '/images/missing.png' }}"/>
+        <img ng-file-select
+						 ng-src="{{ $storage.current_idea.cover_img_file_name ? '/images/ideas/'+$storage.current_idea.id +'/medium/' + $storage.current_idea.cover_img_file_name : '/images/missing.png' }}"/>
       </div>
     </div>
     <div class="col-md-6">
