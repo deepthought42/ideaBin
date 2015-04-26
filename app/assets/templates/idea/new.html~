@@ -41,7 +41,6 @@
 						<div ng-messages="ideaForm.name.$error" ng-if="ideaForm.$submitted">
 							<p ng-message="required">Idea name is required.</p>
 							<p ng-message="minlength">Your idea name must be at least 3 characters</p>
-							<p ng-message="maxlength">Idea name cannot be longer than 250 characters</p>
 						</div>
 					</div>
 					<div class="field">

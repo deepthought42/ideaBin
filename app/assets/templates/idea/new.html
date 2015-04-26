@@ -13,7 +13,7 @@
 				<button class="fa fa-times hidePanelButton" ng-click="hideCreateIdeaPanel()"></button>
 				<form name="ideaForm" 
 							enctype="multipart/form-data" 
-							ng-submit="createNewIdea(ideaForm.$validate)"
+							ng-submit="createNewIdea(ideaForm.$valid)"
 							novalidate>
 					<div class=" text-center field" 
 								name="cover_image"

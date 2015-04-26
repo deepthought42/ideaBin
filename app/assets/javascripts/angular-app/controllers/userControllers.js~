@@ -156,7 +156,7 @@ app.controller('UserRegisterController', ['$scope', '$rootScope', '$auth', '$ses
 				password_confirmation: $scope.registrationForm.confirmation_password
 			};
 
-
+			if(isValid){
 				$auth.submitRegistration(credentials).then(function(registeredUser) {
 					$auth.validateUser();
 					//show some sort of statement that indicates they are welcome to enjoy
@@ -168,6 +168,7 @@ app.controller('UserRegisterController', ['$scope', '$rootScope', '$auth', '$ses
 					$rootScope.$broadcast('userRegistered', user);
 					$('#userRegistrationForm').hide()
 				});
+			}
 		}
 	}
 ]);

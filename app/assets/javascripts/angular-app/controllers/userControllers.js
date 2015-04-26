@@ -155,18 +155,20 @@ app.controller('UserRegisterController', ['$scope', '$rootScope', '$auth', '$ses
 				password: $scope.registrationForm.password,
 				password_confirmation: $scope.registrationForm.confirmation_password
 			};
+			console.log("IS VALID ? :: " +isValid);
+			if(isValid){
+				$auth.submitRegistration(credentials).then(function(registeredUser) {
+					$auth.validateUser();
+					//show some sort of statement that indicates they are welcome to enjoy
+				}, function(error) {
+					alert("Something went wrong during registration. Womp womp");
+				});
 
-			$auth.submitRegistration(credentials).then(function(registeredUser) {
-				$auth.validateUser();
-				//show some sort of statement that indicates they are welcome to enjoy
-			}, function(error) {
-				alert("Something went wrong during registration. Womp womp");
-			});
-
-			$scope.$on('auth:registration-email-success', function(event, user) {
-				$rootScope.$broadcast('userRegistered', user);
-				$('#userRegistrationForm').hide()
-			});
+				$scope.$on('auth:registration-email-success', function(event, user) {
+					$rootScope.$broadcast('userRegistered', user);
+					$('#userRegistrationForm').hide()
+				});
+			}
 		}
 	}
 ]);

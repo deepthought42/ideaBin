@@ -1,8 +1,7 @@
 <div id="userRegistrationForm" ng-controller="UserRegisterController">
 	<div class="col-md-12">
-		<form name="userRegistration" 
-					ng-submit="register(userRegistration.$validate)"
-					novalidate > 
+		<form ng-submit="register(userRegistration.$valid)" 
+					name="userRegistration" novalidate > 
 			<div class="form-group">
 				<input placeholder= "Email" 
 								type="email" 
