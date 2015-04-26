@@ -12,9 +12,9 @@ class UsersController < ApplicationController
     end
 		
     if current_user.save
-	render json: @idea
+			render json: @idea
     else
-	puts "THERE WAS AN ISSUE UPDATING"
+			puts "THERE WAS AN ISSUE UPDATING"
     end
   end
 end

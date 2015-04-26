@@ -43,7 +43,6 @@ app.controller('UserSessionCtrl', ['$scope', '$auth', '$location', '$sessionStor
 		
 		$scope.$on('userRegistered', function(event, data){
 			$scope.$session.user = data;
-			$auth.validateUser();
 		})
 		
 		$scope.editProfile = function(){
@@ -122,7 +121,7 @@ app.controller('UserAuthenticateController', ['$scope', '$rootScope', '$auth', '
 			
 			//Authenticate with user credentials
 			$auth.submitLogin(credentials).then(function(response) {
-				$scope.$session.user = response.data;
+				//$scope.$session.user = response.data;
 				console.log(response.data)
 				console.log($scope.$session.user); // => {id: 1, ect: '...'}
 			}, function(error) {
@@ -131,6 +130,7 @@ app.controller('UserAuthenticateController', ['$scope', '$rootScope', '$auth', '
 			
 			$scope.$on('auth:login-success', function(event, currentUser) {
 				$scope.$session.user = currentUser.data;
+				$auth.validateUser();
 				$location.path('/ideas');
 				$scope.hideSignInPanel();
 			});
@@ -151,23 +151,22 @@ app.controller('UserRegisterController', ['$scope', '$rootScope', '$auth', '$ses
 		}
 		$scope.register = function(isValid){
 			var credentials = {
-				email: $scope.userRegistration.email,
-				password: $scope.userRegistration.password,
-				password_confirmation: $scope.userRegistration.confirmation_password
+				email: $scope.registrationForm.email,
+				password: $scope.registrationForm.password,
+				password_confirmation: $scope.registrationForm.confirmation_password
 			};
 
-			if(isValid){
-				$auth.submitRegistration(credentials).then(function(registeredUser) {
-					//show some sort of statement that indicates they are welcome to enjoy
-				}, function(error) {
-					alert("Something went wrong during registration. Womp womp");
-				});
+			$auth.submitRegistration(credentials).then(function(registeredUser) {
+				$auth.validateUser();
+				//show some sort of statement that indicates they are welcome to enjoy
+			}, function(error) {
+				alert("Something went wrong during registration. Womp womp");
+			});
 
-				$scope.$on('auth:registration-email-success', function(event, user) {
-					$rootScope.$broadcast('userRegistered', user);
-					$('#userRegistrationForm').hide()
-				});
-			}
+			$scope.$on('auth:registration-email-success', function(event, user) {
+				$rootScope.$broadcast('userRegistered', user);
+				$('#userRegistrationForm').hide()
+			});
 		}
 	}
 ]);

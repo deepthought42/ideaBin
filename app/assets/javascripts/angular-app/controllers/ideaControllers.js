@@ -24,7 +24,7 @@ app.controller("IdeaIndexController", ['$scope', '$localStorage', '$sessionStora
 				{user_id: $scope.$session.user.id, 
 				 id: ideaId}
 			).$promise;
-			$localStorage.repo.then(function onSuccess(response){
+			$scope.$storage.repo.then(function onSuccess(response){
 				$scope.$storage.repo = response;
 
 				$rootScope.$broadcast("loadDirectory", $scope.$storage.repo.path )

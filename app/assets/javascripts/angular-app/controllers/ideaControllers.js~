@@ -172,7 +172,7 @@ app.controller('IdeaCreationCtrl', ['$scope', '$auth', '$rootScope', 'Idea', '$l
 			$scope.$upload = $upload.upload({
 				url: '/ideas.json',
 				method: 'POST',
-				data: {idea: $scope.ideam},
+				data: {idea: $scope.idea},
 				file: $scope.cover_img,
         			fileFormDataName: 'cover_img'
 			}).

@@ -38,7 +38,9 @@ IdeaBin::Application.routes.draw do
 
 
 #	devise_for :users
-	mount_devise_token_auth_for 'User', at: 'api/auth'
+	mount_devise_token_auth_for 'User', at: 'api/auth', controllers: {
+    registrations:  'overrides/registrations'
+  }
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

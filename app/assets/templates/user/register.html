@@ -1,7 +1,8 @@
 <div id="userRegistrationForm" ng-controller="UserRegisterController">
 	<div class="col-md-12">
-		<form ng-submit="register(userRegistration.$validate)" 
-					name="userRegistration" novalidate > 
+		<form name="userRegistration" 
+					ng-submit="register(userRegistration.$validate)"
+					novalidate > 
 			<div class="form-group">
 				<input placeholder= "Email" 
 								type="email" 
@@ -42,7 +43,7 @@
 					<p ng-message="required" >
 								Confirmation password is required
 					</p>
-		      <p 	ng-if="userRegistration.password != userRegistration.confirmation_password" >
+		      <p 	ng-if="registrationForm.password != registrationForm.confirmation_password" >
 								Passwords do not match.
 					</p>
 				</div>

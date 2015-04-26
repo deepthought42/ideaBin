@@ -7,9 +7,9 @@ class UsersController < ApplicationController
   # PUT /users
   # PUT /users
   def update
-      if params[:avatar]
-	current_user.avatar = params[:avatar]
-      end
+    if params[:avatar]
+      current_user.avatar = params[:avatar]
+    end
 		
     if current_user.save
 	render json: @idea
