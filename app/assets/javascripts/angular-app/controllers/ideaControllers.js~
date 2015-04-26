@@ -161,8 +161,10 @@ app.controller('IdeaCreationCtrl', ['$scope', '$auth', '$rootScope', 'Idea', '$l
 		$scope.ideaForm.description = "";
 		$scope.ideaForm.cover_img = "";
 
-		$scope.createNewIdea = function(){
-			$scope.uploadFile();
+		$scope.createNewIdea = function(isValid){
+			if(isValid){
+				$scope.uploadFile();
+			}
 		}
 		
 		$scope.uploadFile = function(){
@@ -170,7 +172,7 @@ app.controller('IdeaCreationCtrl', ['$scope', '$auth', '$rootScope', 'Idea', '$l
 			$scope.$upload = $upload.upload({
 				url: '/ideas.json',
 				method: 'POST',
-				data: {idea: $scope.ideaForm},
+				data: {idea: $scope.ideam},
 				file: $scope.cover_img,
         			fileFormDataName: 'cover_img'
 			}).
@@ -185,7 +187,9 @@ app.controller('IdeaCreationCtrl', ['$scope', '$auth', '$rootScope', 'Idea', '$l
 		
 		$scope.previewImage = function(files){
 			var reader = new FileReader();
-			reader.readAsDataURL(files[0]);
+			if(typeof files[0] === 'Blob'){
+				reader.readAsDataURL(files[0]);
+			}
 			reader.onload = function(event){
 				$('#ideaCreationImage').attr('src', reader.result);
 				$scope.ideaForm.cover_img = files[0];

@@ -161,8 +161,10 @@ app.controller('IdeaCreationCtrl', ['$scope', '$auth', '$rootScope', 'Idea', '$l
 		$scope.ideaForm.description = "";
 		$scope.ideaForm.cover_img = "";
 
-		$scope.createNewIdea = function(){
-			$scope.uploadFile();
+		$scope.createNewIdea = function(isValid){
+			if(isValid){
+				$scope.uploadFile();
+			}
 		}
 		
 		$scope.uploadFile = function(){
@@ -170,7 +172,7 @@ app.controller('IdeaCreationCtrl', ['$scope', '$auth', '$rootScope', 'Idea', '$l
 			$scope.$upload = $upload.upload({
 				url: '/ideas.json',
 				method: 'POST',
-				data: {idea: $scope.ideaForm},
+				data: {idea: $scope.idea},
 				file: $scope.cover_img,
         			fileFormDataName: 'cover_img'
 			}).
