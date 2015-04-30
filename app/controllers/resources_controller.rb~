@@ -51,11 +51,8 @@ class ResourcesController < ApplicationController
     @repo = Repository.find(resource["repo_id"])
 
     post = DataFile.save(params['file'], @repo.path)
-    
-    Dir.chdir(@repo.path)
-		@git = Git.init()
-		@git.config('user.name', current_user.name)
-		@git.config('user.email', current_user.email)
+		
+		@git = GitHelper.init(@repo.path, current_user.email, current_user.name)
 		@git.add(:all => true)
 		@git.commit(resource["comment"])
    

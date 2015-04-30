@@ -1,0 +1,6 @@
+class Git < ActiveRecord::Base
+
+	def self.init(repo, username, user_email)
+	
+	end
+end
