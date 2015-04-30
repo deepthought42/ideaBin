@@ -24,19 +24,12 @@ class IdeasController < ApplicationController
     @idea = Idea.find(params[:id])
     #clone idea repo from owners copy if current user isn't owner
     if(current_user.id != @idea.user_id)
-	    repo_path = "#{Rails.root}/public/data/repository/#{@idea.user_id}/#{@idea.name}"
-			#unless @idea.users.include?(current_user)
+	    repo_path = "#{Rails.root}/public/data/repository/#{current_user.id}/#{@idea.name}"
 			@repo = Repository.new()
-
-			@repo.path = "#{Rails.root}/public/data/repository/#{current_user.id}/#{@idea.name}"
+			@repo.path = repo_path
 			@repo.user = current_user
 			@repo.idea = @idea
-			#@idea.repositories << @repo
-			#@idea.save
-
 			@repo.save
-			logger.debug "REPOSITORY :: #{@repo.path}"
-			#end
 		else
 			#load up existing repository
 			@repo = Repository.where(user_id: current_user.id).where(idea_id: params[:id]).first
@@ -121,9 +114,7 @@ class IdeasController < ApplicationController
 	      DataFile.save(params[:cover_img], cover_img_path)
       end
 		
-    Dir.chdir(repo_path)
-    @git = Git.init
-		@git.config('user.email', current_user.email)
+		@git = GitHelper.init(repo_path, current_user.email, current_user.name)
     @gitcommit = ""
     if params[:alteredStatus] == '1'
       @gitcommit = "it was committed"
@@ -151,17 +142,17 @@ class IdeasController < ApplicationController
  
   # PUT /ideas/:id/uploadCover.json
   def uploadCover
-	@idea = Idea.find(params[:id])
+		@idea = Idea.find(params[:id])
 	
-	if params[:cover_img]
-		@idea.cover_img = params[:cover_img]
-	end
+		if params[:cover_img]
+			@idea.cover_img = params[:cover_img]
+		end
 	
-	if @idea.save
-		puts "Upload successful"
-		respond_with(@idea)
-	else
-		puts "THERE WAS AN ISSUE UPDATING COVER IMAGE."
+		if @idea.save
+			puts "Upload successful"
+			respond_with(@idea)
+		else
+			puts "THERE WAS AN ISSUE UPDATING COVER IMAGE."
     end
   end
 

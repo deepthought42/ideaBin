@@ -47,7 +47,6 @@ class ResourcesController < ApplicationController
     data =params[:data]
 
     resource = ActiveSupport::JSON.decode(data)
-		logger.debug "REPO ID :: #{resource["repo_id"]}"
     @repo = Repository.find(resource["repo_id"])
 
     post = DataFile.save(params['file'], @repo.path)
@@ -89,8 +88,7 @@ class ResourcesController < ApplicationController
 		
 		#REMOVE FILE FROM FILE SYSTEM AND DO A GIT commit
 		if(FileUtils.rm(params[:path]))
-			Dir.chdir(@repo.path)
-			@git = Git.init()
+			@git = GitHelper.init(@repo.path, current_user.email, current_user.name)
 			@git.add(:all => true)
 			@git.commit("Removed file :: #{params[:path]}")
 		end
@@ -115,7 +113,6 @@ class ResourcesController < ApplicationController
 	# GET /resources/1
   # GET /resources/1.json
   def download
-		#send_file(params[:path], :disposition => 'attachment', :x_sendfile=>true)
 		send_file(params[:path])
   end
 	
