@@ -103,6 +103,7 @@ class IdeasController < ApplicationController
 		end
     respond_with(@idea)
   end
+
   ## Calling this method with the appropriate paramaters will result in saving
   #   an uploaded image if present as well as commit the changes to the users repo
   #
@@ -116,12 +117,13 @@ class IdeasController < ApplicationController
       cover_img_path = "/data/repository/#{current_user.id}/#{@idea.name}"
 		
       if params[:cover_img]
-	@idea.cover_img = params[:cover_img]
-	DataFile.save(params[:cover_img], cover_img_path)
+	      @idea.cover_img = params[:cover_img]
+	      DataFile.save(params[:cover_img], cover_img_path)
       end
 		
     Dir.chdir(repo_path)
     @git = Git.init
+		@git.config('user.email', current_user.email)
     @gitcommit = ""
     if params[:alteredStatus] == '1'
       @gitcommit = "it was committed"
@@ -180,6 +182,6 @@ class IdeasController < ApplicationController
     end
 
     def idea_params
-	params.require(:idea).permit(:name, :description)
+			params.require(:idea).permit(:name, :description)
     end
 end

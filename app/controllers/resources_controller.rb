@@ -54,6 +54,8 @@ class ResourcesController < ApplicationController
     
     Dir.chdir(@repo.path)
 		@git = Git.init()
+		@git.config('user.name', current_user.name || 'Ideabin User')
+		@git.config('user.email', current_user.email)
 		@git.add(:all => true)
 		@git.commit(resource["comment"])
    
