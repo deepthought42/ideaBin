@@ -10,7 +10,7 @@
 				</span>
     		
 			</div>
-			<div class="col-md-1 pull-right resourceEditIconWrapper ">
+			<div class="col-md-1 pull-left resourceEditIconWrapper ">
 				<span ng-click="updateComment(resourceComment)" class="fa fa-pencil resourceEditIcon"></span>     
 			</div>
 			<div class="col-md-2 pull-right resourceCommentUserAvatar">  
@@ -18,12 +18,6 @@
 			</div>
     </li>
   </ul>
-  <div class="col-md-12" ng-controller="ResourceCommentCreationController">
-    <form novalidate> 
-      <textarea rows="5" cols="100" ng-model="resource_comment.message" placeholder="Create Resource Comment Here" class="form-control"></textarea>
-	<button id="createResourceCommentButton" ng-click="createResourceComment()" class="btn btn-default btn-lg">
-          Save Resource Comment
-        </button>
-    </form>
-  </div>
+  <div ng-include="resource_comment/new.html">
+	</div>
 </div>
