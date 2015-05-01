@@ -1,8 +1,20 @@
 <div class="col-md-12" ng-controller="ResourceCommentCreationController">
-  <form novalidate> 
-    <textarea rows="5" cols="100" ng-model="resource_comment.message" placeholder="Create Resource Comment Here" class="form-control"></textarea>
-			<button id="createResourceCommentButton" ng-click="createResourceComment()" class="btn btn-default btn-lg">
-        Save Resource Comment
-      </button>
+  <form name="resourceCommentForm" ng-click="createResourceComment()" novalidate> 
+    <textarea rows="5" 
+						  cols="100" 
+							ng-model="resource_comment.message" 
+              placeholder="Create Resource Comment Here" 
+              class="form-control"
+							required
+              maxlength="250">
+    </textarea>
+		<div ng-messages="resourceCommentForm.message.$error" ng-if="resourceCommentForm.$submitted">
+			<p ng-message="required">You must enter a comment.</p>
+		</div>
+		<button id="createResourceCommentButton" 
+         		type="submit" 
+            class="btn btn-default btn-lg">
+      Save Resource Comment
+    </button>
   </form>
 </div>
