@@ -8,4 +8,9 @@ class GitHelper
 
 		return @git
 	end
+
+	def self.commitAll(gitInstance, commit_message)
+		gitInstance.add(:all => true)
+		gitInstance.commit(commit_message)
+	end
 end

@@ -91,14 +91,15 @@ class IdeasController < ApplicationController
 		@git = Git.init(@idea.name)
 		if params[:cover_img]
 			DataFile.save(params[:cover_img], @repo.path)
-			@git.add(:all => true)
-			@git.commit("Cover image added.")
+			GitHelper.commitAll(@git, "Added cover image.")
 		end
     respond_with(@idea)
   end
 
   ## Calling this method with the appropriate paramaters will result in saving
-  #   an uploaded image if present as well as commit the changes to the users repo
+  #   an uploaded image if present. If a cover image is present the changes to 
+	#   the users repo will be added to git and committed. If other values are present
+	# 	then they will be updated for the idea object passed
   #
   # PUT /ideas/1
   # PUT /ideas/1.json
@@ -106,22 +107,16 @@ class IdeasController < ApplicationController
     @idea = Idea.find(params[:id])
     @idea.name = params[:name]
     @idea.description = params[:description]
-      repo_path = "#{Rails.root}/public/data/repository/#{current_user.id}/#{@idea.name}"
-      cover_img_path = "/data/repository/#{current_user.id}/#{@idea.name}"
-		
-      if params[:cover_img]
-	      @idea.cover_img = params[:cover_img]
-	      DataFile.save(params[:cover_img], cover_img_path)
-      end
-		
-		@git = GitHelper.init(repo_path, current_user.email, current_user.name)
-    @gitcommit = ""
-    if params[:alteredStatus] == '1'
-      @gitcommit = "it was committed"
-      @git.add(:all => true)
-      @git.commit('this is a commit...REMEMBER TO CHANGE THIS TO USER DEFINED MESSAGE') 
+    repo_path = "#{Rails.root}/public/data/repository/#{current_user.id}/#{@idea.name}"
+    cover_img_path = "/data/repository/#{current_user.id}/#{@idea.name}"
+	
+    if params[:cover_img]
+      @idea.cover_img = params[:cover_img]
+      DataFile.save(params[:cover_img], cover_img_path)
+			@git = GitHelper.init(repo_path, current_user.email, current_user.name)
+			GitHelper.commitAll(@git, "Changed cover image.")
     end
-
+		
     if @idea.save
 			render json: @idea
 		else

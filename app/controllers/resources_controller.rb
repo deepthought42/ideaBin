@@ -52,9 +52,8 @@ class ResourcesController < ApplicationController
     post = DataFile.save(params['file'], @repo.path)
 		
 		@git = GitHelper.init(@repo.path, current_user.email, current_user.name)
-		@git.add(:all => true)
-		@git.commit(resource["comment"])
-   
+		GitHelper.commitAll(@git, resource["comment"])
+
 		render json: {success: "file uploaded"}
   end
 
@@ -72,8 +71,7 @@ class ResourcesController < ApplicationController
     if File.open(file_path, 'w') {|f| f.write(params[:content]) }
 			Dir.chdir(params[:dir_path])
 			@git = Git.init()
-			@git.add(:all => true)
-			@git.commit(params[:comment])
+			GitHelper.commitAll(@git, params["comment"])
 			
 			render json: {success: "file successfully uploaded"}
     else
@@ -89,10 +87,8 @@ class ResourcesController < ApplicationController
 		#REMOVE FILE FROM FILE SYSTEM AND DO A GIT commit
 		if(FileUtils.rm(params[:path]))
 			@git = GitHelper.init(@repo.path, current_user.email, current_user.name)
-			@git.add(:all => true)
-			@git.commit("Removed file :: #{params[:path]}")
+			GitHelper.commitAll(@git, "Removed file :: #{params[:path]}")
 		end
-
   end
 	
 	#GET /resources/1/contents.json
