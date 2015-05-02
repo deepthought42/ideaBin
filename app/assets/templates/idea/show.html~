@@ -9,22 +9,41 @@
            drop-available="dropSupported"
 					 ng-file-select
 					 accept="image/*">
-        <img ng-src="{{ $storage.current_idea.cover_img_file_name ? '/images/ideas/'+$storage.current_idea.id +'/medium/' + $storage.current_idea.cover_img_file_name : '/images/missing.png' }}"/>
+        <img ng-src="{{ $storage.current_idea.idea.cover_img_file_name ? '/images/ideas/'+$storage.current_idea.idea.id +'/medium/' + $storage.current_idea.idea.cover_img_file_name : '/images/missing.png' }}"/>
       </div>
     </div>
     <div class="col-md-6">
-      <h2 id="ideaName" ng-click="convertToInput('ideaName', $storage.current_idea.name)" >
-        {{$storage.current_idea.name}}
-        <a href="#" class="edit">Edit</a>
+      <h2 id="ideaName">
+        <span ng-show="!editName">
+					{{$storage.current_idea.idea.name}}
+        	<a href="#" class="edit">Edit</a>
+				<span>
+				<span ng-show="editName">
+					<input type='text'
+							 	 placeholder="Name here"
+								 ng-model="$storage.current_idea.idea.name"/>
+						<span class="fa fa-save" ng-click="updateIdea()"></span>
+				</span>
       </h2>
       <h5 id="ideaMetadata">
   			Idea created by 
-        <a href="#">{{$storage.current_idea.user.user_email}}</a> 
-        on {{$storage.current_idea.created_at | date:'longDate'}}
+        <a href="#">{{$storage.current_idea.user.email}}</a> 
+        on {{$storage.current_idea.idea.created_at | date:'longDate'}}
       </h5>
-      <p id="ideaDescription" ng-model="$storage.current_idea.description">
-        {{$storage.current_idea.description || 'Description here ...'}}
+      <p id="ideaDescription" 
+				 >
+				<span ng-show="!editDescription" ng-click="editDescription=true">
+	        {{$storage.current_idea.idea.description || 'Description here ...'}}
+					<a href="#" class="edit">Edit</a>
+				</span>
+				<span ng-show="editDescription">
+					<input type='text'
+							 	 placeholder="Description here..."
+								 ng-model="$storage.current_idea.idea.description"/>
+						<span class="fa fa-save" ng-click="updateIdea()"></span>
+				</span>
       </p>
+				
     </div>
    	<div class="col-md-3 pull-right" id="ideaButtonListWrapper">
 		  <ul id="ideaButtonList">

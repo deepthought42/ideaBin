@@ -144,7 +144,7 @@ class IdeasController < ApplicationController
   # PUT /ideas/:id/uploadCover.json
   def uploadCover
 		@idea = Idea.find(params[:id])
-	
+
 		if params[:cover_img]
 			@idea.cover_img = params[:cover_img]
 		end

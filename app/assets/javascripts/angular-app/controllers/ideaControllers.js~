@@ -19,7 +19,8 @@ app.controller("IdeaIndexController", ['$scope', '$localStorage', '$sessionStora
 	$scope.editIdea = function (ideaId) {
 		$scope.$storage.current_idea  = Idea.show({id: ideaId}).$promise;
 		$scope.$storage.current_idea.then(function onSuccess(response){
-			$scope.$storage.current_idea = response.idea;
+			$scope.$storage.current_idea.idea = response.idea;
+			$scope.$storage.current_idea.user= response.user;
 			$scope.$storage.repo = Repository.show(
 				{user_id: $scope.$session.user.id, 
 				 id: ideaId}
@@ -81,17 +82,14 @@ app.controller('IdeaDetailCtrl', ['$scope', '$localStorage', '$sessionStorage', 
 	function($scope, $localStorage, $sessionStorage, $routeParams, Idea, $location, $upload, $rootScope, $http){
 		$scope.$storage = $localStorage;
 		$scope.$session = $sessionStorage;
-
-		$scope.convertToInput = function(id, val) {
-			$("#"+id).html("<input type='text' value='" + val + "' /><span class='fa fa-save'></span>'")
-		}
+		$scope.idea = $scope.current_idea;
+		$scope.editDescription = false;
 
 		$scope.uploadFile = function(){
 
 			$scope.upload = $upload.upload({
-				url: '/ideas/' + $scope.$storage.current_idea.id + '/uploadCover.json',
+				url: '/ideas/' + $scope.$storage.current_idea.idea.id + '/uploadCover.json',
 				method: 'PUT',
-				data: {idea: angular.toJson($scope.current_idea)},
 				file: $scope.cover_img,
 				fileFormDataName: 'cover_img'
 			}).
@@ -112,11 +110,10 @@ app.controller('IdeaDetailCtrl', ['$scope', '$localStorage', '$sessionStorage', 
 			});
 		};
 		
-		$scope.updateIdea = function (ideaId){
-			$scope.uploadFile();
-			Idea.update($scope.idea,{id: ideaId}, function(){
-					$location.path('/ideas');
-			});
+		$scope.updateIdea = function(){
+			Idea.update($scope.$storage.current_idea.idea)
+			editDescription=false
+			editName=false
 		};
 		
 		$scope.showIdeaEditPanel = function() {
@@ -125,7 +122,7 @@ app.controller('IdeaDetailCtrl', ['$scope', '$localStorage', '$sessionStorage', 
 		};
 		
 		$scope.hideIdeaEditPanel = function() {
-						console.log("hiding edit panel");
+			console.log("hiding edit panel");
 
 			$("#ideaEditPanel").hide();
 		};

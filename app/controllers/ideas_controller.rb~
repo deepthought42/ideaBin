@@ -40,10 +40,11 @@ class IdeasController < ApplicationController
 		end
 		@user = User.find(@idea.user_id)
 		respond_to do |format|
-			format.json  { render :json => {:moulding => @moulding, 
-				                              :material_costs => @material_costs }}
+			format.json  { render :json => {:idea => @idea, 
+				                              :user => @user }}
 		end
-		render json: @idea, json: @user
+
+	#		render json: @idea, json: @user
 
   end
 
@@ -143,7 +144,8 @@ class IdeasController < ApplicationController
   # PUT /ideas/:id/uploadCover.json
   def uploadCover
 		@idea = Idea.find(params[:id])
-	
+	  @idea.name = params[:name]
+    @idea.description = params[:description]
 		if params[:cover_img]
 			@idea.cover_img = params[:cover_img]
 		end
