@@ -6,9 +6,11 @@ app.controller("DirectoryIndexCtrl", ['$scope', '$rootScope', '$localStorage', '
 		$scope.$storage = $localStorage;
 
 		$scope.loadParentDirectory = function(){
-			string idx = $scope.$storage.dir_path.lastIndexOf("/");
-			String parent_dir_path = $scope.$storage.dir_path.substring(0, idx);
-			$scope.loadDirectory("", parent_dir_path);
+			var idx = $scope.$storage.dir_path.lastIndexOf("/");
+			var parent_dir_path = $scope.$storage.dir_path.substring(0, idx);
+			console.log("current DIR :: " + $scope.$storage.dir_path);
+			console.log("PARENT DIR :: " + parent_dir_path);
+			$scope.loadDirectory("", $scope.$storage.repo.path + parent_dir_path);
 		}
 		
   	$scope.deleteDirectory =  function(directory){
@@ -28,7 +30,12 @@ app.controller("DirectoryIndexCtrl", ['$scope', '$rootScope', '$localStorage', '
 		$scope.loadDirectory = function(name, path){
 			$scope.directories = Directory.query({'path': path+"/"+name})
 			if(typeof name != 'undefined' && name != null && name != ''){
-				$scope.$storage.dir_path +=  name + "/";
+				if($scope.$storage.dir_path.lastIndexOf("/") === $scope.$storage.dir_path.length){
+					$scope.$storage.dir_path += name;
+				}
+				else{
+					$scope.$storage.dir_path +=  name + "/";
+				}
 			}
 			else{
 				$scope.$storage.dir_path =  "/";
