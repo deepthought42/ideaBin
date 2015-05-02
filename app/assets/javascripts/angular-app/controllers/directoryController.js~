@@ -6,8 +6,8 @@ app.controller("DirectoryIndexCtrl", ['$scope', '$rootScope', '$localStorage', '
 		$scope.$storage = $localStorage;
 
 		$scope.loadParentDirectory = function(){
-			var idx = $scope.$storage.dir_path.lastIndexOf("/");
-			var parent_dir_path = $scope.$storage.dir_path.substring(0, idx);
+			string idx = $scope.$storage.dir_path.lastIndexOf("/");
+			String parent_dir_path = $scope.$storage.dir_path.substring(0, idx);
 			$scope.loadDirectory("", parent_dir_path);
 		}
 		

@@ -1,5 +1,8 @@
 <div ng-controller="DirectoryIndexCtrl">
-  <span class="fa fa-level-up"></span><h3 class="margin-bottom-15">Current Directory: {{$storage.dir_path}}</h3>
+  <span class="fa fa-level-up" ng-click="loadParentDirectory()"></span>
+	<h3 class="margin-bottom-15">
+		Current Directory: {{$storage.dir_path}}
+	</h3>
   <div class="container-fluid" ng-repeat="directory in directories">
     <div class="row directory-row">
         <div class="col-md-12">

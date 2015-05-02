@@ -1,9 +1,14 @@
-<div ng-controller="DirectoryIndexCtrl" >
-	<h6>Listing directories</h6>
-	<span class="fa fa-folder"></span>
-	<div class="col-md-12" ng-repeat="directory in directories">
-		<span class="col-md-1"><i class="fa fa-folder"></i></span>
-		<span class="col-md-9" id="directoryName" ng-click="loadDirectory(directory, $storage.repo.path)">{{ directory }}</span>
-		<span class="col-md-1 directoryButtons pull-right" ng-click="deleteDirectory(directory)"><i class='directoryButton fa fa-times deleteButton'></i>
-	</div>
+<div ng-controller="DirectoryIndexCtrl">
+  <span class="fa fa-level-up" ng-click="loadParentDirectory()"></span>
+	<h3 class="margin-bottom-15">Current Directory: {{$storage.dir_path}}</h3>
+  <div class="container-fluid" ng-repeat="directory in directories">
+    <div class="row directory-row">
+        <div class="col-md-12">
+            <span id="directoryName" ng-click="loadDirectory(directory, $storage.repo.path)"><i class="fa fa-folder-o"></i>{{ directory }}</span>
+            <ul class="directory-row-tool-list">
+                <li ng-click="deleteDirectory(directory)"><i class="fa fa-times deleteButton"></i></li>
+            </ul>
+        </div>
+    </div>
+  </div>
 </div>
