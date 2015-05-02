@@ -57,7 +57,7 @@ class PullRequestsController < ApplicationController
 		
 
 		@pull_request = PullRequest.where(to_repo_id: @toRepo.id).where(repository_id: @repo.id).where(status: "SUBMITTED").first
-		if( @pull_request && current_user != @idea.user)
+		if( !@pull_request && current_user != @idea.user)
 	    @pullRequest = PullRequest.new()
 
 			@pullRequest.repository_id = @repo.id

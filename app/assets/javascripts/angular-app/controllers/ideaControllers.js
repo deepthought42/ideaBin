@@ -19,7 +19,8 @@ app.controller("IdeaIndexController", ['$scope', '$localStorage', '$sessionStora
 	$scope.editIdea = function (ideaId) {
 		$scope.$storage.current_idea  = Idea.show({id: ideaId}).$promise;
 		$scope.$storage.current_idea.then(function onSuccess(response){
-			$scope.$storage.current_idea = response;
+			$scope.$storage.current_idea = response.idea;
+			$scope.$storage.current_idea.user= response.user;
 			$scope.$storage.repo = Repository.show(
 				{user_id: $scope.$session.user.id, 
 				 id: ideaId}

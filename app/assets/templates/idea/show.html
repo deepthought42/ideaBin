@@ -19,7 +19,7 @@
       </h2>
       <h5 id="ideaMetadata">
   			Idea created by 
-        <a href="#">{{$session.user.email}}</a> 
+        <a href="#">{{$storage.current_idea.user.email}}</a> 
         on {{$storage.current_idea.created_at | date:'longDate'}}
       </h5>
       <p id="ideaDescription" ng-model="$storage.current_idea.description">

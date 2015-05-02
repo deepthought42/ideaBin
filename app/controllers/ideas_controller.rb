@@ -38,7 +38,13 @@ class IdeasController < ApplicationController
 			Dir.chdir("#{Rails.root}/public/data/repository/#{current_user.id}/")
 			@git = Git.clone("#{Rails.root}/public/data/repository/#{@idea.user_id}/#{@idea.name}", @idea.name)	
 		end
-		render json: @idea
+		@user = User.find(@idea.user_id)
+		respond_to do |format|
+			format.json  { render :json => {:idea => @idea, 
+				                              :user => @user }}
+		end
+
+	#		render json: @idea, json: @user
 
   end
 
@@ -144,10 +150,9 @@ class IdeasController < ApplicationController
 		end
 	
 		if @idea.save
-			puts "Upload successful"
 			respond_with(@idea)
 		else
-			puts "THERE WAS AN ISSUE UPDATING COVER IMAGE."
+			render json: {error: "Cover Image upload failed."}
     end
   end
 
@@ -158,8 +163,13 @@ class IdeasController < ApplicationController
 		if @ideas
 			respond_with(@ideas)
 		else
-			render json: {errors: "Could not find files for user"}
+			render json: {errors: "Could not find files for user."}
 		end
+	end
+
+	#GET /ideaCommits/:id
+	def commitCount
+		
 	end
  
  private
