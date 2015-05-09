@@ -2,17 +2,12 @@
 <div class="container" ng-controller="IdeaIndexController">
 	<div ng-include="'idea/new.html'" ></div>
     <div class="row text-center">
-      <h1 id="headerIdeas">
-        These are your ideas.<br>Make the most of them.
-      </h1>
-    </div>
-    <div class="row text-center">
       <div class="col-md-3 ideaItem text-center" ng-repeat="idea in ideas">
         <div class="flip-container" ontouchstart="this.classList.toggle('hover');">
           <div class="flipper">
               <div class="front">
                 <div class="ideaImg">
-		  <img ng-src="{{ idea.cover_img_file_name ? '/images/ideas/'+idea.id +'/medium/' + idea.cover_img_file_name : '/images/missing.ng' }}" />
+		  <img ng-src="{{ idea.cover_img_file_name ? '/images/ideas/'+idea.id +'/medium/' + idea.cover_img_file_name : '/images/missing.png' }}" />
                 </div>
               </div>
               <div class="back">
@@ -22,9 +17,8 @@
                           {{idea.description}}  
                       </p>
                   </div>
-                  <div class="btn-group" role="group" aria-label="...">
-                    <i type="button" class="fa fa-pencil ideaIcon" ng-click="editIdea(idea.id)" ng-show="$session.user">
-                    </i>
+                  <div class="btn-group" role="group" aria-label="..." ng-show="$session.user">
+                    <i type="button" class="fa fa-pencil ideaIcon" ng-click="editIdea(idea.id)"></i>
                     <i type="button" class="fa fa-times ideaIcon deleteButton" ng-click="deleteIdea(idea)" ng-show="$session.user">
                     </i>
                   </div>

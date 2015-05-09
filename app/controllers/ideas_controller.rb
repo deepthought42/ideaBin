@@ -126,7 +126,7 @@ class IdeasController < ApplicationController
     if @idea.save
 			render json: @idea
 		else
-			puts "THERE WAS AN ISSUE UPDATING"
+			render json: {error: "Failed to update idea"}, status: :unauthorized
     end
   end
 
@@ -134,11 +134,14 @@ class IdeasController < ApplicationController
   # DELETE /ideas/1.json
   def destroy
     @idea = Idea.find(params[:id])
-    repo_path = "#{Rails.root}/public/data/repository/#{current_user.id}/#{@idea.name}"
-    FileUtils.rm_rf(repo_path)
-    @idea.destroy
-
-    respond_with(@idea)
+		if(@idea.user == current_user)
+		  repo_path = "#{Rails.root}/public/data/repository/#{current_user.id}/#{@idea.name}"
+		  FileUtils.rm_rf(repo_path)
+		  @idea.destroy
+		  respond_with(@idea)
+		else
+			render json: {error: "You must be the idea owner to delete an idea"}, status: :unauthorized
+		end
  end
  
   # PUT /ideas/:id/uploadCover.json
@@ -152,7 +155,7 @@ class IdeasController < ApplicationController
 		if @idea.save
 			respond_with(@idea)
 		else
-			render json: {error: "Cover Image upload failed."}
+			render json: {error: "Cover Image upload failed."}, status: :unprocessable_entity
     end
   end
 
