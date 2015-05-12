@@ -3,7 +3,7 @@ var app = angular.module('ideaBin.resourceCommentControllers', ['ngResource']);
 app.controller("ResourceCommentIndexController", ['$scope', '$localStorage', '$sessionStorage', 'ResourceComment', 'User', '$http',
 	function($scope, $localStorage, $sessionStorage, ResourceComment, User, $http) {
 		$scope.$storage = $localStorage;
-		$scope.resourceComments = {};
+		$scope.resourceComments = [];
 		$scope.mouseOverAvatars = false;
 		$scope.$session = $sessionStorage;
 
@@ -45,6 +45,7 @@ app.controller("ResourceCommentIndexController", ['$scope', '$localStorage', '$s
 		* Adds a comment to the current index of resource comments
 		*/
 		$scope.$on('addResourceCommentToIndex', function(event, comment){
+			console.log("COMMENT :: " + comment);
 			$scope.resourceComments.push(comment);
 		});
 		
@@ -62,21 +63,21 @@ app.controller("ResourceCommentIndexController", ['$scope', '$localStorage', '$s
 		/**
 		* 
 		*/
-		$scope.editResourceComment = function (message){
-			console.log("MAKING RESOURCE COMMENT EDITABLE");
-			$scope.isEditResourceVisible = true;
-			$scope.$broadcast('editResourceComment', message);
+		$scope.editResourceComment = function (comment){
+			comment.isEditResourceVisible = true;
+			$scope.$broadcast('editResourceComment', comment);
 		}
 }]);
 
 app.controller('ResourceCommentDetailController', ['$scope', '$localStorage', 'ResourceComment',
 	function($scope, $localStorage, ResourceComment){
-		$scope.$on('editResourceComment', function(event,message){
-			$scope.resource_comment.comment = message;
+		$scope.resource_comments = {};
+		$scope.$on('editResourceComment', function(event, comment){
+			$scope.resource_comment.comment = comment;
 		});
 
 		$scope.updateResourceComment = function(){
-			if($scope.resourceCommentForm.comment != resourceComment.comment){
+			if($scope.resourceCommentForm.comment != resource_comment.comment){
 				ResourceComment.update($scope.resourceCommentForm.comment);
 			}
 		}
@@ -85,19 +86,21 @@ app.controller('ResourceCommentDetailController', ['$scope', '$localStorage', 'R
 
 app.controller('ResourceCommentCreationController', ['$scope', '$localStorage', '$rootScope', 'ResourceComment',
   function($scope, $localStorage, $rootScope, ResourceComment){
+		$scope.resource_comment = {}
     $scope.createResourceComment = function(){
       if($localStorage.resource){
 				var resourceComment = ResourceComment.create(
 					{
 					 	path: $localStorage.repo.path + $localStorage.dir_path + $localStorage.resource, 
 					 	repo_id: $localStorage.repo.id, 
-					 	message: $scope.resource_comment.message
+					 	comment: $scope.resource_comment.comment
 			    }
 				).$promise;
+
 				resourceComment.then(function onSuccess(response){
 					console.log("RESPONSER :: " + response + ", :: " + response.comment);
 					$rootScope.$broadcast('addResourceCommentToIndex', response);
-					$scope.resource_comment.message = '';
+					$scope.resource_comment.comment = '';
 				})
       }
       else{

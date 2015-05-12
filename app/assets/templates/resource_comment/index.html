@@ -3,8 +3,8 @@
     <li class="resourceCommentsListItem col-md-12">
       <div class="resourceCommentWrapper col-md-9">
 				<span class="resourceComment col-md-12" ng-click="editComment(resourceComment)">
-   				<div ng-show="!isEditResourceVisible">{{ resourceComment.comment }}</div>
-					<div ng-include="'resource_comment/index.html'" ng-show="isEditResourceVisible"></div>
+   				<div ng-show="!resourceComment.isEditResourceVisible">{{ resourceComment.comment }}</div>
+					<div ng-include="'resource_comment/edit.html'" ng-show="resourceComment.isEditResourceVisible"></div>
   			</span>
   			<span id="resourceCommentTimestamp" class="col-md-12 pull-right">
 					{{resourceComment.created_at | date:'shortDate'}} at {{resourceComment.created_at | date:'shortTime'}}

@@ -17,12 +17,12 @@ class ResourceCommentsController < ApplicationController
 		respond_with(@resource_comment)
   end
 	
-	#creates a new comment with the given comment
+	#creates a new comment with the given message
 	#
   # POST /repository_comments.json
   def create
 		@comment = Comment.new()
-		@comment.comment = params[:comment] 
+		@comment.comment = params[:message] 
 		@comment.user = current_user
 		@comment.save
 		
