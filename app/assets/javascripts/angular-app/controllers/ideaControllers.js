@@ -7,9 +7,11 @@ app.controller("IdeaIndexController", ['$scope', '$localStorage', '$sessionStora
 	$scope.$session = $sessionStorage;
 
 	$scope.deleteIdea =  function(idea){
-		Idea.delete({id: idea.id});
-		var index = $scope.ideas.indexOf(idea);
-		$scope.ideas.splice(index, 1);
+		if(confirm("Are you sure you want to delete "+idea.name +"?")){
+			Idea.delete({id: idea.id});
+			var index = $scope.ideas.indexOf(idea);
+			$scope.ideas.splice(index, 1);
+		}
 	}
 		
 	$scope.createNewIdea = function(){
