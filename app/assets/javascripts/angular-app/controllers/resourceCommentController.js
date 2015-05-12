@@ -71,15 +71,14 @@ app.controller("ResourceCommentIndexController", ['$scope', '$localStorage', '$s
 
 app.controller('ResourceCommentDetailController', ['$scope', '$localStorage', 'ResourceComment',
 	function($scope, $localStorage, ResourceComment){
-		$scope.resource_comments = {};
+		$scope.resource_comment = {};
 		$scope.$on('editResourceComment', function(event, comment){
 			$scope.resource_comment = comment;
 		});
 
 		$scope.updateResourceComment = function(){
-			if($scope.resourceCommentForm.comment != resource_comment.comment){
-				ResourceComment.update($scope.resourceCommentForm.comment);
-			}
+			ResourceComment.update($scope.resource_comment);
+			$scope.resource_comment.isEditResourceVisible = false;
 		}
 	}
 ]);

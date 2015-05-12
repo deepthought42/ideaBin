@@ -36,4 +36,16 @@ class ResourceCommentsController < ApplicationController
 			render json: {error: "something went wrong while creating resource comment"}
 		end
   end
+
+  # PUT /resource_comment/1.json
+  def update
+		@comment = Comment.find(params[:id])
+		@comment.comment = params[:comment]
+		
+    if @comment.save
+			render json: @comment
+		else
+			render json: {error: "Failed to update comment"}, status: :unprocessable_entity
+    end
+  end
 end
