@@ -3,21 +3,22 @@
     <li class="resourceCommentsListItem col-md-12">
       <div class="resourceCommentWrapper col-md-9">
 				<span class="resourceComment col-md-12" ng-click="editComment(resourceComment)">
-   				{{ resourceComment.comment }}
+   				<div ng-show="!isEditResourceVisible">{{ resourceComment.comment }}</div>
+					<div ng-include="'resource_comment/index.html'" ng-show="isEditResourceVisible"></div>
   			</span>
   			<span id="resourceCommentTimestamp" class="col-md-12 pull-right">
 					{{resourceComment.created_at | date:'shortDate'}} at {{resourceComment.created_at | date:'shortTime'}}
 				</span>
     		
 			</div>
-			<div class="col-md-1 pull-left resourceEditIconWrapper ">
-				<span ng-click="updateComment(resourceComment)" class="fa fa-pencil resourceEditIcon"></span>     
+			<div class="col-md-1 pull-left resourceEditIconWrapper">
+				<span ng-click="editComment(resourceComment)" class="fa fa-pencil resourceEditIcon"></span>     
 			</div>
 			<div class="col-md-2 pull-right resourceCommentUserAvatar">  
 			  <img ng-src="{{$session.user.avatar_file_name ? '/images/'+$session.user.id +'/thumb/' + $session.user.avatar_file_name : '/images/missing.png'}}" />
 			</div>
     </li>
   </ul>
-  <div ng-include="resource_comment/new.html">
+  <div ng-include="'resource_comment/new.html'">
 	</div>
 </div>

@@ -58,14 +58,26 @@ app.controller("ResourceCommentIndexController", ['$scope', '$localStorage', '$s
 			var index = $scope.resourceComments.indexOf(resource_comment_id);
 			$scope.resourceComments.splice(index, 1);
 		}
+
+		/**
+		* 
+		*/
+		$scope.editResourceComment = function (message){
+			console.log("MAKING RESOURCE COMMENT EDITABLE");
+			$scope.isEditResourceVisible = true;
+			$scope.$broadcast('editResourceComment', message);
+		}
 }]);
 
 app.controller('ResourceCommentDetailController', ['$scope', '$localStorage', 'ResourceComment',
 	function($scope, $localStorage, ResourceComment){
-		$scope.updateComment = function (message){
-			$scope.resourceComment.comment = message;
-			if($scope.resourceComment){
-				ResourceComment.update($scope.resourceComment);
+		$scope.$on('editResourceComment', function(event,message){
+			$scope.resource_comment.comment = message;
+		});
+
+		$scope.updateResourceComment = function(){
+			if($scope.resourceCommentForm.comment != resource_comment.comment){
+				ResourceComment.update($scope.resourceCommentForm.comment);
 			}
 		}
 	}
