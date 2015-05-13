@@ -42,8 +42,9 @@
 	</div>
 </body>
     <%= include_jquery %>
+		
 		<%= javascript_include_tag 'application', controller_name %>
-    <script src="http://d1n0x3qji82z53.cloudfront.net/src-min-noconflict/ace.js" type="text/javascript" charset="utf-8"></script>
+    
 
 </html>
 
