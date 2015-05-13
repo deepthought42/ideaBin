@@ -171,6 +171,8 @@ app.controller('ResourceCreationCtrl', ['$scope', '$rootScope', 'Resource', '$up
 						console.log('percent: ' + parseInt(100.0 * evt.loaded / evt.total));
 					}).success(function(data, status, headers, config) {
 						$rootScope.$broadcast('addResourceToIndex', file.name);
+						$rootScope.$broadcast("getContributingUserCount", $scope.$storage.current_idea.idea)
+						$rootScope.$broadcast("getCommitCount", $scope.$storage.current_idea.idea)
 					}).error(function(data, status, headers, config) {
 						console.log("There was an error uploading for the file. It may already be up to date");
 					})
