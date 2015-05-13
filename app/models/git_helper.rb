@@ -28,7 +28,7 @@ class GitHelper
 	##
 	def self.getContributors(gitInstance)
 		contributor_arr = Array.new		
-		gitInstance.log.each{|l| contributor_arr.push(l.author) }
+		gitInstance.log.each{|l| contributor_arr.include?(l.author.email) ? nil : contributor_arr.push(l.author.email) }
 		return contributor_arr
 	end
 end

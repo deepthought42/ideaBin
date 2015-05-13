@@ -170,7 +170,7 @@ class IdeasController < ApplicationController
 		end
 	end
 
-	#GET /idea/:id/commitCount
+	#GET /idea/:id/commitCount.json
 	def commitCount
 		@idea = Idea.find(params[:id])
     repo_path = "#{Rails.root}/public/data/repository/#{current_user.id}/#{@idea.name}"
@@ -182,7 +182,7 @@ class IdeasController < ApplicationController
 		end
 	end
 
-	#GET /idea/:id/contributingUserCount
+	#GET /idea/:id/contributingUserCount.json
 	def contributingUserCount
 		@idea = Idea.find(params[:id])
     repo_path = "#{Rails.root}/public/data/repository/#{current_user.id}/#{@idea.name}"

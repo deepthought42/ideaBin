@@ -40,7 +40,7 @@
 					<input type='text'
 							 	 placeholder="Description here..."
 								 ng-model="$storage.current_idea.idea.description"/>
-						<span class="fa fa-save" ng-click="updateIdea()"></span>
+					<span class="fa fa-save" ng-click="updateIdea()"></span>
 				</span>
       </p>
 				
@@ -67,10 +67,10 @@
 	<div class="col-md-12" id="ideaAdditionalInfo">
     <ul id="ideaAdditionalInfoList">
       <li class="ideaAdditionalInfoListItem">
-  			<span class="ideaInfoNumber">427</span> Total Commits
+  			<span class="ideaInfoNumber">{{commitCount}}</span> Total Commits
       </li>
       <li class="ideaAdditionalInfoListItem">
-  			<span class="ideaInfoNumber">12</span> Contributors
+  			<span class="ideaInfoNumber">{{contributingUserCount}}</span> Contributors
       </li>
     </ul>
   </div>

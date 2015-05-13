@@ -24,6 +24,10 @@ app.controller("IdeaIndexController", ['$scope', '$localStorage', '$sessionStora
 		$scope.$storage.current_idea.then(function onSuccess(response){
 			$scope.$storage.current_idea.idea = response.idea;
 			$scope.$storage.current_idea.user= response.user;
+
+			$rootScope.$broadcast("getContributingUserCount", $scope.$storage.current_idea.idea)
+			$rootScope.$broadcast("getCommitCount", $scope.$storage.current_idea.idea)
+
 			$scope.$storage.repo = Repository.show(
 				{user_id: $scope.$session.user.id, 
 				 id: ideaId}
@@ -81,8 +85,8 @@ app.controller("IdeaIndexController", ['$scope', '$localStorage', '$sessionStora
 		});
 }]);
 
-app.controller('IdeaDetailCtrl', ['$scope', '$localStorage', '$sessionStorage', '$routeParams', 'Idea', '$location', '$upload', '$rootScope', '$http',
-	function($scope, $localStorage, $sessionStorage, $routeParams, Idea, $location, $upload, $rootScope, $http){
+app.controller('IdeaDetailCtrl', ['$scope', '$localStorage', '$sessionStorage', 'Idea', '$location', '$upload', '$rootScope', '$http',
+	function($scope, $localStorage, $sessionStorage, Idea, $location, $upload, $rootScope, $http){
 		$scope.$storage = $localStorage;
 		$scope.$session = $sessionStorage;
 		$scope.idea = $scope.current_idea;
@@ -98,7 +102,7 @@ app.controller('IdeaDetailCtrl', ['$scope', '$localStorage', '$sessionStorage', 
 			progress(function(evt) {
 				console.log('progress: ' + parseInt(100.0 * evt.loaded / evt.total));
 			}).success(function(data, status, headers, config) {
-				$scope.idea  = Idea.show({id: $scope.$storage.current_idea.id});
+				$scope.idea  = Idea.show({id: $scope.$storage.current_idea.idea.id});
 				$scope.idea.then(function onSuccess(response){
 					$localStorage.current_idea = response;
 					$scope.$apply(function () {
@@ -128,6 +132,27 @@ app.controller('IdeaDetailCtrl', ['$scope', '$localStorage', '$sessionStorage', 
 
 			$("#ideaEditPanel").hide();
 		};
+
+		$scope.$on('getContributingUserCount', function(event, idea) {
+			console.log("IDEA :: " + idea);
+			$http.get("/ideas/" + idea.id+"/contributingUserCount.json")
+				.success(function(data){ 
+					$scope.contributingUserCount = data.user_count;
+				})
+				.error(function(data){
+					alert(data.errors);
+				});
+		});
+
+		$scope.$on('getCommitCount', function(event, idea) {
+			$http.get("/ideas/" + idea.id+"/commitCount.json")
+				.success(function(data){ 
+					$scope.commitCount = data.commit_count;
+				})
+				.error(function(data){
+					alert(data.errors);
+				});
+		});
 		
 		$scope.showPullRequestIndexPage = function() {
 			$rootScope.$broadcast("showAllPullRequests", $localStorage.repo.id);

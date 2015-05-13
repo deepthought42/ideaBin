@@ -14,7 +14,7 @@
     </div>
     <div class="col-md-6">
       <h2 id="ideaName">
-        <span ng-show="!editName">
+        <span ng-show="!editName" ng-click="editName=true">
 					{{$storage.current_idea.idea.name}}
         	<a href="#" class="edit">Edit</a>
 				<span>
@@ -40,7 +40,7 @@
 					<input type='text'
 							 	 placeholder="Description here..."
 								 ng-model="$storage.current_idea.idea.description"/>
-						<span class="fa fa-save" ng-click="updateIdea()"></span>
+					<span class="fa fa-save" ng-click="updateIdea()"></span>
 				</span>
       </p>
 				
@@ -67,10 +67,10 @@
 	<div class="col-md-12" id="ideaAdditionalInfo">
     <ul id="ideaAdditionalInfoList">
       <li class="ideaAdditionalInfoListItem">
-  			<span class="ideaInfoNumber">427</span> Total Commits
+  			<span class="ideaInfoNumber">{{commitCount}}</span> Total Commits
       </li>
       <li class="ideaAdditionalInfoListItem">
-  			<span class="ideaInfoNumber">12</span> Contributors
+  			<span class="ideaInfoNumber">{{$scope.contributingUserCount}}</span> Contributors
       </li>
     </ul>
   </div>
