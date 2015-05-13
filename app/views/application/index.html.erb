@@ -3,8 +3,6 @@
 <head>
   <title>IdeaBin</title>
     <%= stylesheet_link_tag    'application', media: 'all' %>
-    <%= include_jquery %>
-		<%= javascript_include_tag 'application', controller_name %>
 		<%= csrf_meta_tags %>
 </head>
 <body ng-app="ideaBin">
@@ -43,6 +41,11 @@
 		<div class="container" id="mainPanel" ng-view=""></div>
 	</div>
 </body>
+    <%= include_jquery %>
+		<script src="http://d1n0x3qji82z53.cloudfront.net/src-min-noconflict/ace.js" type="text/javascript" charset="utf-8"></script>
+		<%= javascript_include_tag 'application', controller_name %>
+    
+
 </html>
 
 

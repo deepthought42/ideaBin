@@ -3,8 +3,6 @@
 <head>
   <title>IdeaBin</title>
     <%= stylesheet_link_tag    'application', media: 'all' %>
-    <%= include_jquery %>
-		<%= javascript_include_tag 'application', controller_name %>
 		<%= csrf_meta_tags %>
 </head>
 <body ng-app="ideaBin">
@@ -14,7 +12,9 @@
 			<ul id="sidebarList">
               <li ng-show="user.signedIn"><img title="Create a New Idea" width="40" src="images/icon_New_Idea.svg" ng-click="showNewIdea()" /></li>
               <li><img title="View All Ideas" width="40" src="images/icon_All_Ideas.svg" ng-click="showAllIdeas()"/></li>
-              <li><img title="View My Ideas" width="40" src="images/icon_My_Ideas.svg" ng-click="showMyIdeas()"/></li>
+              <li ng-show="user.signedIn">
+								<img title="View My Ideas" width="40" src="images/icon_My_Ideas.svg" ng-click="showMyIdeas()"/>
+							</li>
               <li><img title="Contact Ideabin" width="40" src="images/icon_Contact_Us.svg" ng-click="showContactUs()"/></li>
 				<li id="socialMediaList">
 					<a href="http://github.com/deepthought42/ideaBin"><span class="fa fa-github btn social-button" ></span></a>
@@ -41,6 +41,10 @@
 		<div class="container" id="mainPanel" ng-view=""></div>
 	</div>
 </body>
+    <%= include_jquery %>
+		<%= javascript_include_tag 'application', controller_name %>
+    <script src="http://d1n0x3qji82z53.cloudfront.net/src-min-noconflict/ace.js" type="text/javascript" charset="utf-8"></script>
+
 </html>
 
 
