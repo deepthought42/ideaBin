@@ -7,23 +7,25 @@ IdeaBin::Application.routes.draw do
 	put '/resources' => 'resources#update'
 
   resources :directories do
-	member do
-		get 'topDir'
-	end
+		member do
+			get 'topDir'
+		end
   end
 	
   resources :uploads
   resources :resources do
-	member do
-		get 'contents'
-		get 'download'
-	end
+		member do
+			get 'contents'
+			get 'download'
+		end
   end
 	
   resources :ideas do
-	member do
-		put 'uploadCover'
-	end
+		member do
+			put 'uploadCover'
+			get 'commitCount'
+			get 'contributingUserCount'
+		end
   end
 	
 	resources :pull_requests
@@ -38,7 +40,9 @@ IdeaBin::Application.routes.draw do
 
 
 #	devise_for :users
-	mount_devise_token_auth_for 'User', at: 'api/auth'
+	mount_devise_token_auth_for 'User', at: 'api/auth', controllers: {
+    registrations:  'overrides/registrations'
+  }
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

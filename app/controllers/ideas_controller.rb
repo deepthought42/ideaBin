@@ -170,9 +170,29 @@ class IdeasController < ApplicationController
 		end
 	end
 
-	#GET /ideaCommits/:id
+	#GET /idea/:id/commitCount
 	def commitCount
-		
+		@idea = Idea.find(params[:id])
+    repo_path = "#{Rails.root}/public/data/repository/#{current_user.id}/#{@idea.name}"
+		@git = GitHelper.init(repo_path, current_user.email, current_user.name)
+		if(@git)
+			render json: {commit_count: @git.log.count}
+		else
+			render json: {error: "Unable to calculate commit count"}, status: :unprocessable_entity
+		end
+	end
+
+	#GET /idea/:id/contributingUserCount
+	def contributingUserCount
+		@idea = Idea.find(params[:id])
+    repo_path = "#{Rails.root}/public/data/repository/#{current_user.id}/#{@idea.name}"
+		@git = GitHelper.init(repo_path, current_user.email, current_user.name)
+		committing_user_arr = GitHelper.getContributors(@git)
+		if(@git)
+			render json: {user_count: committing_user_arr.count}
+		else
+			render json: {error: "Unable to calculate number of users that have contributed"}, status: :unprocessable_entity
+		end
 	end
  
  private

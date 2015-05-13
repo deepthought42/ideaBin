@@ -7,23 +7,25 @@ IdeaBin::Application.routes.draw do
 	put '/resources' => 'resources#update'
 
   resources :directories do
-	member do
-		get 'topDir'
-	end
+		member do
+			get 'topDir'
+		end
   end
 	
   resources :uploads
   resources :resources do
-	member do
-		get 'contents'
-		get 'download'
-	end
+		member do
+			get 'contents'
+			get 'download'
+		end
   end
 	
   resources :ideas do
-	member do
-		put 'uploadCover'
-	end
+		member do
+			put 'uploadCover'
+			get 'commitCount'
+			get 'contributingUserCount'
+		end
   end
 	
 	resources :pull_requests
