@@ -1,5 +1,5 @@
 class DirectoriesController < ApplicationController
-	before_filter :authenticate_user!, except: [:index]
+	before_filter :authenticate_user!, except: [:show]
 	respond_to :json
 	
 	# GET /directories

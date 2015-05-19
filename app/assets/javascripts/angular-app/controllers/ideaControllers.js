@@ -25,20 +25,40 @@ app.controller("IdeaIndexController", ['$scope', '$localStorage', '$sessionStora
 			$scope.$storage.current_idea.idea = response.idea;
 			$scope.$storage.current_idea.user= response.user;
 
-			$rootScope.$broadcast("getContributingUserCount", $scope.$storage.current_idea.idea)
-			$rootScope.$broadcast("getCommitCount", $scope.$storage.current_idea.idea)
 
-			$scope.$storage.repo = Repository.show(
-				{user_id: $scope.$session.user.id, 
-				 id: ideaId}
-			).$promise;
+			if($scope.$session.user){
+				$rootScope.$broadcast("getContributingUserCount", $scope.$storage.current_idea.idea)
+				$rootScope.$broadcast("getCommitCount", $scope.$storage.current_idea.idea)
+
+				//if user is signed in then get repo
+				// otherwise get repository for owner
+			
+				$scope.$storage.repo = Repository.show(
+					{
+						user_id: $scope.$session.user.id, 
+						id: ideaId
+					}
+				).$promise;
+			}
+			else{
+				$scope.$storage.repo = Repository.show(
+					{
+						user_id: $scope.$storage.current_idea.idea.user_id,
+						id: ideaId
+					}
+				).$promise;
+			}
 			$scope.$storage.repo.then(function onSuccess(response){
 				$scope.$storage.repo = response;
 
 				$rootScope.$broadcast("loadDirectory", $scope.$storage.repo.path )
 				$rootScope.$broadcast("loadResources", $scope.$storage.repo.path)
-				$rootScope.$broadcast("getSubmittedPullRequests", $scope.$storage.repo.id)
 				$rootScope.$broadcast("loadRepositoryComments")
+			
+				if($scope.$session.user){
+					$rootScope.$broadcast("getSubmittedPullRequests", $scope.$storage.repo.id)
+				}
+				
 				},
 				function onFail(response) {
 						alert("failed to load idea for editing");

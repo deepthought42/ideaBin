@@ -1,5 +1,5 @@
 class ResourcesController < ApplicationController
-  before_filter :authenticate_user!
+  before_filter :authenticate_user!, except: [:index, :contents]
 	#before_action :set_resource, except: [:new, :create, :index]
 	respond_to :html, :json
 	

@@ -1,5 +1,5 @@
 class IdeasController < ApplicationController
-  before_action :authenticate_user!, except: [:index]
+  before_action :authenticate_user!, except: [:index, :show]
   before_action :set_idea, except: [:new, :create, :index, :userIdeas]
 	respond_to :json
 	
@@ -23,21 +23,28 @@ class IdeasController < ApplicationController
   def show
     @idea = Idea.find(params[:id])
     #clone idea repo from owners copy if current user isn't owner
-    if(current_user.id != @idea.user_id)
+    if(current_user and current_user.id != @idea.user_id)
 	    repo_path = "#{Rails.root}/public/data/repository/#{current_user.id}/#{@idea.name}"
 			@repo = Repository.new()
 			@repo.path = repo_path
 			@repo.user = current_user
 			@repo.idea = @idea
 			@repo.save
-		else
+		elsif(current_user and current_user.id == @idea.user_id)
 			#load up existing repository
 			@repo = Repository.where(user_id: current_user.id).where(idea_id: params[:id]).first
+		else
+			#load up existing repository
+			@repo = Repository.where(user_id: params[:user_id]).where(idea_id: params[:id]).first
 		end
-		unless File.exists?("#{Rails.root}/public/data/repository/#{current_user.id}/#{@idea.name}")
-			Dir.chdir("#{Rails.root}/public/data/repository/#{current_user.id}/")
-			@git = Git.clone("#{Rails.root}/public/data/repository/#{@idea.user_id}/#{@idea.name}", @idea.name)	
+	
+		if current_user
+			unless File.exists?("#{Rails.root}/public/data/repository/#{current_user.id}/#{@idea.name}")
+				Dir.chdir("#{Rails.root}/public/data/repository/#{current_user.id}/")
+				@git = Git.clone("#{Rails.root}/public/data/repository/#{@idea.user_id}/#{@idea.name}", @idea.name)	
+			end
 		end
+
 		@user = User.find(@idea.user_id)
 		respond_to do |format|
 			format.json  { render :json => {:idea => @idea, 

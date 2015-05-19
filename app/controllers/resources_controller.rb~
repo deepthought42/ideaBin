@@ -1,5 +1,5 @@
 class ResourcesController < ApplicationController
-  before_filter :authenticate_user!
+  before_filter :authenticate_user!, except: [:index, :show]
 	#before_action :set_resource, except: [:new, :create, :index]
 	respond_to :html, :json
 	
@@ -89,7 +89,6 @@ class ResourcesController < ApplicationController
 			@git = GitHelper.init(@repo.path, current_user.email, current_user.name)
 			GitHelper.commitAll(@git, "Removed file :: #{params[:path]}")
 		end
-
   end
 	
 	#GET /resources/1/contents.json
