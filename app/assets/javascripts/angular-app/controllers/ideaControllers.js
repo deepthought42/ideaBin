@@ -26,13 +26,13 @@ app.controller("IdeaIndexController", ['$scope', '$localStorage', '$sessionStora
 			$scope.$storage.current_idea.user= response.user;
 
 
-			if($scope.$session.user){
+			
 				$rootScope.$broadcast("getContributingUserCount", $scope.$storage.current_idea.idea)
 				$rootScope.$broadcast("getCommitCount", $scope.$storage.current_idea.idea)
 
 				//if user is signed in then get repo
 				// otherwise get repository for owner
-			
+			if($scope.$session.user){
 				$scope.$storage.repo = Repository.show(
 					{
 						user_id: $scope.$session.user.id, 
@@ -105,8 +105,9 @@ app.controller("IdeaIndexController", ['$scope', '$localStorage', '$sessionStora
 		});
 }]);
 
-app.controller('IdeaDetailCtrl', ['$scope', '$localStorage', '$sessionStorage', 'Idea', '$location', '$upload', '$rootScope', '$http',
-	function($scope, $localStorage, $sessionStorage, Idea, $location, $upload, $rootScope, $http){
+app.controller('IdeaDetailCtrl', ['$scope', '$auth', '$localStorage', '$sessionStorage', 'Idea', '$location', '$upload', '$rootScope', '$http',
+	function($scope, $auth, $localStorage, $sessionStorage, Idea, $location, $upload, $rootScope, $http){
+		$auth.validateUser();
 		$scope.$storage = $localStorage;
 		$scope.$session = $sessionStorage;
 		$scope.idea = $scope.current_idea;
@@ -161,6 +162,7 @@ app.controller('IdeaDetailCtrl', ['$scope', '$localStorage', '$sessionStorage', 
 				})
 				.error(function(data){
 					alert(data.errors);
+					$scope.contributingUserCount = -1
 				});
 		});
 
@@ -171,6 +173,7 @@ app.controller('IdeaDetailCtrl', ['$scope', '$localStorage', '$sessionStorage', 
 				})
 				.error(function(data){
 					alert(data.errors);
+					$scope.commitCount = -1
 				});
 		});
 		

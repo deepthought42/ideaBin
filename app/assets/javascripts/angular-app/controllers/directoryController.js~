@@ -4,7 +4,7 @@ app.controller("DirectoryIndexCtrl", ['$scope', '$rootScope', '$localStorage', '
 	function($scope, $rootScope, $localStorage, $routeParams, Directory, $location, $http) {
 		$rootScope.showCreateDirectoryPanel = false;
 		$scope.$storage = $localStorage;
-
+		$scope.$session = $sessionStorage
 		$scope.loadParentDirectory = function(){
 			var idx = $scope.$storage.dir_path.lastIndexOf("/");
 			var parent_dir_path = $scope.$storage.dir_path.substring(0, idx);
@@ -30,7 +30,7 @@ app.controller("DirectoryIndexCtrl", ['$scope', '$rootScope', '$localStorage', '
 		$scope.loadDirectory = function(name, path){
 			$scope.directories = Directory.query({'path': path+"/"+name})
 			if(typeof name != 'undefined' && name != null && name != ''){
-				if($scope.$storage.dir_path.lastIndexOf("/") === $scope.$storage.dir_path.length){
+				if($scope.$storage.dir_path.lastIndexOf("/") === $scope.$storage.dir_path.length-1){
 					$scope.$storage.dir_path += name;
 				}
 				else{

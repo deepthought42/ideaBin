@@ -1,7 +1,7 @@
 var app = angular.module('ideaBin.resourceControllers', [])
 
-app.controller("ResourceIndexCtrl", ['$rootScope', '$scope', '$localStorage', 'Resource', '$location', '$upload', '$http',
-	function($rootScope, $scope, $localStorage, Resource, $location, $upload, $http) {
+app.controller("ResourceIndexCtrl", ['$rootScope', '$scope', '$sessionStorage', '$localStorage', 'Resource', '$location', '$upload', '$http',
+	function($rootScope, $scope, $sessionStorage, $localStorage, Resource, $location, $upload, $http) {
 		$scope.$storage = $localStorage;
 		$scope.editableResourceTypes = ["txt", "rb", "html", "log", "js", "php", "scss"];
 		$scope.resourceLogos = {"text":"fa-file-text", "rb": "fa-file-code-o", "html": "fa-file-code-o" , "log":"fa-file-o", "js":"fa-file-code-o", "php":"fa-file-code-o", "jpg": "fa-file-image-o", "css": "fa-file-code-o", "scss": "fa-file-code-o", "no-format": "fa-file-o"}
@@ -108,9 +108,6 @@ app.controller('ResourceDetailCtrl', ['$scope', '$localStorage', '$sessionStorag
         // for site specific purposes as well.
         var mode = modelist.getModeForPath(resource_name).mode;
 				$scope.editor.session.setMode(mode);
-				if(!$scope.$session.user){
-					$scope.editor.session.setReadOnly(true);
-				}
 				$scope.editor.commands.addCommands([{
 					name: "showSettingsMenu",
 					bindKey: {win: "Ctrl-q", mac: "Command-q"},

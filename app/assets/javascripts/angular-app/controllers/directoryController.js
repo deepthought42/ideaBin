@@ -48,9 +48,10 @@ app.controller("DirectoryIndexCtrl", ['$scope', '$rootScope', '$localStorage', '
 		});	
 }]);
 
-app.controller('DirectoryCreationCtrl', ['$scope', '$rootScope', '$localStorage', '$routeParams', 'Directory', '$location',
-	function($scope, $rootScope, $localStorage, $routeParams, Directory, $location ){
+app.controller('DirectoryCreationCtrl', ['$scope', '$rootScope', '$localStorage', '$sessionStorage', '$routeParams', 'Directory', '$location',
+	function($scope, $rootScope, $localStorage, $sessionStorage, $routeParams, Directory, $location ){
 		$scope.$storage = $localStorage;
+		$scope.$session = $sessionStorage
 		//callback for ng-click 'createNewDirectory'
 		$scope.directoryForm = {}
 		$scope.directoryForm.name = ""

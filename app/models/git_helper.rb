@@ -8,7 +8,7 @@ class GitHelper
     Dir.chdir(repo_path)
 		@git = Git.init()
 		@git.config('user.name', username || 'Ideabin User')
-		@git.config('user.email', user_email)
+		@git.config('user.email', user_email || 'contributor@ideabin.net')
 
 		return @git
 	end
@@ -29,6 +29,7 @@ class GitHelper
 	def self.getContributors(gitInstance)
 		contributor_arr = Array.new		
 		gitInstance.log.each{|l| contributor_arr.include?(l.author.email) ? nil : contributor_arr.push(l.author.email) }
+
 		return contributor_arr
 	end
 end

@@ -58,15 +58,17 @@ app.controller("IdeaIndexController", ['$scope', '$localStorage', '$sessionStora
 				if($scope.$session.user){
 					$rootScope.$broadcast("getSubmittedPullRequests", $scope.$storage.repo.id)
 				}
+				
+				},
+				function onFail(response) {
+						alert("failed to load idea for editing");
+				});
 			},
 			function onFail(response) {
 				alert("failed to load repo while opening idea for editing");
 			});
 			$location.path('/ideas/'+ideaId);
-		},
-		function onFail(response) {
-				alert("failed to load idea for editing");
-		});
+		}
 		
 		$scope.showNewIdea = function(){
 			$scope.isCreateIdeaPanelVisible = true;
@@ -103,8 +105,9 @@ app.controller("IdeaIndexController", ['$scope', '$localStorage', '$sessionStora
 		});
 }]);
 
-app.controller('IdeaDetailCtrl', ['$scope', '$localStorage', '$sessionStorage', 'Idea', '$location', '$upload', '$rootScope', '$http',
-	function($scope, $localStorage, $sessionStorage, Idea, $location, $upload, $rootScope, $http){
+app.controller('IdeaDetailCtrl', ['$scope', '$auth', '$localStorage', '$sessionStorage', 'Idea', '$location', '$upload', '$rootScope', '$http',
+	function($scope, $auth, $localStorage, $sessionStorage, Idea, $location, $upload, $rootScope, $http){
+		$auth.validateUser();
 		$scope.$storage = $localStorage;
 		$scope.$session = $sessionStorage;
 		$scope.idea = $scope.current_idea;
@@ -159,6 +162,7 @@ app.controller('IdeaDetailCtrl', ['$scope', '$localStorage', '$sessionStorage', 
 				})
 				.error(function(data){
 					alert(data.errors);
+					$scope.contributingUserCount = -1
 				});
 		});
 
@@ -169,6 +173,7 @@ app.controller('IdeaDetailCtrl', ['$scope', '$localStorage', '$sessionStorage', 
 				})
 				.error(function(data){
 					alert(data.errors);
+					$scope.commitCount = -1
 				});
 		});
 		
