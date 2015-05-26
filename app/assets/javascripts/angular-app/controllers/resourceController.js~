@@ -78,9 +78,10 @@ app.controller("ResourceIndexCtrl", ['$rootScope', '$scope', '$localStorage', 'R
 	}
 ]);
 
-app.controller('ResourceDetailCtrl', ['$scope', '$localStorage', 'Resource', '$http',
-	function($scope, $localStorage, Resource, $http){
+app.controller('ResourceDetailCtrl', ['$scope', '$localStorage', '$sessionStorage', 'Resource', '$http',
+	function($scope, $localStorage, $sessionStorage, Resource, $http){
 		$scope.$storage = $localStorage
+		$scope.$session = $sessionStorage
 		$scope.aceLoaded = function(_editor) {
 			$scope.editor = _editor;
 			// Options
@@ -107,6 +108,9 @@ app.controller('ResourceDetailCtrl', ['$scope', '$localStorage', 'Resource', '$h
         // for site specific purposes as well.
         var mode = modelist.getModeForPath(resource_name).mode;
 				$scope.editor.session.setMode(mode);
+				if(!$scope.$session.user){
+					$scope.editor.session.setReadOnly(true);
+				}
 				$scope.editor.commands.addCommands([{
 					name: "showSettingsMenu",
 					bindKey: {win: "Ctrl-q", mac: "Command-q"},
@@ -114,8 +118,9 @@ app.controller('ResourceDetailCtrl', ['$scope', '$localStorage', 'Resource', '$h
 						editor.showSettingsMenu();
 					}
 				}]);
-
 				$scope.editor.setValue(data);
+
+				
 
 				$localStorage.resource = resource_name;
 			}).error(function(data){
@@ -171,6 +176,8 @@ app.controller('ResourceCreationCtrl', ['$scope', '$rootScope', 'Resource', '$up
 						console.log('percent: ' + parseInt(100.0 * evt.loaded / evt.total));
 					}).success(function(data, status, headers, config) {
 						$rootScope.$broadcast('addResourceToIndex', file.name);
+						$rootScope.$broadcast("getContributingUserCount", $scope.$storage.current_idea.idea)
+						$rootScope.$broadcast("getCommitCount", $scope.$storage.current_idea.idea)
 					}).error(function(data, status, headers, config) {
 						console.log("There was an error uploading for the file. It may already be up to date");
 					})

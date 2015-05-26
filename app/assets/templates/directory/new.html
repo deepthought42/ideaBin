@@ -1,4 +1,4 @@
-<div id="directoryForm" ng-controller="DirectoryCreationCtrl">
+<div id="directoryForm" ng-controller="DirectoryCreationCtrl" ng-show="$session.user">
 	<h4 class="margin-bottom-15">Add a New Directory to {{$storage.dir_path}}</h4>
 	<form name="directory" novalidate>
 	  <input type="hidden" ng-model="directoryForm.idea_id" />
@@ -8,7 +8,10 @@
 	    <input class="form-control" type="text" placeholder="Name" ng-model="directoryForm.name" name="directory[name]"/>
 	    </div>
 	    <div class="actions">
-	    <button class="btn btn-primary" ng-click="createNewDirectory()"><i class="fa fa-save"></i> Add Directory</button>
+			  <button class="btn btn-primary" ng-click="createNewDirectory()" >
+					<i class="fa fa-save"></i> 
+					Add Directory
+				</button>
 	  </div>
 	</form>
 </div>

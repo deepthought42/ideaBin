@@ -12,7 +12,7 @@
       </div>
     </div>
     <hr/>
-		<div ng-controller="ResourceCreationCtrl">
+		<div ng-controller="ResourceCreationCtrl" ng-show="$session.user">
 		  <h4 class="margin-bottom-15">Add a New Resource to {{$storage.dir_path}}</h4>
 		  <div class="col-md-12" id="resource-drag-drop-wrapper">
 		    <span >

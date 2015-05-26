@@ -15,7 +15,7 @@
 		<div ng-controller="ResourceCreationCtrl">
 		  <h4 class="margin-bottom-15">Add a New Resource to {{$storage.dir_path}}</h4>
 		  <div class="col-md-12" id="resource-drag-drop-wrapper">
-		    <span >
+		    <span ng-show="$session.user">
 		      <button class="btn btn-primary btn-block" 
 						      id="resourceDragDropBtn" 
 									ng-file-select		          

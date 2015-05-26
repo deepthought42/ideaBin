@@ -78,9 +78,10 @@ app.controller("ResourceIndexCtrl", ['$rootScope', '$scope', '$localStorage', 'R
 	}
 ]);
 
-app.controller('ResourceDetailCtrl', ['$scope', '$localStorage', 'Resource', '$http',
-	function($scope, $localStorage, Resource, $http){
+app.controller('ResourceDetailCtrl', ['$scope', '$localStorage', '$sessionStorage', 'Resource', '$http',
+	function($scope, $localStorage, $sessionStorage, Resource, $http){
 		$scope.$storage = $localStorage
+		$scope.$session = $sessionStorage
 		$scope.aceLoaded = function(_editor) {
 			$scope.editor = _editor;
 			// Options
@@ -114,8 +115,9 @@ app.controller('ResourceDetailCtrl', ['$scope', '$localStorage', 'Resource', '$h
 						editor.showSettingsMenu();
 					}
 				}]);
-
 				$scope.editor.setValue(data);
+
+				
 
 				$localStorage.resource = resource_name;
 			}).error(function(data){
