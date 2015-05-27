@@ -38,6 +38,7 @@ app.controller('UserSessionCtrl', ['$scope', '$auth', '$location', '$sessionStor
 
 			$scope.$on('auth:logout-error', function(event, reason){
 				alert("There was an error signing you out. REASON :: "+reason);
+				$scope.$session.user = null;
 			})
 		}
 		
@@ -45,6 +46,11 @@ app.controller('UserSessionCtrl', ['$scope', '$auth', '$location', '$sessionStor
 			$scope.$session.user = data;
 		})
 		
+		$scope.$on('auth:session-expired', function(ev) {
+			alert('Session has expired');
+			$scope.session.user = null;
+		});
+
 		$scope.editProfile = function(){
 			$scope.user = $scope.$session.user;
 		}
@@ -137,6 +143,7 @@ app.controller('UserAuthenticateController', ['$scope', '$rootScope', '$auth', '
 			
 			$scope.$on('auth:login-error', function(event, currentUser) {
 				alert("Error logging in");
+				$scope.$session.user = null;
 			});
 		}
 	}

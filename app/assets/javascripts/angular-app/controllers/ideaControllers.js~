@@ -26,13 +26,13 @@ app.controller("IdeaIndexController", ['$scope', '$localStorage', '$sessionStora
 			$scope.$storage.current_idea.user= response.user;
 
 
-			if($scope.$session.user){
+			
 				$rootScope.$broadcast("getContributingUserCount", $scope.$storage.current_idea.idea)
 				$rootScope.$broadcast("getCommitCount", $scope.$storage.current_idea.idea)
 
 				//if user is signed in then get repo
 				// otherwise get repository for owner
-			
+			if($scope.$session.user){
 				$scope.$storage.repo = Repository.show(
 					{
 						user_id: $scope.$session.user.id, 

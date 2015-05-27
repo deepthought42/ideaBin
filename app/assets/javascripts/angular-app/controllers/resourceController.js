@@ -86,7 +86,9 @@ app.controller('ResourceDetailCtrl', ['$scope', '$localStorage', '$sessionStorag
 		$scope.aceLoaded = function(_editor) {
 			$scope.editor = _editor;
 			// Options
-			//_editor.setReadOnly(true);
+			if(!$scope.$session.user){
+				$scope.editor.setReadOnly(true);
+			}
 		};
 
 		$scope.aceChanged = function(e) {
