@@ -29,19 +29,21 @@ app.controller('UserSessionCtrl', ['$scope', '$auth', '$location', '$sessionStor
 		}
 
 		$scope.logout = function(user){
+			alert($scope.session.user.email + "you're signed out now.");
 			$auth.signOut()
-			$scope.$on('auth:logout-success', function(event, oldCurrentUser) {
+		}
+
+		$scope.$on('auth:logout-success', function(event, oldCurrentUser) {
 				$('#editProfileForm').hide();
-				alert($scope.session.user.email + "you're signed out now.");
 				$scope.$session.user = null;
+				$location.path('/ideas');
 			});
 
 			$scope.$on('auth:logout-error', function(event, reason){
 				alert("There was an error signing you out. REASON :: "+reason);
 				$scope.$session.user = null;
+				$location.path('/ideas');
 			})
-		}
-		
 		$scope.$on('userRegistered', function(event, data){
 			$scope.$session.user = data;
 		})
