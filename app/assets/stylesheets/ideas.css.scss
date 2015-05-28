@@ -276,3 +276,14 @@
 .ideaEditPanelTop {
 	height:				40%;
 }
+
+#pullRequestCountBubble {
+	position:				absolute;
+	top:						5%;
+	right:					5%;
+	width: 					20px;
+	height:				 	20px;
+	border-radius:  15px;
+	background-color: green;
+	color:						white;
+}

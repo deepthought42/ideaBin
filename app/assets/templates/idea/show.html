@@ -60,6 +60,7 @@
 		 	      		ng-click="showPullRequestIndexPage()"
 								ng-show="$storage.current_idea.idea.user_id == $session.user.id">
 					View Pull Requests
+					<i id="pullRequestCountBubble">{{$storage.submittedPullRequestCount}}</i>
 		    </button>
 		  </ul>
 		</div>

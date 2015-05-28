@@ -59,9 +59,12 @@ app.controller("PullRequestIndexController", ['$scope', '$localStorage', 'PullRe
 		});
 		
 		$scope.$on('getSubmittedPullRequests', function(event, data){
-			$http.get("/pull_requests/count.json", {params: {repo_id: $localStorage.repo.id, status: "SUBMITTED"}})
+			$http.get("/pull_requests/count.json",
+				 {headers: $scope.$storage.auth_headers, 
+					params: {repo_id: $localStorage.repo.id, status: "SUBMITTED"}})
 				.success(function(data){
 					$scope.submittedCount = data;
+					$scope.$storage.submittedPullRequestCount = data;
 				})
 				.error(function(data){
 					alert(data.errors);

@@ -104,10 +104,6 @@
 	right:				5px;
 }
 
-.outline {
-	border: 1px dashed red;
-}
-
 .overlay {
 	display:		none;
 	position:		absolute;
@@ -164,22 +160,23 @@
 }
 
 #ideaCoverImage img {
-	position:			relative;
-	width:				inherit;
-	height:				inherit;
-	padding:			0px;
+	position: relative;
+	width: inherit;
+	height: inherit;
+	padding: 0px;
 }
 
 #ideaCreationImage{
-  width: 100%;
+    width: 250px;
+    height: 250px;
 } 
 
 .hidePanelButton{
-	position: 	    absolute;
-	z-index: 				20;
-	font-size:			1.5em;
-	top:		    		3%;
-	right:					3%;
+	position: absolute;
+	z-index: 20;
+	font-size: 1.5em;
+	top: 15px;
+    right: 15px;
 }
 
 
@@ -278,4 +275,15 @@
 
 .ideaEditPanelTop {
 	height:				40%;
+}
+
+#pullRequestCountBubble {
+	position:				absolute;
+	top:						4%;
+	right:					4%;
+	width: 					20px;
+	height:				 	20px;
+	border-radius:  15px;
+	background-color: green;
+	color:						white;
 }

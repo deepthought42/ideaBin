@@ -37,7 +37,7 @@ app.controller('UserSessionCtrl', ['$scope', '$auth', '$location', '$sessionStor
 			});
 
 			$scope.$on('auth:logout-error', function(event, reason){
-				alert("There was an error signing you out. REASON :: "+reason);
+				console.log("There was an error signing you out. REASON :: "+reason);
 			})
 		}
 		
@@ -105,7 +105,7 @@ app.controller('UserDetailController', ['$scope', 'User', '$auth', '$location', 
 	
 ]);
 
-app.controller('UserAuthenticateController', ['$scope', '$rootScope', '$auth', '$location', '$sessionStorage', '$http',
+app.controller('UserAuthenticateController', ['$scope', '$rootScope', '$auth', '$location', '$sessionStorage',
 	function ($scope, $rootScope, $auth, $location, $sessionStorage, $http) { 
 		$scope.$session = $sessionStorage;
 		

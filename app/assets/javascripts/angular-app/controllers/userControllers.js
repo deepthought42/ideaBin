@@ -105,8 +105,8 @@ app.controller('UserDetailController', ['$scope', 'User', '$auth', '$location', 
 	
 ]);
 
-app.controller('UserAuthenticateController', ['$scope', '$rootScope', '$auth', '$location', '$sessionStorage', '$http',
-	function ($scope, $rootScope, $auth, $location, $sessionStorage, $http) { 
+app.controller('UserAuthenticateController', ['$scope', '$rootScope', '$auth', '$location', '$sessionStorage',
+	function ($scope, $rootScope, $auth, $location, $sessionStorage) { 
 		$scope.$session = $sessionStorage;
 		
 		$scope.hideSignInPanel = function() {
