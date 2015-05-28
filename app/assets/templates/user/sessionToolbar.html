@@ -5,11 +5,11 @@
 	</span>
 	<span  ng-show="user.signedIn" class="pull-right">
 		<div class="col-md-12 pull-right">
-			<span>
+			<span ng-show="$session.user">
 				Welcome <strong>{{$session.user.nickname || $session.user.email}}</strong>
 			</span>			
 			<span>
-				<span class="pointerCursor link" ng-click='logout(user)'>Sign out</span> |
+				<span class="pointerCursor link" ng-click='logout($session.user)'>Sign out</span> |
 				<span class='pointerCursor navbar-link link' ng-click="showEditProfileForm()">Edit profile</span> 
 			</span>
 		</div>
