@@ -30,8 +30,7 @@
         <a href="#">{{$storage.current_idea.user.email}}</a> 
         on {{$storage.current_idea.idea.created_at | date:'longDate'}}
       </h5>
-      <p id="ideaDescription" 
-				 >
+      <p id="ideaDescription" >
 				<span ng-show="!editDescription" ng-click="editDescription=true">
 	        {{$storage.current_idea.idea.description || 'Description here ...'}}
 					<a href="#" class="edit">Edit</a>

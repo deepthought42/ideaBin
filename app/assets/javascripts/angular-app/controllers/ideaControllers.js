@@ -111,7 +111,7 @@ app.controller('IdeaDetailCtrl', ['$scope', '$auth', '$localStorage', '$sessionS
 		$scope.$storage = $localStorage;
 		$scope.$session = $sessionStorage;
 		$scope.idea = $scope.current_idea;
-
+		
 		$scope.uploadFile = function(){
 
 			$scope.upload = $upload.upload({

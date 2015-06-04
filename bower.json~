@@ -11,6 +11,7 @@
     "angular-cookie": "latest",
     "angular-cookies": "latest",
     "ng-token-auth" : "latest",
-    "angular-masonry": "latest"
+    "angular-masonry": "latest",
+		"angular-messages": "latest"
   }
 }
