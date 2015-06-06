@@ -1,19 +1,48 @@
+
+
 <div class="col-md-12 fullHeight" id="ace-wrapper" ng-controller="ResourceDetailCtrl">
-	<div class="col-md-8" 
-             ui-ace="{
-			onLoad : aceLoaded,
-			maxLines: 40,
-			require: ['ace/ext/language_tools'],
-			advanced: {
-				enableSnippets: true,
-				enableBasicAutocompletion: true,
-				enableLiveAutocompletion: true
-			}
-	  }" >
+	<div class="col-md-8 actions" id="resourceToolbar" ng-show="$session.user" >
+		<div class="col-md-12">
+			<span class="btn btn-default pull-left fa fa-save" ng-click="updateResource()"></span>
+			<select class="pull-left" ng-click="selectTheme()">
+				<option value="Chrome" selected>Chrome</option>
+				<option value="Clouds">Clouds</option>
+				<option value="Clouds Midnight">Clouds Midnight</option>
+				<option value="Cobalt">Cobalt</option>
+				<option value="Crimson Editor">Crimson Editor</option>
+				<option value="Dawn">Dawn</option>
+				<option value="Eclipse">Eclipse</option>
+				<option value="Idle Fingers">Idle Fingers</option>
+				<option value="Kr Theme">Kr Theme</option>
+				<option value="Merbivore">Merbivore</option>
+				<option value="Merbivore Soft">Merbivore Soft</option>
+				<option value="Mono Industrial">Mono Industrial</option>
+				<option value="Monokai">Monokai</option>
+				<option value="Pastel On Dark">Pastel On Dark</option>
+				<option value="Solarized Dark">Solarized Dark</option>
+				<option value="Solarized Dark">Solarized Dark</option>
+				<option value="Solarized Light">Solarized Light</option>
+				<option value="TextMate">TextMate</option>
+				<option value="Tomorrow">Tomorrow</option>
+				<option value="Tomorrow Night">Tomorrow Night</option>
+				<option value="Tomorrow Night Blue">Tomorrow Night Blue</option>
+				<option value="Tomorrow Night Bright">Tomorrow Night Bright</option>
+				<option value="Tomorrow Night Eighties">Tomorrow Night Eighties</option>
+				<option value="Twilight">Twilight</option>
+				<option value="Vibrant Ink">Vibrant Ink</option>
+			</select>
+		</div>
+		<div class="col-md-12" ui-ace="{
+				onLoad : aceLoaded,
+				maxLines: 40,
+				require: ['ace/ext/language_tools'],
+				advanced: {
+					enableSnippets: true,
+					enableBasicAutocompletion: true,
+					enableLiveAutocompletion: true
+				}
+		  }" >
+		</div>
 	</div>
-	<div class="col-md-4 actions" id="resourceToolbar" ng-show="$session.user">
-		<span class="btn btn-default pull-left fa fa-save" ng-click="updateResource()"></span>
-		<div ng-include="'resource_comment/index.html'"></div>
-	</div>
-	
+  <div class="col-md-4" ng-include="'resource_comment/index.html'"></div>
 </div>
