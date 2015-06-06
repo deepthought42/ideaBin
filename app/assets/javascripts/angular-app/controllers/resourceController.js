@@ -128,6 +128,10 @@ app.controller('ResourceDetailCtrl', ['$scope', '$localStorage', '$sessionStorag
 			});
 		});
 
+		$scope.$on("loadTheme", function(event, themeName){
+			$scope.editor.setTheme('ace/theme/'+themeName);
+		});
+
 		$scope.updateResource = function (){
 			var content = $scope.editor.getValue();
 			$scope.resource.content = content;
@@ -157,7 +161,7 @@ app.controller('ResourceCreationCtrl', ['$scope', '$rootScope', 'Resource', '$up
 			if($scope.resources && $scope.resources.indexOf(files[0].name) > -1){
 				confirmed = confirm("Are you sure you want to overwrite the current copy?")
 			}
-			if(confirmed && files){			
+			if(confirmed && files){
 				for (var i = 0; i < files.length; i++) {
 					var comment = prompt("Please describe the upload");
 					var file = files[i];
