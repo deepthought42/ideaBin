@@ -13,12 +13,12 @@ app.controller("IdeaIndexController", ['$scope', '$localStorage', '$sessionStora
 			$scope.ideas.splice(index, 1);
 		}
 	}
-		
+
 	$scope.createNewIdea = function(){
 		Idea.create();
 		$location.path('/ideas');
 	};
-	
+
 	$scope.editIdea = function (ideaId) {
 		$scope.$storage.current_idea  = Idea.show({id: ideaId}).$promise;
 		$scope.$storage.current_idea.then(function onSuccess(response){
@@ -26,7 +26,7 @@ app.controller("IdeaIndexController", ['$scope', '$localStorage', '$sessionStora
 			$scope.$storage.current_idea.user= response.user;
 
 
-			
+
 				$rootScope.$broadcast("getContributingUserCount", $scope.$storage.current_idea.idea)
 				$rootScope.$broadcast("getCommitCount", $scope.$storage.current_idea.idea)
 
@@ -35,7 +35,7 @@ app.controller("IdeaIndexController", ['$scope', '$localStorage', '$sessionStora
 			if($scope.$session.user){
 				$scope.$storage.repo = Repository.show(
 					{
-						user_id: $scope.$session.user.id, 
+						user_id: $scope.$session.user.id,
 						id: ideaId
 					}
 				).$promise;
@@ -54,11 +54,16 @@ app.controller("IdeaIndexController", ['$scope', '$localStorage', '$sessionStora
 				$rootScope.$broadcast("loadDirectory", $scope.$storage.repo.path )
 				$rootScope.$broadcast("loadResources", $scope.$storage.repo.path)
 				$rootScope.$broadcast("loadRepositoryComments")
-			
-				if($scope.$session.user && $scope.$storage.auth_headers){
+
+				console.log("USER SESSION EXISTS: " + $scope.$session.user)
+				if($scope.$session.user.id === $scope.$storage.current_idea.idea.user_id){
+
 					$rootScope.$broadcast("getSubmittedPullRequests", $scope.$storage.repo.id)
 				}
-				
+				else {
+					delete $scope.$storage.submittedPullRequestCount;
+				}
+
 				},
 				function onFail(response) {
 						alert("failed to load idea for editing");
@@ -69,37 +74,37 @@ app.controller("IdeaIndexController", ['$scope', '$localStorage', '$sessionStora
 			});
 			$location.path('/ideas/'+ideaId);
 		}
-		
+
 		$scope.showNewIdea = function(){
 			$scope.isCreateIdeaPanelVisible = true;
 		}
-	
+
 		$scope.$on('showMyIdeas', function(event, userId){
 			$scope.showUserIdeas(userId);
 		});
-		
+
 		$scope.$on('showAddIdea', function(event, data){
 			$scope.showNewIdea();
 		});
-		
+
 		$scope.$on('showAllIdeas', function(event, data){
 			$scope.ideas = Idea.query();
 		});
-		
+
 		$scope.$on('addIdeaToList', function(event, data){
 			$scope.ideas.push(data);
 		});
-		
+
 		$scope.showUserIdeas = function(userId){
 			$http.get("/userIdeas/" + userId+".json")
-			.success(function(data){ 
+			.success(function(data){
 				$scope.ideas = data;
 			})
 			.error(function(data){
 				alert(data.errors);
 			});
 		}
-		
+
 		$scope.$on('hideCreateIdeaPanel', function(event, data) {
 			$scope.isCreateIdeaPanelVisible = false;
 		});
@@ -111,7 +116,7 @@ app.controller('IdeaDetailCtrl', ['$scope', '$auth', '$localStorage', '$sessionS
 		$scope.$storage = $localStorage;
 		$scope.$session = $sessionStorage;
 		$scope.idea = $scope.current_idea;
-		
+
 		$scope.uploadFile = function(){
 
 			$scope.upload = $upload.upload({
@@ -136,18 +141,18 @@ app.controller('IdeaDetailCtrl', ['$scope', '$auth', '$localStorage', '$sessionS
 				console.log('file ' + config.file + ' was uploaded successfully. Status: ' + status);
 			});
 		};
-		
+
 		$scope.updateIdea = function(){
 			Idea.update($scope.$storage.current_idea.idea)
 			editDescription=false
 			editName=false
 		};
-		
+
 		$scope.showIdeaEditPanel = function() {
 			console.log("showing edit panel");
 			$("#ideaEditPanel").show();
 		};
-		
+
 		$scope.hideIdeaEditPanel = function() {
 			console.log("hiding edit panel");
 
@@ -157,7 +162,7 @@ app.controller('IdeaDetailCtrl', ['$scope', '$auth', '$localStorage', '$sessionS
 		$scope.$on('getContributingUserCount', function(event, idea) {
 			console.log("IDEA :: " + idea);
 			$http.get("/ideas/" + idea.id+"/contributingUserCount.json")
-				.success(function(data){ 
+				.success(function(data){
 					$scope.contributingUserCount = data.user_count;
 				})
 				.error(function(data){
@@ -168,7 +173,7 @@ app.controller('IdeaDetailCtrl', ['$scope', '$auth', '$localStorage', '$sessionS
 
 		$scope.$on('getCommitCount', function(event, idea) {
 			$http.get("/ideas/" + idea.id+"/commitCount.json")
-				.success(function(data){ 
+				.success(function(data){
 					$scope.commitCount = data.commit_count;
 				})
 				.error(function(data){
@@ -176,7 +181,7 @@ app.controller('IdeaDetailCtrl', ['$scope', '$auth', '$localStorage', '$sessionS
 					$scope.commitCount = -1
 				});
 		});
-		
+
 		$scope.showPullRequestIndexPage = function() {
 			$rootScope.$broadcast("showAllPullRequests", $localStorage.repo.id);
 			$("#pullRequestDetailsPanel").hide();
@@ -184,15 +189,15 @@ app.controller('IdeaDetailCtrl', ['$scope', '$auth', '$localStorage', '$sessionS
 			$("#resourceEditPanel").hide();
 			$("#pullRequestIndexPanel").show();
 		};
-		
+
 		$scope.showNewIdea = function(){
 			$rootScope.isCreateIdeaPanelVisible = true;
 		};
-		
+
 		$scope.showNewDirectoryPanel = function(){
 			$('#directoryForm').slideToggle().delay(100);
 		};
-		
+
 		$scope.showPullRequestCreatePanel = function(){
 			$rootScope.$broadcast('showPullRequestCreatePanel');
 		};
@@ -213,7 +218,7 @@ app.controller('IdeaCreationCtrl', ['$scope', '$auth', '$rootScope', 'Idea', '$l
 				$scope.uploadFile();
 			}
 		}
-		
+
 		$scope.uploadFile = function(){
 
 			$scope.$upload = $upload.upload({
@@ -231,7 +236,7 @@ app.controller('IdeaCreationCtrl', ['$scope', '$auth', '$rootScope', 'Idea', '$l
 				$rootScope.$broadcast('addIdeaToList', data.data);
 			});
 		}
-		
+
 		$scope.previewImage = function(files){
 			var reader = new FileReader();
 			if(typeof files[0] === 'Blob'){
@@ -242,7 +247,7 @@ app.controller('IdeaCreationCtrl', ['$scope', '$auth', '$rootScope', 'Idea', '$l
 				$scope.ideaForm.cover_img = files[0];
 			}
 		}
-		
+
 		$scope.hideCreateIdeaPanel = function(){
 			$rootScope.$broadcast('hideCreateIdeaPanel');
 		}

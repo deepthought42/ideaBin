@@ -1,12 +1,12 @@
-var ideaBin = angular.module('ideaBin', 
-	[ 'ngRoute', 
-		'templates', 
-		'ideaBin.ideaServices', 
-		'ideaBin.directoryServices', 
+var ideaBin = angular.module('ideaBin',
+	[ 'ngRoute',
+		'templates',
+		'ideaBin.ideaServices',
+		'ideaBin.directoryServices',
 		'ideaBin.ideaControllers',
-		'ideaBin.ideaDirectives', 
+		'ideaBin.ideaDirectives',
 		'ideaBin.directoryControllers',
-		'ideaBin.resourceServices', 
+		'ideaBin.resourceServices',
 		'ideaBin.resourceControllers',
 		'ideaBin.userControllers',
 		'ideaBin.userServices',
@@ -35,11 +35,12 @@ var ideaBin = angular.module('ideaBin',
 
 ideaBin.config([
   '$httpProvider', function($httpProvider){
-    $httpProvider.defaults.headers.common['X-CSRF-Token'] = $('meta[name=csrf-token]').attr('content');
+    $httpProvider.defaults.headers.common['X-CSRF-Token'] =
+			$('meta[name=csrf-token]').attr('content');
   /*
-   Response interceptors are stored inside the 
+   Response interceptors are stored inside the
    $httpProvider.responseInterceptors array.
-   To register a new response interceptor is enough to add 
+   To register a new response interceptor is enough to add
    a new function to that array.
   */
 
@@ -47,7 +48,7 @@ ideaBin.config([
 	function() {
 		return {
     	'request': function(config) {
-				if (config.headers['access-token']) {
+				if (config.headers['access-token'] && !$httpProvider.defaults.headers.common['Access-Token']) {
 		    	$httpProvider.defaults.headers.common['Access-Token'] = config.headers['access-token'];
 					$httpProvider.defaults.headers.common['Token-Type'] = config.headers['token-type'];
 			    $httpProvider.defaults.headers.common['Client'] = config.headers['client'];
@@ -59,60 +60,60 @@ ideaBin.config([
 		};
   });
 }]);
+
 ideaBin.config(function($httpProvider, $authProvider){
 	$authProvider.configure({
 	      tokenValidationPath: '/auth/validate_token',
-	       tokenFormat: {
-		    "access-token": "{{ token }}",
-		    "token-type": "Bearer",
-		    "client": "{{ clientId }}",
-		    "expiry": "{{ expiry }}",
-		    "uid": "{{ uid }}"
-		  },
-	      storage: 'localStorage',
+	      tokenFormat: {
+			    "access-token": "{{ token }}",
+			    "token-type": "Bearer",
+			    "client": "{{ clientId }}",
+			    "expiry": "{{ expiry }}",
+			    "uid": "{{ uid }}"
+			  },
+	      storage: 'sessionStorage',
 
 	  handleLoginResponse: function(response) {
 		return response;
 	  },
 
-          handleAccountUpdateResponse: function(response) {
-            return response;
-          },
+    handleAccountUpdateResponse: function(response) {
+      return response;
+    },
 
-          handleTokenValidationResponse: function(response) {
-            return response;
-          }
-
-        })
+    handleTokenValidationResponse: function(response) {
+      return response;
+    }
+  })
 });
 
 ideaBin.config(function ($routeProvider, $locationProvider) {
 
 
         $routeProvider.when('/ideas', {
-					templateUrl: 'idea/index.html', 
+					templateUrl: 'idea/index.html',
 				})
 				.when('/ideas/new', {
-					templateUrl: 'idea/new.html', 
+					templateUrl: 'idea/new.html',
 				})
 				.when('/ideas/:id', {
-					templateUrl: 'idea/edit.html', 
+					templateUrl: 'idea/edit.html',
 				})
 				.when('/directories', {
-					templateUrl: 'directory/index.html', 
+					templateUrl: 'directory/index.html',
 				})
 				.when('/directories/new', {
-					templateUrl: 'directory/new.html', 
+					templateUrl: 'directory/new.html',
 				})
 				.when('/directories/:id', {
-					templateUrl: 'directory/edit.html', 
+					templateUrl: 'directory/edit.html',
 				})
 				.when('/users/edit', {
-					templateUrl: 'user/edit.html', 
+					templateUrl: 'user/edit.html',
 					controller: 'UserSessionCtrl'
 				})
 				.when('/users/signout', {
-					templateUrl: 'idea/index.html', 
+					templateUrl: 'idea/index.html',
 					controller: 'UserSessionCtrl'
 				})
 				.when('/sign_in', {
@@ -127,18 +128,18 @@ ideaBin.config(function ($routeProvider, $locationProvider) {
 					templateUrl:  'contact_us.html',
 				})
 				.otherwise({redirectTo : '/ideas'});
-				
+
         $locationProvider.html5Mode({
 					enabled: true,
 					requireBase: false
 				});
     });
-		
-ideaBin.run(['$rootScope', '$injector', function($rootScope,$injector) { 
-	$injector.get("$http").defaults.transformRequest = function(data, headersGetter) { 
-		if ($rootScope.oauth) headersGetter()['Authorization'] = "Bearer "+$rootScope.oauth.access_token; 
+
+ideaBin.run(['$rootScope', '$injector', function($rootScope,$injector) {
+	$injector.get("$http").defaults.transformRequest = function(data, headersGetter) {
+		if ($rootScope.oauth) headersGetter()['Authorization'] = "Bearer "+$rootScope.oauth.access_token;
     	if (data) {
-		return angular.toJson(data); 
-    	} 
+		return angular.toJson(data);
+    	}
   }
  }]);

@@ -9,65 +9,60 @@ app.controller("PullRequestIndexController", ['$scope', '$localStorage', 'PullRe
 			var index = $scope.pullRequests.indexOf(pullRequest);
 			$scope.pullRequests.splice(index, 1);
 		}
-		
-		$scope.createNewPullRequest = function(){
-			PullRequest.create();
-			$location.path('/pullRequests');
-		}
-		
+
 		$scope.showPullRequest = function(pullRequestId){
 			$rootScope.$broadcast('showPullRequest', pullRequestId);
 		}
-		
+
 		$scope.acceptPullRequest = function (pullRequestId) {
 			PullRequest.update({id: pullRequestId});
 			$location.path('/ideas/'+$localStorage.current_idea.id);
 		}
-		
+
 		$scope.showNewPullRequest = function(){
 			$scope.isCreatePullRequestPanelVisible = true;
 		}
-	
+
 		$scope.$on('showMyPullRequests', function(event, userId){
 			$scope.showUserPullRequests(userId);
 		});
-		
+
 		$scope.$on('showAddPullRequest', function(event, data){
 			$scope.showNewPullRequest();
 		});
-		
+
 		$scope.$on('showAllPullRequests', function(event, repository_id){
 			$scope.pullRequests = PullRequest.query({repo_id: repository_id});
 		});
-		
+
 		$scope.$on('addPullRequestToList', function(event, data){
 			$scope.pullRequests.push(data);
 		});
-		
+
 		$scope.showUserPullRequests = function(userId){
 			$http.get("/userPullRequests/" + userId+".json")
-				.success(function(data){ 
+				.success(function(data){
 					$scope.pullRequests = data;
 				})
 				.error(function(data){
 					alert(data.errors);
 				});
 		}
-		
+
 		$scope.$on('hideCreatePullRequestPanel', function(event, data) {
 			$scope.isCreatePullRequestPanelVisible = false;
 		});
-		
+
 		$scope.$on('getSubmittedPullRequests', function(event, data){
 			$http.get("/pull_requests/count.json",
-				 {headers: $scope.$storage.auth_headers, 
+				 {headers: $scope.$storage.auth_headers,
 					params: {repo_id: $localStorage.repo.id, status: "SUBMITTED"}})
 				.success(function(data){
 					$scope.submittedCount = data;
 					$scope.$storage.submittedPullRequestCount = data;
 				})
 				.error(function(data){
-					alert(data.errors);
+					console.log("ERROR GETTING PULL REQUEST COUNT :: " + data.errors);
 				})
 		});
 }]);
@@ -79,14 +74,14 @@ app.controller('PullRequestDetailController', ['$scope', '$localStorage', '$rout
 
 		$scope.updatePullRequest = function (pullRequestId){
 			PullRequest.update($scope.pullRequest,{id: pullRequestId}, function(){
-					
+
 			});
 		}
-		
+
 		$scope.hidePullRequestDetailPanel = function() {
 			//$rootScope.pullRequestEditPanelVisible = false;
 		}
-		
+
 		$scope.$on('showPullRequest', function(event, pullRequestId){
 			console.log("PULL REQUEST ID :: " + pullRequestId);
 			$scope.pull_request = PullRequest.show({id: pullRequestId}).$promise;
@@ -107,19 +102,19 @@ app.controller('PullRequestCreationController', ['$scope', '$rootScope', 'PullRe
 	function($scope, $rootScope, PullRequest, $location, $upload, $localStorage ){
 		//callback for ng-click 'createNewPullRequest'
 		$scope.pullRequestForm = {};
-		
-		
+
+
 		$scope.createNewPullRequest = function(){
-			$scope.pullRequestForm.idea_id = $localStorage.current_idea.id;
+			$scope.pullRequestForm.idea_id = $localStorage.current_idea.idea.id;
 			PullRequest.create($scope.pullRequestForm, function(){
-				$("#pullRequestCreatePanel").hide();			
+				$("#pullRequestCreatePanel").hide();
 			});
 		}
-		
+
 		$scope.$on('showPullRequestCreatePanel', function() {
 			$("#pullRequestCreatePanel").show();
 		})
-		
+
 		$scope.hideCreatePullRequestPanel = function(){
 			$("#pullRequestCreatePanel").hide();
 		}

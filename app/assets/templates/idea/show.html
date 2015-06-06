@@ -1,11 +1,11 @@
 <div id="ideaEditPanel" class="col-md-12" ng-controller="IdeaDetailCtrl">
   <div class="col-md-12">
     <div class="col-md-3" id="ideaCoverImageWrapper">
-      <div id="ideaCoverImage" 
-	   			 class="outline" 
-           ng-file-drop 
-           ng-file-change="uploadFile($files)" 
-           ng-model="cover_img" 
+      <div id="ideaCoverImage"
+	   			 class="outline"
+           ng-file-drop
+           ng-file-change="uploadFile($files)"
+           ng-model="cover_img"
            drop-available="dropSupported"
 					 ng-file-select
 					 accept="image/*">
@@ -26,8 +26,8 @@
 				</span>
       </h2>
       <h5 id="ideaMetadata">
-  			Idea created by 
-        <a href="#">{{$storage.current_idea.user.email}}</a> 
+  			Idea created by
+        <a href="#">{{$storage.current_idea.user.email}}</a>
         on {{$storage.current_idea.idea.created_at | date:'longDate'}}
       </h5>
       <p id="ideaDescription" >
@@ -42,16 +42,16 @@
 					<span class="fa fa-save" ng-click="updateIdea()"></span>
 				</span>
       </p>
-				
+
     </div>
    	<div class="col-md-3 pull-right" id="ideaButtonListWrapper">
 		  <ul id="ideaButtonList">
-		    <button class="btn btn-default btn-block"   
+		    <button class="btn btn-default btn-block"
 								ng-show="$session.user && $storage.current_idea.idea.user_id != $session.user.id">
 					Follow
 				</button>
-		    <div class="btn btn-default btn-block" 
-			    			ng-click="showPullRequestCreatePanel()" 
+		    <div class="btn btn-default btn-block"
+			    			ng-click="showPullRequestCreatePanel()"
 								ng-show="$session.user && $storage.current_idea.idea.user_id != $session.user.id">
 			    Create Pull Request
 		    </div>
@@ -59,7 +59,11 @@
 		 	      		ng-click="showPullRequestIndexPage()"
 								ng-show="$storage.current_idea.idea.user_id == $session.user.id">
 					View Pull Requests
-					<i id="pullRequestCountBubble">{{$storage.submittedPullRequestCount}}</i>
+					<i id="pullRequestCountBubble"
+              ng-show="$storage.submittedPullRequestCount
+                        && $storage.submittedPullRequestCount > 0">
+            {{$storage.submittedPullRequestCount}}
+          </i>
 		    </button>
 		  </ul>
 		</div>

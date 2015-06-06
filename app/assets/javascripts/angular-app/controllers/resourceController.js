@@ -11,7 +11,7 @@ app.controller("ResourceIndexCtrl", ['$rootScope', '$scope', '$sessionStorage', 
 		$scope.$on('loadResources', function(event, path){
 			$scope.resources = Resource.query({path: path});
 		});
-	
+
 		$scope.$on('addResourceToIndex', function(event, resource){
 			$scope.resources.push(resource);
 		});
@@ -19,7 +19,7 @@ app.controller("ResourceIndexCtrl", ['$rootScope', '$scope', '$sessionStorage', 
 		$scope.showResource = function(resourceText){
 			$scope.editor.setValue(resourceText);
 		};
-		
+
 		$scope.getResourceIcon = function(resource_name){
 			extension = resource_name.substr(resource_name.lastIndexOf('.') + 1);
 			if( $scope.resourceLogos[extension])
@@ -31,25 +31,25 @@ app.controller("ResourceIndexCtrl", ['$rootScope', '$scope', '$sessionStorage', 
   	$scope.deleteResource =  function(resourceName){
 			$localStorage.repo.path + $localStorage.dir_path + resourceName;
 			Resource.delete({id: $localStorage.repo.id, path: resourceName});
-		
+
 			var index = $scope.resources.indexOf(resourceName);
 			$scope.resources.splice(index, 1);
 		};
-		
+
 		$scope.createNewResource = function(){
 			Resource.create();
 			$location.path('/resources');
 		};
-		
+
 		$scope.editResource = function (resource_name) {
 			$("#pullRequestIndexPanel").hide();
 			$("#pullRequestDetailsPanel").hide();
 			$("#ideaMainPanel").hide();
 			$("#resourceEditPanel").show();
-		
+
 			//check for if resource name is of a type that is supported
 			var ext = resource_name.substr(resource_name.lastIndexOf('.') + 1);
-			
+
 			if($scope.editableResourceTypes.indexOf(ext) > -1){
 				$rootScope.$broadcast("loadResourceComments", resource_name)
 				$rootScope.$broadcast("editResource", resource_name, ext);
@@ -58,7 +58,7 @@ app.controller("ResourceIndexCtrl", ['$rootScope', '$scope', '$sessionStorage', 
 				alert(resource_name + " is not currently editable in IdeaBin. Please download to make changes");
 			}
 		};
-		
+
 		$scope.downloadResource = function(path, filename){
 			$http.get('/resources/1/download', {params: {path: path+filename}}).
 				success(function(data, status, headers, config) {
@@ -74,8 +74,8 @@ app.controller("ResourceIndexCtrl", ['$rootScope', '$scope', '$sessionStorage', 
 					alert("Error downloading file");
 				});
 		};
-		
-		
+
+
 	}
 ]);
 
@@ -94,12 +94,12 @@ app.controller('ResourceDetailCtrl', ['$scope', '$localStorage', '$sessionStorag
 		$scope.aceChanged = function(e) {
 			//TODO : Save changes
 		};
-		
-		$scope.$on('editResource', function(event, resource_name, extension) { 
-			$http.get("/resources/1/contents", {params: 
-								{filename: resource_name, 
+
+		$scope.$on('editResource', function(event, resource_name, extension) {
+			$http.get("/resources/1/contents", {params:
+								{filename: resource_name,
 								 path: $localStorage.repo.path + $localStorage.dir_path}
-			}).success(function(data){ 
+			}).success(function(data){
 				$scope.resource = {};
 				$scope.resource.content = data;
 				ace.require('ace/ext/settings_menu').init($scope.editor);
@@ -120,14 +120,14 @@ app.controller('ResourceDetailCtrl', ['$scope', '$localStorage', '$sessionStorag
 				}]);
 				$scope.editor.setValue(data);
 
-				
+
 
 				$localStorage.resource = resource_name;
 			}).error(function(data){
 				alert("Failed to load resource!");
 			});
 		});
-		
+
 		$scope.updateResource = function (){
 			var content = $scope.editor.getValue();
 			$scope.resource.content = content;
@@ -152,23 +152,23 @@ app.controller('ResourceCreationCtrl', ['$scope', '$rootScope', 'Resource', '$up
 
     });
 
-		$scope.upload = function(files) {			
+		$scope.upload = function(files) {
 			var confirmed = true;
 			if($scope.resources && $scope.resources.indexOf(files[0].name) > -1){
-				confirmed = confirm("Are you sure you want to overwrite the current copy?")	
+				confirmed = confirm("Are you sure you want to overwrite the current copy?")
 			}
-			if(confirmed){			
+			if(confirmed && files){			
 				for (var i = 0; i < files.length; i++) {
 					var comment = prompt("Please describe the upload");
 					var file = files[i];
 					$scope.filename = file.filename;
 					$upload.upload({
-						url: '/resources.json', 
+						url: '/resources.json',
 						method: 'POST', // or 'PUT',
 						headers: {'XSRF-TOKEN': ''},
 						//withCredentials: true,
-						data: {	comment: comment, 
-										resource: $scope.resource, 
+						data: {	comment: comment,
+										resource: $scope.resource,
 										repo_id:	$scope.$storage.repo.id
 						},
 						file: file
