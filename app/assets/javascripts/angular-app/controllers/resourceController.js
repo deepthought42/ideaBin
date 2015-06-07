@@ -4,7 +4,9 @@ app.controller("ResourceIndexCtrl", ['$rootScope', '$scope', '$sessionStorage', 
 	function($rootScope, $scope, $sessionStorage, $localStorage, Resource, $location, $upload, $http) {
 		$scope.$storage = $localStorage;
 		$scope.$session = $sessionStorage
-		$scope.editableResourceTypes = ["txt", "rb", "html", "log", "js", "php", "scss"];
+		$scope.editableResourceTypes = ["txt", "rb", "html", "log", "js", "php", "scss", "jpg", "jpeg", "gif", "svg", "png"];
+		$scope.codeResourcesTypes = ["txt", "rb", "html", "log", "js", "php", "scss"];
+		$scope.imageResourcesTypes = ["jpg", "jpeg", "gif", "svg", "png"];
 		$scope.resourceLogos = {"text":"fa-file-text", "rb": "fa-file-code-o", "html": "fa-file-code-o" , "log":"fa-file-o", "js":"fa-file-code-o", "php":"fa-file-code-o", "jpg": "fa-file-image-o", "css": "fa-file-code-o", "scss": "fa-file-code-o", "no-format": "fa-file-o"}
 
 		//move to event
@@ -110,7 +112,6 @@ app.controller('ResourceDetailCtrl', ['$scope', '$rootScope', '$localStorage', '
         // set the editor mode. Webmasters could use it in their scripts
         // for site specific purposes as well.
         var mode = modelist.getModeForPath(resource_name).mode;
-				console.log("MODE :: "+ mode);
 				$rootScope.$broadcast("loadModeScript", mode);
 				$scope.editor.session.setMode(mode);
 				$scope.editor.commands.addCommands([{

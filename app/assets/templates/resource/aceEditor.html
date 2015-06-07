@@ -1,0 +1,13 @@
+<div class="col-md-12" ng-include="'resource/aceToolbar.html'"></div>
+
+<div class="col-md-12" ui-ace="{
+    onLoad : aceLoaded,
+    maxLines: 40,
+    require: ['ace/ext/language_tools'],
+    advanced: {
+      enableSnippets: true,
+      enableBasicAutocompletion: true,
+      enableLiveAutocompletion: true
+    }
+  }" >
+</div>
