@@ -5,8 +5,6 @@ app.controller("ResourceIndexCtrl", ['$rootScope', '$scope', '$sessionStorage', 
 		$scope.$storage = $localStorage;
 		$scope.$session = $sessionStorage
 		$scope.editableResourceTypes = ["txt", "rb", "html", "log", "js", "php", "scss", "jpg", "jpeg", "gif", "svg", "png"];
-		$scope.codeResourcesTypes = ["txt", "rb", "html", "log", "js", "php", "scss"];
-		$scope.imageResourcesTypes = ["jpg", "jpeg", "gif", "svg", "png"];
 		$scope.resourceLogos = {"text":"fa-file-text", "rb": "fa-file-code-o", "html": "fa-file-code-o" , "log":"fa-file-o", "js":"fa-file-code-o", "php":"fa-file-code-o", "jpg": "fa-file-image-o", "css": "fa-file-code-o", "scss": "fa-file-code-o", "no-format": "fa-file-o"}
 
 		//move to event
@@ -85,6 +83,9 @@ app.controller('ResourceDetailCtrl', ['$scope', '$rootScope', '$localStorage', '
 	function($scope, $rootScope, $localStorage, $sessionStorage, Resource, $http){
 		$scope.$storage = $localStorage
 		$scope.$session = $sessionStorage
+		$scope.codeResourcesTypes = ["txt", "rb", "html", "log", "js", "php", "scss"];
+		$scope.imageResourcesTypes = ["jpg", "jpeg", "gif", "svg", "png"];
+		
 		$scope.aceLoaded = function(_editor) {
 			$scope.editor = _editor;
 			// Options
@@ -98,37 +99,42 @@ app.controller('ResourceDetailCtrl', ['$scope', '$rootScope', '$localStorage', '
 		};
 
 		$scope.$on('editResource', function(event, resource_name, extension) {
-			$http.get("/resources/1/contents", {params:
-								{filename: resource_name,
-								 path: $localStorage.repo.path + $localStorage.dir_path}
-			}).success(function(data){
-				$scope.resource = {};
-				$scope.resource.content = data;
-				ace.require('ace/ext/settings_menu').init($scope.editor);
- 				var modelist = ace.require("ace/ext/modelist");
-        // the file path could come from an xmlhttp request, a drop event,
-        // or any other scriptable file loading process.
-        // Extensions could consume the modelist and use it to dynamically
-        // set the editor mode. Webmasters could use it in their scripts
-        // for site specific purposes as well.
-        var mode = modelist.getModeForPath(resource_name).mode;
-				$rootScope.$broadcast("loadModeScript", mode);
-				$scope.editor.session.setMode(mode);
-				$scope.editor.commands.addCommands([{
-					name: "showSettingsMenu",
-					bindKey: {win: "Ctrl-q", mac: "Command-q"},
-					exec: function(editor) {
-						editor.showSettingsMenu();
-					}
-				}]);
-				$scope.editor.setValue(data);
-
-
-
-				$localStorage.resource = resource_name;
-			}).error(function(data){
-				alert("Failed to load resource!");
-			});
+			if($scope.codeResourcesTypes.indexOf(extension) > -1){
+				$http.get("/resources/1/contents", {params:
+									{filename: resource_name,
+									 path: $localStorage.repo.path + $localStorage.dir_path}
+				}).success(function(data){
+					$scope.resource = {};
+					$scope.resource.content = data;
+					ace.require('ace/ext/settings_menu').init($scope.editor);
+	 				var modelist = ace.require("ace/ext/modelist");
+	        // the file path could come from an xmlhttp request, a drop event,
+	        // or any other scriptable file loading process.
+	        // Extensions could consume the modelist and use it to dynamically
+	        // set the editor mode. Webmasters could use it in their scripts
+	        // for site specific purposes as well.
+	        var mode = modelist.getModeForPath(resource_name).mode;
+					$rootScope.$broadcast("loadModeScript", mode);
+					$scope.editor.session.setMode(mode);
+					$scope.editor.commands.addCommands([{
+						name: "showSettingsMenu",
+						bindKey: {win: "Ctrl-q", mac: "Command-q"},
+						exec: function(editor) {
+							editor.showSettingsMenu();
+						}
+					}]);
+					$scope.editor.setValue(data);
+					$scope.isAceEditorVisible = true;
+					$scope.isImageViewerVisible = false;
+				}).error(function(data){
+					alert("Failed to load resource!");
+				});
+			}
+			else if($scope.imageResourcesTypes.indexOf(extension) > -1){
+				$scope.isAceEditorVisible = false;
+				$scope.isImageViewerVisible = true;
+			}
+			$scope.$storage.resource = resource_name;
 		});
 
 		$scope.$on("loadTheme", function(event, themeName){
