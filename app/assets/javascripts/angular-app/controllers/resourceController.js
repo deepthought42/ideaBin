@@ -79,8 +79,8 @@ app.controller("ResourceIndexCtrl", ['$rootScope', '$scope', '$sessionStorage', 
 	}
 ]);
 
-app.controller('ResourceDetailCtrl', ['$scope', '$localStorage', '$sessionStorage', 'Resource', '$http',
-	function($scope, $localStorage, $sessionStorage, Resource, $http){
+app.controller('ResourceDetailCtrl', ['$scope', '$rootScope', '$localStorage', '$sessionStorage', 'Resource', '$http',
+	function($scope, $rootScope, $localStorage, $sessionStorage, Resource, $http){
 		$scope.$storage = $localStorage
 		$scope.$session = $sessionStorage
 		$scope.aceLoaded = function(_editor) {
@@ -110,6 +110,8 @@ app.controller('ResourceDetailCtrl', ['$scope', '$localStorage', '$sessionStorag
         // set the editor mode. Webmasters could use it in their scripts
         // for site specific purposes as well.
         var mode = modelist.getModeForPath(resource_name).mode;
+				console.log("MODE :: "+ mode);
+				$rootScope.$broadcast("loadModeScript", mode);
 				$scope.editor.session.setMode(mode);
 				$scope.editor.commands.addCommands([{
 					name: "showSettingsMenu",
@@ -132,7 +134,7 @@ app.controller('ResourceDetailCtrl', ['$scope', '$localStorage', '$sessionStorag
 			$scope.editor.setTheme('ace/theme/'+themeName);
 		});
 
-		$scope.updateResource = function (){
+		$scope.$on("updateResource", function (event, args){
 			var content = $scope.editor.getValue();
 			$scope.resource.content = content;
 			$scope.resource.comment = prompt("Please describe the changes made");
@@ -144,7 +146,7 @@ app.controller('ResourceDetailCtrl', ['$scope', '$localStorage', '$sessionStorag
 			else{
 				alert("A comment is required in order to save");
 			}
-		}
+		});
 	}
 ]);
 
