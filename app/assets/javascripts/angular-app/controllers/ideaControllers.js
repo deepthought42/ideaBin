@@ -55,9 +55,7 @@ app.controller("IdeaIndexController", ['$scope', '$localStorage', '$sessionStora
 				$rootScope.$broadcast("loadResources", $scope.$storage.repo.path)
 				$rootScope.$broadcast("loadRepositoryComments")
 
-				console.log("USER SESSION EXISTS: " + $scope.$session.user)
 				if($scope.$session.user.id === $scope.$storage.current_idea.idea.user_id){
-
 					$rootScope.$broadcast("getSubmittedPullRequests", $scope.$storage.repo.id)
 				}
 				else {
@@ -149,18 +147,14 @@ app.controller('IdeaDetailCtrl', ['$scope', '$auth', '$localStorage', '$sessionS
 		};
 
 		$scope.showIdeaEditPanel = function() {
-			console.log("showing edit panel");
 			$("#ideaEditPanel").show();
 		};
 
 		$scope.hideIdeaEditPanel = function() {
-			console.log("hiding edit panel");
-
 			$("#ideaEditPanel").hide();
 		};
 
 		$scope.$on('getContributingUserCount', function(event, idea) {
-			console.log("IDEA :: " + idea);
 			$http.get("/ideas/" + idea.id+"/contributingUserCount.json")
 				.success(function(data){
 					$scope.contributingUserCount = data.user_count;
