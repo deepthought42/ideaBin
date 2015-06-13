@@ -8,8 +8,8 @@
 	*/
 var app = angular.module('ideaBin.userControllers', []);
 
-app.controller('UserSessionCtrl', ['$scope', '$auth', '$location', '$sessionStorage',
-	function ($scope, $auth, $location, $sessionStorage) {
+app.controller('UserSessionCtrl', ['$scope', '$auth', '$sessionStorage',
+	function ($scope, $auth, $sessionStorage) {
 
 		$scope.$session = $sessionStorage;
 		$scope.signedIn = $auth.validateUser();
@@ -51,8 +51,8 @@ app.controller('UserSessionCtrl', ['$scope', '$auth', '$location', '$sessionStor
 	}
 ]);
 
-app.controller('UserDetailController', ['$scope', 'User', '$auth', '$location', '$sessionStorage', '$upload',
-	function ($scope, User, $auth, $location, $sessionStorage, $upload) {
+app.controller('UserDetailController', ['$scope', 'User', '$auth', '$sessionStorage', '$upload',
+	function ($scope, User, $auth, $sessionStorage, $upload) {
 		$scope.signedIn = $auth.isAuthenticated;
 		$scope.user = $sessionStorage.user;
 
@@ -131,7 +131,7 @@ app.controller('UserAuthenticateController', ['$scope', '$rootScope', '$auth', '
 			$scope.$on('auth:login-success', function(event, currentUser) {
 				$scope.$session.user = currentUser.data;
 				$auth.validateUser();
-				$location.path('/ideas');
+				$location.path('/ideaIndex');
 				$scope.hideSignInPanel();
 			});
 

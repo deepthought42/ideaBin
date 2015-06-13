@@ -91,7 +91,7 @@ ideaBin.config(function($httpProvider, $authProvider){
 ideaBin.config(function ($routeProvider, $locationProvider) {
 
 
-        $routeProvider.when('/ideas', {
+        $routeProvider.when('/ideaIndex', {
 					templateUrl: 'idea/index.html',
 				})
 				.when('/ideas/new', {
