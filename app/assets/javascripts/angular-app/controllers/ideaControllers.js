@@ -55,7 +55,7 @@ app.controller("IdeaIndexController", ['$scope', '$localStorage', '$sessionStora
 				$rootScope.$broadcast("loadResources", $scope.$storage.repo.path)
 				$rootScope.$broadcast("loadRepositoryComments")
 
-				if($scope.$session.user.id === $scope.$storage.current_idea.idea.user_id){
+				if($scope.$session.user && $scope.$session.user.id === $scope.$storage.current_idea.idea.user_id){
 					$rootScope.$broadcast("getSubmittedPullRequests", $scope.$storage.repo.id)
 				}
 				else {
