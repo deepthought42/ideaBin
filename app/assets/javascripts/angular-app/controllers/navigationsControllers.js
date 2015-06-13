@@ -18,6 +18,10 @@ app.controller("NavigationController",['$scope', '$location', '$http', '$rootSco
 		}
 
 		$scope.showContactUs = function(){
-			$location.path('/contact_us');
+			$location.path('/contactUs');
 		};
+
+		$scope.showAboutUs = function(){
+			$location.path('/aboutUs');
+		}
 	}]);

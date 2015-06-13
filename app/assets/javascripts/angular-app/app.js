@@ -99,9 +99,13 @@ ideaBin.config(function ($routeProvider, $locationProvider) {
 				.when('/idea/:id', {
 					templateUrl: 'idea/edit.html',
 				})
-				.when('/contact_us', {
+				.when('/contactUs', {
 					templateUrl:  'contact_us.html',
 				})
+				.when('/aboutUs', {
+					templateUrl:  'aboutUs.html',
+				})
+
 				.otherwise({redirectTo : '/ideaIdx'});
 
         $locationProvider.html5Mode({
