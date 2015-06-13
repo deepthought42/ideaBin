@@ -131,7 +131,7 @@ app.controller('UserAuthenticateController', ['$scope', '$rootScope', '$auth', '
 			$scope.$on('auth:login-success', function(event, currentUser) {
 				$scope.$session.user = currentUser.data;
 				$auth.validateUser();
-				$location.path('/ideaIndex');
+				$location.path('/ideas');
 				$scope.hideSignInPanel();
 			});
 

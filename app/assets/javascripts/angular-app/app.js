@@ -91,13 +91,25 @@ ideaBin.config(function($httpProvider, $authProvider){
 ideaBin.config(function ($routeProvider, $locationProvider) {
 
 
-        $routeProvider.when('/ideaIndex', {
+        $routeProvider.when('/ideas', {
 					templateUrl: 'idea/index.html',
+					redirectTo: function(current, path, search){
+          if(search.goto){
+            // if we were passed in a search param, and it has a path
+            // to redirect to, then redirect to that path
+            return "/" + search.goto
+          }
+          else{
+            // else just redirect back to this location
+            // angular is smart enough to only do this once.
+            return "/"
+          }
+        }
 				})
-				.when('/idea/new', {
+				.when('/ideas/new', {
 					templateUrl: 'idea/new.html',
 				})
-				.when('/idea/:id', {
+				.when('/ideas/:id', {
 					templateUrl: 'idea/edit.html',
 				})
 				.when('/directories', {
@@ -128,7 +140,7 @@ ideaBin.config(function ($routeProvider, $locationProvider) {
 				.when('/contact_us', {
 					templateUrl:  'contact_us.html',
 				})
-				.otherwise({redirectTo : '/ideas'});
+				.otherwise({redirectTo : '/'});
 
         $locationProvider.html5Mode({
 					enabled: true,
