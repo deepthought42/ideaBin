@@ -9,12 +9,12 @@ app.controller("NavigationController",['$scope', '$location', '$http', '$rootSco
 		}
 
 		$scope.showNewIdea = function(){
-			$rootScope.$broadcast('showAddIdea');
+			$location.path('/idea/new')
 		}
 
 		$scope.showAllIdeas = function(){
-			$rootScope.$broadcast('showAllIdeas');
-			$location.path('/ideaIdx')
+		  $rootScope.$broadcast('showAllIdeas');
+			$location.path('/ideaIdx');
 		}
 
 		$scope.showContactUs = function(){

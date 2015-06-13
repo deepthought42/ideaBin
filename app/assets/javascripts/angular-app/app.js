@@ -90,40 +90,14 @@ ideaBin.config(function($httpProvider, $authProvider){
 
 ideaBin.config(function ($routeProvider, $locationProvider) {
 
-
         $routeProvider.when('/ideaIdx', {
 					templateUrl: 'idea/index.html',
 				})
-				.when('/ideas/new', {
+				.when('/idea/new', {
 					templateUrl: 'idea/new.html',
 				})
 				.when('/idea/:id', {
 					templateUrl: 'idea/edit.html',
-				})
-				.when('/directories', {
-					templateUrl: 'directory/index.html',
-				})
-				.when('/directories/new', {
-					templateUrl: 'directory/new.html',
-				})
-				.when('/directories/:id', {
-					templateUrl: 'directory/edit.html',
-				})
-				.when('/users/edit', {
-					templateUrl: 'user/edit.html',
-					controller: 'UserSessionCtrl'
-				})
-				.when('/users/signout', {
-					templateUrl: 'idea/index.html',
-					controller: 'UserSessionCtrl'
-				})
-				.when('/sign_in', {
-					templateUrl: 'user_session/new.html',
-					controller:	'UserSessionCtrl'
-				})
-				.when('/register', {
-					templateUrl: 'user/register.html',
-					controller:	'UserSessionCtrl'
 				})
 				.when('/contact_us', {
 					templateUrl:  'contact_us.html',

@@ -1,5 +1,5 @@
 <div class="container" ng-controller="IdeaCreationCtrl">
-	 <div class="row" ng-show="isCreateIdeaPanelVisible">
+	 <div class="row" >
 	  <div  class="col-md-4"></div>
 		<div id="ideaCreatePanel" class="col-md-4">
 			<div class="row text-center">
@@ -11,31 +11,31 @@
 			</div>
 			<div>
 				<button class="fa fa-times hidePanelButton" ng-click="hideCreateIdeaPanel()"></button>
-				<form name="ideaForm" 
-							enctype="multipart/form-data" 
+				<form name="ideaForm"
+							enctype="multipart/form-data"
 							ng-submit="createNewIdea(ideaForm.$valid)"
 							novalidate>
-					<div class=" text-center field" 
+					<div class=" text-center field"
 								name="cover_image"
-								ng-file-drop 
-								ng-file-change="previewImage($files)" 
-								ng-model="cover_img" 
+								ng-file-drop
+								ng-file-change="previewImage($files)"
+								ng-model="cover_img"
 								drop-available="dropSupported"
 								ng-file-select
-								accept="image/*">			
-									<img id="ideaCreationImage" 
-												class="cover_img" 
+								accept="image/*">
+									<img id="ideaCreationImage"
+												class="cover_img"
 												ng-src="/images/{{ideaForm.cover_img.name || 'missing.png'}}"/>
-                      
+
 					</div>
 					<div class="field">
-						<input  class="form-control" 
-										type="text" 
-										name="name" 
-										ng-model="idea.name" 
-										id="name" 
+						<input  class="form-control"
+										type="text"
+										name="name"
+										ng-model="idea.name"
+										id="name"
 										placeholder="Name"
-										required 
+										required
 										minlength="3"
 										maxlength="250"/>
 						<div ng-messages="ideaForm.name.$error" ng-if="ideaForm.$submitted">
@@ -44,10 +44,10 @@
 						</div>
 					</div>
 					<div class="field">
-						<input  type="text" 
-									  class="form-control" 
-										name="description" 
-										ng-model="idea.description" 
+						<input  type="text"
+									  class="form-control"
+										name="description"
+										ng-model="idea.description"
 										id="description"
 										placeholder="Description"
 										required />
@@ -57,9 +57,9 @@
 					</div>
 					<div class="actions">
 		        <button type="submit" class="btn btn-primary" >
-							<i class="fa fa-save"></i> 
+							<i class="fa fa-save"></i>
 							Save Cover Image
-						</button>      
+						</button>
 					</div>
 				</form>
 			</div>
