@@ -70,7 +70,7 @@ app.controller("IdeaIndexController", ['$scope', '$localStorage', '$sessionStora
 			function onFail(response) {
 				alert("failed to load repo while opening idea for editing");
 			});
-			$location.path('/ideas/'+ideaId);
+			$location.path('/idea/'+ideaId);
 		}
 
 		$scope.showNewIdea = function(){
