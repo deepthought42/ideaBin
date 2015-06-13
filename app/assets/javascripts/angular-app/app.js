@@ -94,10 +94,10 @@ ideaBin.config(function ($routeProvider, $locationProvider) {
         $routeProvider.when('/ideaIndex', {
 					templateUrl: 'idea/index.html',
 				})
-				.when('/ideas/new', {
+				.when('/idea/new', {
 					templateUrl: 'idea/new.html',
 				})
-				.when('/ideas/:id', {
+				.when('/idea/:id', {
 					templateUrl: 'idea/edit.html',
 				})
 				.when('/directories', {

@@ -16,7 +16,7 @@ app.controller("IdeaIndexController", ['$scope', '$localStorage', '$sessionStora
 
 	$scope.createNewIdea = function(){
 		Idea.create();
-		$location.path('/ideas');
+		$location.path('/ideaIndex');
 	};
 
 	$scope.editIdea = function (ideaId) {
@@ -70,7 +70,7 @@ app.controller("IdeaIndexController", ['$scope', '$localStorage', '$sessionStora
 			function onFail(response) {
 				alert("failed to load repo while opening idea for editing");
 			});
-			$location.path('/ideas/'+ideaId);
+			$location.path('/idea/'+ideaId);
 		}
 
 		$scope.showNewIdea = function(){
@@ -108,8 +108,8 @@ app.controller("IdeaIndexController", ['$scope', '$localStorage', '$sessionStora
 		});
 }]);
 
-app.controller('IdeaDetailCtrl', ['$scope', '$auth', '$localStorage', '$sessionStorage', 'Idea', '$location', '$upload', '$rootScope', '$http',
-	function($scope, $auth, $localStorage, $sessionStorage, Idea, $location, $upload, $rootScope, $http){
+app.controller('IdeaDetailCtrl', ['$scope', '$auth', '$localStorage', '$sessionStorage', 'Idea', '$upload', '$rootScope', '$http',
+	function($scope, $auth, $localStorage, $sessionStorage, Idea, $upload, $rootScope, $http){
 		$auth.validateUser();
 		$scope.$storage = $localStorage;
 		$scope.$session = $sessionStorage;
@@ -198,8 +198,8 @@ app.controller('IdeaDetailCtrl', ['$scope', '$auth', '$localStorage', '$sessionS
 	}
 ]);
 
-app.controller('IdeaCreationCtrl', ['$scope', '$auth', '$rootScope', 'Idea', '$location', '$upload',
-	function($scope, $auth, $rootScope, Idea, $location, $upload ){
+app.controller('IdeaCreationCtrl', ['$scope', '$auth', '$rootScope', 'Idea', '$upload',
+	function($scope, $auth, $rootScope, Idea, $upload ){
 		//callback for ng-click 'createNewIdea'
 		$auth.validateUser();
 		$scope.ideaForm = {};
