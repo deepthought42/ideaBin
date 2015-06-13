@@ -16,7 +16,7 @@ app.controller("IdeaIndexController", ['$scope', '$localStorage', '$sessionStora
 
 	$scope.createNewIdea = function(){
 		Idea.create();
-		$location.path('/ideaIndex');
+		$location.path('/ideaIdx');
 	};
 
 	$scope.editIdea = function (ideaId) {
@@ -70,7 +70,7 @@ app.controller("IdeaIndexController", ['$scope', '$localStorage', '$sessionStora
 			function onFail(response) {
 				alert("failed to load repo while opening idea for editing");
 			});
-			$location.path('/idea/'+ideaId);
+			$location.path('/ideas/'+ideaId);
 		}
 
 		$scope.showNewIdea = function(){

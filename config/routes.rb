@@ -1,6 +1,7 @@
 IdeaBin::Application.routes.draw do
   resources :application
   root 'application#index'
+
   get '/userIdeas/:id' => 'ideas#userIdeas'
   get '/pull_requests/count' => 'pull_requests#count'
   put '/users' => 'users#update'
@@ -11,7 +12,7 @@ IdeaBin::Application.routes.draw do
 			get 'topDir'
 		end
   end
-	
+
   resources :uploads
   resources :resources do
 		member do
@@ -19,7 +20,7 @@ IdeaBin::Application.routes.draw do
 			get 'download'
 		end
   end
-	
+
   resources :ideas do
 		member do
 			put 'uploadCover'
@@ -27,7 +28,7 @@ IdeaBin::Application.routes.draw do
 			get 'contributingUserCount'
 		end
   end
-	
+
 	resources :pull_requests
 	resources :repositories
 	resources :comments
@@ -43,6 +44,8 @@ IdeaBin::Application.routes.draw do
 	mount_devise_token_auth_for 'User', at: 'api/auth', controllers: {
     registrations:  'overrides/registrations'
   }
+
+  get '*path' => redirect('/')
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

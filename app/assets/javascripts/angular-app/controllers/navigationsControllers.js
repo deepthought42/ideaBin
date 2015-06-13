@@ -5,7 +5,7 @@ app.controller("NavigationController",['$scope', '$location', '$http', '$rootSco
 		$scope.$session = $sessionStorage;
 		$scope.showMyIdeas = function(){
 			$rootScope.$broadcast('showMyIdeas', $scope.$session.user.id);
-			$location.path('/ideaIndex')
+			$location.path('/ideaIdx')
 		}
 
 		$scope.showNewIdea = function(){
@@ -14,7 +14,7 @@ app.controller("NavigationController",['$scope', '$location', '$http', '$rootSco
 
 		$scope.showAllIdeas = function(){
 			$rootScope.$broadcast('showAllIdeas');
-			$location.path('/ideaIndex')
+			$location.path('/ideaIdx')
 		}
 
 		$scope.showContactUs = function(){
