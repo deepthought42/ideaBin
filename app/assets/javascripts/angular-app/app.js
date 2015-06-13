@@ -128,7 +128,7 @@ ideaBin.config(function ($routeProvider, $locationProvider) {
 				.when('/contact_us', {
 					templateUrl:  'contact_us.html',
 				})
-				.otherwise({redirectTo : '/'});
+				.otherwise({redirectTo : '/ideaIdx'});
 
         $locationProvider.html5Mode({
 					enabled: true,
