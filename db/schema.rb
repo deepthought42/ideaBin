@@ -54,7 +54,7 @@ ActiveRecord::Schema.define(version: 20150613233138) do
 
   add_index "ideas", ["user_id"], name: "index_ideas_on_user_id", using: :btree
 
-  create_table "ideas_users_likes", force: :cascade do |t|
+  create_table "idea_users_likes", force: :cascade do |t|
     t.integer "idea_id"
     t.integer "user_id"
   end
