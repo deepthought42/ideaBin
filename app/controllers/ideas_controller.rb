@@ -44,7 +44,6 @@ class IdeasController < ApplicationController
 				@git = Git.clone("#{Rails.root}/public/data/repository/#{@idea.user_id}/#{@idea.name}", @idea.name)
 			end
 		end
-
 		@user = User.find(@idea.user_id)
 		respond_to do |format|
 			format.json  { render :json => {:idea => @idea,
@@ -234,6 +233,17 @@ class IdeasController < ApplicationController
     end
   end
 
+  def likeCount
+    @idea = Idea.find(params[:id])
+    @idea_likes = IdeaUsersLike.where(idea_id: @idea.id)
+    @liked_by_user = false
+    if(current_user)
+      @liked_by_user = !@idea_likes.where(user_id: current_user.id).empty?
+    end
+    @num_likes = idea_likes.count
+    render json: {like_count: @num_likes, liked_by_user: @liked_by_user}
+  end
+  
  private
     def set_idea
       @idea = Idea.find(params[:id])

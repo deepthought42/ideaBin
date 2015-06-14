@@ -27,6 +27,7 @@ IdeaBin::Application.routes.draw do
 			get 'commitCount'
 			get 'contributingUserCount'
       get 'like'
+      get 'likeCount'
 		end
   end
 
