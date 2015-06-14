@@ -240,8 +240,13 @@ app.controller('IdeaDetailCtrl', ['$scope', '$auth', '$localStorage', '$sessionS
 					$scope.likeCount = data.like_count
 					$scope.error = data.errors
 				});
-				$scope.$apply()
 		}
+
+		/**
+		*	watches the likeCount variable for changes
+		*/
+		$scope.$watch('likeCount', function(){
+		});
 
 		/**
 		*
