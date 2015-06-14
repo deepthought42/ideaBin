@@ -4,7 +4,7 @@
 
 @import url(http://fonts.googleapis.com/css?family=Fira+Sans:300,400,700);
 
-.ace_editor { 
+.ace_editor {
   height: 500px;
 }
 
@@ -116,7 +116,7 @@
 
 .ideaItem:hover .overlay{
 	display:		block;
-	
+
 }
 
 .overlay > h3.title{
@@ -147,16 +147,16 @@
   width: 400px;*/
   z-index: 10;
   padding: 15px;
-  
+
   .cover_img{
 	height: 200px;
   }
-  
+
   .ideaName{
     top: 40%;
 	text-align: center;
-  } 
-  
+  }
+
 }
 
 #ideaCoverImage img {
@@ -169,7 +169,7 @@
 #ideaCreationImage{
     width: 250px;
     height: 250px;
-} 
+}
 
 .hidePanelButton{
 	position: absolute;
@@ -215,6 +215,9 @@
 	color:				#FFFF99;
 }
 
+.highlight {
+  color:        #FFFF99;
+}
 
 /*Flip Cards for Ideas*/
 
