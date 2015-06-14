@@ -2,10 +2,11 @@ class User < ActiveRecord::Base
   attr_accessible :email, :password, :password_confirmation, :avatar
 
   has_many :repositories
-  has_many :comments 
+  has_many :comments
 	has_many :ideas
-	
-  has_attached_file :avatar, 
+  has_many :ideas_users_likes
+
+  has_attached_file :avatar,
 		    :styles => { :medium => "300x300>", :thumb => "100x100#" },
 		    :url => "/images/:id/:style/:basename\.:extension",
     		    :path => ":rails_root/public/images/:id/:style/:basename\.:extension"

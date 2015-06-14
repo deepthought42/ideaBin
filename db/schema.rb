@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150419010341) do
+ActiveRecord::Schema.define(version: 20150613233138) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -54,6 +54,11 @@ ActiveRecord::Schema.define(version: 20150419010341) do
 
   add_index "ideas", ["user_id"], name: "index_ideas_on_user_id", using: :btree
 
+  create_table "ideas_users_likes", force: :cascade do |t|
+    t.integer "idea_id"
+    t.integer "user_id"
+  end
+
   create_table "pull_requests", force: :cascade do |t|
     t.integer "repository_id",                                   null: false
     t.string  "message",       limit: 255,                       null: false
@@ -91,19 +96,6 @@ ActiveRecord::Schema.define(version: 20150419010341) do
   end
 
   add_index "resource_comments", ["resource_path", "comment_id"], name: "index_resource_comments_on_resource_path_and_comment_id", using: :btree
-
-  create_table "resources", force: :cascade do |t|
-    t.string   "comment",      limit: 255
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.string   "filename",     limit: 255
-    t.string   "content_type", limit: 255
-    t.integer  "repo_id"
-    t.integer  "directory_id"
-  end
-
-  add_index "resources", ["directory_id"], name: "index_resources_on_directory_id", using: :btree
-  add_index "resources", ["repo_id"], name: "index_resources_on_repo_id", using: :btree
 
   create_table "sessions", force: :cascade do |t|
     t.string   "session_id", limit: 255, null: false

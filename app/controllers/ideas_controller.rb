@@ -2,7 +2,7 @@ class IdeasController < ApplicationController
   before_action :authenticate_user!, except: [:index, :show, :commitCount, :contributingUserCount]
   before_action :set_idea, except: [:new, :create, :index, :userIdeas]
 	respond_to :json
-	
+
   # GET /ideas
   # GET /ideas.json
   def index
@@ -19,7 +19,7 @@ class IdeasController < ApplicationController
 	#
 	# GET /ideas/1
   # GET /ideas/1.json
-	
+
   def show
     @idea = Idea.find(params[:id])
     #clone idea repo from owners copy if current user isn't owner
@@ -37,29 +37,26 @@ class IdeasController < ApplicationController
 			#load up existing repository
 			@repo = Repository.where(user_id: params[:user_id]).where(idea_id: params[:id]).first
 		end
-	
+
 		if current_user
 			unless File.exists?("#{Rails.root}/public/data/repository/#{current_user.id}/#{@idea.name}")
 				Dir.chdir("#{Rails.root}/public/data/repository/#{current_user.id}/")
-				@git = Git.clone("#{Rails.root}/public/data/repository/#{@idea.user_id}/#{@idea.name}", @idea.name)	
+				@git = Git.clone("#{Rails.root}/public/data/repository/#{@idea.user_id}/#{@idea.name}", @idea.name)
 			end
 		end
 
 		@user = User.find(@idea.user_id)
 		respond_to do |format|
-			format.json  { render :json => {:idea => @idea, 
+			format.json  { render :json => {:idea => @idea,
 				                              :user => @user }}
 		end
-
-	#		render json: @idea, json: @user
-
   end
 
   # GET /ideas/new
   # GET /ideas/new.json
   def new
     @idea = Idea.new
-		
+
     respond_to do |format|
       format.html # new.html.erb
       format.json { render json: @idea }
@@ -68,7 +65,7 @@ class IdeasController < ApplicationController
 
   # GET /ideas/1/edit
   def edit
-    
+
   end
 
   # POST /ideas
@@ -83,21 +80,20 @@ class IdeasController < ApplicationController
     @idea.name = idea["name"]
     @idea.description = idea["description"]
 
-
     @idea.user_id = @current_user.id
-    repo_path = "#{Rails.root}/public/data/repository/#{current_user.id}" 
+    repo_path = "#{Rails.root}/public/data/repository/#{current_user.id}"
     @idea.cover_img = params[:cover_img]
 
 		if @idea.save
 			@repo = Repository.new()
 			@repo.path = "#{Rails.root}/public/data/repository/#{current_user.id}/#{@idea.name}"
-			@repo.idea = @idea 
-			@repo.user = current_user 
+			@repo.idea = @idea
+			@repo.user = current_user
 			@repo.save
 	    unless File.exists?(repo_path)
 				Dir.mkdir(repo_path)
 		  end
-		end 
+		end
 
 		#create directory in database to associate the directory created in the file systems.
 		Dir.chdir(repo_path)
@@ -110,7 +106,7 @@ class IdeasController < ApplicationController
   end
 
   ## Calling this method with the appropriate paramaters will result in saving
-  #   an uploaded image if present. If a cover image is present the changes to 
+  #   an uploaded image if present. If a cover image is present the changes to
 	#   the users repo will be added to git and committed. If other values are present
 	# 	then they will be updated for the idea object passed
   #
@@ -122,14 +118,14 @@ class IdeasController < ApplicationController
     @idea.description = params[:description]
     repo_path = "#{Rails.root}/public/data/repository/#{current_user.id}/#{@idea.name}"
     cover_img_path = "/data/repository/#{current_user.id}/#{@idea.name}"
-	
+
     if params[:cover_img]
       @idea.cover_img = params[:cover_img]
       DataFile.save(params[:cover_img], cover_img_path)
 			@git = GitHelper.init(repo_path, current_user.email, current_user.name)
 			GitHelper.commitAll(@git, "Changed cover image.")
     end
-		
+
     if @idea.save
 			render json: @idea
 		else
@@ -150,7 +146,7 @@ class IdeasController < ApplicationController
 			render json: {error: "You must be the idea owner to delete an idea"}, status: :unauthorized
 		end
  end
- 
+
   # PUT /ideas/:id/uploadCover.json
   def uploadCover
 		@idea = Idea.find(params[:id])
@@ -158,7 +154,7 @@ class IdeasController < ApplicationController
 		if params[:cover_img]
 			@idea.cover_img = params[:cover_img]
 		end
-	
+
 		if @idea.save
 			respond_with(@idea)
 		else
@@ -166,10 +162,10 @@ class IdeasController < ApplicationController
     end
   end
 
-	#GET /userIdeas/:id 
+	#GET /userIdeas/:id
 	def userIdeas
 		@ideas = Idea.where(user_id: params[:id])
-		
+
 		if @ideas
 			respond_with(@ideas)
 		else
@@ -217,7 +213,30 @@ class IdeasController < ApplicationController
 			render json: {error: "Unable to calculate number of users that have contributed"}, status: :unprocessable_entity
 		end
 	end
- 
+
+  def like
+    @idea = Idea.find(params[:id])
+    @user_likes = IdeaLike.where(idea_id: @idea.id).where(user_id: current_user.id)
+    if(current_user)
+      if(!@user_likes.empty?)
+        @like = IdeaLike.new()
+  			@like.idea = @idea
+  			@like.user = current_user
+  			if(@like.save)
+          @num_likes = IdeaLike.where(idea_id: @idea.id).count
+        end
+      else
+        @like = IdeaLike.where(idea_id: @idea.id).where(user_id: current_user.id)
+        if(@like.destroy)
+          @num_likes = IdeaLike.where(idea_id: @idea.id).count
+        end
+      end
+      render json: {idea_likes: @num_likes}
+    else
+      render json: {error: "You must be signed in to like an idea", status: :unauthorized}
+    end
+  end
+
  private
     def set_idea
       @idea = Idea.find(params[:id])

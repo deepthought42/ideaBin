@@ -26,6 +26,7 @@ IdeaBin::Application.routes.draw do
 			put 'uploadCover'
 			get 'commitCount'
 			get 'contributingUserCount'
+      get 'like'
 		end
   end
 
