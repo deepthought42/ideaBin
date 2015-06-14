@@ -224,8 +224,7 @@ class IdeasController < ApplicationController
   			@like.user = current_user
   			@like.save
       else
-        @like = IdeaUsersLike.where(idea_id: @idea.id).where(user_id: current_user.id)
-        @like.destroy
+        @user_likes.destroy(@user_likes.first.id)
       end
       @num_likes = IdeaUsersLike.where(idea_id: @idea.id).count
       render json: {like_count: @num_likes}
