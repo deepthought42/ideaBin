@@ -29,6 +29,7 @@ app.controller("IdeaIndexController", ['$scope', '$localStorage', '$sessionStora
 
 				$rootScope.$broadcast("getContributingUserCount", $scope.$storage.current_idea.idea)
 				$rootScope.$broadcast("getCommitCount", $scope.$storage.current_idea.idea)
+				$rootScope.$broadcast("getLikeCount", $scope.$storage.current_idea.idea)
 
 				//if user is signed in then get repo
 				// otherwise get repository for owner
@@ -232,12 +233,30 @@ app.controller('IdeaDetailCtrl', ['$scope', '$auth', '$localStorage', '$sessionS
 			$http.get("/ideas/" + $scope.$storage.current_idea.idea.id+"/like.json")
 				.success(function(data){
 					$scope.likeCount = data.like_count;
+					$scope.$storage.current_idea.idea.liked_by_user = data.liked_by_user
 				})
 				.error(function(data){
 					alert(data.errors);
-					$scope.likeCount = data.like_count
+					$scope.like_count = data.like_count
+					$scope.error = data.errors
 				});
 		}
+
+		/**
+		*
+		*/
+		$scope.$on('getLikeCount', function(event, idea) {
+			$http.get("/ideas/" + $scope.$storage.current_idea.idea.id+"/likeCount.json")
+				.success(function(data){
+					$scope.like_count = data.like_count;
+					$scope.$storage.current_idea.idea.liked_by_user = data.liked_by_user
+				})
+				.error(function(data){
+					alert(data.errors);
+					$scope.like_count = data.like_count
+					$scope.error = data.errors
+				});
+		})
 	}
 ]);
 
@@ -268,7 +287,6 @@ app.controller('IdeaCreationCtrl', ['$scope', '$auth', '$rootScope', 'Idea', '$u
 			progress(function(evt) {
 				console.log('progress: ' + parseInt(100.0 * evt.loaded / evt.total));
 			}).success(function(data, status, headers, config) {
-				//console.log('file ' + $scope.cover_img.name + 'is uploaded successfully. Response: ' + data);
 				$rootScope.$broadcast('hideCreateIdeaPanel');
 				$rootScope.$broadcast('addIdeaToList', data.data);
 			});

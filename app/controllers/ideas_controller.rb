@@ -240,10 +240,10 @@ class IdeasController < ApplicationController
     if(current_user)
       @liked_by_user = !@idea_likes.where(user_id: current_user.id).empty?
     end
-    @num_likes = idea_likes.count
+    @num_likes = @idea_likes.count
     render json: {like_count: @num_likes, liked_by_user: @liked_by_user}
   end
-  
+
  private
     def set_idea
       @idea = Idea.find(params[:id])
