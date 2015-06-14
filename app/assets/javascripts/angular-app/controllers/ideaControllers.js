@@ -113,10 +113,12 @@ app.controller('IdeaDetailCtrl', ['$scope', '$auth', '$localStorage', '$sessionS
 		$auth.validateUser();
 		$scope.$storage = $localStorage;
 		$scope.$session = $sessionStorage;
-		$scope.idea = $scope.current_idea;
+		$scope.idea = $scope.$storage.current_idea.idea;
 
+		/**
+		*
+		*/
 		$scope.uploadFile = function(){
-
 			$scope.upload = $upload.upload({
 				url: '/ideas/' + $scope.$storage.current_idea.idea.id + '/uploadCover.json',
 				method: 'PUT',
@@ -140,20 +142,32 @@ app.controller('IdeaDetailCtrl', ['$scope', '$auth', '$localStorage', '$sessionS
 			});
 		};
 
+		/**
+		*
+		*/
 		$scope.updateIdea = function(){
 			Idea.update($scope.$storage.current_idea.idea)
 			editDescription=false
 			editName=false
 		};
 
+		/**
+		*
+		*/
 		$scope.showIdeaEditPanel = function() {
 			$("#ideaEditPanel").show();
 		};
 
+		/**
+		*
+		*/
 		$scope.hideIdeaEditPanel = function() {
 			$("#ideaEditPanel").hide();
 		};
 
+		/**
+		*
+		*/
 		$scope.$on('getContributingUserCount', function(event, idea) {
 			$http.get("/ideas/" + idea.id+"/contributingUserCount.json")
 				.success(function(data){
@@ -165,6 +179,9 @@ app.controller('IdeaDetailCtrl', ['$scope', '$auth', '$localStorage', '$sessionS
 				});
 		});
 
+		/**
+		*
+		*/
 		$scope.$on('getCommitCount', function(event, idea) {
 			$http.get("/ideas/" + idea.id+"/commitCount.json")
 				.success(function(data){
@@ -176,6 +193,9 @@ app.controller('IdeaDetailCtrl', ['$scope', '$auth', '$localStorage', '$sessionS
 				});
 		});
 
+		/**
+		*
+		*/
 		$scope.showPullRequestIndexPage = function() {
 			$rootScope.$broadcast("showAllPullRequests", $localStorage.repo.id);
 			$("#pullRequestDetailsPanel").hide();
@@ -184,17 +204,40 @@ app.controller('IdeaDetailCtrl', ['$scope', '$auth', '$localStorage', '$sessionS
 			$("#pullRequestIndexPanel").show();
 		};
 
+		/**
+		*
+		*/
 		$scope.showNewIdea = function(){
 			$rootScope.isCreateIdeaPanelVisible = true;
 		};
 
+		/**
+		*
+		*/
 		$scope.showNewDirectoryPanel = function(){
 			$('#directoryForm').slideToggle().delay(100);
 		};
 
+		/**
+		*
+		*/
 		$scope.showPullRequestCreatePanel = function(){
 			$rootScope.$broadcast('showPullRequestCreatePanel');
 		};
+
+		/**
+		*
+		*/
+		$scope.likeIdea = function(){
+			$http.get("/ideas/" + $scope.$storage.current_idea.idea.id+"/like.json")
+				.success(function(data){
+					$scope.likeCount = data.like_count;
+				})
+				.error(function(data){
+					alert(data.errors);
+					$scope.likeCount = data.like_count
+				});
+		}
 	}
 ]);
 

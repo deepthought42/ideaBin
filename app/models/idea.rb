@@ -3,7 +3,7 @@ class Idea < ActiveRecord::Base
   belongs_to :user, :foreign_key => 'user_id'
   has_many   :resources
   has_many 	 :repositories
-  has_many   :ideas_users_likes
+  has_many   :idea_users_likes
   #has_many 	 :users, through: :repositories
 
   has_attached_file :cover_img, :styles => { :medium => "300x300>", :thumb => "100x100>" },

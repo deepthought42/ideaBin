@@ -216,24 +216,22 @@ class IdeasController < ApplicationController
 
   def like
     @idea = Idea.find(params[:id])
-    @user_likes = IdeaLike.where(idea_id: @idea.id).where(user_id: current_user.id)
+    @user_likes = IdeaUsersLike.where(idea_id: @idea.id).where(user_id: current_user.id)
     if(current_user)
-      if(!@user_likes.empty?)
-        @like = IdeaLike.new()
+      if(@user_likes.empty?)
+        @like = IdeaUsersLike.new()
   			@like.idea = @idea
   			@like.user = current_user
-  			if(@like.save)
-          @num_likes = IdeaLike.where(idea_id: @idea.id).count
-        end
+  			@like.save
       else
-        @like = IdeaLike.where(idea_id: @idea.id).where(user_id: current_user.id)
-        if(@like.destroy)
-          @num_likes = IdeaLike.where(idea_id: @idea.id).count
-        end
+        @like = IdeaUsersLike.where(idea_id: @idea.id).where(user_id: current_user.id)
+        @like.destroy
       end
-      render json: {idea_likes: @num_likes}
+      @num_likes = IdeaUsersLike.where(idea_id: @idea.id).count
+      render json: {like_count: @num_likes}
     else
-      render json: {error: "You must be signed in to like an idea", status: :unauthorized}
+      @num_likes = IdeaUsersLike.where(idea_id: @idea.id).count
+      render json: {like_count: @num_likes, error: "You must be signed in to like an idea", status: :unauthorized}
     end
   end
 
