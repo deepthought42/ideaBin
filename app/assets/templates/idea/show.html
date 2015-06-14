@@ -81,7 +81,7 @@
       <li class="ideaAdditionalInfoListItem">
       </li>
       <li class="ideaAdditionalInfoListItem pull-right">
-        <span class="fa fa-thumbs-up" toggle-class="highlight" ng-click="likeIdea()"></span>
+        <span class="fa fa-thumbs-up" ng-class="{'highlight': $storage.current_idea.idea.liked_by_user}" toggle-class="highlight" ng-click="likeIdea()"></span>
         <span class="ideaInfoNumber">{{likeCount}}</span>
       </li>
     </ul>

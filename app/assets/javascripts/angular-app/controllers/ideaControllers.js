@@ -242,6 +242,7 @@ app.controller('IdeaDetailCtrl', ['$scope', '$auth', '$localStorage', '$sessionS
 				});
 		}
 
+
 		/**
 		*	watches the likeCount variable for changes
 		*/
