@@ -30,9 +30,9 @@
 <script src="https://ajaxorg.github.io/ace-builds/src-min-noconflict/worker-xquery.js" type="text/javascript"></script>
 
 <div class="col-md-12 fullHeight" id="ace-wrapper" ng-controller="ResourceDetailCtrl">
-	<div class="col-md-8 actions" id="resourceToolbar" ng-show="$session.user" >
+	<div class="col-md-8 actions" ng-show="$session.user" >
 		<div class="col-md-12" ng-include="'resource/aceEditor.html'" ng-show="isAceEditorVisible"></div>
-		<div class="col-md-11" ng-include="'resource/imageViewer.html'" ng-show="isImageViewerVisible"></div>
+		<div class="col-md-12" ng-include="'resource/imageViewer.html'" ng-show="isImageViewerVisible"></div>
 	</div>
   <div class="col-md-4" ng-include="'resource_comment/index.html'"></div>
 </div>
