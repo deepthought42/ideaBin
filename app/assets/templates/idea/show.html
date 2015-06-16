@@ -12,36 +12,36 @@
         <img ng-src="{{ $storage.current_idea.idea.cover_img_file_name ? '/images/ideas/'+$storage.current_idea.idea.id +'/medium/' + $storage.current_idea.idea.cover_img_file_name : '/images/missing.png' }}"/>
       </div>
     </div>
-    <div class="col-md-6">
-      <h2 id="ideaName">
+    <div id="ideaDetails" class="col-md-6 top-padded left-padded" >
+      <h2 id="ideaName" class="col-md-12">
         <span ng-show="!editName" ng-click="editName=true">
 					{{$storage.current_idea.idea.name}}
         	<a href="#" class="edit">Edit</a>
-				<span>
+				</span>
 				<span ng-show="editName">
-					<input type='text'
+					<input type='textarea'
 							 	 placeholder="Name here"
-								 ng-model="$storage.current_idea.idea.name"/>
-						<span class="fa fa-save" ng-click="updateIdea()"></span>
+								 ng-model="$storage.current_idea.idea.name" class="col-md-10 fullHeight"/>
+						<span class="fa fa-save col-md-2" ng-click="updateIdea()"></span>
 				</span>
       </h2>
-      <h5 id="ideaMetadata">
+      <h5 id="ideaMetadata" class="col-md-12">
   			Idea created by
         <a href="#">{{$storage.current_idea.user.email}}</a>
         on {{$storage.current_idea.idea.created_at | date:'longDate'}}
       </h5>
-      <p id="ideaDescription" >
+      <div id="ideaDescription" class="col-md-12 fullHeight">
 				<span ng-show="!editDescription" ng-click="editDescription=true">
 	        {{$storage.current_idea.idea.description || 'Description here ...'}}
 					<a href="#" class="edit">Edit</a>
 				</span>
 				<span ng-show="editDescription">
-					<input type='text'
+					<textarea
 							 	 placeholder="Description here..."
-								 ng-model="$storage.current_idea.idea.description"/>
+								 ng-model="$storage.current_idea.idea.description"></textarea>
 					<span class="fa fa-save" ng-click="updateIdea()"></span>
 				</span>
-      </p>
+      </div>
 
     </div>
    	<div class="col-md-3 pull-right" id="ideaButtonListWrapper">

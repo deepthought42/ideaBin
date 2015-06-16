@@ -148,10 +148,11 @@ app.controller('IdeaDetailCtrl', ['$scope', '$auth', '$localStorage', '$sessionS
 		*/
 		$scope.updateIdea = function(){
 			Idea.update($scope.$storage.current_idea.idea)
-			editDescription=false
-			editName=false
+			$scope.editDescription=false
+			$scope.editName=false
 		};
 
+		$scope.$watch("editDescription", function(){})
 		/**
 		*
 		*/

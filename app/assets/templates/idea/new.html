@@ -1,7 +1,6 @@
 <div class="container" ng-controller="IdeaCreationCtrl">
-	 <div class="row" >
-	  <div  class="col-md-4"></div>
-		<div id="ideaCreatePanel" class="col-md-4">
+	<div class="row" >
+		<div id="ideaCreatePanel" class="col-md-8">
 			<div class="row text-center">
               <div class="col-md-12">
                 <h2>
@@ -9,59 +8,63 @@
 				</h2>
               </div>
 			</div>
-			<div>
 				<form name="ideaForm"
 							enctype="multipart/form-data"
 							ng-submit="createNewIdea(ideaForm.$valid)"
 							novalidate>
-					<div class=" text-center field"
-								name="cover_image"
-								ng-file-drop
-								ng-file-change="previewImage($files)"
-								ng-model="cover_img"
-								drop-available="dropSupported"
-								ng-file-select
-								accept="image/*">
-									<img id="ideaCreationImage"
-												class="cover_img"
-												ng-src="/images/{{ideaForm.cover_img.name || 'missing.png'}}"/>
+					<div class="col-md-12">
+						<div class="col-md-6">
+							<div class=" text-center field"
+										name="cover_image"
+										ng-file-drop
+										ng-file-change="previewImage($files)"
+										ng-model="cover_img"
+										drop-available="dropSupported"
+										ng-file-select
+										accept="image/*">
+											<img id="ideaCreationImage"
+														class="cover_img"
+														ng-src="/images/{{ideaForm.cover_img.name || 'missing.png'}}"/>
 
-					</div>
-					<div class="field">
-						<input  class="form-control"
-										type="text"
-										name="name"
-										ng-model="idea.name"
-										id="name"
-										placeholder="Name"
-										required
-										minlength="3"
-										maxlength="250"/>
-						<div ng-messages="ideaForm.name.$error" ng-if="ideaForm.$submitted">
-							<p ng-message="required">Idea name is required.</p>
-							<p ng-message="minlength">Your idea name must be at least 3 characters</p>
+							</div>
+							<div class="field">
+								<input  class="form-control"
+												type="text"
+												name="name"
+												ng-model="idea.name"
+												id="name"
+												placeholder="Name"
+												required
+												minlength="3"
+												maxlength="250"/>
+								<div ng-messages="ideaForm.name.$error" ng-if="ideaForm.$submitted">
+									<p ng-message="required">Idea name is required.</p>
+									<p ng-message="minlength">Your idea name must be at least 3 characters</p>
+								</div>
+							</div>
+						</div>
+						<div class="field col-md-6 fullHeight">
+							<textarea
+										  class="form-control"
+											name="description"
+											ng-model="idea.description"
+											id="newIdeaDescription"
+											placeholder="Description"
+											required >
+							</textarea>
+							<div ng-messages="ideaForm.description.$error" ng-if="ideaForm.$submitted">
+								<p ng-message="required">A description is required.</p>
+							</div>
 						</div>
 					</div>
-					<div class="field">
-						<input  type="text"
-									  class="form-control"
-										name="description"
-										ng-model="idea.description"
-										id="description"
-										placeholder="Description"
-										required />
-						<div ng-messages="ideaForm.description.$error" ng-if="ideaForm.$submitted">
-							<p ng-message="required">A description is required.</p>
-						</div>
-					</div>
-					<div class="actions">
-		        <button type="submit" class="btn btn-primary" >
+
+					<div class="actions col-md-12">
+						<button type="submit" class="btn btn-primary pull-right" >
 							<i class="fa fa-save"></i>
-							Save Cover Image
+							Save Idea
 						</button>
 					</div>
 				</form>
-			</div>
 		</div>
 	</div>
 </div>
