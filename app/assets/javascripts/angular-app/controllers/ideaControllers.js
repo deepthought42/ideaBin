@@ -302,7 +302,7 @@ app.controller('IdeaCreationCtrl', ['$scope', '$auth', '$rootScope', 'Idea', '$u
 
 		$scope.previewImage = function(files){
 			var reader = new FileReader();
-			if(typeof files[0] === 'Blob'){
+			if(typeof files[0] === 'object'){
 				reader.readAsDataURL(files[0]);
 			}
 			reader.onload = function(event){
