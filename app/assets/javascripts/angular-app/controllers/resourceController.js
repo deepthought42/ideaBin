@@ -85,7 +85,7 @@ app.controller('ResourceDetailCtrl', ['$scope', '$rootScope', '$localStorage', '
 		$scope.$session = $sessionStorage
 		$scope.codeResourcesTypes = ["txt", "rb", "html", "log", "js", "php", "scss"];
 		$scope.imageResourcesTypes = ["jpg", "jpeg", "gif", "svg", "png"];
-		
+
 		$scope.aceLoaded = function(_editor) {
 			$scope.editor = _editor;
 			// Options
@@ -157,8 +157,9 @@ app.controller('ResourceDetailCtrl', ['$scope', '$rootScope', '$localStorage', '
 	}
 ]);
 
-app.controller('ResourceCreationCtrl', ['$scope', '$rootScope', 'Resource', '$upload',
-	function($scope, $rootScope, Resource, $upload ){
+app.controller('ResourceCreationCtrl', ['$scope', '$rootScope', 'Resource', '$upload', '$localStorage',
+	function($scope, $rootScope, Resource, $upload, $localStorage ){
+		$scope.$storage = $localStorage
 
 		$scope.$watch('files', function () {
       $scope.upload($scope.files);
@@ -171,6 +172,7 @@ app.controller('ResourceCreationCtrl', ['$scope', '$rootScope', 'Resource', '$up
 				confirmed = confirm("Are you sure you want to overwrite the current copy?")
 			}
 			if(confirmed && files){
+				console.log("DIRECTORY PATH :: " + $scope.$storage.dir_path)
 				for (var i = 0; i < files.length; i++) {
 					var comment = prompt("Please describe the upload");
 					var file = files[i];
@@ -180,9 +182,10 @@ app.controller('ResourceCreationCtrl', ['$scope', '$rootScope', 'Resource', '$up
 						method: 'POST', // or 'PUT',
 						headers: {'XSRF-TOKEN': ''},
 						//withCredentials: true,
-						data: {	comment: comment,
-										resource: $scope.resource,
-										repo_id:	$scope.$storage.repo.id
+						data: {
+							comment: comment,
+							dirPath:  $scope.$storage.dir_path,
+							repo_id:	$scope.$storage.repo.id
 						},
 						file: file
 					}).progress(function(evt) {

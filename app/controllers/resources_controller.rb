@@ -2,17 +2,17 @@ class ResourcesController < ApplicationController
   before_filter :authenticate_user!, except: [:index, :contents]
 	#before_action :set_resource, except: [:new, :create, :index]
 	respond_to :html, :json
-	
+
   # GET /resources
   # GET /resources.json
   def index
     @resources = []
-		Dir.glob("#{params[:path]}/*").each do |f| 
+		Dir.glob("#{params[:path]}/*").each do |f|
 		unless File.directory?(f)
 			@resources.push(File.basename(f))
 		end
 	end
-	
+
 	render json: @resources
   end
 
@@ -48,9 +48,9 @@ class ResourcesController < ApplicationController
 
     resource = ActiveSupport::JSON.decode(data)
     @repo = Repository.find(resource["repo_id"])
+    dir_path = resource["dirPath"];
+    post = DataFile.save(params['file'], @repo.path+dir_path)
 
-    post = DataFile.save(params['file'], @repo.path)
-		
 		@git = GitHelper.init(@repo.path, current_user.email, current_user.name)
 		GitHelper.commitAll(@git, resource["comment"])
 
@@ -61,18 +61,18 @@ class ResourcesController < ApplicationController
   # PUT /resources/1.json
   def update
     @resource = params[:content]
-	
+
 		if params[:dir_path] == "/"
-			params[:dir_path]=""			
+			params[:dir_path]=""
 		end
 
 		file_path = "#{params[:dir_path]}/#{params[:filename]}"
-		
+
     if File.open(file_path, 'w') {|f| f.write(params[:content]) }
 			Dir.chdir(params[:dir_path])
 			@git = Git.init()
 			GitHelper.commitAll(@git, params["comment"])
-			
+
 			render json: {success: "file successfully uploaded"}
     else
       render json: { error: "SOMETHING WENT WRONG SAVING RESOURCE" }
@@ -83,14 +83,14 @@ class ResourcesController < ApplicationController
   # DELETE /resources/1.json
   def destroy
     @repo = Repository.find(params[:id])
-		
+
 		#REMOVE FILE FROM FILE SYSTEM AND DO A GIT commit
 		if(FileUtils.rm(params[:path]))
 			@git = GitHelper.init(@repo.path, current_user.email, current_user.name)
 			GitHelper.commitAll(@git, "Removed file :: #{params[:path]}")
 		end
   end
-	
+
 	#GET /resources/1/contents.json
 	def contents
 		extname = File.extname(params[:filename])[1..-1]
@@ -98,20 +98,20 @@ class ResourcesController < ApplicationController
     content_type = mime_type.to_s unless mime_type.nil?
 
 		@content = IO.read("#{params[:path]}/#{params[:filename]}")
-		
+
 		if(@content)
 			render text: @content
 		else
 			render plain: "OH NO!"
 		end
 	end
-	
+
 	# GET /resources/1
   # GET /resources/1.json
   def download
 		send_file(params[:path])
   end
-	
+
 	private
 		def set_resource
       @resource = Resource.find(params[:id])
