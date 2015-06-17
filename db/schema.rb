@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150613233138) do
+ActiveRecord::Schema.define(version: 20150617231644) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -40,6 +40,11 @@ ActiveRecord::Schema.define(version: 20150613233138) do
     t.datetime "updated_at"
   end
 
+  create_table "idea_users_likes", force: :cascade do |t|
+    t.integer "idea_id"
+    t.integer "user_id"
+  end
+
   create_table "ideas", force: :cascade do |t|
     t.string   "name",                   limit: 255
     t.string   "description",            limit: 255
@@ -52,12 +57,8 @@ ActiveRecord::Schema.define(version: 20150613233138) do
     t.datetime "cover_img_updated_at"
   end
 
+  add_index "ideas", ["name"], name: "index_ideas_on_name", unique: true, using: :btree
   add_index "ideas", ["user_id"], name: "index_ideas_on_user_id", using: :btree
-
-  create_table "idea_users_likes", force: :cascade do |t|
-    t.integer "idea_id"
-    t.integer "user_id"
-  end
 
   create_table "pull_requests", force: :cascade do |t|
     t.integer "repository_id",                                   null: false

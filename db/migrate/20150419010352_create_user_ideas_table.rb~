@@ -1,6 +1,0 @@
-class CreateUserIdeasTable < ActiveRecord::Migration
-  def change
-    create_table :user_ideas_tables do |t|
-    end
-  end
-end
