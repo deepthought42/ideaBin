@@ -276,6 +276,7 @@ app.controller('IdeaCreationCtrl', ['$scope', '$auth', '$rootScope', 'Idea', '$u
 		$scope.ideaForm.name = "";
 		$scope.ideaForm.description = "";
 		$scope.ideaForm.cover_img = "";
+		$scope.logo_url = '/images/missing.png';
 
 		$scope.createNewIdea = function(isValid){
 			if(isValid){
@@ -284,13 +285,12 @@ app.controller('IdeaCreationCtrl', ['$scope', '$auth', '$rootScope', 'Idea', '$u
 		}
 
 		$scope.uploadFile = function(){
-
 			$scope.$upload = $upload.upload({
 				url: '/ideas.json',
 				method: 'POST',
 				data: {idea: $scope.idea},
 				file: $scope.cover_img,
-        			fileFormDataName: 'cover_img'
+  			fileFormDataName: 'cover_img'
 			}).
 			progress(function(evt) {
 				console.log('progress: ' + parseInt(100.0 * evt.loaded / evt.total));
@@ -306,8 +306,9 @@ app.controller('IdeaCreationCtrl', ['$scope', '$auth', '$rootScope', 'Idea', '$u
 				reader.readAsDataURL(files[0]);
 			}
 			reader.onload = function(event){
-				$('#ideaCreationImage').attr('src', reader.result);
+				$scope.logo_url = reader.result;
 				$scope.ideaForm.cover_img = files[0];
+				$scope.$apply()
 			}
 		}
 

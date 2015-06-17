@@ -14,7 +14,7 @@
 							novalidate>
 					<div class="col-md-12">
 						<div class="col-md-5">
-							<div class=" text-center field"
+							<div class="text-center field"
 										name="cover_image"
 										ng-file-drop
 										ng-file-change="previewImage($files)"
@@ -24,7 +24,7 @@
 										accept="image/*">
 											<img id="ideaCreationImage"
 														class="cover_img"
-														ng-src="/images/{{ideaForm.cover_img.name || 'missing.png'}}"/>
+														ng-src="{{logo_url}}"/>
 
 							</div>
 							<div class="field">
