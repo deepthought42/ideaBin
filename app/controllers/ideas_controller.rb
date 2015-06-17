@@ -92,15 +92,16 @@ class IdeasController < ApplicationController
 	    unless File.exists?(repo_path)
 				Dir.mkdir(repo_path)
 		  end
+      #create directory in database to associate the directory created in the file systems.
+  		Dir.chdir(repo_path)
+  		@git = Git.init(@idea.name)
+  		if params[:cover_img]
+  			DataFile.save(params[:cover_img], @repo.path)
+  			GitHelper.commitAll(@git, "Added cover image.")
+  		end
 		end
 
-		#create directory in database to associate the directory created in the file systems.
-		Dir.chdir(repo_path)
-		@git = Git.init(@idea.name)
-		if params[:cover_img]
-			DataFile.save(params[:cover_img], @repo.path)
-			GitHelper.commitAll(@git, "Added cover image.")
-		end
+
     respond_with(@idea)
   end
 

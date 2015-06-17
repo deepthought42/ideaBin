@@ -15,6 +15,7 @@ ActiveRecord::Schema.define(version: 20150617231644) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+  enable_extension "citext"
 
   create_table "comments", force: :cascade do |t|
     t.string   "comment",    limit: 255, null: false
@@ -46,7 +47,7 @@ ActiveRecord::Schema.define(version: 20150617231644) do
   end
 
   create_table "ideas", force: :cascade do |t|
-    t.string   "name",                   limit: 255
+    t.citext   "name"
     t.string   "description",            limit: 255
     t.datetime "created_at"
     t.datetime "updated_at"

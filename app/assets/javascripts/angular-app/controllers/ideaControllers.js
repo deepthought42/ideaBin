@@ -268,8 +268,8 @@ app.controller('IdeaDetailCtrl', ['$scope', '$auth', '$localStorage', '$sessionS
 	}
 ]);
 
-app.controller('IdeaCreationCtrl', ['$scope', '$auth', '$rootScope', 'Idea', '$upload',
-	function($scope, $auth, $rootScope, Idea, $upload ){
+app.controller('IdeaCreationCtrl', ['$scope', '$auth', '$rootScope', 'Idea', '$upload', '$location',
+	function($scope, $auth, $rootScope, Idea, $upload, $location ){
 		//callback for ng-click 'createNewIdea'
 		$auth.validateUser();
 		$scope.ideaForm = {};
@@ -297,6 +297,7 @@ app.controller('IdeaCreationCtrl', ['$scope', '$auth', '$rootScope', 'Idea', '$u
 			}).success(function(data, status, headers, config) {
 				$rootScope.$broadcast('hideCreateIdeaPanel');
 				$rootScope.$broadcast('addIdeaToList', data.data);
+				$location.path('/ideaIdx');
 			});
 		}
 

@@ -12,4 +12,5 @@ class Idea < ActiveRecord::Base
   validates_attachment :cover_img, content_type: { content_type: ["image/jpeg", "image/jpg", "image/png", "image/gif"] }
 
   validates :name, :presence => true
+  validates :name, uniqueness: {:case_sensitive => false}
 end
