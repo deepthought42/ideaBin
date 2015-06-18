@@ -12,5 +12,12 @@ class Idea < ActiveRecord::Base
   validates_attachment :cover_img, content_type: { content_type: ["image/jpeg", "image/jpg", "image/png", "image/gif"] }
 
   validates :name, :presence => true
-  validates :name, uniqueness: {:case_sensitive => false}
+  validate :uniqueness_of_name
+
+  def uniqueness_of_name
+    existing_record = Idea.find_by_name(name)
+    unless existing_record.nil?
+      errors.add(:name, "Idea name already exists")
+    end
+  end
 end

@@ -36,11 +36,12 @@
 												placeholder="Name"
 												required
 												minlength="3"
-												maxlength="250"/>
-								<div ng-messages="ideaForm.name.$error" ng-if="ideaForm.$submitted">
+												maxlength="250"
+												idea-name-availability-validator="/ideas.json"/>
+								<div ng-messages="ideaForm.name.$error" ng-if="ideaForm.$submitted" class="error">
 									<p ng-message="required">Idea name is required.</p>
 									<p ng-message="minlength">Your idea name must be at least 3 characters</p>
-								</div>
+									<p ng-repeat="validation in serverValidations['errors']">{{validation[0]}}</p>								</div>
 							</div>
 						</div>
 						<div class="field col-md-7 fullHeight">

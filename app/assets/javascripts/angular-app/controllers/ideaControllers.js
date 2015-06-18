@@ -277,6 +277,7 @@ app.controller('IdeaCreationCtrl', ['$scope', '$auth', '$rootScope', 'Idea', '$u
 		$scope.ideaForm.description = "";
 		$scope.ideaForm.cover_img = "";
 		$scope.logo_url = '/images/missing.png';
+		$scope.serverValidations = false;
 
 		$scope.createNewIdea = function(isValid){
 			if(isValid){
@@ -298,6 +299,9 @@ app.controller('IdeaCreationCtrl', ['$scope', '$auth', '$rootScope', 'Idea', '$u
 				$rootScope.$broadcast('hideCreateIdeaPanel');
 				$rootScope.$broadcast('addIdeaToList', data.data);
 				$location.path('/ideaIdx');
+			}).error(function(data, status, headers, config) {
+				console.log("data :: " + data['errors'].name)
+				$scope.serverValidations = data;
 			});
 		}
 
