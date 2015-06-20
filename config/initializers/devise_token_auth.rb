@@ -5,7 +5,7 @@ DeviseTokenAuth.setup do |config|
   # each request.
   config.change_headers_on_each_request = false
 
-  # By default, users will need to re-authenticate after 2 weeks. This setting
+  # By default, users will need to re-authenticate after 1 day. This setting
   # determines how long tokens will remain valid after they are issued.
   config.token_lifespan = 1.day
 
