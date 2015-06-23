@@ -119,7 +119,7 @@ ideaBin.run(['$rootScope', '$injector', function($rootScope,$injector) {
 	$injector.get("$http").defaults.transformRequest = function(data, headersGetter) {
 		if ($rootScope.oauth) headersGetter()['Authorization'] = "Bearer "+$rootScope.oauth.access_token;
     	if (data) {
-		return angular.toJson(data);
+				return angular.toJson(data);
     	}
   }
  }]);
