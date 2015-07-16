@@ -1,43 +1,44 @@
+.
 <div id="userRegistrationForm" ng-controller="UserRegisterController">
 	<div class="col-md-12">
-		<form ng-submit="register(userRegistration.$valid)" 
-					name="userRegistration" novalidate > 
+		<form ng-submit="register(userRegistration.$valid)"
+					name="userRegistration" novalidate >
 			<div class="form-group">
-				<input placeholder= "Email" 
-								type="email" 
-								name="email" 
-								id="email" 
-								ng-model="registrationForm.email" 
-								class="form-control" 
-								required /> 
-			<div ng-messages="userRegistration.email.$error" ng-if="userRegistration.$submitted">
-				<p ng-message="required">Email is required.</p>
-				<p ng-message="email">Invalid email address.</p>
-
-			</div> 
-			<div class="form-group"> 
-				<input placeholder= "Password" 
-								type="password" 
-								name="password" 
-								id="password" 
-								ng-model="registrationForm.password" 
+				<input placeholder= "Email"
+								type="email"
+								name="email"
+								id="email"
+								ng-model="registrationForm.email"
+								class="form-control"
+								required />
+				<div ng-messages="userRegistration.email.$error" ng-if="userRegistration.$submitted">
+					<p ng-message="required">Email is required.</p>
+					<p ng-message="email">Invalid email address.</p>
+				</div>
+			</div>
+			<div class="form-group">
+				<input placeholder= "Password"
+								type="password"
+								name="password"
+								id="password"
+								ng-model="registrationForm.password"
 								class="form-control"
 								required
-								minlength="8" /> 
-        <div ng-messages="userRegistration.password.$error" ng-if="userRegistration.$submitted">					
+								minlength="8" />
+        <div ng-messages="userRegistration.password.$error" ng-if="userRegistration.$submitted">
 					<p ng-message="minlength">
 							Password must be at least 8 characters.
 					</p>
 				</div>
-			</div> 
-			<div class="form-group"> 
-				<input placeholder= "Confirm Password" 
-								type="password" 
-								name="confirmation_password" 
-								id="confirmation_password" 
-								ng-model="registrationForm.confirmation_password" 
+			</div>
+			<div class="form-group">
+				<input placeholder= "Confirm Password"
+								type="password"
+								name="confirmation_password"
+								id="confirmation_password"
+								ng-model="registrationForm.confirmation_password"
 								class="form-control"
-								required /> 
+								required />
         <div ng-messages="userRegistration.confirmation_password.$error" ng-if="userRegistration.$submitted">
 					<p ng-message="required" >
 								Confirmation password is required
@@ -46,12 +47,12 @@
 								Passwords do not match.
 					</p>
 				</div>
-			</div> 
-			<button type="submit" 
+			</div>
+			<button type="submit"
 							class="btn btn-primary btn-sm">
 								Sign up
-			</button> 
-			<button class="btn btn-primary btn-sm pull-right" 
+			</button>
+			<button class="btn btn-primary btn-sm pull-right"
 							ng-click="hideRegistrationPanel()">
 								Cancel
 			</button>
