@@ -23,3 +23,4 @@
 
 #ignore all components
 /app/assets/components/*
+/node_modules/*
