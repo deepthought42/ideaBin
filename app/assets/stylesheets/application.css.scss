@@ -30,6 +30,14 @@ body{
 	margin: 		0px;
 }
 
+.pop-over{
+  position:absolute;
+  border: 1px solid black;
+  background: white;
+  right: 0px;
+  top: 34px;
+}
+
 .item {
   width: 	220px;
   margin: 10px;

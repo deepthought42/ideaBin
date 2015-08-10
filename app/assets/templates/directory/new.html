@@ -1,5 +1,8 @@
-<div id="directoryForm" ng-controller="DirectoryCreationCtrl" ng-show="$session.user">
-	<h4 class="margin-bottom-15">Add a New Directory to {{$storage.dir_path}}</h4>
+<div id="directoryForm"
+		 class="pop-over"
+		 ng-controller="DirectoryCreationCtrl"
+		 ng-show="$session.user">
+	<h4 class="margin-bottom-15">{{$storage.dir_path}}</h4>
 	<form name="directory" novalidate>
 	  <input type="hidden" ng-model="directoryForm.idea_id" />
 	  <input type="hidden" ng-model="directoryForm.parent_id" />
