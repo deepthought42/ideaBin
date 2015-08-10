@@ -1,11 +1,29 @@
-<ul class="list-inline" ng-controller="IdeaNavigationController">
-  <li>
-    Directories
-  </li>
-  <li ng-if="session.user" >
-    Pull Requests
-  </li>
-  <li ng-if="session.user" >
-    Add Resource
-  </li>
-</ul>
+<div ng-controller="IdeaNavigationController">
+  <nav class="navbar navbar-default" role="navigation">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" ng-init="navCollapsed = true"
+                          ng-click="navCollapsed = !navCollapsed">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+      </button>
+    </div>
+    <div class="collapse navbar-collapse" ng-class="!navCollapsed && 'in'">
+
+      <ul class="nav navbar-nav">
+        <li dropdown>
+          <a href="" dropdown-toggle>
+            Directories
+          </a>
+        </li>
+        <li ng-if="session.user" >
+          <a href="" >Pull Requests</a>
+        </li>
+        <li ng-if="session.user" >
+          <a href="" >Add Resource</a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+</div>
