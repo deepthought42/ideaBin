@@ -13,11 +13,6 @@
 // require jquery
 // require jquery_ujs
 
-//= require site
-//= require resources
-//= require directories
-//= require nav
-
 //= require bootstrap
 // require_tree ../components/ace-builds/src-min-noconflict
 //= require ../components/angular/angular.min
