@@ -13,17 +13,16 @@
     </div>
     <hr/>
 		<div ng-controller="ResourceCreationCtrl" ng-show="$session.user">
-		  <h4 class="margin-bottom-15">Add a New Resource to {{$storage.dir_path}}</h4>
 		  <div class="col-md-12" id="resource-drag-drop-wrapper">
 		    <span >
-		      <button class="btn btn-primary btn-block" 
-						      id="resourceDragDropBtn" 
-									ng-file-select		          
-									ng-file-drop 
-									ng-model="files" 
-						      class="drop-box" 
-						      drag-over-class="dragover" 
-						      ng-multiple="true" 
+		      <button class="btn btn-primary btn-block"
+						      id="resourceDragDropBtn"
+									ng-file-select
+									ng-file-drop
+									ng-model="files"
+						      class="drop-box"
+						      drag-over-class="dragover"
+						      ng-multiple="true"
 						      allow-dir="true">
 		              	Drop Resource Files Here
 		      </button>
@@ -32,6 +31,6 @@
 		      </div>
 		    </span>
 		  </div>
-		</div>    
+		</div>
   </div>
 </div>
