@@ -1,11 +1,11 @@
-<ul class="list-inline">
+<ul class="list-inline" ng-controller="IdeaNavigationController">
   <li>
     Directories
   </li>
-  <li>
+  <li ng-if="session.user" >
     Pull Requests
   </li>
-  <li>
+  <li ng-if="session.user" >
     Add Resource
   </li>
 </ul>
