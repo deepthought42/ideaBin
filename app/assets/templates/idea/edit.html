@@ -1,14 +1,16 @@
 <div class="container">
   <div class="row">
-    <div id="ideaBody" class="col-md-12">
-      <div class="col-md-3 padded" id="ideaDirectoriesResourcesWrapper">
+    <div class="col-sm-10" ng-include="'idea/navbar.html'"></div>
+
+    <div id="ideaBody" class="col-sm-12">
+      <div class="col-sm-3 padded" id="ideaDirectoriesResourcesWrapper">
         <div ng-include="'directory/index.html'" ></div>
         <div ng-include="'resource/index.html'" ></div>
         <hr/>
         <div ng-include="'directory/new.html'" ></div>
       </div>
 
-      <div class="col-md-9">
+      <div class="col-sm-9">
 				<div ng-include="'idea/show.html'"></div>
 		    <div class="col-md-12 top-padded" id="ideaMainPanel">
 		      <div id="ideaRecentUpdatesCommentsWrapper" class="col-md-12">

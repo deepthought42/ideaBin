@@ -1,5 +1,5 @@
 class IdeasController < ApplicationController
-  before_action :authenticate_user!, except: [:index, :show, :commitCount, :contributingUserCount, :likeCount]
+  before_action :authenticate_user!, except: [:index, :show, :commitCount, :contributingUserCount, :like, :likeCount]
   before_action :set_idea, except: [:new, :create, :index, :userIdeas]
 	respond_to :json
 
@@ -216,7 +216,7 @@ class IdeasController < ApplicationController
 
   def like
     @idea = Idea.find(params[:id])
-    @user_likes = IdeaUsersLike.where(idea_id: @idea.id).where(user_id: current_user.id)
+    @user_likes = IdeaUsersLike.where(idea_id: @idea.id)
     if(current_user)
       if(@user_likes.empty?)
         @like = IdeaUsersLike.new()

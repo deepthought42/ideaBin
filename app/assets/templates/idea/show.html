@@ -80,7 +80,7 @@
       </li>
       <li class="ideaAdditionalInfoListItem">
       </li>
-      <li class="ideaAdditionalInfoListItem pull-right">
+      <li class="ideaAdditionalInfoListItem pull-right" ng-if="$session.user">
         <span class="fa fa-thumbs-up" ng-class="{'highlight': $storage.current_idea.idea.liked_by_user}" toggle-class="highlight" ng-click="likeIdea()"></span>
         <span class="ideaInfoNumber">{{likeCount}}</span>
       </li>
