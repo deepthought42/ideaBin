@@ -5,7 +5,12 @@
 }
 
 .btn{
-  /*border-radius: 0px;  */ 
+  /*border-radius: 0px;  */
+}
+
+.navButtonTitle{
+  font-size:8px;
+  font-weight: bold;
 }
 
 .social-button {
@@ -33,7 +38,7 @@
 }
 
 #sideMenu{
-  width: 60px;
+  width: 80px;
   background-color: #17385e;
   height: 100vh;
   display: inline-block;
@@ -46,7 +51,7 @@
 
 #socialMediaList{
   position: absolute;
-  bottom: 12%;
+  bottom: 15%;
 }
 
 #ideabinLogo{
@@ -65,10 +70,10 @@
   font-size: 20px;
   letter-spacing: 2px;
   margin-top: 15px;
-  
+
   img{
     transition: border-width .2s;
-    
+
     &:hover{
       border: 3px solid rgba(255,255,255,0);
       transition: border-width .2s;

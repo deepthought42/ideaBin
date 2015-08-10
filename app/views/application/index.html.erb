@@ -25,13 +25,26 @@
 
     <div ng-controller="NavigationController">
 			<ul id="sidebarList">
-              <li ng-show="user.signedIn"><img title="Create a New Idea" width="40" src="images/icon_New_Idea.svg" ng-click="showNewIdea()" /></li>
-              <li><img title="View All Ideas" width="40" src="images/icon_All_Ideas.svg" ng-click="showAllIdeas()"/></li>
+              <li ng-show="user.signedIn">
+                <img title="Create a New Idea" width="40" src="images/icon_New_Idea.svg" ng-click="showNewIdea()" />
+                <div class="navButtonTitle">Create Idea</div>
+              </li>
+              <li>
+                <img title="View All Ideas" width="40" src="images/icon_All_Ideas.svg" ng-click="showAllIdeas()"/>
+                <div class="navButtonTitle">All Ideas</div>
+              </li>
               <li ng-show="user.signedIn">
 								<img title="View My Ideas" width="40" src="images/icon_My_Ideas.svg" ng-click="showMyIdeas()"/>
+                <div class="navButtonTitle">My Ideas</div>
 							</li>
-              <li><img title="Contact Ideabin" width="40" src="images/icon_Contact_Us.svg" ng-click="showContactUs()"/></li>
-              <li ng-click="showAboutUs()"><span class="fa fa-question fa-6" ></span></li>
+              <li>
+                <img title="Contact Ideabin" width="40" src="images/icon_Contact_Us.svg" ng-click="showContactUs()"/>
+                <div class="navButtonTitle">Contact Us</div>
+              </li>
+              <li ng-click="showAboutUs()">
+                <span class="fa fa-question fa-6" ></span>
+                <div class="navButtonTitle">About Us</div>
+              </li>
 				<li id="socialMediaList">
 					<!--<a href="http://github.com/deepthought42/ideaBin"><span class="fa fa-github btn social-button" ></span></a>-->
 					<a href="#" ><span class="fa fa-facebook btn social-button"></span></a>
