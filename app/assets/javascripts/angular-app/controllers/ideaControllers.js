@@ -323,8 +323,9 @@ app.controller('IdeaCreationCtrl', ['$scope', '$auth', '$rootScope', 'Idea', '$u
 	}
 ]);
 
-app.controller('IdeaNavigationController', ['$scope', '$auth', '$sessionStorage', 'Idea', '$upload', '$location',
-	function($scope, $auth, $sessionStorage, Idea, $upload, $location ){
+app.controller('IdeaNavigationController', ['$scope', '$auth', '$localStorage', '$sessionStorage', 'Idea', '$upload', '$location',
+	function($scope, $auth, $localStorage, $sessionStorage, Idea, $upload, $location ){
 		//callback for ng-click 'createNewIdea'
 		$scope.session = $sessionStorage;
+		$scope.storage = $localStorage;
 }])

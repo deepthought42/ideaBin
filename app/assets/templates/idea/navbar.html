@@ -17,7 +17,7 @@
             Directories
           </a>
         </li>
-        <li ng-if="session.user" >
+        <li ng-if="storage.current_idea.idea.user_id == session.user.id" >
           <a href="" >Pull Requests</a>
         </li>
       </ul>
