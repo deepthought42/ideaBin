@@ -25,6 +25,8 @@
 //= require ../components/ng-token-auth/dist/ng-token-auth.min
 //= require ../components/angular-masonry/angular-masonry
 //= require ../components/angular-messages/angular-messages.min
+//= require ../components/ui-navbar/dist/js/ui-navbar.min
+
 //= require angular-resource
 //= require angular-route
 //= require angular-rails-templates
