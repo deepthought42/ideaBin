@@ -55,16 +55,6 @@
 								ng-show="$session.user && $storage.current_idea.idea.user_id != $session.user.id">
 			    Create Pull Request
 		    </div>
-		    <button class="btn btn-default btn-block"
-		 	      		ng-click="showPullRequestIndexPage()"
-								ng-show="$storage.current_idea.idea.user_id == $session.user.id">
-					View Pull Requests
-					<i id="pullRequestCountBubble"
-              ng-show="$storage.submittedPullRequestCount
-                        && $storage.submittedPullRequestCount > 0">
-            {{$storage.submittedPullRequestCount}}
-          </i>
-		    </button>
 		  </ul>
 		</div>
   </div>

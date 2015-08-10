@@ -17,8 +17,13 @@
             Directories
           </a>
         </li>
-        <li ng-if="storage.current_idea.idea.user_id == session.user.id" >
-          <a href="" >Pull Requests</a>
+        <li ng-if="storage.current_idea.idea.user_id == session.user.id">
+           <a href="" ng-click="showPullRequestIndexPage()">Pull Requests</a>
+           <i id="pullRequestCountBubble"
+               ng-show="$storage.submittedPullRequestCount
+                         && $storage.submittedPullRequestCount > 0">
+             {{$storage.submittedPullRequestCount}}
+           </i>
         </li>
       </ul>
     </div>

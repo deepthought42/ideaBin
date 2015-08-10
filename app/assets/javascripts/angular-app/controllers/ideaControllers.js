@@ -195,16 +195,6 @@ app.controller('IdeaDetailCtrl', ['$scope', '$auth', '$localStorage', '$sessionS
 				});
 		});
 
-		/**
-		*
-		*/
-		$scope.showPullRequestIndexPage = function() {
-			$rootScope.$broadcast("showAllPullRequests", $localStorage.repo.id);
-			$("#pullRequestDetailsPanel").hide();
-			$("#RepositoryCommentIndexPanel").hide();
-			$("#resourceEditPanel").hide();
-			$("#pullRequestIndexPanel").show();
-		};
 
 		/**
 		*
@@ -323,9 +313,20 @@ app.controller('IdeaCreationCtrl', ['$scope', '$auth', '$rootScope', 'Idea', '$u
 	}
 ]);
 
-app.controller('IdeaNavigationController', ['$scope', '$auth', '$localStorage', '$sessionStorage', 'Idea', '$upload', '$location',
-	function($scope, $auth, $localStorage, $sessionStorage, Idea, $upload, $location ){
+app.controller('IdeaNavigationController', ['$scope', '$rootScope', '$auth', '$localStorage', '$sessionStorage', 'Idea', '$upload', '$location',
+	function($scope, $rootScope, $auth, $localStorage, $sessionStorage, Idea, $upload, $location ){
 		//callback for ng-click 'createNewIdea'
 		$scope.session = $sessionStorage;
 		$scope.storage = $localStorage;
+
+		/**
+		*
+		*/
+		$scope.showPullRequestIndexPage = function() {
+			$rootScope.$broadcast("showAllPullRequests", $localStorage.repo.id);
+			$("#pullRequestDetailsPanel").hide();
+			$("#RepositoryCommentIndexPanel").hide();
+			$("#resourceEditPanel").hide();
+			$("#pullRequestIndexPanel").show();
+		};
 }])
