@@ -1,18 +1,42 @@
 <div ng-controller="contactController">
 	<div class="container">
       <div class="row">
-        <div class="col-md-6 col-md-offset-3" id="contactFormWrapper">
+        <div class="col-sm-6 col-sm-offset-3" id="contactFormWrapper">
           <h2>Contact the Ideabin Team</h2>
-          <form id="contactForm">
-              <input class="form-control" placeholder="First Name" ng-model="contact.fname" />
-              <input class="form-control" placeholder="Last Name" ng-model="contact.lname" />
-              <input class="form-control"  placeholder="Email" ng-model="contact.email" />
-              <select class="form-control" ng-model="contact.reason">
-                <option ng-repeat="option in options" value="{{option}}">{{option}}</option>  
-              </select>
-              <textarea class="form-control" placeholder="Your Message" ng-model="contact.message" />
+          <form id="contactForm" class="form" role="form">
+              <div class="form-group">
+								<label for="contactFirstName">First Name</label>
+								<input class="form-control"
+											 id="contactFirstName"
+											 placeholder="First Name"
+											 ng-model="contact.fname" />
+							</div>
+							<div class="form-group">
+								<label for="contactFirstName">Last Name</label>
+								<input class="form-control"
+											id="contactLastName"
+											placeholder="Last Name"
+											ng-model="contact.lname" />
+							</div>
+							<div class="form-group">
+								<label for="contactEmail">Email</label>
+              	<input class="form-control"
+											 id="contactEmail"
+											 placeholder="Email"
+											 ng-model="contact.email" />
+							</div>
+							<div class="form-group">
+								<label for="contactReason">Reason</label>
+	              <select class="form-control" id="contactReason" ng-model="contact.reason">
+	                <option ng-repeat="option in options" value="{{option}}">{{option}}</option>
+	              </select>
+							</div>
+							<div class="form-group">
+								<label for="contactMessage">Message</label>
+              	<textarea class="form-control" placeholder="Your Message" ng-model="contact.message" />
+							</div>
 
-              <button class="btn btn-default btn-large" ng-click="createContact()">Submit</button>
+              <button class="btn btn-primary btn-large" ng-click="createContact()">Submit</button>
           </form>
         </div>
       </div>
