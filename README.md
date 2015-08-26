@@ -13,8 +13,8 @@ IdeaBin is intended to be a platform to better enable people to easily collabora
 <h3><b>Getting Started: </b></h3>
 In order to get started you'll need Ruby 2.1.2 as well as Rails 4.1.5 installed. You can find documentation on installing these and getting started with Ruby on Rails at rubyonrails.org. This project also relies on PostGreSQL, and the database file currently relies on the default user with an empty password. The following list of instructions will guide you through getting setup.
 
-	1. Install <a href="https://www.ruby-lang.org/en/documentation/installation/">Ruby</a>
-	2. Install <a href="http://installrails.com/">Rails</a>: 
+	1. Install [a link](https://www.ruby-lang.org/en/documentation/installation/")Ruby
+	2. Install [a link](http://installrails.com/")Rails:
 			gem install rails
 	3. Install git.
 	4. Install postrgreSQL
