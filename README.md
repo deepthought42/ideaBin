@@ -40,17 +40,21 @@ In order to get started you'll need Ruby 2.1.2 as well as Rails 4.1.5 installed.
 	8. create directories /public/data/repository
 	9. On the command line navigate to the ideaBin folder and run the following commands:
 		9.1) Install bower dependencies by typing the following on the command line
-					<i>bower install</i>
+					bower install
 		9.2) Setup Database
 			9.2.1) rename ideaBin/config/database.tmp.yml to
 			 			ideaBin/config/database.yml. Replace 'user_here' with your username.
 						Replace 'password_here' with your password.
-			9.2.2) On the command line type <i>rake db:setup</i>
+			9.2.2) Navigate to the top of the ideaBin folder on the command line.
+
+						rake db:setup
+
 		9.3) install bundled gems bundle install
-		9.4) Start server rails server 10. Navigate to localhost:3000 and you should
-						see the home page for ideaBin.
+		9.4) Start server rails server
+	10. Navigate to localhost:3000 and you should see the home page for ideaBin.
 
 <h3><b>Overview:</b></h3>
+
  <p>In ideaBin everything focuses on the management of and contribution to ideas,
 so naturally an idea is the focal point of the code and the app in general.
 Currently the code is quite simple and consists of just ideas and users. Whenever
