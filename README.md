@@ -55,6 +55,7 @@ a new file or one they downloaded and edited, ideaBin then does 1 of 2 things.
 				changes are simultaneously committed to the repository so you don't have
 				to worry about it.
 		</p>
+		<p>
 		2) If you aren't the user that created the idea then the original repository
 				is cloned and placed in the users repository folder at
 				/public/data/repository/:user_id. The system then takes the uploaded file
@@ -71,3 +72,4 @@ a new file or one they downloaded and edited, ideaBin then does 1 of 2 things.
 				love to know about it. You can also find features or whatnot that need
 				to be fixed in the issues section of github. Any and all help or
 				criticism are very much appreciated. Email us at support@ideabin.net.
+</p>
