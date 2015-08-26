@@ -78,11 +78,14 @@ a new file or one they downloaded and edited, ideaBin then does 1 of 2 things.
 				through an intuitive User interface and integrated code editors, image
 				editors, diagramming tools and other things that teams tend to need when
 				collaborating on a project. There is certainly lots to do, so feel free
-				to help out if that's something you'd be in to. Contribute: There's no
-				shortage of things that need to be done on this project. If you are
-				interested in contributing there are a number of things you can do.
-				There is currently very limited bug reporting, but if you find one I'd
-				love to know about it. You can also find features or whatnot that need
-				to be fixed in the issues section of github. Any and all help or
-				criticism are very much appreciated. Email us at support@ideabin.net.
+				to help out if that's something you'd be in to.
+</p>
+<h4><b>Contribute: </h4></b>
+<p>
+	There's no shortage of things that need to be done on this project. If you are
+		interested in contributing there are a number of things you can do.	There is
+		currently very limited bug reporting. If you find one I'd	love to know about
+		it. You can also find features or whatnot that need to be fixed in the issues
+		section of github. Any and all help or criticism are very much appreciated.
+		Email us at <b>support@ideabin.net</b>
 </p>
