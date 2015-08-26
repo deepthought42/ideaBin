@@ -22,7 +22,13 @@ In order to get started you'll need Ruby 2.1.2 as well as Rails 4.1.5 installed.
 	6. Install bower npm install -g bower
 	7. Make sure you have imageMagick installed.
 
-			For windows users this means not using the .dll file and setting up the appropriate paths 7. Open a command line and navigate to the directory that you would like to save the project and type in the following and press enter. git clone https://github.com/deepthought42/ideaBin.git
+			For windows users this means not using the .dll file and setting
+			up the appropriate paths 7. Open a command line and navigate to
+			the directory that you would like to save the project and type in
+			the following and press enter.
+
+				git clone https://github.com/deepthought42/ideaBin.git
+				
 	8. create directories /public/data/repository
 	9. using the command line navigate to the ideaBin folder and run the following commands:
 		9.1) Install bower dependencies bower install
