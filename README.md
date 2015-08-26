@@ -1,5 +1,6 @@
 IdeaBin is intended to be a platform to better enable people to easily collaborate with others while maintaining project versions allowing idea owners to retain control over their projects using the Git versioning sysem, as well as allowing them to approve and undo changes submitted by collaborators.
-Stack:
+
+<h3><b>Stack:</b></h3>
 Rails 4.1.5
 Ruby 2.1.2
 NodeJS
@@ -10,9 +11,13 @@ imageMagick
 
 <h3><b>Getting Started: </b></h3>
 In order to get started you'll need Ruby 2.1.2 as well as Rails 4.1.5 installed. You can find documentation on installing these and getting started with Ruby on Rails at rubyonrails.org. This project also relies on PostGreSQL, and the database file currently relies on the default user with an empty password. The following list of instructions will guide you through getting setup.
-	1. Install Ruby.
-		You can find instructions here
-	2. Install Rails: gem install rails
+
+	<ul>
+	 	<li>Install Ruby.
+				You can find instructions here
+		</li>
+		<li>Install Rails: gem install rails</li>
+	</ul>
 	3. Install git.
 	4. Install postrgreSQL
 	5. Install NodeJS
